@@ -1,0 +1,94 @@
+@import "../../global/scss/rootStyles.scss";
+
+.headerContainer {
+  color: $blackColor;
+  background-color: $whiteColor;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $paddingRL;
+
+  .logoImg {
+    width: 120px;
+  }
+  .searchInput {
+    @include box(268, 36);
+    border-radius: $borderRadius;
+    background: rgb(239, 239, 239);
+    border: none;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      border: none;
+    }
+    input {
+      background: rgb(239, 239, 239);
+    }
+
+    .searchIcon {
+      width: 1.8rem;
+      height: 1.8rem;
+      color: #8e8e8e;
+    }
+  }
+
+  .headerMenu {
+    @include d-flex(center, center);
+    height: 100%;
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-left: 26px;
+      height: 100%;
+
+      &:hover a {
+        color: blue;
+        transform: translateY(-10px);
+        transition: all 0.2s ease-out;
+      }
+      a {
+        width: 2.4rem;
+        height: 2.4rem;
+        display: block;
+        text-decoration: none;
+        color: $blackColor;
+        transition: all 0.2s ease-out;
+      }
+    }
+    .menuIcon {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+    .menuUser {
+      @include d-flex(center, center);
+      width: 2.4rem;
+      height: 2.4rem;
+      border: 2px solid #000;
+      overflow: hidden;
+      border-radius: 100rem;
+      margin-left: 2.2rem;
+      cursor: pointer;
+      img {
+        height: 3.4rem;
+        width: 3, 4rem;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.nav-link.activated {
+  background-color: aqua;
+}
+
+.active {
+  color: white !important;
+}

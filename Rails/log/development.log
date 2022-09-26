@@ -1,0 +1,708 @@
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE "back_end_dev" ENCODING = 'UTF8'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE "back_end_test" ENCODING = 'UTF8'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220919155025)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (19.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "back_end_dev"[0m
+  [1m[35m (20.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "back_end_test"[0m
+  [1m[35m (95.0ms)[0m  [1m[35mCREATE DATABASE "back_end_dev" ENCODING = 'UTF8'[0m
+  [1m[35m (131.3ms)[0m  [1m[35mCREATE DATABASE "back_end_test" ENCODING = 'UTF8'[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220919155025)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220919155025"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-09-19 15:52:47.146505"], ["updated_at", "2022-09-19 15:52:47.146505"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-09-19 22:53:34 +0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant HomeController):
+  
+Started GET "/users/sign_in" for ::1 at 2022-09-19 22:53:49 +0700
+Processing by Devise::SessionsController#new as HTML
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.9ms | Allocations: 4817)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "application_records" does not exist
+LINE 8:  WHERE a.attrelid = '"application_records"'::regclass
+                            ^
+):
+  
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `exec'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `block (2 levels) in query'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.1.7) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:18:in `block in query'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:696:in `block (2 levels) in log'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:695:in `block in log'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:687:in `log'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:17:in `query'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql_adapter.rb:820:in `column_definitions'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract/schema_statements.rb:116:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:112:in `block in columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:120:in `block in columns_hash'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `columns_hash'
+activerecord (6.1.7) lib/active_record/model_schema.rb:553:in `load_schema!'
+activerecord (6.1.7) lib/active_record/attributes.rb:250:in `load_schema!'
+activerecord (6.1.7) lib/active_record/model_schema.rb:539:in `block in load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `synchronize'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:402:in `attribute_types'
+activerecord (6.1.7) lib/active_record/attribute_methods.rb:187:in `_has_attribute?'
+activerecord (6.1.7) lib/active_record/inheritance.rb:57:in `new'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:11:in `new'
+actionpack (6.1.7) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:19:in `block in <class:Constraints>'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:49:in `serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:842:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/permissions_policy.rb:22:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/content_security_policy.rb:19:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (6.1.7) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+railties (6.1.7) lib/rails/engine.rb:539:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/users/sign_up" for ::1 at 2022-09-19 22:54:14 +0700
+Processing by Devise::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.7ms | Allocations: 1240)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "application_records" does not exist
+LINE 8:  WHERE a.attrelid = '"application_records"'::regclass
+                            ^
+):
+  
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `exec'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `block (2 levels) in query'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.1.7) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:18:in `block in query'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:696:in `block (2 levels) in log'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:695:in `block in log'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:687:in `log'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:17:in `query'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql_adapter.rb:820:in `column_definitions'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract/schema_statements.rb:116:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:112:in `block in columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:120:in `block in columns_hash'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `columns_hash'
+activerecord (6.1.7) lib/active_record/model_schema.rb:553:in `load_schema!'
+activerecord (6.1.7) lib/active_record/attributes.rb:250:in `load_schema!'
+activerecord (6.1.7) lib/active_record/model_schema.rb:539:in `block in load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `synchronize'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:402:in `attribute_types'
+activerecord (6.1.7) lib/active_record/attribute_methods.rb:187:in `_has_attribute?'
+activerecord (6.1.7) lib/active_record/inheritance.rb:57:in `new'
+devise (4.8.1) lib/devise/models/registerable.rb:22:in `new_with_session'
+devise (4.8.1) app/controllers/devise/registrations_controller.rb:100:in `build_resource'
+devise (4.8.1) app/controllers/devise/registrations_controller.rb:10:in `new'
+actionpack (6.1.7) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:19:in `block in <class:Constraints>'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:49:in `serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:842:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/permissions_policy.rb:22:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/content_security_policy.rb:19:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (6.1.7) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+railties (6.1.7) lib/rails/engine.rb:539:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/users/sign_up" for ::1 at 2022-09-19 22:55:19 +0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.8ms | Allocations: 3841)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "application_records" does not exist
+LINE 8:  WHERE a.attrelid = '"application_records"'::regclass
+                            ^
+):
+  
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `exec'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `block (2 levels) in query'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.1.7) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:18:in `block in query'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:696:in `block (2 levels) in log'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:695:in `block in log'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:687:in `log'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:17:in `query'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql_adapter.rb:820:in `column_definitions'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract/schema_statements.rb:116:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:112:in `block in columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:120:in `block in columns_hash'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `columns_hash'
+activerecord (6.1.7) lib/active_record/model_schema.rb:553:in `load_schema!'
+activerecord (6.1.7) lib/active_record/attributes.rb:250:in `load_schema!'
+activerecord (6.1.7) lib/active_record/model_schema.rb:539:in `block in load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `synchronize'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:402:in `attribute_types'
+activerecord (6.1.7) lib/active_record/attribute_methods.rb:187:in `_has_attribute?'
+activerecord (6.1.7) lib/active_record/inheritance.rb:57:in `new'
+devise (4.8.1) lib/devise/models/registerable.rb:22:in `new_with_session'
+devise (4.8.1) app/controllers/devise/registrations_controller.rb:100:in `build_resource'
+devise (4.8.1) app/controllers/devise/registrations_controller.rb:10:in `new'
+actionpack (6.1.7) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:19:in `block in <class:Constraints>'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:49:in `serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:842:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/permissions_policy.rb:22:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/content_security_policy.rb:19:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (6.1.7) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+railties (6.1.7) lib/rails/engine.rb:539:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE "back_end_dev" ENCODING = 'UTF8'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE "back_end_test" ENCODING = 'UTF8'[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1e9162713c4dfdaa2fd42b3d21b7e86ac4332b6c"], ["created_at", "2022-09-19 15:56:22.434996"], ["updated_at", "2022-09-19 15:56:22.434996"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20220919155025)[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-09-19 15:56:22.553086"], ["updated_at", "2022-09-19 15:56:22.553086"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.9ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2022-09-19 15:56:22.570279"], ["key", "environment"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1e9162713c4dfdaa2fd42b3d21b7e86ac4332b6c"], ["created_at", "2022-09-19 15:56:22.581995"], ["updated_at", "2022-09-19 15:56:22.581995"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220919155025)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_users_on_unlock_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_users_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_users_on_reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_users_on_email"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20220919155025"]]
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220919155025)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220919155025"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-09-19 22:57:10 +0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant HomeController):
+  
+Started GET "/users/sign_in" for ::1 at 2022-09-19 22:57:18 +0700
+Processing by Devise::SessionsController#new as HTML
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.9ms | Allocations: 4195)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "application_records" does not exist
+LINE 8:  WHERE a.attrelid = '"application_records"'::regclass
+                            ^
+):
+  
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `exec'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:19:in `block (2 levels) in query'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.1.7) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.1.7) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:18:in `block in query'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:696:in `block (2 levels) in log'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.1.7) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:695:in `block in log'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract_adapter.rb:687:in `log'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql/database_statements.rb:17:in `query'
+activerecord (6.1.7) lib/active_record/connection_adapters/postgresql_adapter.rb:820:in `column_definitions'
+activerecord (6.1.7) lib/active_record/connection_adapters/abstract/schema_statements.rb:116:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:112:in `block in columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:111:in `columns'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:120:in `block in columns_hash'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `fetch'
+activerecord (6.1.7) lib/active_record/connection_adapters/schema_cache.rb:119:in `columns_hash'
+activerecord (6.1.7) lib/active_record/model_schema.rb:553:in `load_schema!'
+activerecord (6.1.7) lib/active_record/attributes.rb:250:in `load_schema!'
+activerecord (6.1.7) lib/active_record/model_schema.rb:539:in `block in load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `synchronize'
+activerecord (6.1.7) lib/active_record/model_schema.rb:536:in `load_schema'
+activerecord (6.1.7) lib/active_record/model_schema.rb:402:in `attribute_types'
+activerecord (6.1.7) lib/active_record/attribute_methods.rb:187:in `_has_attribute?'
+activerecord (6.1.7) lib/active_record/inheritance.rb:57:in `new'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:11:in `new'
+actionpack (6.1.7) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:19:in `block in <class:Constraints>'
+actionpack (6.1.7) lib/action_dispatch/routing/mapper.rb:49:in `serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:842:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/permissions_policy.rb:22:in `call'
+actionpack (6.1.7) lib/action_dispatch/http/content_security_policy.rb:19:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (6.1.7) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+railties (6.1.7) lib/rails/engine.rb:539:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/users/sign_in" for ::1 at 2022-09-19 22:59:33 +0700
+  
+NameError (undefined local variable or method `primary_abstract_class' for ApplicationRecord:Class
+Did you mean?  primary_class?):
+  
+app/models/application_record.rb:2:in `<class:ApplicationRecord>'
+app/models/application_record.rb:1:in `<main>'
+app/models/user.rb:1:in `<main>'
+config/routes.rb:2:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/users/sign_in" for ::1 at 2022-09-19 22:59:47 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /home/truongtho/.rvm/gems/ruby-3.0.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /home/truongtho/.rvm/gems/ruby-3.0.0/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 1.4ms | Allocations: 1209)
+  Rendered /home/truongtho/.rvm/gems/ruby-3.0.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 13.8ms | Allocations: 9936)
+  Rendered layout layouts/application.html.erb (Duration: 126.7ms | Allocations: 79176)
+Completed 200 OK in 143ms (Views: 128.9ms | ActiveRecord: 3.4ms | Allocations: 91758)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6497430008007136590)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePost (20220920160215)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (16.6ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220920160215"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6497430008007136590)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-09-20 23:06:05 +0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant HomeController):
+  
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Create (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "abc"], ["description", "abc"], ["created_at", "2022-09-20 16:08:10.853034"], ["updated_at", "2022-09-20 16:08:10.853034"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2022-09-20 23:22:28 +0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant HomeController):
+  
+Started GET "/posts" for ::1 at 2022-09-20 23:22:34 +0700
+  
+ActionController::RoutingError (uninitialized constant PostsController
+Did you mean?  PostController):
+  
+Started GET "/posts" for ::1 at 2022-09-20 23:26:05 +0700
+  
+ActionController::RoutingError (uninitialized constant PostsController
+Did you mean?  PostController):
+  
+Started GET "/posts" for ::1 at 2022-09-20 23:26:18 +0700
+  
+ActionController::RoutingError (uninitialized constant PostsController
+Did you mean?  PostController):
+  
+Started GET "/posts" for ::1 at 2022-09-20 23:26:22 +0700
+  
+ActionController::RoutingError (uninitialized constant PostsController
+Did you mean?  PostController):
+  
+Started GET "/posts" for ::1 at 2022-09-20 23:26:54 +0700
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:4:in `index'
+Completed 200 OK in 15ms (Views: 6.1ms | ActiveRecord: 4.5ms | Allocations: 7377)
+
+

@@ -1,0 +1,154 @@
+@import "../../../global/scss/rootStyles.scss";
+.login {
+  height: 100vh;
+  background-color: $bgColor;
+  padding: 0 16%;
+}
+
+.loginLeft {
+  display: flex !important;
+
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 94%;
+    object-fit: cover;
+  }
+}
+.loginRight {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.loginForm {
+  @include d-flex(center, center);
+  flex-direction: column;
+
+  width: 350px;
+  height: fit-content;
+  background-color: $whiteColor;
+  border: 1px solid #dbdbdb;
+  padding: 12px 40px;
+  .loginFormLogo {
+    width: 175px;
+    height: 54px;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+      margin-top: 16px;
+      margin-bottom: 30px;
+    }
+  }
+  .formInput {
+    height: 36px;
+    border-radius: 4px;
+    &:first-child {
+      margin-bottom: 8px;
+    }
+  }
+  .loginBtn {
+    @include d-flex(center, center);
+
+    width: 100%;
+    height: 36px;
+    border-radius: 4px;
+    background-color: $mainBlue;
+    color: $whiteColor;
+    border: none;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .formLine {
+    @include d-flex(center, center);
+    width: 100%;
+    margin: 8px 0;
+    .line {
+      width: 100%;
+      border-bottom: 2px solid $greyLight;
+    }
+    span {
+      text-transform: uppercase;
+      color: $greyBold;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 10px;
+    }
+  }
+  .forgotPass {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    color: #385185;
+  }
+}
+
+.signUp {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: fit-content;
+  background-color: $whiteColor;
+  border: 1px solid #dbdbdb;
+  padding: 20px 40px;
+  .signUpText {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 0;
+  }
+  .signUpLink {
+    color: $mainBlue;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+}
+
+// RESPONSIVE
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .login {
+    padding: 0 6%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .login {
+    padding: 0 0%;
+  }
+  .loginForm,
+  .signUp {
+    width: 300px;
+  }
+  .loginLeft {
+    img {
+      width: 100%;
+    }
+  }
+
+  .signUp {
+    margin-top: 8px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login {
+    padding: 0 6%;
+  }
+  .loginForm,
+  .signUp {
+    width: 100%;
+  }
+  .loginLeft {
+    display: none !important;
+  }
+}
