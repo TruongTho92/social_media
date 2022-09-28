@@ -1,27 +1,12 @@
 @import "../../../global/scss/rootStyles.scss";
-.login {
-  background-color: $bgColor;
-  height: 100vh;
-  padding: 0 16%;
-}
 
-.loginLeft {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    width: 94%;
-    object-fit: cover;
-  }
-}
-.loginRight {
+.registerRight {
   display: flex !important;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.loginForm {
+.registerForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +17,7 @@
   background-color: $whiteColor;
   border: 1px solid #dbdbdb;
   padding: 12px 40px;
-  .loginFormLogo {
+  .registerFormLogo {
     width: 175px;
     height: 54px;
     margin-top: 16px;
@@ -62,7 +47,7 @@
       margin-top: 8px;
     }
   }
-  .loginBtn {
+  .registerBtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,19 +101,13 @@
 
 // RESPONSIVE
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .login {
-    padding: 0 6%;
-  }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .login {
-    padding: 0 0%;
-  }
-  .loginForm,
+  .registerForm,
   .signUp {
     width: 300px;
   }
-  .loginLeft {
+  .registerLeft {
     img {
       width: 100%;
     }
@@ -140,14 +119,8 @@
 }
 
 @media screen and (max-width: 767px) {
-  .login {
-    padding: 0 6%;
-  }
-  .loginForm,
+  .registerForm,
   .signUp {
     width: 100%;
-  }
-  .loginLeft {
-    display: none !important;
   }
 }

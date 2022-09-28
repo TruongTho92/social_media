@@ -1,32 +1,19 @@
 import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "~/app/hooks";
+import { UserLoginTypes } from "~/common/types";
+import { loginUserAsync } from "~/features/Auth/login/loginSlice";
 import styles from "./LoginStyles.module.scss";
 
-export interface userTypes {
-  username: string;
-  password: string;
-}
-
 const LoginPage: React.FC = () => {
+  const dispatch = useAppDispatch;
   const navigate = useNavigate();
-  const [user, setUser] = useState<userTypes>({ username: "", password: "" });
+  const [user, setUser] = useState<UserLoginTypes>({ email: "", password: "" });
 
-  const handleLogin = () => {
-    const userLocal = JSON.parse(localStorage.getItem("user") || "{}");
-    if (
-      user.username === userLocal.username &&
-      user.password === userLocal.password
-    ) {
-      navigate("/");
-    } else if (
-      user.username !== userLocal.username &&
-      user.password !== userLocal.password
-    ) {
-      alert(" Username or password is incorrect");
-    } else {
-      alert("nhajp day du thong tin");
-    }
+  const handleLogin = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    // dispatch(loginUserAsync(user));
   };
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,22 +25,12 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className={`container-fluid ${styles.login}`}>
+    <>
       <Row
         justify="center"
         align="middle"
         style={{ width: "100%", height: "100%" }}
       >
-        <Col
-          sm={24}
-          md={12}
-          lg={12}
-          span={12}
-          xl={12}
-          className={styles.loginLeft}
-        >
-          <img src="/assets/images/login-background.png" alt="" />
-        </Col>
         <Col
           xs={24}
           sm={24}
@@ -69,12 +46,12 @@ const LoginPage: React.FC = () => {
             </div>
             <form onSubmit={handleLogin} className={styles.form}>
               <Input
-                value={user.username}
-                name="username"
+                value={user.email}
+                name="email"
                 type="text"
                 onChange={handleLoginChange}
                 className={styles.formInput}
-                placeholder="username"
+                placeholder="email"
                 required
               />
 
@@ -95,7 +72,7 @@ const LoginPage: React.FC = () => {
                 <span>or</span>
                 <span className={styles.line}></span>
               </div>
-              <Link to="/forgot-password" className={styles.forgotPass}>
+              <Link to="/auth/forgot-password" className={styles.forgotPass}>
                 <span>Forgot password?</span>
               </Link>
             </form>
@@ -103,13 +80,13 @@ const LoginPage: React.FC = () => {
           <div className={styles.signUp}>
             <span className={styles.signUpText}>Don't have account?</span>
 
-            <Link to="/register" className={styles.signUpLink}>
+            <Link to="/auth/register" className={styles.signUpLink}>
               Sign Up
             </Link>
           </div>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 
