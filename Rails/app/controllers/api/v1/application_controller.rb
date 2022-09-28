@@ -1,7 +1,5 @@
-class Api::V1::ApplicationController < ActionController::API
-  acts_as_token_authentication_handler_for User, {fallback: :none}
-
-  respond_to :json
+class ApplicationController < ActionController::API
+  acts_as_token_authentication_handler_for User
 
   private
   def current_user
