@@ -8,10 +8,10 @@ class Api::V1::SessionsController < Devise::SessionsController
     if @user.valid_password? user_params[:password]
       sign_in @user, store: false
       render json: {message: "Signed in successfully",
-        user: @user, status: 200
-      return
+        user: @user}, status: 200
+    else
+      invalid_login_attempt
     end
-    invalid_login_attempt
   end
 
   def destroy
