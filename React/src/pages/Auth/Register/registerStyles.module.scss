@@ -99,6 +99,32 @@
   }
 }
 
+.messageWaitConfirm {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: fit-content;
+  height: fit-content;
+  white-space: nowrap;
+  padding: 8px 12px;
+  background-color: $mainBlue;
+  border-radius: 4px;
+  color: #fff;
+  animation: TopToDown 0.45s ease-out;
+}
+.errorValidatePassword,
+.errorMatchPassword {
+  font-size: 14px;
+  color: red;
+  margin-top: 6px;
+  animation: LeftToRight 0.45s ease-out;
+}
+
+.errorMatchPassword {
+}
+
 // RESPONSIVE
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
 }
@@ -122,5 +148,30 @@
   .registerForm,
   .signUp {
     width: 100%;
+  }
+  .messageWaitConfirm {
+    width: 100%;
+  }
+}
+
+@keyframes TopToDown {
+  0% {
+    transform: translateY(-100px) translate(-50%, -50%);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translate(-50%, -50%);
+  }
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

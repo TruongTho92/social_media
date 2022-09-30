@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "~/app/hooks";
+import { UserDataTypes } from "~/common/types";
+import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
+import InputPassword from "~/components/Input/Password";
 import {
-  getUserRegister,
+  getRegisterMessage,
   registerUserAsync,
-} from "~/features/Auth/register/registerSlice";
+} from "~/features/Auth/AuthSlice";
 import styles from "./registerStyles.module.scss";
 
 const Register = () => {
@@ -15,21 +18,49 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passValidate, setPassValidate] = useState({
+    capsLetterCheck: false,
+    numberCheck: false,
+    pwdLengthCheck: false,
+    specialCharCheck: false,
+  });
+  const [isMatchPassword, setIsMatchPassword] = useState(false);
+  const [isValidatePassword, setIsValidatePassword] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const getUserRegistered = useSelector(getUserRegister);
+  // Message register successfull
+  const getMessageRegister = useSelector(getRegisterMessage);
 
-  const handleRegister = async (e: React.SyntheticEvent) => {
+  const handleRegister = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const userSignUp = {
+    const data: UserDataTypes = {
       user: {
         email,
         password,
         password_confirmation: passwordConfirmation,
       },
     };
-    dispatch(registerUserAsync(userSignUp));
+
+    // Check password confirmation
+    if (password !== passwordConfirmation) {
+      setIsMatchPassword(true);
+    } else {
+      setIsMatchPassword(false);
+    }
+
+    // Handle registerUserAsync
+    if (
+      passValidate.capsLetterCheck &&
+      passValidate.numberCheck &&
+      passValidate.pwdLengthCheck &&
+      passValidate.specialCharCheck
+    ) {
+      setIsValidatePassword(false);
+      dispatch(registerUserAsync(data));
+    } else {
+      setIsValidatePassword(true);
+    }
   };
 
   return (
@@ -66,25 +97,32 @@ const Register = () => {
                 required
               />
 
-              <Input.Password
+              <InputPassword
                 value={password}
-                name="password"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
+                name={"password"}
+                setPassword={setPassword}
                 className={styles.formInput}
-                placeholder="password"
-                required
+                validate={passValidate}
+                setValidate={setPassValidate}
               />
+              {isValidatePassword ? (
+                <div className={styles.errorValidatePassword}>
+                  * Password incorrect format
+                </div>
+              ) : null}
 
-              <Input.Password
+              <InputConfirmPassword
                 value={passwordConfirmation}
                 name="password_confirmation"
-                type="password"
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
                 className={styles.formInput}
-                placeholder="confirm password"
-                required
+                onChange={setPasswordConfirmation}
               />
+
+              {isMatchPassword ? (
+                <div className={styles.errorMatchPassword}>
+                  * Password dont match
+                </div>
+              ) : null}
 
               <button type="submit" className={styles.registerBtn}>
                 Sign Up
@@ -104,7 +142,12 @@ const Register = () => {
             </Link>
           </div>
 
-          <div className="message-confirm">{getUserRegistered}</div>
+          {/* ERROR AND REGISTED MESSAGE */}
+          {getMessageRegister ? (
+            <div className={styles.messageWaitConfirm}>
+              {getMessageRegister}
+            </div>
+          ) : null}
         </Col>
       </Row>
     </>

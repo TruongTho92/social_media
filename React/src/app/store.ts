@@ -4,12 +4,10 @@ import {
   configureStore,
   ThunkAction,
 } from "@reduxjs/toolkit";
-import registerReducer from "~/features/Auth//register/registerSlice";
-import loginReducer from "~/features/Auth/login/loginSlice";
+import AuthSlice from "~/features/Auth/AuthSlice";
 
 const rootReducer = combineReducers({
-  register: registerReducer,
-  login: loginReducer,
+  auth: AuthSlice,
 });
 
 export const store = configureStore({

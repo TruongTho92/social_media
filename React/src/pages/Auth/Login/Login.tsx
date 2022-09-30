@@ -2,26 +2,28 @@ import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "~/app/hooks";
-import { UserLoginTypes } from "~/common/types";
-import { loginUserAsync } from "~/features/Auth/login/loginSlice";
+import { UserDataTypes } from "~/common/types";
+import { loginUserAsync } from "~/features/Auth/AuthSlice";
 import styles from "./LoginStyles.module.scss";
 
 const LoginPage: React.FC = () => {
-  const dispatch = useAppDispatch;
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserLoginTypes>({ email: "", password: "" });
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // dispatch(loginUserAsync(user));
-  };
 
-  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setUser({
-      ...user,
-      [e.target.name]: value,
-    });
+    const data: UserDataTypes = {
+      user: {
+        email,
+        password,
+      },
+    };
+
+    dispatch(loginUserAsync(data));
   };
 
   return (
@@ -46,20 +48,20 @@ const LoginPage: React.FC = () => {
             </div>
             <form onSubmit={handleLogin} className={styles.form}>
               <Input
-                value={user.email}
+                value={email}
                 name="email"
                 type="text"
-                onChange={handleLoginChange}
+                onChange={(e) => setEmail(e.target.value)}
                 className={styles.formInput}
                 placeholder="email"
                 required
               />
 
               <Input.Password
-                value={user.password}
+                value={password}
                 name="password"
                 type="password"
-                onChange={handleLoginChange}
+                onChange={(e) => setPassword(e.target.value)}
                 className={styles.formInput}
                 placeholder="password"
                 required
