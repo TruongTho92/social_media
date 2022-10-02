@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import ForgotPassword from "./pages/Auth/ForgotPassword/ForgotPassword";
+import Auth from "./pages/Auth";
 
 const App: React.FC = () => {
   const user = localStorage.getItem("user");
@@ -18,8 +20,11 @@ const App: React.FC = () => {
       {user && <Header />}
 
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/auth" element={<Auth />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+        </Route>
 
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home />} />
