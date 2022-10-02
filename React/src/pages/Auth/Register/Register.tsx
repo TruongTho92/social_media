@@ -22,7 +22,6 @@ const Register = () => {
     capsLetterCheck: false,
     numberCheck: false,
     pwdLengthCheck: false,
-    specialCharCheck: false,
   });
   const [isMatchPassword, setIsMatchPassword] = useState(false);
   const [isValidatePassword, setIsValidatePassword] = useState(false);
@@ -53,8 +52,7 @@ const Register = () => {
     if (
       passValidate.capsLetterCheck &&
       passValidate.numberCheck &&
-      passValidate.pwdLengthCheck &&
-      passValidate.specialCharCheck
+      passValidate.pwdLengthCheck
     ) {
       setIsValidatePassword(false);
       dispatch(registerUserAsync(data));
