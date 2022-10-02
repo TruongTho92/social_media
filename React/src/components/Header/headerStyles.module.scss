@@ -1,6 +1,8 @@
 @import "../../global/scss/rootStyles.scss";
 
 .headerContainer {
+  position: fixed;
+  z-index: 1000;
   color: $blackColor;
   background-color: $whiteColor;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);

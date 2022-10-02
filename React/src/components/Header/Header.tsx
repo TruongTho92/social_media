@@ -1,12 +1,10 @@
-import { Input, MenuProps } from "antd";
+import { Input } from "antd";
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
+import { BiMessage } from "react-icons/bi";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineAddPhotoAlternate, MdSaveAlt } from "react-icons/md";
-import { RiMessageLine } from "react-icons/ri";
-import { BiMessage } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
-import { Menu } from "antd";
 
 import styles from "./headerStyles.module.scss";
 
