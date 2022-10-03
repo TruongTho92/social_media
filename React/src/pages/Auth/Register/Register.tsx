@@ -13,8 +13,6 @@ import {
 import styles from "./registerStyles.module.scss";
 
 const Register = () => {
-  const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +20,6 @@ const Register = () => {
     capsLetterCheck: false,
     numberCheck: false,
     pwdLengthCheck: false,
-    specialCharCheck: false,
   });
   const [isMatchPassword, setIsMatchPassword] = useState(false);
   const [isValidatePassword, setIsValidatePassword] = useState(false);
@@ -53,8 +50,7 @@ const Register = () => {
     if (
       passValidate.capsLetterCheck &&
       passValidate.numberCheck &&
-      passValidate.pwdLengthCheck &&
-      passValidate.specialCharCheck
+      passValidate.pwdLengthCheck
     ) {
       setIsValidatePassword(false);
       dispatch(registerUserAsync(data));

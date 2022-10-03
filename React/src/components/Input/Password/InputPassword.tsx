@@ -6,7 +6,6 @@ export interface ValidateTypes {
   capsLetterCheck: boolean;
   numberCheck: boolean;
   pwdLengthCheck: boolean;
-  specialCharCheck: boolean;
 }
 
 export interface PropsTypes {
@@ -33,13 +32,11 @@ const InputPassword = ({
     const capsLetterCheck = /[A-Z]/.test(value);
     const numberCheck = /[0-9]/.test(value);
     const pwdLengthCheck = value.length >= 8;
-    const specialCharCheck = /[!@#$%^&*]/.test(value);
 
     setValidate({
       capsLetterCheck,
       numberCheck,
       pwdLengthCheck,
-      specialCharCheck,
     });
   };
 
@@ -62,7 +59,6 @@ const InputPassword = ({
           capsLetterFlag={validate.capsLetterCheck ? true : false}
           numberFlag={validate.numberCheck ? true : false}
           pwdLengthFlag={validate.pwdLengthCheck ? true : false}
-          specialCharFlag={validate.specialCharCheck ? true : false}
         />
       ) : null}
     </>
