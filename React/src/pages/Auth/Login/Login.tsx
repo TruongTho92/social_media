@@ -1,9 +1,9 @@
 import { Col, Input, Row } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "~/app/hooks";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { loginUserAsync } from "~/features/Auth/AuthSlice";
+import { getLoginSuccess, loginUserAsync } from "~/features/Auth/AuthSlice";
 import styles from "./LoginStyles.module.scss";
 
 const LoginPage: React.FC = () => {
@@ -12,6 +12,15 @@ const LoginPage: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const isSuccess = useAppSelector(getLoginSuccess);
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [isSuccess, navigate]);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();

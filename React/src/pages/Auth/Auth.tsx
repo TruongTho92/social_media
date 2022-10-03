@@ -1,6 +1,9 @@
 import { Col, Row } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import styles from "./authStyles.module.scss";
+import ForgotPassword from "./ForgotPassword";
+import Login from "./Login";
+import Register from "./Register";
 
 const Auth = () => {
   return (
@@ -29,7 +32,11 @@ const Auth = () => {
           xl={12}
           className={styles.loginRight}
         >
-          <Outlet />
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+          </Routes>
         </Col>
       </Row>
     </div>
