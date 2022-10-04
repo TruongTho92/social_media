@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_params_exist
+    return unless params[:user].blank?
+     render json: {message: "Missing params"}, status: 422
+   end
+
   def load_user_authentication
     @user = User.find_by_email(user_params[:email])
     return login_invalid unless @user
