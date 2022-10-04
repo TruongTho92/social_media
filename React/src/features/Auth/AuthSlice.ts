@@ -38,7 +38,7 @@ const initialState: stateType = {
   },
 };
 
-const registerSlice = createSlice({
+const AuthSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
@@ -70,8 +70,8 @@ const registerSlice = createSlice({
         (state, action: PayloadAction<UserDataResponse>) => {
           state.status = "success";
           state.data.message = action.payload.message;
+          state.data.is_success = action.payload.is_success;
           state.data = action.payload;
-          state.data.is_success = true;
         }
       )
       .addCase(loginUserAsync.rejected, (state) => {
@@ -84,4 +84,4 @@ export const getRegisterMessage = (state: RootState) => state.auth.data.message;
 export const getLoginMessage = (state: RootState) => state.auth.data.message;
 export const getLoginSuccess = (state: RootState) => state.auth.data.is_success;
 
-export default registerSlice.reducer;
+export default AuthSlice.reducer;

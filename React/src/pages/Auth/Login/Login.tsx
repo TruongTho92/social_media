@@ -13,14 +13,12 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const isSuccess = useAppSelector(getLoginSuccess);
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate("/");
-      window.location.reload();
-    }
-  }, [isSuccess, navigate]);
+  const isLogin = useAppSelector(getLoginSuccess);
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     navigate("/");
+  //   }
+  // }, [isLogin, navigate]);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
