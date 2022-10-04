@@ -1,21 +1,25 @@
 class Api::V1::SessionsController < Devise::SessionsController
+  skip_before_action :authenticate_user_from_token
   before_action :ensure_params_exist, only: [:create, :destroy]
   before_action :load_user_authentication
 
-  respond_to :json
-
   def create
-    if @user.valid_password? user_params[:password]
+    if @user.valid_password?(user_params[:password])
       sign_in @user, store: false
-      render json: {message: "Signed in successfully",
-        user: @user}, status: 200
+      render json: {
+        is_success: true,
+        data: {user: @user}
+      }, status: :ok
     else
-      invalid_login_attempt
+      render json: {
+        is_success: false,
+        data: {}
+      }, status: :ok
     end
   end
 
   def destroy
-    if @user.authentication_token == user_params[:authentication_token] #token thông qua query string
+    if @user.authentication_token == user_params[:authentication_token]
       sign_out @user
       render json: {message: "Signed out"}, status: 200
     else
@@ -25,10 +29,6 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   private
   def user_params
-    params.require(:user).permit :email, :password, :authentication_token
-  end
-
-  def invalid_login_attempt
-    render json: {message: "Sign in failed"}, status: 200
+    params.require(:user).permit(:email, :password, :authentication_token)
   end
 end
