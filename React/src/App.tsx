@@ -3,8 +3,7 @@ import React from "react";
 
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
+import Auth from "./pages/Auth";
 import Chat from "./pages/Chat";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -12,14 +11,16 @@ import Posts from "./pages/Posts";
 import PrivateRoutes from "./utils/PrivateRoutes";
 
 const App: React.FC = () => {
-  const user = localStorage.getItem("user");
+  const isAuthenticated = sessionStorage.getItem("user");
   return (
     <div className="App">
-      {user && <Header />}
+      {isAuthenticated && <Header />}
 
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/auth/*"
+          element={isAuthenticated ? <NotFound /> : <Auth />}
+        />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home />} />

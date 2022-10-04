@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClient from "~/apiClient/apiClient";
+import { Col, Row } from "antd";
+import PostList from "~/components/PostList";
+import UserList from "~/components/UserList";
 import styles from "./homeStyles.module.scss";
 
 export interface postsTypes {
@@ -9,22 +10,16 @@ export interface postsTypes {
 }
 
 const HomePage = () => {
-  const [posts, setPosts] = useState<postsTypes[]>([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await apiClient.get("/posts");
-      console.log(res.data);
-      setPosts(res.data);
-    };
-    fetchPosts();
-  }, []);
-
   return (
-    <div className={styles.homePage}>
-      {posts && posts.length > 0
-        ? posts.map((post) => <li key={post.id}>{post.title}</li>)
-        : ""}
+    <div className={`container-fluid pt-80 ${styles.homePage} `}>
+      <Row gutter={[24, 24]}>
+        <Col span={16}>
+          <PostList />
+        </Col>
+        <Col span={8}>
+          <UserList />
+        </Col>
+      </Row>
     </div>
   );
 };

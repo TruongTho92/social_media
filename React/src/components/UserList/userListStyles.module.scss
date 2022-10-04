@@ -1,0 +1,45 @@
+@import "../../global/scss/rootStyles.scss";
+.userList {
+  padding: 30px;
+  background-color: $whiteColor;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+.userItem {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  .userImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 100rem;
+    object-fit: cover;
+  }
+  .userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 8px;
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+      width: 200px;
+      margin: 0;
+      line-height: 1;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .description {
+      margin: 0;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: italic;
+      color: #8e8e8e;
+      line-height: normal;
+    }
+  }
+}

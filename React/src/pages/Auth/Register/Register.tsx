@@ -1,57 +1,71 @@
 import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "~/app/hooks";
+import { UserDataTypes } from "~/common/types";
+import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
+import InputPassword from "~/components/Input/Password";
+import {
+  getRegisterMessage,
+  registerUserAsync,
+} from "~/features/Auth/AuthSlice";
 import styles from "./registerStyles.module.scss";
 
-export interface userSignUp {
-  username: string;
-  password: string;
-  confirmPassword: string;
-}
-
 const Register = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState<userSignUp>({
-    username: "",
-    password: "",
-    confirmPassword: "",
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passValidate, setPassValidate] = useState({
+    capsLetterCheck: false,
+    numberCheck: false,
+    pwdLengthCheck: false,
   });
+  const [isMatchPassword, setIsMatchPassword] = useState(false);
+  const [isValidatePassword, setIsValidatePassword] = useState(false);
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const handleRegister = () => {
-    if (user.password === user.confirmPassword) {
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/login");
-    } else if (user.password !== user.confirmPassword) {
-      alert("password dont match");
+  // Message register successfull
+  const getMessageRegister = useSelector(getRegisterMessage);
+
+  const handleRegister = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    const data: UserDataTypes = {
+      user: {
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+      },
+    };
+
+    // Check password confirmation
+    if (password !== passwordConfirmation) {
+      setIsMatchPassword(true);
+    } else {
+      setIsMatchPassword(false);
+    }
+
+    // Handle registerUserAsync
+    if (
+      passValidate.capsLetterCheck &&
+      passValidate.numberCheck &&
+      passValidate.pwdLengthCheck
+    ) {
+      setIsValidatePassword(false);
+      dispatch(registerUserAsync(data));
+    } else {
+      setIsValidatePassword(true);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    setUser({
-      ...user,
-      [e.target.name]: value,
-    });
-  };
-
   return (
-    <div className={`container-fluid ${styles.login}`}>
+    <>
       <Row
         justify="center"
         align="middle"
         style={{ width: "100%", height: "100%" }}
       >
-        <Col
-          sm={24}
-          md={12}
-          lg={12}
-          span={12}
-          xl={12}
-          className={styles.loginLeft}
-        >
-          <img src="/assets/images/login-background.png" alt="" />
-        </Col>
         <Col
           xs={24}
           sm={24}
@@ -59,10 +73,10 @@ const Register = () => {
           lg={12}
           span={12}
           xl={12}
-          className={styles.loginRight}
+          className={styles.registerRight}
         >
-          <div className={styles.loginForm}>
-            <div className={styles.loginFormLogo}>
+          <div className={styles.registerForm}>
+            <div className={styles.registerFormLogo}>
               <img src="/assets/images/Instagram_logo.png" alt="" />
             </div>
             <p className={styles.subTitle}>
@@ -70,34 +84,43 @@ const Register = () => {
             </p>
             <form onSubmit={handleRegister} className={styles.form}>
               <Input
-                value={user.username}
-                name="username"
-                type="text"
-                onChange={handleChange}
+                value={email}
+                name="email"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
                 className={styles.formInput}
-                placeholder="username"
+                placeholder="email"
                 required
               />
 
-              <Input.Password
-                value={user.password}
-                name="password"
-                type="password"
-                onChange={handleChange}
+              <InputPassword
+                value={password}
+                name={"password"}
+                setPassword={setPassword}
                 className={styles.formInput}
-                placeholder="password"
-                required
+                validate={passValidate}
+                setValidate={setPassValidate}
               />
-              <Input.Password
-                value={user.confirmPassword}
-                name="confirmPassword"
-                type="password"
-                onChange={handleChange}
+              {isValidatePassword ? (
+                <div className={styles.errorValidatePassword}>
+                  * Password incorrect format
+                </div>
+              ) : null}
+
+              <InputConfirmPassword
+                value={passwordConfirmation}
+                name="password_confirmation"
                 className={styles.formInput}
-                placeholder="confirm password"
-                required
+                onChange={setPasswordConfirmation}
               />
-              <button type="submit" className={styles.loginBtn}>
+
+              {isMatchPassword ? (
+                <div className={styles.errorMatchPassword}>
+                  * Password dont match
+                </div>
+              ) : null}
+
+              <button type="submit" className={styles.registerBtn}>
                 Sign Up
               </button>
 
@@ -110,13 +133,20 @@ const Register = () => {
           <div className={styles.signUp}>
             <span className={styles.signUpText}>Don't have account?</span>
 
-            <Link to="/login" className={styles.signUpLink}>
+            <Link to="/auth/login" className={styles.signUpLink}>
               Log In
             </Link>
           </div>
+
+          {/* ERROR AND REGISTED MESSAGE */}
+          {getMessageRegister ? (
+            <div className={styles.messageWaitConfirm}>
+              {getMessageRegister}
+            </div>
+          ) : null}
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 

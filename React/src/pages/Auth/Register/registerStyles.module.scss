@@ -1,27 +1,12 @@
 @import "../../../global/scss/rootStyles.scss";
-.login {
-  background-color: $bgColor;
-  height: 100vh;
-  padding: 0 16%;
-}
 
-.loginLeft {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    width: 94%;
-    object-fit: cover;
-  }
-}
-.loginRight {
+.registerRight {
   display: flex !important;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.loginForm {
+.registerForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +17,7 @@
   background-color: $whiteColor;
   border: 1px solid #dbdbdb;
   padding: 12px 40px;
-  .loginFormLogo {
+  .registerFormLogo {
     width: 175px;
     height: 54px;
     margin-top: 16px;
@@ -62,7 +47,7 @@
       margin-top: 8px;
     }
   }
-  .loginBtn {
+  .registerBtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,21 +99,41 @@
   }
 }
 
+.messageWaitConfirm {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: fit-content;
+  height: fit-content;
+  white-space: nowrap;
+  padding: 8px 12px;
+  background-color: $mainBlue;
+  border-radius: 4px;
+  color: #fff;
+  animation: TopToDown 0.45s ease-out;
+}
+.errorValidatePassword,
+.errorMatchPassword {
+  font-size: 14px;
+  color: red;
+  margin-top: 6px;
+  animation: LeftToRight 0.45s ease-out;
+}
+
+.errorMatchPassword {
+}
+
 // RESPONSIVE
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .login {
-    padding: 0 6%;
-  }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .login {
-    padding: 0 0%;
-  }
-  .loginForm,
+  .registerForm,
   .signUp {
     width: 300px;
   }
-  .loginLeft {
+  .registerLeft {
     img {
       width: 100%;
     }
@@ -140,14 +145,33 @@
 }
 
 @media screen and (max-width: 767px) {
-  .login {
-    padding: 0 6%;
-  }
-  .loginForm,
+  .registerForm,
   .signUp {
     width: 100%;
   }
-  .loginLeft {
-    display: none !important;
+  .messageWaitConfirm {
+    width: 100%;
+  }
+}
+
+@keyframes TopToDown {
+  0% {
+    transform: translateY(-100px) translate(-50%, -50%);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translate(-50%, -50%);
+  }
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
