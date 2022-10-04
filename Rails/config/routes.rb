@@ -9,5 +9,5 @@ Rails.application.routes.draw do
       end
     end
   end
-  get "/me" => 'application#authenticate_user_from_token'
+  get "/me" => 'users#check_login'
 end
