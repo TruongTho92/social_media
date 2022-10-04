@@ -1,0 +1,43 @@
+@import "../../global/scss/rootStyles.scss";
+.commentItem {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  width: fit-content;
+  margin-bottom: 10px;
+  .userImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 100rem;
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 100rem;
+
+      object-fit: cover;
+    }
+  }
+  .content {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 8px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    width: fit-content;
+    background-color: #f0f2f5;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+
+    .name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .commentText {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}
