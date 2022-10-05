@@ -26,11 +26,9 @@ class ApplicationController < ActionController::Base
 
   def load_user_authentication
     @user = User.find_by_email(user_params[:email])
-    return login_invalid unless @user
-  end
-
-  def login_invalid
-    render json:
-      {message: "Invalid login"}, status: 200
+    unless @user
+      render json: {
+        message: "Invalid login" }, status: :ok
+    end
   end
 end
