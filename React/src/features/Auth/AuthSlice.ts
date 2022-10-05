@@ -1,4 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { RootState } from "~/app/store";
 import { UserDataResponse, UserDataTypes } from "~/common/types";
 import { loginUser, registerUser } from "./AuthApi";
@@ -53,7 +56,15 @@ const AuthSlice = createSlice({
         (state, action: PayloadAction<UserDataResponse>) => {
           state.status = "success";
           state.data.message = action.payload.message;
-          // state.data = action.payload;
+          toast(`${action.payload.message}`, {
+            position: "top-right",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       )
       .addCase(registerUserAsync.rejected, (state) => {
@@ -69,9 +80,19 @@ const AuthSlice = createSlice({
         loginUserAsync.fulfilled,
         (state, action: PayloadAction<UserDataResponse>) => {
           state.status = "success";
-          state.data.message = action.payload.message;
-          state.data.is_success = action.payload.is_success;
           state.data = action.payload;
+          toast(`${action.payload.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          if (state.data.is_success) {
+            sessionStorage.setItem("user", JSON.stringify(state.data));
+          }
         }
       )
       .addCase(loginUserAsync.rejected, (state) => {
@@ -81,7 +102,6 @@ const AuthSlice = createSlice({
 });
 
 export const getRegisterMessage = (state: RootState) => state.auth.data.message;
-export const getLoginMessage = (state: RootState) => state.auth.data.message;
-export const getLoginSuccess = (state: RootState) => state.auth.data.is_success;
+export const getLoginData = (state: RootState) => state.auth.data;
 
 export default AuthSlice.reducer;

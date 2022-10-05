@@ -9,6 +9,5 @@ export const registerUser = async (payload: UserDataTypes) => {
 
 export const loginUser = async (payload: UserDataTypes) => {
   const res = await axios.post(`/api/v1/sign_in`, payload);
-  sessionStorage.setItem("user", JSON.stringify(res.data));
   return res.data;
 };

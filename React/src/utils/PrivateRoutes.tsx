@@ -1,11 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppSelector } from "~/app/hooks";
-import { getLoginSuccess } from "~/features/Auth/AuthSlice";
 
 const PrivateRoutes = () => {
-  const isLogin = useAppSelector(getLoginSuccess);
+  const isLogin = Boolean(sessionStorage.getItem("user"));
 
-  return isLogin ? <Outlet /> : <Navigate to="/auth/login" />;
+  return isLogin ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;
