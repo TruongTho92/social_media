@@ -146,6 +146,7 @@ const Register: React.FC = () => {
             <ToastContainer
               position="top-right"
               autoClose={false}
+              theme="dark"
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick

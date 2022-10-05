@@ -38,6 +38,7 @@ const initialState: stateType = {
     },
     message: "",
     is_success: false,
+    authentication_token: "",
   },
 };
 
@@ -91,12 +92,18 @@ const AuthSlice = createSlice({
             progress: undefined,
           });
           if (state.data.is_success) {
-            sessionStorage.setItem("user", JSON.stringify(state.data));
+            sessionStorage.setItem(
+              "access_token",
+              JSON.stringify(state.data.authentication_token)
+            );
+
+            document.cookie = JSON.stringify(state.data.authentication_token);
           }
         }
       )
-      .addCase(loginUserAsync.rejected, (state) => {
+      .addCase(loginUserAsync.rejected, (state, action: any) => {
         state.status = "failure";
+        state.data = action.payload;
       });
   },
 });
