@@ -1,9 +1,13 @@
 import { Col, Input, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { getLoginSuccess, loginUserAsync } from "~/features/Auth/AuthSlice";
+import { getLoginData, loginUserAsync } from "~/features/Auth/AuthSlice";
+
 import styles from "./LoginStyles.module.scss";
 
 const LoginPage: React.FC = () => {
@@ -13,14 +17,13 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const isSuccess = useAppSelector(getLoginSuccess);
+  const { is_success, message } = useAppSelector(getLoginData);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (is_success) {
       navigate("/");
-      window.location.reload();
     }
-  }, [isSuccess, navigate]);
+  }, [dispatch, is_success, navigate]);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -83,7 +86,7 @@ const LoginPage: React.FC = () => {
                 <span>or</span>
                 <span className={styles.line}></span>
               </div>
-              <Link to="/auth/forgot-password" className={styles.forgotPass}>
+              <Link to="/forgot-password" className={styles.forgotPass}>
                 <span>Forgot password?</span>
               </Link>
             </form>
@@ -91,12 +94,24 @@ const LoginPage: React.FC = () => {
           <div className={styles.signUp}>
             <span className={styles.signUpText}>Don't have account?</span>
 
-            <Link to="/auth/register" className={styles.signUpLink}>
+            <Link to="/register" className={styles.signUpLink}>
               Sign Up
             </Link>
           </div>
         </Col>
       </Row>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };
