@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < Devise::SessionsController
-  skip_before_action :authenticate_user_from_token
+  # skip_before_action :authenticate_user_from_token
   before_action :ensure_params_exist, only: [:create, :destroy]
   before_action :load_user_authentication
 
