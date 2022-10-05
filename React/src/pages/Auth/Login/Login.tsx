@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { is_success, message } = useAppSelector(getLoginData);
+  const { is_success } = useAppSelector(getLoginData);
 
   useEffect(() => {
     if (is_success) {
