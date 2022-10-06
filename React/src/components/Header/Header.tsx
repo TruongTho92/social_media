@@ -1,9 +1,13 @@
 import { Input } from "antd";
-import React, { useState } from "react";
-import { AiFillHome } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import {
+  AiFillHome,
+  AiOutlineSave,
+  AiOutlineSetting,
+  AiOutlineUser,
+} from "react-icons/ai";
 import { BsBookmarkPlus, BsChatDots, BsPlusSquare } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import { TbSearchOff } from "react-icons/tb";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
@@ -13,7 +17,20 @@ import styles from "./headerStyles.module.scss";
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
-  console.log(isOpenInput);
+
+  const [openSubUser, setOpenSubUser] = useState(false);
+
+  useEffect(() => {
+    window.onclick = () => {
+      setOpenSubUser(false);
+    };
+  }, []);
+
+  const onOpenSubUser = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpenSubUser(!openSubUser);
+  };
+
   return (
     <>
       <div className={`${styles.headerContainer} container-fluid`}>
@@ -67,8 +84,26 @@ const Header: React.FC = () => {
               <BsBookmarkPlus className={styles.menuIcon} />
             </NavLink>
           </div>
-          <div className={styles.menuUser}>
+          <div className={styles.menuUser} onClick={onOpenSubUser}>
             <img src="/assets/images/user-img.jpg" alt="" />
+            {openSubUser ? (
+              <div className={styles.subUserMenu}>
+                <Link to="/profile" className={styles.subMenuItem}>
+                  <AiOutlineUser className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Profile</label>
+                </Link>
+                <Link to="/settings" className={styles.subMenuItem}>
+                  <AiOutlineSetting className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Settings</label>
+                </Link>
+                <Link to="/profile/saves" className={styles.subMenuItem}>
+                  <AiOutlineSave className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Saved</label>
+                </Link>
+                <span className={styles.line}></span>
+                <span className={styles.logout}>Log out</span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -96,9 +131,9 @@ const Header: React.FC = () => {
             <BsBookmarkPlus className={styles.menuIcon} />
           </NavLink>
         </div>
-        <div className={styles.menuUser}>
+        <Link to="/profile" className={styles.menuUser}>
           <img src="/assets/images/user-img.jpg" alt="" />
-        </div>
+        </Link>
       </div>
     </>
   );
