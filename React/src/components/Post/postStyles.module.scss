@@ -89,9 +89,12 @@
   .likeIcon {
     font-size: 26px;
     margin-right: 8px;
+    cursor: pointer;
   }
 
   .inputComment {
+    font-size: 16px;
+    font-weight: 400;
     width: 70%;
     padding: 10px 12px;
     border-radius: 8px;
@@ -99,5 +102,10 @@
 
   .saveIcon {
     font-size: 26px;
+    cursor: pointer;
   }
+}
+
+.comment {
+  margin-top: 12px;
 }

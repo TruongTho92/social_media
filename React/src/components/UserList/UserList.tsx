@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./userListStyles.module.scss";
-type Props = {};
+import { FiCheck } from "react-icons/fi";
 
-const UserList = (props: Props) => {
+const UserList: React.FC = () => {
   return (
     <div className={styles.userList}>
       <div className={styles.userItem}>
@@ -15,6 +15,9 @@ const UserList = (props: Props) => {
           <span className={styles.name}>Minh Tài</span>
           <span className={styles.description}>Conian Guys</span>
         </div>
+        <span className={styles.ticked}>
+          <FiCheck className={styles.tickedIcon} />
+        </span>
       </div>
 
       <div className={styles.userItem}>
