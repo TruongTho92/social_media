@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "~/app/store";
-import { UserDataResponse } from "~/common/types";
 import { loadUser } from "./UserApi";
 
 export interface UserData {
   email: string;
   password: string;
+
   is_login: boolean;
 }
 

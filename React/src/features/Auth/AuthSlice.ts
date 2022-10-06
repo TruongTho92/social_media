@@ -30,15 +30,16 @@ export const loginUserAsync = createAsyncThunk(
 const initialState: stateType = {
   status: "idle",
   data: {
-    user: {
-      email: "",
-      password: "",
-      password_confirmation: "",
-      authentication_token: "",
+    data: {
+      user: {
+        email: "",
+        password: "",
+        password_confirmation: "",
+        authentication_token: "",
+      },
     },
     message: "",
     is_success: false,
-    authentication_token: "",
   },
 };
 
@@ -91,24 +92,19 @@ const AuthSlice = createSlice({
             draggable: true,
             progress: undefined,
           });
-          if (state.data.is_success) {
-            sessionStorage.setItem(
-              "access_token",
-              JSON.stringify(state.data.authentication_token)
-            );
-
-            document.cookie = JSON.stringify(state.data.authentication_token);
-          }
+          sessionStorage.setItem(
+            "access_token",
+            JSON.stringify(action.payload.data.user.authentication_token)
+          );
         }
       )
       .addCase(loginUserAsync.rejected, (state, action: any) => {
         state.status = "failure";
-        state.data = action.payload;
       });
   },
 });
 
 export const getRegisterMessage = (state: RootState) => state.auth.data.message;
-export const getLoginData = (state: RootState) => state.auth.data;
+export const getUserLogin = (state: RootState) => state.auth.data;
 
 export default AuthSlice.reducer;

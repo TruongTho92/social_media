@@ -1,12 +1,12 @@
 import { Col, Input, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { getLoginData, loginUserAsync } from "~/features/Auth/AuthSlice";
+import { getUserLogin, loginUserAsync } from "~/features/Auth/AuthSlice";
 
 import styles from "./LoginStyles.module.scss";
 
@@ -17,13 +17,14 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { is_success } = useAppSelector(getLoginData);
+  const { is_success: isSuccess } = useAppSelector(getUserLogin);
 
   useEffect(() => {
-    if (is_success) {
+    if (isSuccess) {
       navigate("/");
+      window.location.reload();
     }
-  }, [dispatch, is_success, navigate]);
+  }, [dispatch, isSuccess, navigate]);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();

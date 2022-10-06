@@ -14,18 +14,18 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isLogin = Boolean(sessionStorage.getItem("user"));
+  const token = Boolean(sessionStorage.getItem("access_token"));
 
   useEffect(() => {
     dispatch(loadUserAsync());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
-      {isLogin && <Header />}
+      {token && <Header />}
 
       <Routes>
-        <Route path="/*" element={isLogin ? <NotFound /> : <Auth />} />
+        <Route path="/*" element={token ? <NotFound /> : <Auth />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home />} />

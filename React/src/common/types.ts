@@ -7,13 +7,14 @@ export interface UserDataTypes {
 }
 
 export interface UserDataResponse {
-  user: {
-    email: string;
-    password: string;
-    password_confirmation: string;
-    authentication_token: string;
+  data: {
+    user: {
+      email: string;
+      password: string;
+      password_confirmation: string;
+      authentication_token: string;
+    };
   };
   message: string;
   is_success: boolean;
-  authentication_token: string;
 }
