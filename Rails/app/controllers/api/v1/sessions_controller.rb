@@ -11,6 +11,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       }, status: :ok
     else
       render json: {
+        message:"Email or Password incorrect",
         is_success: false,
         data: {}
       }, status: :ok
@@ -20,9 +21,15 @@ class Api::V1::SessionsController < Devise::SessionsController
   def destroy
     if @user.authentication_token == user_params[:authentication_token]
       sign_out @user
-      render json: {message: "Signed out"}, status: 200
+      render json: {
+        message: "Signed out",
+        is_success: true,
+      }, status: :ok
     else
-      render json: {message: "Invalid token"}, status: 200
+      render json: {
+        message: "Invalid token",
+        is_success: false,
+      }, status: :ok
     end
   end
 

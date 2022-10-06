@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   acts_as_token_authentication_handler_for User, {fallback: :none}
-  skip_before_action :authenticate_user_from_token
+  skip_before_action :authenticate_user_from_token, if: :devise_controller?
 
   private
   def current_user
