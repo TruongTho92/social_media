@@ -2,3 +2,21 @@
 .homePage {
   padding: 0 20%;
 }
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .homePage {
+    padding: 0 10%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .homePage {
+    padding: 0 4%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .homePage {
+    padding: 0 4%;
+  }
+}
