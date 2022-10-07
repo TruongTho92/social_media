@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./userListStyles.module.scss";
 import { FiCheck } from "react-icons/fi";
+import styles from "./userListStyles.module.scss";
 
 const UserList: React.FC = () => {
   return (
