@@ -28,8 +28,7 @@ const App: React.FC = () => {
 
       <Routes>
         <Route path="/" element={token ? <Home /> : <Login />} />
-
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={token ? <NotFound /> : <Register />} />
 
         <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
         <Route path="posts" element={isAuthenticated ? <Posts /> : <Login />} />
