@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  get "/me" => 'users#check_login'
 end

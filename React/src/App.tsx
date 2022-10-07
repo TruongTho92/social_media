@@ -1,8 +1,10 @@
 import "antd/dist/antd.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Route, Routes } from "react-router-dom";
+import { useAppDispatch } from "./app/hooks";
 import Header from "./components/Header";
+import { loadUserAsync } from "./features/User/UserSlice";
 import Auth from "./pages/Auth";
 import Chat from "./pages/Chat";
 import Home from "./pages/Home";
@@ -11,16 +13,19 @@ import Posts from "./pages/Posts";
 import PrivateRoutes from "./utils/PrivateRoutes";
 
 const App: React.FC = () => {
-  const isAuthenticated = sessionStorage.getItem("user");
+  const dispatch = useAppDispatch();
+  const token = Boolean(sessionStorage.getItem("access_token"));
+
+  useEffect(() => {
+    dispatch(loadUserAsync());
+  }, [dispatch]);
+
   return (
     <div className="App">
-      {isAuthenticated && <Header />}
+      {token && <Header />}
 
       <Routes>
-        <Route
-          path="/auth/*"
-          element={isAuthenticated ? <NotFound /> : <Auth />}
-        />
+        <Route path="/*" element={token ? <NotFound /> : <Auth />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home />} />

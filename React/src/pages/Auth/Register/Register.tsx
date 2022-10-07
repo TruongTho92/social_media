@@ -2,6 +2,9 @@ import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
@@ -12,7 +15,7 @@ import {
 } from "~/features/Auth/AuthSlice";
 import styles from "./registerStyles.module.scss";
 
-const Register = () => {
+const Register: React.FC = () => {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -133,16 +136,25 @@ const Register = () => {
           <div className={styles.signUp}>
             <span className={styles.signUpText}>Don't have account?</span>
 
-            <Link to="/auth/login" className={styles.signUpLink}>
+            <Link to="/login" className={styles.signUpLink}>
               Log In
             </Link>
           </div>
 
           {/* ERROR AND REGISTED MESSAGE */}
           {getMessageRegister ? (
-            <div className={styles.messageWaitConfirm}>
-              {getMessageRegister}
-            </div>
+            <ToastContainer
+              position="top-right"
+              autoClose={false}
+              theme="dark"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           ) : null}
         </Col>
       </Row>

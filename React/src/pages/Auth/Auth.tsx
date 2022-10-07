@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import styles from "./authStyles.module.scss";
 import ForgotPassword from "./ForgotPassword";
 import Login from "./Login";

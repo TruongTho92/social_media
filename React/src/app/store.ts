@@ -5,9 +5,11 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import AuthSlice from "~/features/Auth/AuthSlice";
+import UserSlice from "~/features/User/UserSlice";
 
 const rootReducer = combineReducers({
   auth: AuthSlice,
+  user: UserSlice,
 });
 
 export const store = configureStore({
