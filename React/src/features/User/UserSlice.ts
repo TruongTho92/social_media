@@ -1,56 +1,140 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { RootState } from "~/app/store";
-import { loadUser } from "./UserApi";
-
-export interface UserData {
-  email: string;
-  password: string;
-
-  is_login: boolean;
-}
+import { UserDataResponse, UserDataTypes } from "~/common/types";
+import { loadUser, loginUser, registerUser } from "./UserApi";
 
 export interface stateType {
+  loading: boolean;
   status: "idle" | "loading" | "success" | "failure";
-  data: UserData;
+  data: UserDataResponse;
+  isAuthenticated: boolean;
 }
+
+const initialState: stateType = {
+  status: "idle",
+  loading: false,
+  data: {
+    data: {
+      user: {
+        email: "",
+        password: "",
+        password_confirmation: "",
+        authentication_token: "",
+      },
+    },
+    message: "",
+    is_success: false,
+  },
+  isAuthenticated: false,
+};
+
+// ACTIONS THUNK
+export const registerUserAsync = createAsyncThunk(
+  "auth/registerUser",
+  async (payload: UserDataTypes) => {
+    const response = await registerUser(payload);
+    return response;
+  }
+);
+
+export const loginUserAsync = createAsyncThunk(
+  "auth/login",
+  async (payload: UserDataTypes) => {
+    const response = await loginUser(payload);
+    return response;
+  }
+);
 
 export const loadUserAsync = createAsyncThunk("auth/loadUser", async () => {
   const response = await loadUser();
   return response;
 });
 
-const initialState: stateType = {
-  status: "idle",
-  data: {
-    email: "",
-    password: "",
-    is_login: false,
-  },
-};
-
-const registerSlice = createSlice({
+const UserSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // REGISTER
+      .addCase(registerUserAsync.pending, (state) => {
+        state.status = "loading";
+        state.isAuthenticated = false;
+      })
+      .addCase(
+        registerUserAsync.fulfilled,
+        (state, action: PayloadAction<UserDataResponse>) => {
+          state.status = "success";
+          state.data.message = action.payload.message;
+          toast(`${action.payload.message}`, {
+            position: "top-right",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      )
+      .addCase(registerUserAsync.rejected, (state) => {
+        state.status = "failure";
+        state.isAuthenticated = false;
+      });
 
-      .addCase(loadUserAsync.pending, (state) => {
+    // LOGIN
+    builder
+      .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(
-        loadUserAsync.fulfilled,
-        (state, action: PayloadAction<UserData>) => {
+        loginUserAsync.fulfilled,
+        (state, action: PayloadAction<UserDataResponse>) => {
           state.status = "success";
           state.data = action.payload;
+          state.isAuthenticated = true;
+          toast(`${action.payload.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          sessionStorage.setItem(
+            "access_token",
+            JSON.stringify(action.payload.data.user.authentication_token)
+          );
         }
       )
-      .addCase(loadUserAsync.rejected, (state) => {
+      .addCase(loginUserAsync.rejected, (state) => {
         state.status = "failure";
+      });
+
+    // LOAD USER
+    builder
+      .addCase(loadUserAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(loadUserAsync.fulfilled, (state, action) => {
+        state.status = "success";
+        state.data = action.payload;
+        state.loading = true;
+        state.isAuthenticated = true;
+      })
+      .addCase(loadUserAsync.rejected, (state, action) => {
+        state.status = "failure";
+        state.data.message = action.error.message;
+        state.isAuthenticated = false;
       });
   },
 });
 
-export const getCurrentUser = (state: RootState) => state.user.data;
+export const getRegisterMessage = (state: RootState) => state.user.data.message;
+export const getUserLogin = (state: RootState) => state.user;
 
-export default registerSlice.reducer;
+export default UserSlice.reducer;

@@ -12,7 +12,8 @@ import InputPassword from "~/components/Input/Password";
 import {
   getRegisterMessage,
   registerUserAsync,
-} from "~/features/Auth/AuthSlice";
+} from "~/features/User/UserSlice";
+
 import styles from "./registerStyles.module.scss";
 
 const Register: React.FC = () => {
@@ -63,12 +64,22 @@ const Register: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={`container-fluid ${styles.login}`}>
       <Row
         justify="center"
         align="middle"
         style={{ width: "100%", height: "100%" }}
       >
+        <Col
+          sm={24}
+          md={12}
+          lg={12}
+          span={12}
+          xl={12}
+          className={styles.loginLeft}
+        >
+          <img src="/assets/images/login-background.png" alt="" />
+        </Col>
         <Col
           xs={24}
           sm={24}
@@ -136,7 +147,7 @@ const Register: React.FC = () => {
           <div className={styles.signUp}>
             <span className={styles.signUpText}>Don't have account?</span>
 
-            <Link to="/login" className={styles.signUpLink}>
+            <Link to="/" className={styles.signUpLink}>
               Log In
             </Link>
           </div>
@@ -158,7 +169,7 @@ const Register: React.FC = () => {
           ) : null}
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

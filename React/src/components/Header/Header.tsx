@@ -11,6 +11,7 @@ import { FiSearch } from "react-icons/fi";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+import apiClient from "~/apiClient/apiClient";
 
 import styles from "./headerStyles.module.scss";
 

@@ -15,6 +15,6 @@ export interface UserDataResponse {
       authentication_token: string;
     };
   };
-  message: string;
+  message: string | undefined;
   is_success: boolean;
 }
