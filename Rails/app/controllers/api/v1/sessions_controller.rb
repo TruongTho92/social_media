@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < Devise::SessionsController
-  before_action :ensure_params_exist, only: [:create, :destroy]
+  before_action :ensure_params_exist
   before_action :load_user_authentication
 
   def create
