@@ -24,10 +24,10 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {token && <Header />}
+      {isAuthenticated && <Header />}
 
       <Routes>
-        <Route path="/" element={token ? <Home /> : <Login />} />
+        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
 
         <Route path="register" element={<Register />} />
 

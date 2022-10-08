@@ -7,10 +7,10 @@ import { UserDataResponse, UserDataTypes } from "~/common/types";
 import { loadUser, loginUser, registerUser } from "./UserApi";
 
 export interface stateType {
-  loading: boolean;
-  status: "idle" | "loading" | "success" | "failure";
+  loading?: boolean;
+  status?: "idle" | "loading" | "success" | "failure";
   data: UserDataResponse;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 const initialState: stateType = {
@@ -48,10 +48,13 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
-export const loadUserAsync = createAsyncThunk("auth/loadUser", async () => {
-  const response = await loadUser();
-  return response;
-});
+export const loadUserAsync = createAsyncThunk(
+  "auth/loadUser",
+  async (data, { rejectWithValue }) => {
+    const response = await loadUser();
+    return response;
+  }
+);
 
 const UserSlice = createSlice({
   name: "auth",
@@ -62,7 +65,6 @@ const UserSlice = createSlice({
       // REGISTER
       .addCase(registerUserAsync.pending, (state) => {
         state.status = "loading";
-        state.isAuthenticated = false;
       })
       .addCase(
         registerUserAsync.fulfilled,
@@ -82,7 +84,6 @@ const UserSlice = createSlice({
       )
       .addCase(registerUserAsync.rejected, (state) => {
         state.status = "failure";
-        state.isAuthenticated = false;
       });
 
     // LOGIN
@@ -120,20 +121,32 @@ const UserSlice = createSlice({
       .addCase(loadUserAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(loadUserAsync.fulfilled, (state, action) => {
-        state.status = "success";
-        state.data = action.payload;
-        state.loading = true;
-        state.isAuthenticated = true;
-      })
+      .addCase(
+        loadUserAsync.fulfilled,
+        (state, action: PayloadAction<UserDataResponse>) => {
+          state.status = "success";
+          state.data = action.payload;
+          state.loading = false;
+          state.isAuthenticated = action.payload.is_success;
+          toast(`${action.payload.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      )
       .addCase(loadUserAsync.rejected, (state, action) => {
         state.status = "failure";
-        state.data.message = action.error.message;
         state.isAuthenticated = false;
       });
   },
 });
 
+//SELECTOR
 export const getRegisterMessage = (state: RootState) => state.user.data.message;
 export const getUserLogin = (state: RootState) => state.user;
 
