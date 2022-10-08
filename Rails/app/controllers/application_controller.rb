@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   acts_as_token_authentication_handler_for User, {fallback: :none}
   skip_before_action :authenticate_user_from_token
-  before_action :load_user_authentication
 
   def load_user_authentication
     if current_user
@@ -12,7 +11,7 @@ class ApplicationController < ActionController::Base
         message: "Please login first",
         is_success: false,
         data: {},
-      }, status: :failure
+      }, status: 400
     end
   end
 

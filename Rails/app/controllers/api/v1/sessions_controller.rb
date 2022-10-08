@@ -1,7 +1,6 @@
 class Api::V1::SessionsController < Devise::SessionsController
   before_action :ensure_params_exist
-  before_action :load_user_authentication
-
+  before_action :load_user
   def create
     if @user.valid_password?(user_params[:password])
       sign_in @user, store: false
@@ -36,5 +35,10 @@ class Api::V1::SessionsController < Devise::SessionsController
   private
   def user_params
     params.require(:user).permit(:email, :password, :authentication_token)
+  end
+
+  def load_user
+    @user = User.find_by_email user_params[:email]
+    return render json:{message: "Invalid login"}, status: 200 unless @user
   end
 end
