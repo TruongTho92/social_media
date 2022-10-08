@@ -4,6 +4,18 @@ class ApplicationController < ActionController::Base
   skip_before_action :authenticate_user_from_token
   before_action :load_user_authentication
 
+  def load_user_authentication
+    if current_user
+      return current_user
+    else
+      render json: {
+        message: "Please login first",
+        is_success: false,
+        data: {},
+      }, status: :failure
+    end
+  end
+
   private
   def current_user
     @current_user ||= User.find_by(authentication_token: request.headers["Authorization"])
@@ -17,18 +29,5 @@ class ApplicationController < ActionController::Base
   def ensure_params_exist
     return unless params[:user].blank?
      render json: {message: "Missing params"}, status: 422
-  end
-
-  def load_user_authentication
-    @user = User.find_by(email: user_params[:email])
-    if @user
-      return @user
-    else
-      render json: {
-        message: "Cannot get User",
-        is_success: false,
-        data: {},
-      }, status: :ok
-    end
   end
 end
