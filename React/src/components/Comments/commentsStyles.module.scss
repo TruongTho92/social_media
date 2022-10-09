@@ -1,10 +1,16 @@
 @import "../../global/scss/rootStyles.scss";
+
+.commentList {
+  overflow-y: scroll;
+  height: 300px;
+  padding: 10px;
+}
 .commentItem {
   display: flex;
   justify-content: start;
   align-items: flex-start;
   width: fit-content;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   .userImage {
     width: 30px;
     height: 30px;
@@ -39,5 +45,45 @@
       font-size: 16px;
       font-weight: 400;
     }
+  }
+}
+.form {
+  @include d-flex(center, center);
+  margin-bottom: 16px;
+  .inputComment {
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .btnComment {
+    float: right;
+    padding: 8px 16px;
+    background-color: $mainBlue;
+    font-weight: 400;
+    color: $whiteColor;
+    margin-left: 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .commentList {
+    height: 260px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .commentList {
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .commentList {
+    height: fit-content;
   }
 }

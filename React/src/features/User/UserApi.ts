@@ -13,16 +13,6 @@ export const loginUser = async (payload: UserDataTypes) => {
 };
 
 export const loadUser = async () => {
-  try {
-    const token = JSON.parse(sessionStorage.getItem("access_token") || "");
-
-    const res = await apiClient.get(`/api/v1/load-user`, {
-      headers: {
-        Authorization: "bearer " + token,
-      },
-    });
-    return res.data;
-  } catch (error: any) {
-    return error.response.data;
-  }
+  const res = await apiClient.get(`/api/v1/load-user`);
+  return res.data;
 };

@@ -106,10 +106,10 @@ const UserSlice = createSlice({
             draggable: true,
             progress: undefined,
           });
-          sessionStorage.setItem(
-            "access_token",
-            JSON.stringify(action.payload.data.user.authentication_token)
-          );
+          // sessionStorage.setItem(
+          //   "access_token",
+          //   JSON.stringify(action.payload.data.user.authentication_token)
+          // );
         }
       )
       .addCase(loginUserAsync.rejected, (state) => {
