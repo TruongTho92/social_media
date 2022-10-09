@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
+import PostDetail from "./components/PostDetail";
 import { getUserLogin, loadUserAsync } from "./features/User/UserSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -24,15 +25,17 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {isAuthenticated && <Header />}
+      {token && <Header />}
 
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route path="/" element={token ? <Home /> : <Login />} />
 
         <Route path="register" element={<Register />} />
 
-        <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
-        <Route path="posts" element={isAuthenticated ? <Posts /> : <Login />} />
+        <Route path="chat" element={token ? <Chat /> : <Login />} />
+        <Route path="posts" element={token ? <Posts /> : <Login />}></Route>
+        <Route path="posts/:id" element={<PostDetail />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

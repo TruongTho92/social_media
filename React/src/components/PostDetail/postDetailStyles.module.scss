@@ -1,0 +1,85 @@
+@import "../../global/scss/rootStyles.scss";
+
+.postDetail {
+  padding-top: 80px !important;
+  padding: 0 20%;
+}
+
+.postDetailContainer {
+  @include d-flex(center, flex-start);
+  background-color: #fff;
+  height: fit-content;
+  padding: 16px;
+}
+
+.postDetailImg {
+  width: 100%;
+  height: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.postDetailContent {
+  margin-left: 48px;
+  .userName {
+    @include d-flex(start, flex-start);
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    .image {
+      width: 40px;
+      height: 40px;
+      border-radius: 100rem;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100rem;
+      }
+    }
+  }
+  .info {
+    margin-left: 8px;
+
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .description {
+      margin: 0;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: italic;
+      color: $greyBold;
+      line-height: normal;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .postDetail {
+    padding: 0 10%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .postDetail {
+    padding: 0 4%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .postDetailContainer {
+    flex-direction: column;
+  }
+  .postDetail {
+    padding: 0 4%;
+  }
+  .postDetailContent {
+    margin-left: 0 !important;
+  }
+}
