@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < Devise::SessionsController
-  before_action :ensure_params_exist
+  before_action :ensure_params_exist, only: [:create, :destroy]
   before_action :load_user
 
   def create
@@ -15,7 +15,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         message:"Email or Password incorrect",
         is_success: false,
         data: {}
-      }, status: :ok
+      }, status: 401
     end
   end
 

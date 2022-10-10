@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
 
   def ensure_params_exist
     return unless params[:user].blank?
-     render json: {message: "Please login First"}, status: 401
+     render json: {message: "Missing Params"}, status: 401
   end
 end
