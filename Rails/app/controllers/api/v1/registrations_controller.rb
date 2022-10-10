@@ -4,6 +4,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       render json: {
         message: "Waiting confirm your email!",
         is_success: true,

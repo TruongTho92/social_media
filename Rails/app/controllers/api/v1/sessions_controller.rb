@@ -3,7 +3,8 @@ class Api::V1::SessionsController < Devise::SessionsController
   before_action :load_user
   def create
     if @user.valid_password?(user_params[:password])
-      sign_in @user, store: false
+      sign_in @user
+      session[:user_id] = @user.id
       render json: {
         is_success: true,
         data: {user: @user}
@@ -14,6 +15,20 @@ class Api::V1::SessionsController < Devise::SessionsController
         is_success: false,
         data: {}
       }, status: :ok
+    end
+  end
+
+  def is_logged_in?
+    @current_user = User.find(session[:user_id]) if session[:user_id]
+    if @current_user
+      render json: {
+        is_success: true,
+        data: {user: @current_user}
+      }, status: :ok
+    else
+      render json: {
+        is_success: false
+      }
     end
   end
 
@@ -35,10 +50,5 @@ class Api::V1::SessionsController < Devise::SessionsController
   private
   def user_params
     params.require(:user).permit(:email, :password, :authentication_token)
-  end
-
-  def load_user
-    @user = User.find_by_email user_params[:email]
-    return render json:{message: "Invalid login"}, status: 200 unless @user
   end
 end
