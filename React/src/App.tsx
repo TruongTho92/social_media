@@ -16,7 +16,7 @@ import Posts from "./pages/Posts";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAppSelector(getUser);
-
+  const token = sessionStorage.getItem("token");
   const dispatch = useAppDispatch();
 
   useEffect(() => {

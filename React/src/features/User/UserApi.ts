@@ -51,9 +51,6 @@ export const loginUser = (payload: UserDataTypes) => async (dispatch: any) => {
       payload: error.response.data,
     });
   }
-  const res = await apiClient.post(`/api/v1/sign_in`, payload);
-
-  return res.data;
 };
 
 export const loadUser = () => async (dispatch: any) => {
@@ -62,7 +59,7 @@ export const loadUser = () => async (dispatch: any) => {
       type: LoadUserRequest.toString(),
     });
 
-    const { data } = await apiClient.get(`/api/v1/load-user`);
+    const { data } = await apiClient.get(`/api/v1/logged_in`);
 
     dispatch({
       type: LoadUserSuccess.toString(),
