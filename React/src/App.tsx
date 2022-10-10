@@ -16,7 +16,7 @@ import Posts from "./pages/Posts";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAppSelector(getUser);
-  const token = sessionStorage.getItem("token");
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,13 +30,13 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
 
-        <Route path="register" element={<Register />} />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <NotFound /> : <Register />}
+        />
 
         <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
-        <Route
-          path="posts"
-          element={isAuthenticated ? <Posts /> : <Login />}
-        ></Route>
+        <Route path="posts" element={isAuthenticated ? <Posts /> : <Login />} />
         <Route path="posts/:id" element={<PostDetail />} />
 
         <Route path="*" element={<NotFound />} />
