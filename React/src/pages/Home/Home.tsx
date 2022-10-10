@@ -1,9 +1,6 @@
 import { Col, Row } from "antd";
-import { useEffect } from "react";
-import { useAppDispatch } from "~/app/hooks";
 import PostList from "~/components/PostList";
 import UserList from "~/components/UserList";
-import { loadUserAsync } from "~/features/User/UserSlice";
 import styles from "./homeStyles.module.scss";
 
 export interface postsTypes {

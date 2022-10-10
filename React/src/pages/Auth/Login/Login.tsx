@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { loginUserAsync } from "~/features/User/UserSlice";
+import { loginUser } from "~/features/User/UserApi";
 
 import styles from "./LoginStyles.module.scss";
 
@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
       },
     };
 
-    dispatch(loginUserAsync(data));
+    dispatch(loginUser(data));
   };
 
   return (
