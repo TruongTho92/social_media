@@ -18,7 +18,6 @@ import styles from "./headerStyles.module.scss";
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
-
   const [openSubUser, setOpenSubUser] = useState(false);
 
   useEffect(() => {

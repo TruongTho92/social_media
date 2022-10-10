@@ -41,6 +41,9 @@ const Post = ({ userId = 1, postId = 1 }) => {
 
         <BsBookmarkPlus className={styles.saveIcon} />
       </div>
+      <div className={styles.comment}>
+        <Comments />
+      </div>
     </div>
   );
 };
