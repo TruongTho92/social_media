@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Devise::SessionsController
   before_action :ensure_params_exist, only: [:create, :destroy]
-  before_action :load_user
+  before_action :load_user, only: [:create, :destroy]
 
   def create
     if @user.valid_password?(user_params[:password])
