@@ -1,9 +1,11 @@
 class Api::V1::SessionsController < Devise::SessionsController
-  before_action :ensure_params_exist
+  before_action :ensure_params_exist, only: [:create, :destroy]
   before_action :load_user
+
   def create
     if @user.valid_password?(user_params[:password])
-      sign_in @user, store: false
+      sign_in @user
+      session[:user_id] = @user.id
       render json: {
         is_success: true,
         data: {user: @user}
@@ -13,7 +15,23 @@ class Api::V1::SessionsController < Devise::SessionsController
         message:"Email or Password incorrect",
         is_success: false,
         data: {}
+      }, status: 401
+    end
+  end
+
+  def is_logged_in?
+    @current_user = User.find(session[:user_id]) if session[:user_id]
+    if @current_user
+      render json: {
+        message: "Is login",
+        is_success: true,
+        data: {user: @current_user}
       }, status: :ok
+    else
+      render json: {
+        message: "Please login first",
+        is_success: false
+      }, status: 401
     end
   end
 

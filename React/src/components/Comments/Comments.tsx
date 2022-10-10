@@ -1,3 +1,4 @@
+import Input from "antd/lib/input/Input";
 import React, { useState } from "react";
 import styles from "./commentsStyles.module.scss";
 
@@ -14,19 +15,31 @@ const Comments = (props: Props) => {
   ]);
   return (
     <div>
-      {comments && comments.length > 0
-        ? comments.map((item, index) => (
-            <div className={styles.commentItem} key={index}>
-              <div className={styles.userImage}>
-                <img src="/assets/images/user-img.jpg" alt="" />
+      <form action="" className={styles.form}>
+        <Input
+          type="text"
+          placeholder="Add a comment..."
+          className={styles.inputComment}
+        />
+        <button type="submit" className={styles.btnComment}>
+          Add
+        </button>
+      </form>
+      <div className={styles.commentList}>
+        {comments && comments.length > 0
+          ? comments.map((item, index) => (
+              <div className={styles.commentItem} key={index}>
+                <div className={styles.userImage}>
+                  <img src="/assets/images/user-img.jpg" alt="" />
+                </div>
+                <div className={styles.content}>
+                  <span className={styles.name}>{item.name}</span>
+                  <span className={styles.commentText}>{item.data}</span>
+                </div>
               </div>
-              <div className={styles.content}>
-                <span className={styles.name}>{item.name}</span>
-                <span className={styles.commentText}>{item.data}</span>
-              </div>
-            </div>
-          ))
-        : null}
+            ))
+          : null}
+      </div>
     </div>
   );
 };

@@ -1,18 +1,16 @@
 import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import {
-  getRegisterMessage,
-  registerUserAsync,
-} from "~/features/User/UserSlice";
+import { registerUser } from "~/features/User/UserApi";
+import { getUser } from "~/features/User/UserSlice";
 
 import styles from "./registerStyles.module.scss";
 
@@ -30,7 +28,8 @@ const Register: React.FC = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   // Message register successfull
-  const getMessageRegister = useSelector(getRegisterMessage);
+  const getMessageRegister = useSelector(getUser);
+  console.log(getMessageRegister);
 
   const handleRegister = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -57,7 +56,7 @@ const Register: React.FC = () => {
       passValidate.pwdLengthCheck
     ) {
       setIsValidatePassword(false);
-      dispatch(registerUserAsync(data));
+      dispatch(registerUser(data));
     } else {
       setIsValidatePassword(true);
     }
@@ -153,20 +152,19 @@ const Register: React.FC = () => {
           </div>
 
           {/* ERROR AND REGISTED MESSAGE */}
-          {getMessageRegister ? (
-            <ToastContainer
-              position="top-right"
-              autoClose={false}
-              theme="dark"
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          ) : null}
+
+          <ToastContainer
+            position="top-right"
+            autoClose={false}
+            theme="dark"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </Col>
       </Row>
     </div>

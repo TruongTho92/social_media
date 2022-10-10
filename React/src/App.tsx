@@ -4,7 +4,9 @@ import { Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
-import { getUserLogin, loadUserAsync } from "./features/User/UserSlice";
+import PostDetail from "./components/PostDetail";
+import { loadUser } from "./features/User/UserApi";
+import { getUser } from "./features/User/UserSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Chat from "./pages/Chat";
@@ -13,25 +15,32 @@ import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 
 const App: React.FC = () => {
-  const { isAuthenticated } = useAppSelector(getUserLogin);
-  const token = Boolean(sessionStorage.getItem("access_token"));
+  const { isAuthenticated } = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadUserAsync());
+    dispatch(loadUser());
   }, [dispatch]);
 
   return (
     <div className="App">
-      {token && <Header />}
+      {isAuthenticated && <Header />}
 
       <Routes>
-        <Route path="/" element={token ? <Home /> : <Login />} />
+
         <Route path="register" element={token ? <NotFound /> : <Register />} />
+        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+
+       
 
         <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
-        <Route path="posts" element={isAuthenticated ? <Posts /> : <Login />} />
+        <Route
+          path="posts"
+          element={isAuthenticated ? <Posts /> : <Login />}
+        ></Route>
+        <Route path="posts/:id" element={<PostDetail />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
