@@ -6,6 +6,7 @@ Rails.application.routes.draw do
           post "sign_up", :to => 'registrations#create'
           post "sign_in", :to => 'sessions#create'
           delete "sign_out", :to => 'sessions#destroy'
+          get 'logged_in', :to => 'sessions#is_logged_in?'
       end
       resources :users
     end
