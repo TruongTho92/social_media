@@ -1,5 +1,4 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
-  skip_before_action :load_user_authentication
 
   def index
     @users = User.all
