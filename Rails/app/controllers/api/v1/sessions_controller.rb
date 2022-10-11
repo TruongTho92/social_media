@@ -20,22 +20,6 @@ class Api::V1::SessionsController < Devise::SessionsController
     end
   end
 
-  def is_logged_in?
-    @current_user = User.find(session[:user_id]) if session[:user_id]
-    if @current_user
-      render json: {
-        message: "Is login",
-        is_success: true,
-        data: {user: @current_user}
-      }, status: :ok
-    else
-      render json: {
-        message: "Please login first",
-        is_success: false
-      }, status: 401
-    end
-  end
-
   def destroy
     if @user.authentication_token == user_params[:authentication_token]
       sign_out @user
