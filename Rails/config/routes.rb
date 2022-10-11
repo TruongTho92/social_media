@@ -11,5 +11,4 @@ Rails.application.routes.draw do
       resources :users
     end
   end
-  get "api/v1/load-user" => 'application#load_user_authentication'
 end
