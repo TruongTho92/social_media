@@ -12,6 +12,8 @@ import {
   RegisterSuccess,
 } from "./UserSlice";
 
+import Cookies from "js-cookie";
+
 export const registerUser =
   (payload: UserDataTypes) => async (dispatch: any) => {
     try {
@@ -40,6 +42,11 @@ export const loginUser = (payload: UserDataTypes) => async (dispatch: any) => {
     });
 
     const { data } = await apiClient.post(`/api/v1/sign_in`, payload);
+    console.log(data);
+    Cookies.set(
+      "access_token",
+      JSON.stringify(data.data.user.authentication_token)
+    );
 
     dispatch({
       type: LoginSuccess.toString(),
