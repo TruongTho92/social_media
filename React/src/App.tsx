@@ -41,6 +41,7 @@ const App: React.FC = () => {
 
         {/* POST */}
         <Route path="posts" element={token ? <Posts /> : <Login />} />
+
         <Route path="posts/:id" element={token ? <PostDetail /> : <Login />} />
 
         {/* PROFILE */}
