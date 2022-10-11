@@ -7,6 +7,9 @@ import {
   LoginFailure,
   LoginRequest,
   LoginSuccess,
+  LogoutFailure,
+  LogoutRequest,
+  LogoutSuccess,
   RegisterFailure,
   RegisterRequest,
   RegisterSuccess,
@@ -66,8 +69,13 @@ export const loadUser = () => async (dispatch: any) => {
       type: LoadUserRequest.toString(),
     });
 
-    const { data } = await apiClient.get(`/api/v1/logged_in`);
+    const token = JSON.parse(Cookies.get("access_token") || "");
 
+    const { data } = await apiClient.get(`/api/v1/logged_in`, {
+      headers: {
+        token: token,
+      },
+    });
     dispatch({
       type: LoadUserSuccess.toString(),
       payload: data,
@@ -75,6 +83,27 @@ export const loadUser = () => async (dispatch: any) => {
   } catch (error: any) {
     dispatch({
       type: LoadUserFailure.toString(),
+      // payload: error.response.data,
+    });
+  }
+};
+
+export const logoutUser = () => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: LogoutRequest.toString(),
+    });
+
+    Cookies.remove("access_token");
+    const { data } = await apiClient.delete(`/api/v1/sign_out`);
+
+    dispatch({
+      type: LogoutSuccess.toString(),
+      payload: data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: LogoutFailure.toString(),
       payload: error.response.data,
     });
   }

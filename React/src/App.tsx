@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
         <Route path="chat" element={token ? <Chat /> : <Login />} />
         <Route path="posts" element={token ? <Posts /> : <Login />} />
-        <Route path="posts/:id" element={<PostDetail />} />
+
 
         <Route path="*" element={<NotFound />} />
       </Routes>

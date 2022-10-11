@@ -11,7 +11,8 @@ import { FiSearch } from "react-icons/fi";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
-import apiClient from "~/apiClient/apiClient";
+import { useAppDispatch } from "~/app/hooks";
+import { logoutUser } from "~/features/User/UserApi";
 
 import styles from "./headerStyles.module.scss";
 
@@ -19,6 +20,8 @@ const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
   const [openSubUser, setOpenSubUser] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     window.onclick = () => {
@@ -29,6 +32,10 @@ const Header: React.FC = () => {
   const onOpenSubUser = (e: React.MouseEvent) => {
     e.stopPropagation();
     setOpenSubUser(!openSubUser);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
   };
 
   return (
@@ -101,7 +108,9 @@ const Header: React.FC = () => {
                   <label className={styles.subUserLabel}>Saved</label>
                 </Link>
                 <span className={styles.line}></span>
-                <span className={styles.logout}>Log out</span>
+                <div className={styles.logout} onClick={handleLogout}>
+                  Log out
+                </div>
               </div>
             ) : null}
           </div>

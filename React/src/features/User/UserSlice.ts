@@ -30,31 +30,6 @@ const initialState: stateType = {
   isAuthenticated: false,
 };
 
-// ACTIONS THUNK
-// export const registerUserAsync = createAsyncThunk(
-//   "auth/registerUser",
-//   async (payload: UserDataTypes) => {
-//     const response = await registerUser(payload);
-//     return response;
-//   }
-// );
-
-// export const loginUserAsync = createAsyncThunk(
-//   "auth/login",
-//   async (payload: UserDataTypes) => {
-//     const response = await loginUser(payload);
-//     return response;
-//   }
-// );
-
-// export const loadUserAsync = createAsyncThunk(
-//   "auth/loadUser",
-//   async (data, { rejectWithValue }) => {
-//     const response = await loadUser();
-//     return response;
-//   }
-// );
-
 const UserSlice = createSlice({
   name: "auth",
   initialState,
@@ -126,91 +101,20 @@ const UserSlice = createSlice({
       state.data = action.payload;
       state.isAuthenticated = false;
     },
+
+    // LOAD USER
+    LogoutRequest: (state) => {
+      state.loading = false;
+    },
+    LogoutSuccess: (state, action: PayloadAction<UserDataResponse>) => {
+      state.data = action.payload;
+      state.isAuthenticated = false;
+    },
+    LogoutFailure: (state, action: any) => {
+      state.loading = true;
+      state.isAuthenticated = true;
+    },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     // REGISTER
-  //     .addCase(registerUserAsync.pending, (state) => {
-  //       state.status = "loading";
-  //     })
-  //     .addCase(
-  //       registerUserAsync.fulfilled,
-  //       (state, action: PayloadAction<UserDataResponse>) => {
-  //         state.status = "success";
-  //         state.data.message = action.payload.message;
-  //         toast(`${action.payload.message}`, {
-  //           position: "top-right",
-  //           autoClose: false,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //         });
-  //       }
-  //     )
-  //     .addCase(registerUserAsync.rejected, (state) => {
-  //       state.status = "failure";
-  //     });
-
-  //   // LOGIN
-  //   builder
-  //     .addCase(loginUserAsync.pending, (state) => {
-  //       state.status = "loading";
-  //     })
-  //     .addCase(
-  //       loginUserAsync.fulfilled,
-  //       (state, action: PayloadAction<UserDataResponse>) => {
-  //         state.status = "success";
-  //         state.data = action.payload;
-  //         state.isAuthenticated = true;
-  //         toast(`${action.payload.message}`, {
-  //           position: "top-right",
-  //           autoClose: 5000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //         });
-  //         // sessionStorage.setItem(
-  //         //   "access_token",
-  //         //   JSON.stringify(action.payload.data.user.authentication_token)
-  //         // );
-  //       }
-  //     )
-  //     .addCase(loginUserAsync.rejected, (state) => {
-  //       state.status = "failure";
-  //     });
-
-  //   // LOAD USER
-  //   builder
-  //     .addCase(loadUserAsync.pending, (state) => {
-  //       state.status = "loading";
-  //     })
-  //     .addCase(
-  //       loadUserAsync.fulfilled,
-  //       (state, action: PayloadAction<UserDataResponse>) => {
-  //         state.status = "success";
-  //         state.data = action.payload;
-  //         state.loading = false;
-  //         state.isAuthenticated = action.payload.is_success;
-  //         toast(`${action.payload.message}`, {
-  //           position: "top-right",
-  //           autoClose: 5000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //         });
-  //       }
-  //     )
-  //     .addCase(loadUserAsync.rejected, (state, action) => {
-  //       state.status = "failure";
-  //       state.isAuthenticated = false;
-  //     });
-  // },
 });
 
 // ACTIONS
@@ -218,6 +122,8 @@ export const { RegisterSuccess, RegisterRequest, RegisterFailure } =
   UserSlice.actions;
 export const { LoginSuccess, LoginRequest, LoginFailure } = UserSlice.actions;
 export const { LoadUserSuccess, LoadUserRequest, LoadUserFailure } =
+  UserSlice.actions;
+export const { LogoutSuccess, LogoutRequest, LogoutFailure } =
   UserSlice.actions;
 
 //SELECTOR
