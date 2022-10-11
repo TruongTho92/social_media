@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   skip_before_action :authenticate_user_from_token
 
   private
-  def current_user
-    @current_user ||= User.find_by(authentication_token: request.headers["Authorization"])
-  end
-
   def authenticate_user_from_token
     render json: {message: "You are not authenticated"},
       status: 401 if current_user.nil?
