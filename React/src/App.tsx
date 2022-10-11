@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
 import PostDetail from "./components/PostDetail";
+import UpdateProfile from "./components/UpdateProfile";
 import { loadUser } from "./features/User/UserApi";
 import { getUser } from "./features/User/UserSlice";
 import Login from "./pages/Auth/Login";
@@ -14,6 +15,7 @@ import Chat from "./pages/Chat";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAppSelector(getUser);
@@ -31,14 +33,24 @@ const App: React.FC = () => {
       {token && <Header />}
 
       <Routes>
+        {/* AUTH */}
         <Route path="/" element={token ? <Home /> : <Login />} />
-
         <Route path="/register" element={token ? <NotFound /> : <Register />} />
 
         <Route path="chat" element={token ? <Chat /> : <Login />} />
-        <Route path="posts" element={token ? <Posts /> : <Login />} />
-        <Route path="posts/:id" element={<PostDetail />} />
 
+        {/* POST */}
+        <Route path="posts" element={token ? <Posts /> : <Login />} />
+        <Route path="posts/:id" element={token ? <PostDetail /> : <Login />} />
+
+        {/* PROFILE */}
+        <Route path="profile" element={token ? <Profile /> : <Login />}></Route>
+        <Route
+          path="profile/update"
+          element={token ? <UpdateProfile /> : <Login />}
+        />
+
+        {/* 404 PAGE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

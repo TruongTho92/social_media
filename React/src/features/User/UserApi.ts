@@ -66,7 +66,13 @@ export const loadUser = () => async (dispatch: any) => {
       type: LoadUserRequest.toString(),
     });
 
-    const { data } = await apiClient.get(`/api/v1/logged_in`);
+    const token = JSON.parse(Cookies.get("access_token") || "");
+
+    const { data } = await apiClient.get(`/api/v1/users`, {
+      headers: {
+        token: token,
+      },
+    });
 
     dispatch({
       type: LoadUserSuccess.toString(),
