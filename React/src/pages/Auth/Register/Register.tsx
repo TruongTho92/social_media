@@ -27,10 +27,6 @@ const Register: React.FC = () => {
   const [isValidatePassword, setIsValidatePassword] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  // Message register successfull
-  const getMessageRegister = useSelector(getUser);
-  console.log(getMessageRegister);
-
   const handleRegister = (e: React.SyntheticEvent) => {
     e.preventDefault();
 

@@ -11,8 +11,9 @@ import { FiSearch } from "react-icons/fi";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
-import { useAppDispatch } from "~/app/hooks";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { logoutUser } from "~/features/User/UserApi";
+import { getUser } from "~/features/User/UserSlice";
 
 import styles from "./headerStyles.module.scss";
 
@@ -20,6 +21,8 @@ const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
   const [openSubUser, setOpenSubUser] = useState(false);
+
+  const getUserData = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
 
@@ -34,8 +37,15 @@ const Header: React.FC = () => {
     setOpenSubUser(!openSubUser);
   };
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getUserData.user.email,
+        // password: getUserData.data.data.user.password,
+        authentication_token: getUserData.user.authentication_token,
+      },
+    };
+    dispatch(logoutUser(payload));
   };
 
   return (
@@ -92,7 +102,14 @@ const Header: React.FC = () => {
             </NavLink>
           </div>
           <div className={styles.menuUser} onClick={onOpenSubUser}>
-            <img src="/assets/images/user-img.jpg" alt="" />
+            <img
+              src={
+                getUserData.user.avatar === null
+                  ? `/assets/images/user-vacant.jpg`
+                  : `${getUserData.user.avatar}`
+              }
+              alt="avatar_account"
+            />
             {openSubUser ? (
               <div className={styles.subUserMenu}>
                 <Link to="/profile" className={styles.subMenuItem}>

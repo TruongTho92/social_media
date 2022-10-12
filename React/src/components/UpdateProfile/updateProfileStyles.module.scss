@@ -13,10 +13,14 @@
   .image {
     width: 60px;
     height: 60px;
+    border: 2px solid #000;
+    border-radius: 100rem;
+
     img {
       height: 100%;
       width: 100%;
       border-radius: 100rem;
+      object-fit: cover;
     }
   }
   .info {
