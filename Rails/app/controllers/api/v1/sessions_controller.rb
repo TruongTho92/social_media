@@ -21,17 +21,10 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    if @user.authentication_token == user_params[:authentication_token]
-      sign_out @user
-      session.delete :user_id
+    if current_user.authentication_token == user_params[:authentication_token]
+      sign_out current_user
       render json: {
-        message: "Signed out",
-        is_success: true,
-      }, status: :ok
-    else
-      render json: {
-        message: "Invalid token",
-        is_success: false,
+        message: "Signed out"
       }, status: :ok
     end
   end
@@ -42,7 +35,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def load_user
-    @user = User.find_by_email user_params[:email]
+    @user = User.find_by_email(user_params[:email])
     return render json:{message: "Email doesn't exists"}, status: 401 unless @user
   end
 end

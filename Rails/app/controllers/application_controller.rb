@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_params_exist
-    return unless params[:user].blank?
-     render json: {message: "Missing Params"}, status: 401
+    if params[:user].blank?
+      render json: {
+        message: "Missing Params"
+      }, status: 422
+    end
   end
 end
