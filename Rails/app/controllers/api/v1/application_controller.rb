@@ -1,11 +1,11 @@
 class Api::V1::ApplicationController < ApplicationController
   def is_logged_in?
-    @user = User.find_by(authentication_token: request.headers["token"])
+    @current_user = User.find_by(authentication_token: request.headers["token"])
     if @user
       render json: {
         message: "Is login",
         is_success: true,
-        data: {user: @user}
+        data: {user: @current_user}
       }, status: :ok
     else
       render json: {
@@ -17,8 +17,5 @@ class Api::V1::ApplicationController < ApplicationController
 
   def current_user
     @current_user = User.find_by(authentication_token: request.headers["token"])
-    render json: {
-      data: {user: @current_user}
-    }, status: :ok
   end
 end
