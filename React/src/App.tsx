@@ -14,7 +14,7 @@ import Register from "./pages/Auth/Register";
 import Chat from "./pages/Chat";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Posts from "./pages/Posts";
+import PostCreate from "./pages/PostCreate";
 import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
@@ -40,7 +40,10 @@ const App: React.FC = () => {
         <Route path="chat" element={token ? <Chat /> : <Login />} />
 
         {/* POST */}
-        <Route path="posts" element={token ? <Posts /> : <Login />} />
+        <Route
+          path="create-post"
+          element={token ? <PostCreate /> : <Login />}
+        />
 
         <Route path="posts/:id" element={token ? <PostDetail /> : <Login />} />
 
