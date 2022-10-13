@@ -6,12 +6,6 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     }
   end
 
-  def show
-    render json:{
-      data: {user: current_user}
-    }
-  end
-
   def update
     if current_user.update(user_params)
       render json: {
@@ -29,6 +23,6 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :user_name, :gender, :bio, :avatar)
+    params.require(:user).permit(:password, :password_confirmation, :user_name, :gender, :bio, :avatar, :nick_name)
   end
 end
