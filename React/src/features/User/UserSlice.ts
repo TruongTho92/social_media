@@ -93,19 +93,6 @@ const UserSlice = createSlice({
         progress: undefined,
       });
     },
-    // UPDATE PROFILE
-    UpdateProfileRequest: (state) => {
-      state.loading = true;
-    },
-    UpdateProfileSuccess: (state, action: PayloadAction<UserDataResponse>) => {
-      state.loading = false;
-      state.data.message = action.payload.message;
-    },
-    UpdateProfileFailure: (state, action: PayloadAction<UserDataResponse>) => {
-      state.loading = true;
-      state.data.message = action.payload.message;
-    },
-
     // LOAD USER
     LoadUserRequest: (state) => {
       state.loading = true;
@@ -150,9 +137,6 @@ export const {
   LogoutSuccess,
   LogoutRequest,
   LogoutFailure,
-  UpdateProfileRequest,
-  UpdateProfileSuccess,
-  UpdateProfileFailure,
 } = UserSlice.actions;
 
 //SELECTOR

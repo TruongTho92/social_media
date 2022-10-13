@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
-import { loadUser, updateProfile } from "~/features/User/UserApi";
+import { updateProfile } from "~/features/UpdateProfile/UpdateProfileApi";
+import { loadUser } from "~/features/User/UserApi";
 import { getLoading, getUser } from "~/features/User/UserSlice";
 import styles from "./updateProfileStyles.module.scss";
 
@@ -26,6 +27,7 @@ const UpdateProfile: React.FC = () => {
     const Reader = new FileReader();
 
     Reader.readAsDataURL(file);
+    console.log(Reader);
     Reader.onload = () => {
       if (Reader.readyState === 2) {
         setPrevAvatar(Reader.result as string);

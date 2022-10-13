@@ -13,9 +13,6 @@ import {
   RegisterFailure,
   RegisterRequest,
   RegisterSuccess,
-  UpdateProfileFailure,
-  UpdateProfileRequest,
-  UpdateProfileSuccess,
 } from "./UserSlice";
 
 import Cookies from "js-cookie";
@@ -90,32 +87,6 @@ export const loadUser = () => async (dispatch: any) => {
     });
   }
 };
-
-export const updateProfile =
-  (payload: DataUpdateUser) => async (dispatch: any) => {
-    try {
-      dispatch({
-        type: UpdateProfileRequest.toString(),
-      });
-
-      const token = JSON.parse(Cookies.get("access_token") || "");
-      const { data } = await apiClient.post(`/api/v1/update_user`, payload, {
-        headers: {
-          token: token,
-        },
-      });
-
-      dispatch({
-        type: UpdateProfileSuccess.toString(),
-        payload: data,
-      });
-    } catch (error: any) {
-      dispatch({
-        type: UpdateProfileFailure.toString(),
-        payload: error.response.data,
-      });
-    }
-  };
 
 export const logoutUser = (payload: PayloadLogout) => async (dispatch: any) => {
   try {
