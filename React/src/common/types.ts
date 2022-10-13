@@ -14,7 +14,7 @@ export interface PayloadLogout {
 
 export interface DataUpdateUser {
   user: {
-    avatar: string;
+    avatar?: string;
     user_name?: string;
     nick_name?: string;
     bio?: string;

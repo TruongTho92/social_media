@@ -122,15 +122,15 @@ export const logoutUser = (payload: PayloadLogout) => async (dispatch: any) => {
     dispatch({
       type: LogoutRequest.toString(),
     });
-    Cookies.remove("access_token");
     const token = JSON.parse(Cookies.get("access_token") || "");
 
-    const { data } = await apiClient.delete("/api/v1/sign_out", {
+    const { data } = await apiClient.post("/api/v1/sign_out", {
       data: payload,
       headers: {
         token: token,
       },
     });
+    Cookies.remove("access_token");
 
     dispatch({
       type: LogoutSuccess.toString(),

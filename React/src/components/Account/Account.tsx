@@ -48,7 +48,7 @@ const Account: React.FC = (props: Props) => {
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
-                    <span>{getUserData.user.posted.length}</span> posts
+                    <span>12</span> posts
                   </span>
                   <span className={styles.follower}>
                     <span>122312</span> followers

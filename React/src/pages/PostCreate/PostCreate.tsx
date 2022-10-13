@@ -1,7 +1,9 @@
 import { Button, Col, Form, Image, Input, Row, Typography } from "antd";
-import React, { useState } from "react";
+import Cookies from "js-cookie";
+import React, { SyntheticEvent, useState } from "react";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { Link } from "react-router-dom";
+import apiClient from "~/apiClient/apiClient";
 
 import { useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/User/UserSlice";
@@ -28,7 +30,15 @@ const PostCreate: React.FC = () => {
     };
   };
 
-  console.log(isHasImage);
+  const hanleCreatePost = async () => {
+    const payload = {
+      post: {
+        image: image,
+        caption: "",
+      },
+    };
+  };
+
   return (
     <div className={`container-fluid ${styles.createPost}`}>
       <div className={styles.createPostContainer}>
@@ -48,7 +58,7 @@ const PostCreate: React.FC = () => {
         </div>
 
         {/* FORM */}
-        <Form className={styles.form}>
+        <Form className={styles.form} onFinish={hanleCreatePost}>
           <Form.Item className={styles.fromInput}>
             <label htmlFor="input-image" className={styles.labelInputImage}>
               <MdDriveFolderUpload className={styles.uploadIcon} />
