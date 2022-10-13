@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       post "update_user", :to => 'users#update'
       get "logged_in", :to => 'application#is_logged_in?'
       get "load_user", :to => 'application#current_user'
+
+      get "posts", :to => 'posts#index'
+      get "show_posts", :to => 'posts#show'
+      post "create_post", :to => 'posts#create'
+      post "update_post", :to => 'posts#update'
+      delete "delete_post", :to => 'posts#destroy'
     end
   end
 end

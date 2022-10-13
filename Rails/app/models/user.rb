@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :user_name, length: { maximum: 20}, presence: true
   validates :avatar, presence: true
   validates :password, length: { maximum: 64 }, confirmation: true
+
+  has_many :posts
 end
