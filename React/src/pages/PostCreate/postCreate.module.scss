@@ -1,0 +1,131 @@
+@import "../../global/scss/rootStyles.scss";
+
+.createPost {
+  padding: 80px 20% 40px;
+}
+.createPostContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: $boxShadow;
+  padding: 0 12px 24px 12px;
+  height: fit-content;
+}
+.heading {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid $greyLight;
+}
+
+.account {
+  @include d-flex(center, center);
+  flex-direction: column;
+  margin-top: 12px;
+  .imageAccount {
+    @include avatar(100, 100);
+  }
+  .nameAccount {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.form {
+  //   @include d-flex(space-between, center);
+  margin-top: 12px;
+
+  .labelInputImage {
+    @include d-flex(center, center);
+    color: $whiteColor;
+    width: 100%;
+    background-color: $mainBlue;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    &:hover .uploadIcon {
+      animation: Jumb 1s ease-out infinite;
+    }
+    .uploadIcon {
+      width: 24px;
+      height: 24px;
+      z-index: 1000;
+    }
+  }
+  .imagePost {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .inputForm {
+    font-size: 16px;
+    font-weight: 400;
+    height: 200px;
+    border-radius: 6px;
+  }
+
+  .btnCancel {
+    @include d-flex(center, center);
+    color: $whiteColor;
+    font-size: 16px;
+    font-weight: 500;
+    color: $mainBlue;
+    border: 1.6px solid $mainBlue;
+    padding: 18px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btnSubmit {
+    @include d-flex(center, center);
+    color: $whiteColor;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: $mainBlue;
+    padding: 18px 14px;
+    border-radius: 6px;
+    border: 1px solid $mainBlue;
+    cursor: pointer;
+  }
+}
+
+@include desktop {
+  .createPost {
+    padding: 80px 10% 40px;
+  }
+}
+
+@include tablet {
+  .createPost {
+    padding: 80px 4% 40px;
+  }
+}
+@include mobile {
+  .createPost {
+    padding: 80px 6% 80px;
+  }
+}
+
+@keyframes Jumb {
+  0% {
+    transform: translateY(-40px);
+  }
+  25% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

@@ -40,6 +40,17 @@ body {
   height: $height * 1px;
 }
 
+@mixin avatar($width, $height) {
+  width: $width * 1px;
+  height: $height * 1px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
 // COVER BACKGROUND
 @mixin cover-background {
   background-repeat: no-repeat;

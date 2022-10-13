@@ -1,5 +1,5 @@
 import { Col, Input, Radio, Row } from "antd";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
@@ -14,8 +14,12 @@ const UpdateProfile: React.FC = () => {
 
   const [avatar, setAvatar] = useState("");
   const [prevAvatar, setPrevAvatar] = useState(getUserData.user.avatar);
+  const [validateAvatar, setValidateAvatar] = useState(false);
+
   const [email, setEmail] = useState(getUserData.user.email);
   const [username, setUsername] = useState(getUserData.user.user_name);
+
+  const [validateUser, setValidateUser] = useState(false);
   const [nickName, setNickName] = useState(getUserData.user.nick_name);
   const [bio, setBio] = useState(getUserData.user.bio);
   const [gender, setGender] = useState(getUserData.user.gender);
@@ -31,12 +35,14 @@ const UpdateProfile: React.FC = () => {
       if (Reader.readyState === 2) {
         setPrevAvatar(Reader.result as string);
         setAvatar(Reader.result as string);
+        setValidateAvatar(true);
       }
     };
   };
 
   const handleUpdateProfile = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
     const payload: DataUpdateUser = {
       user: {
         avatar: prevAvatar,
@@ -46,6 +52,12 @@ const UpdateProfile: React.FC = () => {
         gender: gender,
       },
     };
+
+    if (username.length > 25 || !validateAvatar) {
+      setValidateAvatar(false);
+      return;
+    }
+
     await dispatch(updateProfile(payload));
     dispatch(loadUser());
   };
@@ -68,9 +80,15 @@ const UpdateProfile: React.FC = () => {
                   />
                 </div>
               </label>
+              {validateAvatar ? "Success!" : "Please choose image"}
               <div className={styles.info}>
-                <span className={styles.username}>Minh Tai</span>
+                <span className={styles.username}>
+                  {getUserData.user.user_name
+                    ? getUserData.user.user_name
+                    : "Update your name"}
+                </span>
                 <input
+                  required
                   type="file"
                   name="avatar"
                   hidden
@@ -94,23 +112,25 @@ const UpdateProfile: React.FC = () => {
                 <label className={styles.formLabel}>Email</label>
                 <Input
                   disabled={true}
-                  value={getUserData.user.user_name}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={styles.inputInfo}
+                  required
                 />
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>User Name</label>
                 <Input
-                  defaultValue={getUserData.user.user_name}
+                  defaultValue={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className={styles.inputInfo}
+                  required
                 />
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Nick name</label>
                 <Input
-                  defaultValue={getUserData.user.nick_name}
+                  defaultValue={nickName}
                   onChange={(e) => setNickName(e.target.value)}
                   className={styles.inputInfo}
                 />
@@ -118,7 +138,7 @@ const UpdateProfile: React.FC = () => {
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Bio</label>
                 <Input.TextArea
-                  defaultValue={getUserData.user.bio}
+                  defaultValue={bio}
                   onChange={(e) => setBio(e.target.value)}
                   className={`${styles.inputInfo} ${styles.inputBio}`}
                 />
@@ -126,7 +146,7 @@ const UpdateProfile: React.FC = () => {
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Gender</label>
                 <Radio.Group
-                  defaultValue={getUserData.user.gender}
+                  defaultValue={gender}
                   onChange={(e) => setGender(e.target.value)}
                 >
                   <Radio value={"male"}>Male</Radio>

@@ -95,12 +95,12 @@
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
+@include desktop {
   .account {
     padding: 60px 10% 40px;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@include tablet {
   .account {
     padding: 60px 4% 40px;
   }
@@ -113,9 +113,9 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media screen and (max-width: 767px) {
+@include mobile {
   .account {
-    padding: 60px 4% 40px;
+    padding: 60px 4% 80px;
   }
   .accountInfo {
     @include d-flex(center, center);

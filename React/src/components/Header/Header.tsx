@@ -92,7 +92,7 @@ const Header: React.FC = () => {
             </NavLink>
           </div>
           <div className={styles.icon}>
-            <NavLink to="/posts">
+            <NavLink to="/create-post">
               <BsPlusSquare className={styles.menuIcon} />
             </NavLink>
           </div>
@@ -148,7 +148,7 @@ const Header: React.FC = () => {
           />
         </div>
         <div className={styles.icon}>
-          <NavLink to="/posts">
+          <NavLink to="/create-post">
             <BsPlusSquare className={styles.menuIcon} />
           </NavLink>
         </div>
@@ -158,7 +158,14 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <Link to="/profile" className={styles.menuUser}>
-          <img src="/assets/images/user-img.jpg" alt="" />
+          <img
+            src={
+              getUserData.user.avatar === null
+                ? `/assets/images/user-vacant.jpg`
+                : `${getUserData.user.avatar}`
+            }
+            alt=""
+          />
         </Link>
       </div>
     </>

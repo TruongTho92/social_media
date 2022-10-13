@@ -158,21 +158,21 @@
 }
 
 // RESPONSIVE
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
+@include desktop {
   .headerContainer {
     padding: 0 10%;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@include tablet {
   .headerContainer {
     padding: 0 4%;
   }
 }
 
-@media screen and (max-width: 767px) {
+@include mobile {
   .headerContainer {
     height: fit-content;
-    padding: 12px 6%;
+    padding: 6px 6%;
   }
   .headerMenu {
     display: none !important;
@@ -209,7 +209,7 @@
     width: 100%;
     height: fit-content;
     background-color: $whiteColor;
-    padding: 20px 6%;
+    padding: 12px 6%;
     z-index: 100;
     .icon {
       display: flex;
