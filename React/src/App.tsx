@@ -16,11 +16,12 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
 import Profile from "./pages/Profile";
+import UpdatePassword from "./pages/UpdatePassword";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
 
-  const token = Cookies.get("access_token");
+  const token = Cookies.get("access_isAuthenticated");
 
   const dispatch = useAppDispatch();
 
@@ -30,28 +31,41 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {token && <Header />}
+      {isAuthenticated && <Header />}
 
       <Routes>
         {/* AUTH */}
-        <Route path="/" element={token ? <Home /> : <Login />} />
-        <Route path="/register" element={token ? <NotFound /> : <Register />} />
+        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <NotFound /> : <Register />}
+        />
 
-        <Route path="chat" element={token ? <Chat /> : <Login />} />
+        <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
 
         {/* POST */}
         <Route
           path="create-post"
-          element={token ? <PostCreate /> : <Login />}
+          element={isAuthenticated ? <PostCreate /> : <Login />}
         />
 
-        <Route path="posts/:id" element={token ? <PostDetail /> : <Login />} />
+        <Route
+          path="posts/:id"
+          element={isAuthenticated ? <PostDetail /> : <Login />}
+        />
 
         {/* PROFILE */}
-        <Route path="profile" element={token ? <Profile /> : <Login />}></Route>
+        <Route
+          path="profile"
+          element={isAuthenticated ? <Profile /> : <Login />}
+        />
         <Route
           path="profile/update"
-          element={token ? <UpdateProfile /> : <Login />}
+          element={isAuthenticated ? <UpdateProfile /> : <Login />}
+        />
+        <Route
+          path="profile/update-password"
+          element={isAuthenticated ? <UpdatePassword /> : <Login />}
         />
 
         {/* 404 PAGE */}

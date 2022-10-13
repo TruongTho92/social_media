@@ -14,12 +14,9 @@ const UpdateProfile: React.FC = () => {
 
   const [avatar, setAvatar] = useState("");
   const [prevAvatar, setPrevAvatar] = useState(getUserData.user.avatar);
-  const [validateAvatar, setValidateAvatar] = useState(false);
 
   const [email, setEmail] = useState(getUserData.user.email);
   const [username, setUsername] = useState(getUserData.user.user_name);
-
-  const [validateUser, setValidateUser] = useState(false);
   const [nickName, setNickName] = useState(getUserData.user.nick_name);
   const [bio, setBio] = useState(getUserData.user.bio);
   const [gender, setGender] = useState(getUserData.user.gender);
@@ -35,7 +32,6 @@ const UpdateProfile: React.FC = () => {
       if (Reader.readyState === 2) {
         setPrevAvatar(Reader.result as string);
         setAvatar(Reader.result as string);
-        setValidateAvatar(true);
       }
     };
   };
@@ -53,8 +49,7 @@ const UpdateProfile: React.FC = () => {
       },
     };
 
-    if (username.length > 25 || !validateAvatar) {
-      setValidateAvatar(false);
+    if (username.length > 25 || prevAvatar.length < 0) {
       return;
     }
 
@@ -80,7 +75,6 @@ const UpdateProfile: React.FC = () => {
                   />
                 </div>
               </label>
-              {validateAvatar ? "Success!" : "Please choose image"}
               <div className={styles.info}>
                 <span className={styles.username}>
                   {getUserData.user.user_name
