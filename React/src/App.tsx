@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import PostDetail from "./components/PostDetail";
 import UpdateProfile from "./components/UpdateProfile";
 import { loadUser } from "./features/User/UserApi";
-import { getUser } from "./features/User/UserSlice";
+import { getAuthenticated } from "./features/User/UserSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Chat from "./pages/Chat";
@@ -18,7 +18,7 @@ import Posts from "./pages/Posts";
 import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
-  const { isAuthenticated } = useAppSelector(getUser);
+  const isAuthenticated = useAppSelector(getAuthenticated);
 
   const token = Cookies.get("access_token");
 

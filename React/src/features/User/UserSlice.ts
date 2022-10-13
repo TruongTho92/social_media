@@ -7,20 +7,27 @@ import { UserDataResponse } from "~/common/types";
 
 export interface stateType {
   loading?: boolean;
-  status?: "idle" | "loading" | "success" | "failure";
   data: UserDataResponse;
   isAuthenticated?: boolean;
 }
 
 const initialState: stateType = {
-  status: "idle",
-  loading: false,
+  loading: true,
   data: {
     data: {
       user: {
+        id: null,
         email: "",
         password: "",
         password_confirmation: "",
+        avatar: "",
+        user_name: "",
+        nick_name: "",
+        bio: "",
+        posted: [],
+        commented: [],
+        liked: [],
+        gender: "",
         authentication_token: "",
       },
     },
@@ -86,7 +93,6 @@ const UserSlice = createSlice({
         progress: undefined,
       });
     },
-
     // LOAD USER
     LoadUserRequest: (state) => {
       state.loading = true;
@@ -102,7 +108,7 @@ const UserSlice = createSlice({
       state.isAuthenticated = false;
     },
 
-    // LOAD USER
+    // LGOUT USER
     LogoutRequest: (state) => {
       state.loading = false;
     },
@@ -118,15 +124,25 @@ const UserSlice = createSlice({
 });
 
 // ACTIONS
-export const { RegisterSuccess, RegisterRequest, RegisterFailure } =
-  UserSlice.actions;
-export const { LoginSuccess, LoginRequest, LoginFailure } = UserSlice.actions;
-export const { LoadUserSuccess, LoadUserRequest, LoadUserFailure } =
-  UserSlice.actions;
-export const { LogoutSuccess, LogoutRequest, LogoutFailure } =
-  UserSlice.actions;
+export const {
+  RegisterSuccess,
+  RegisterRequest,
+  RegisterFailure,
+  LoginSuccess,
+  LoginRequest,
+  LoginFailure,
+  LoadUserSuccess,
+  LoadUserRequest,
+  LoadUserFailure,
+  LogoutSuccess,
+  LogoutRequest,
+  LogoutFailure,
+} = UserSlice.actions;
 
 //SELECTOR
-export const getUser = (state: RootState) => state.user;
+export const getAuthenticated = (state: RootState) =>
+  state.user.isAuthenticated;
+export const getUser = (state: RootState) => state.user.data.data;
+export const getLoading = (state: RootState) => state.user.loading;
 
 export default UserSlice.reducer;
