@@ -11,12 +11,19 @@
   margin-bottom: 40px;
 }
 
+.errorUpdate {
+  font-size: 18px;
+  color: red;
+  font-weight: 400;
+  font-style: italic;
+}
+
 .accountContainer {
 }
 .accountInfo {
-  @include d-flex(center, center);
+  @include d-flex(start, center);
   .image {
-    padding: 80px;
+    padding: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +31,7 @@
       height: 180px;
       width: 180px;
       border-radius: 50%;
+      border: 2px solid #000;
       object-fit: cover;
     }
   }
@@ -84,5 +92,98 @@
       width: 100%;
       object-fit: cover;
     }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .account {
+    padding: 60px 10% 40px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .account {
+    padding: 60px 4% 40px;
+  }
+  .accountInfo {
+    .image {
+      padding: 40px;
+    }
+  }
+  .accountPost {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 767px) {
+  .account {
+    padding: 60px 4% 40px;
+  }
+  .accountInfo {
+    @include d-flex(center, center);
+    flex-direction: column;
+    .image {
+      padding: 40px 40px 24px 40px;
+    }
+    .info {
+      width: 100%;
+      margin-left: 0;
+    }
+    .infoItem {
+      @include d-flex(space-evenly, center);
+      margin-bottom: 20px;
+      &.infoItemMobile {
+        flex-direction: column;
+        margin-bottom: 24px;
+      }
+      &.infoItemFollow {
+        border-top: 1px solid $greyLight;
+        border-bottom: 1px solid $greyLight;
+        width: 100%;
+        padding: 12px 0px;
+      }
+      .name {
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .linkEdit {
+        padding: 4px 8px;
+        background-color: $whiteColor;
+        color: $blackColor;
+        border: 2px solid $greyLight;
+        border-radius: 6px;
+        font-size: 14px;
+        margin: 0 24px;
+      }
+      .settingIcon {
+        display: none;
+      }
+
+      .posts,
+      .follower,
+      .following {
+        font-size: 14px;
+        span {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+      .follower,
+      .following {
+        margin-left: 0;
+      }
+      .username {
+        display: block;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .bio {
+        width: 100%;
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  .accountPost {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
