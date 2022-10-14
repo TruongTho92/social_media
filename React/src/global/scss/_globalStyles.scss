@@ -28,6 +28,9 @@ body {
 .pt-80 {
   padding-top: 80px;
 }
+.animation-left-to-right {
+  animation: LeftToRight 0.25s linear;
+}
 
 @mixin d-flex($justify, $align) {
   display: flex;
@@ -56,4 +59,15 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
