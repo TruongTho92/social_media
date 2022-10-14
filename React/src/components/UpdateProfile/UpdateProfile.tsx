@@ -1,10 +1,11 @@
 import { Col, Input, Radio, Row } from "antd";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
-import { loadUser, updateProfile } from "~/features/User/UserApi";
-import { getLoading, getUser } from "~/features/User/UserSlice";
+import { loadUser, updateProfile } from "~/features/User/userApi";
+import { getLoading, getUser } from "~/features/User/userSlice";
 import styles from "./updateProfileStyles.module.scss";
 
 const UpdateProfile: React.FC = () => {
@@ -17,7 +18,9 @@ const UpdateProfile: React.FC = () => {
 
   const [email, setEmail] = useState(getUserData.user.email);
   const [username, setUsername] = useState(getUserData.user.user_name);
+  const [validateUserName, setValidateUserName] = useState(false);
   const [nickName, setNickName] = useState(getUserData.user.nick_name);
+  const [validateNickName, setValidateNickName] = useState(false);
   const [bio, setBio] = useState(getUserData.user.bio);
   const [gender, setGender] = useState(getUserData.user.gender);
 
@@ -49,12 +52,11 @@ const UpdateProfile: React.FC = () => {
       },
     };
 
-    if (username.length > 25 || prevAvatar.length < 0) {
-      return;
+    if (username.length <= 20 || prevAvatar.length > 0) {
+      await dispatch(updateProfile(payload));
+      dispatch(loadUser());
     }
-
-    await dispatch(updateProfile(payload));
-    dispatch(loadUser());
+    return;
   };
 
   return (
@@ -104,48 +106,86 @@ const UpdateProfile: React.FC = () => {
               <h1 className={styles.formHeading}>Update Your Profile</h1>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Email</label>
-                <Input
-                  disabled={true}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={styles.inputInfo}
-                  required
-                />
+                <div className={styles.validateInput}>
+                  <Input
+                    disabled={true}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={styles.inputInfo}
+                    required
+                  />
+                </div>
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>User Name</label>
-                <Input
-                  defaultValue={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className={styles.inputInfo}
-                  required
-                />
+                <div className={styles.validateInput}>
+                  <Input
+                    defaultValue={username}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                      if (username.length >= 20) {
+                        setValidateUserName(true);
+                      } else {
+                        setValidateUserName(false);
+                      }
+                    }}
+                    className={styles.inputInfo}
+                    required
+                  />
+                  {validateUserName ? (
+                    <div
+                      className={`animation-left-to-right ${styles.errorMessage}`}
+                    >
+                      * Up to 20 characters
+                    </div>
+                  ) : null}
+                </div>
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Nick name</label>
-                <Input
-                  defaultValue={nickName}
-                  onChange={(e) => setNickName(e.target.value)}
-                  className={styles.inputInfo}
-                />
+                <div className={styles.validateInput}>
+                  <Input
+                    defaultValue={nickName}
+                    onChange={(e) => {
+                      setNickName(e.target.value);
+                      if (nickName.length >= 20) {
+                        setValidateNickName(true);
+                      } else {
+                        setValidateNickName(false);
+                      }
+                    }}
+                    className={styles.inputInfo}
+                  />
+                  {validateNickName ? (
+                    <div
+                      className={`animation-left-to-right ${styles.errorMessage}`}
+                    >
+                      * Up to 20 characters
+                    </div>
+                  ) : null}
+                </div>
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Bio</label>
-                <Input.TextArea
-                  defaultValue={bio}
-                  onChange={(e) => setBio(e.target.value)}
-                  className={`${styles.inputInfo} ${styles.inputBio}`}
-                />
+                <div className={styles.validateInput}>
+                  <Input.TextArea
+                    defaultValue={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    className={`${styles.inputInfo} ${styles.inputBio}`}
+                  />
+                </div>
               </div>
               <div className={styles.formItem}>
                 <label className={styles.formLabel}>Gender</label>
-                <Radio.Group
-                  defaultValue={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
-                  <Radio value={"male"}>Male</Radio>
-                  <Radio value={"female"}>Female</Radio>
-                </Radio.Group>
+                <div className={styles.validateInput}>
+                  <Radio.Group
+                    defaultValue={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <Radio value={"male"}>Male</Radio>
+                    <Radio value={"female"}>Female</Radio>
+                  </Radio.Group>
+                </div>
               </div>
               <Row justify="center">
                 <Col>
@@ -165,6 +205,20 @@ const UpdateProfile: React.FC = () => {
           </div>
         </section>
       )}
+
+      {/* MESSAGE */}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Input, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   AiFillHome,
@@ -12,8 +12,9 @@ import { FiSearch } from "react-icons/fi";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { logoutUser } from "~/features/User/UserApi";
-import { getUser } from "~/features/User/UserSlice";
+import { logoutUser } from "~/features/User/userApi";
+import { getUser } from "~/features/User/userSlice";
+import PostCreate from "~/pages/PostCreate";
 
 import styles from "./headerStyles.module.scss";
 
@@ -21,7 +22,6 @@ const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
   const [openSubUser, setOpenSubUser] = useState(false);
-
   const getUserData = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();

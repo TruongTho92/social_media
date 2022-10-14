@@ -1,19 +1,29 @@
-import { Col, Row } from "antd";
-import React from "react";
-import { AiOutlineSetting } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "~/app/hooks";
-import { getLoading, getUser } from "~/features/User/UserSlice";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { postsApi } from "~/features/Posts/postsApi";
+import { getAllPost, getLoadingPosts } from "~/features/Posts/postsSlice";
+import { getUser } from "~/features/User/userSlice";
+import AccountPosts from "../AccountPosts";
 import ModalSetting from "../Modal/ModalSetting";
 import styles from "./accountStyles.module.scss";
 type Props = {};
 
 const Account: React.FC = (props: Props) => {
+  const dispatch = useAppDispatch();
+
   const getUserData = useAppSelector(getUser);
-  const loading = useAppSelector(getLoading);
+  const loadingPosts = useAppSelector(getLoadingPosts);
+
+  const allAccountPost = useAppSelector(getAllPost);
+
+  useEffect(() => {
+    dispatch(postsApi.getAll());
+  }, []);
+
   return (
     <>
-      {loading ? (
+      {loadingPosts ? (
         "Loading..."
       ) : (
         <div className={`container-fluid ${styles.account}`}>
@@ -44,7 +54,9 @@ const Account: React.FC = (props: Props) => {
                   <Link to="/profile/update" className={styles.linkEdit}>
                     Edit profile
                   </Link>
-                  <ModalSetting classNameIconSetting={styles.settingIcon} />
+                  <div style={{ lineHeight: 0 }}>
+                    <ModalSetting classNameIconSetting={styles.settingIcon} />
+                  </div>
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
@@ -84,24 +96,7 @@ const Account: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.accountPost}>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post-img.jpg" alt="" />
-            </div>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post_img.jpg" alt="" />
-            </div>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post-img.jpg" alt="" />
-            </div>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post_img.jpg" alt="" />
-            </div>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post-img.jpg" alt="" />
-            </div>
-            <div className={styles.postImg}>
-              <img src="/assets/images/post_img.jpg" alt="" />
-            </div>
+            <AccountPosts postList={allAccountPost} />
           </div>
         </div>
       )}

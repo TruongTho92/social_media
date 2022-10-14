@@ -16,7 +16,7 @@ import {
   UpdateProfileFailure,
   UpdateProfileRequest,
   UpdateProfileSuccess,
-} from "./UserSlice";
+} from "./userSlice";
 
 import Cookies from "js-cookie";
 

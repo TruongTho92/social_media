@@ -1,0 +1,46 @@
+@import "../../global/scss/rootStyles.scss";
+
+.postList {
+  overflow: hidden;
+  // gap: 24px;
+  .postItem {
+    height: 272px;
+  }
+  .postImg {
+    height: 100%;
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@include desktop {
+  .postList {
+    .postItem {
+      height: 257px;
+    }
+  }
+}
+@include tablet {
+  .postList {
+    .postItem {
+      height: 340px;
+    }
+  }
+  .postList {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+@include mobile {
+  .postList {
+    .postItem {
+      height: 526px;
+    }
+  }
+  .postList {
+    grid-template-columns: repeat(1, auto);
+  }
+}

@@ -9,8 +9,8 @@ import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { registerUser } from "~/features/User/UserApi";
-import { getUser } from "~/features/User/UserSlice";
+import { registerUser } from "~/features/User/userApi";
+import { getUser } from "~/features/User/userSlice";
 
 import styles from "./registerStyles.module.scss";
 

@@ -4,10 +4,12 @@ import {
   configureStore,
   ThunkAction,
 } from "@reduxjs/toolkit";
-import UserSlice from "~/features/User/UserSlice";
+import postsReducer from "~/features/Posts/postsSlice";
+import UserReducer from "~/features/User/userSlice";
 
 const rootReducer = combineReducers({
-  user: UserSlice,
+  user: UserReducer,
+  post: postsReducer,
 });
 
 export const store = configureStore({

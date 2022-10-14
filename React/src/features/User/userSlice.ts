@@ -37,7 +37,7 @@ const initialState: stateType = {
   isAuthenticated: false,
 };
 
-const UserSlice = createSlice({
+const userSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -100,10 +100,21 @@ const UserSlice = createSlice({
     UpdateProfileSuccess: (state, action: PayloadAction<UserDataResponse>) => {
       state.loading = false;
       state.data.message = action.payload.message;
+      state.data.is_success = action.payload.is_success;
+      toast(`${action.payload.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     UpdateProfileFailure: (state, action: PayloadAction<UserDataResponse>) => {
       state.loading = true;
       state.data.message = action.payload.message;
+      state.data.is_success = action.payload.is_success;
     },
 
     // LOAD USER
@@ -153,12 +164,14 @@ export const {
   UpdateProfileRequest,
   UpdateProfileSuccess,
   UpdateProfileFailure,
-} = UserSlice.actions;
+} = userSlice.actions;
 
 //SELECTOR
 export const getAuthenticated = (state: RootState) =>
   state.user.isAuthenticated;
 export const getUser = (state: RootState) => state.user.data.data;
 export const getLoading = (state: RootState) => state.user.loading;
+export const getMessage = (state: RootState) => state.user.data.message;
+export const getIsSuccess = (state: RootState) => state.user.data.is_success;
 
-export default UserSlice.reducer;
+export default userSlice.reducer;
