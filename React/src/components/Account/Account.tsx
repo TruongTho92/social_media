@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postsApi } from "~/features/Posts/postsApi";
 import { getAllPost, getLoadingPosts } from "~/features/Posts/postsSlice";
 import { getUser } from "~/features/User/userSlice";
-import AccountPosts from "../AccountPosts";
 import ModalSetting from "../Modal/ModalSetting";
+import AccountPosts from "../Posts/PostProfile/AccountPosts";
 import styles from "./accountStyles.module.scss";
 type Props = {};
 

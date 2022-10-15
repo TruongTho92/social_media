@@ -26,31 +26,35 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
     };
   });
   return (
-    <div className={styles.modalSetting}>
+    <>
       <AiOutlineSetting className={classNameIconSetting} onClick={showModal} />
-
       <Modal open={isModalOpen} closable={false} footer={false} width={360}>
-        <div className={styles.heading}>
-          <MdSettingsEthernet size={40} className={styles.ethernetIcon} />
-        </div>
-        <Link to="/profile/update-password" className={styles.linkUpdatePass}>
-          <MdPassword
-            size={20}
-            style={{ marginRight: 12 }}
-            className={styles.iconLink}
-          />
-          <span> Change password</span>
-        </Link>
-        <div className={styles.deleteAccount}>
-          <AiOutlineDelete
-            size={20}
-            style={{ marginRight: 12 }}
-            className={styles.iconLink}
-          />
-          <span> Delete Account</span>
+        <div
+          className={styles.modalSetting}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.heading}>
+            <MdSettingsEthernet size={40} className={styles.ethernetIcon} />
+          </div>
+          <Link to="/profile/update-password" className={styles.linkUpdatePass}>
+            <MdPassword
+              size={20}
+              style={{ marginRight: 12 }}
+              className={styles.iconLink}
+            />
+            <span> Change password</span>
+          </Link>
+          <div className={styles.deleteAccount}>
+            <AiOutlineDelete
+              size={20}
+              style={{ marginRight: 12 }}
+              className={styles.iconLink}
+            />
+            <span> Delete Account</span>
+          </div>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

@@ -1,8 +1,7 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../../../global/scss/rootStyles.scss";
 
 .postList {
   overflow: hidden;
-  // gap: 24px;
   .postItem {
     height: 272px;
   }
@@ -20,7 +19,7 @@
 @include desktop {
   .postList {
     .postItem {
-      height: 257px;
+      height: 260px;
     }
   }
 }
@@ -30,17 +29,12 @@
       height: 340px;
     }
   }
-  .postList {
-    grid-template-columns: repeat(2, auto);
-  }
 }
 @include mobile {
   .postList {
     .postItem {
-      height: 526px;
+      width: 300px;
+      height: 300px;
     }
-  }
-  .postList {
-    grid-template-columns: repeat(1, auto);
   }
 }

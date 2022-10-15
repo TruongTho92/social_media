@@ -2,8 +2,8 @@
 
 .commentList {
   overflow-y: scroll;
-  height: 300px;
-  padding: 10px;
+  height: 200px;
+  width: 100%;
 }
 .commentItem {
   display: flex;
@@ -19,7 +19,6 @@
       height: 100%;
       width: 100%;
       border-radius: 100rem;
-
       object-fit: cover;
     }
   }
@@ -37,42 +36,20 @@
     text-overflow: ellipsis;
 
     .name {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
     .commentText {
       display: block;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400;
     }
-  }
-}
-.form {
-  @include d-flex(center, center);
-  margin-bottom: 16px;
-  .inputComment {
-    font-size: 16px;
-    font-weight: 400;
-    width: 100%;
-    padding: 6px 10px;
-    border-radius: 8px;
-  }
-  .btnComment {
-    float: right;
-    padding: 8px 16px;
-    background-color: $mainBlue;
-    font-weight: 400;
-    color: $whiteColor;
-    margin-left: 20px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
   .commentList {
-    height: 260px;
+    height: 200px;
   }
 }
 
@@ -84,6 +61,6 @@
 
 @media screen and (max-width: 767px) {
   .commentList {
-    height: fit-content;
+    height: 300px;
   }
 }

@@ -3,25 +3,29 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { GoComment } from "react-icons/go";
-import Comments from "../Comments";
 import styles from "./postStyles.module.scss";
 import { useEffect, useState } from "react";
+import Comments from "~/components/Comments";
+import PostDetail from "../../PostDetail";
+import { BiMessageRounded } from "react-icons/bi";
 
 const Post = ({ userId = 1, postId = 1 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = (e: React.MouseEvent) => {
+  const [isOpenDetail, setIsOpenDetail] = useState(false);
+
+  const handleOpenDetail = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setIsModalOpen(true);
+    setIsOpenDetail(true);
   };
 
   useEffect(() => {
     const handleClick = (window.onclick = () => {
-      setIsModalOpen(false);
+      setIsOpenDetail(false);
     });
     return () => {
       window.removeEventListener("click", handleClick);
     };
   });
+
   return (
     <div className={styles.post}>
       <div className={styles.user}>
@@ -40,25 +44,34 @@ const Post = ({ userId = 1, postId = 1 }) => {
       </div>
 
       <div className={styles.postImage}>
-        <img src="/assets/images/post_img.jpg" alt="" />
+        <img
+          src="/assets/images/post_img.jpg"
+          alt=""
+          onClick={handleOpenDetail}
+        />
+        <Modal
+          style={{ width: "fit-content" }}
+          open={isOpenDetail}
+          closable={false}
+          footer={false}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <PostDetail isAccount={false} id={1} />
+          </div>
+        </Modal>
       </div>
 
       <div className={styles.emotion}>
         <div className={styles.left}>
           <AiOutlineHeart className={styles.likeIcon} />
 
-          <GoComment className={styles.commentIcon} onClick={showModal} />
+          <div onClick={handleOpenDetail} style={{ lineHeight: 0 }}>
+            <BiMessageRounded className={styles.commentIcon} />
+          </div>
         </div>
 
         <BsBookmarkPlus className={styles.saveIcon} />
       </div>
-      <div className={styles.comment}></div>
-
-      <Modal open={isModalOpen} closable={false} footer={false}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <Comments />
-        </div>
-      </Modal>
     </div>
   );
 };

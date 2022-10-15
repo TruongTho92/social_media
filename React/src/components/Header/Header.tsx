@@ -30,7 +30,7 @@ const Header: React.FC = () => {
     window.onclick = () => {
       setOpenSubUser(false);
     };
-  }, []);
+  });
 
   const onOpenSubUser = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,7 +111,10 @@ const Header: React.FC = () => {
               alt="avatar_account"
             />
             {openSubUser ? (
-              <div className={styles.subUserMenu}>
+              <div
+                className={styles.subUserMenu}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Link to="/profile" className={styles.subMenuItem}>
                   <AiOutlineUser className={styles.iconSub} />
                   <label className={styles.subUserLabel}>Profile</label>
@@ -142,10 +145,7 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <div className={styles.icon}>
-          <FiSearch
-            className={styles.menuIcon}
-            onClick={() => setIsOpenInput(!isOpenInput)}
-          />
+          <FiSearch className={styles.menuIcon} />
         </div>
         <div className={styles.icon}>
           <NavLink to="/create-post">
