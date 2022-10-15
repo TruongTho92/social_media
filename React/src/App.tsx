@@ -5,7 +5,6 @@ import { Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
-import PostDetail from "./components/PostDetail";
 import UpdateProfile from "./components/UpdateProfile";
 import { loadUser } from "./features/User/userApi";
 import { getAuthenticated } from "./features/User/userSlice";
@@ -16,7 +15,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
 import Profile from "./pages/Profile";
-import UpdatePassword from "./pages/UpdatePassword";
+import UpdatePasswordPage from "./pages/UpdatePassword/UpdatePasswordPage";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
@@ -49,11 +48,6 @@ const App: React.FC = () => {
           element={isAuthenticated ? <PostCreate /> : <Login />}
         />
 
-        <Route
-          path="posts/:id"
-          element={isAuthenticated ? <PostDetail /> : <Login />}
-        />
-
         {/* PROFILE */}
         <Route
           path="profile"
@@ -65,7 +59,7 @@ const App: React.FC = () => {
         />
         <Route
           path="profile/update-password"
-          element={isAuthenticated ? <UpdatePassword /> : <Login />}
+          element={isAuthenticated ? <UpdatePasswordPage /> : <Login />}
         />
 
         {/* 404 PAGE */}

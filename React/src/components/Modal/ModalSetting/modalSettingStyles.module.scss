@@ -1,8 +1,11 @@
 @import "../../../global/scss/rootStyles.scss";
 .modalSetting {
+  padding: 16px 0;
+  width: 300px;
 }
 .linkUpdatePass,
 .deleteAccount {
+  margin: 0 16px;
   @include d-flex(start, center);
   font-size: 18px;
   font-weight: 400;
@@ -21,7 +24,7 @@
   }
   &:hover span {
     color: $mainBlue;
-    transform: translateX(40px);
+    transform: translateX(20px);
     cursor: pointer;
     transition: all 0.2s linear;
   }
@@ -31,7 +34,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
   .ethernetIcon {
     color: $mainBlue;
     transition: all 0.2s linear;

@@ -12,19 +12,12 @@ const Comments = (props: Props) => {
       data: "hay qu hjhjhjhjhjhjsdlkfjv ldjflfjdsa kjj dkj asjdasj ljd klad jklasdj lkasdjlk ajkl klj kljkl jkl jklsajkl djklasddi",
     },
     { name: "Truong Tho", data: "hay qu di" },
+    { name: "Truong Tho", data: "hay qu di" },
+    { name: "Truong Tho", data: "hay qu di" },
+    { name: "Truong Tho", data: "hay qu di" },
   ]);
   return (
-    <div>
-      <form action="" className={styles.form}>
-        <Input
-          type="text"
-          placeholder="Add a comment..."
-          className={styles.inputComment}
-        />
-        <button type="submit" className={styles.btnComment}>
-          Add
-        </button>
-      </form>
+    <>
       <div className={styles.commentList}>
         {comments && comments.length > 0
           ? comments.map((item, index) => (
@@ -40,7 +33,7 @@ const Comments = (props: Props) => {
             ))
           : null}
       </div>
-    </div>
+    </>
   );
 };
 

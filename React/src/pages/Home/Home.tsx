@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import PostList from "~/components/PostList";
+import PostList from "~/components/Posts/PostMain/PostList";
 import UserList from "~/components/UserList";
 import styles from "./homeStyles.module.scss";
 
