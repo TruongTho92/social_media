@@ -2,8 +2,12 @@
 
 .postList {
   overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
   .postItem {
-    height: 272px;
+    // height: 272px;
+    aspect-ratio: 1;
   }
   .postImg {
     height: 100%;
@@ -18,23 +22,16 @@
 
 @include desktop {
   .postList {
-    .postItem {
-      height: 260px;
-    }
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @include tablet {
   .postList {
-    .postItem {
-      height: 340px;
-    }
+    grid-template-columns: 1fr 1fr;
   }
 }
 @include mobile {
   .postList {
-    .postItem {
-      width: 300px;
-      height: 300px;
-    }
+    grid-template-columns: 1fr;
   }
 }

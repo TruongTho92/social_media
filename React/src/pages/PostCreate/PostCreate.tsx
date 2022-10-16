@@ -92,7 +92,7 @@ const PostCreate: React.FC = () => {
                   </div>
                 ) : null}
               </Form.Item>
-              <Form.Item className={styles.formItem}>
+              <Form.Item className={`${styles.formItem} ${styles.widthFull}`}>
                 {/* AVATAR */}
                 <div className={styles.account}>
                   <div className={styles.imageAccount}>

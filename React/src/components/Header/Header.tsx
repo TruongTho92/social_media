@@ -1,5 +1,5 @@
-import { Input, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { Input, Tooltip } from "antd";
+import React, { useState } from "react";
 import {
   AiFillHome,
   AiOutlineSave,
@@ -8,34 +8,22 @@ import {
 } from "react-icons/ai";
 import { BsBookmarkPlus, BsChatDots, BsPlusSquare } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+import { BiLogOutCircle } from "react-icons/bi";
+
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { logoutUser } from "~/features/User/userApi";
 import { getUser } from "~/features/User/userSlice";
-import PostCreate from "~/pages/PostCreate";
 
 import styles from "./headerStyles.module.scss";
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
-  const [openSubUser, setOpenSubUser] = useState(false);
   const getUserData = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    window.onclick = () => {
-      setOpenSubUser(false);
-    };
-  });
-
-  const onOpenSubUser = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setOpenSubUser(!openSubUser);
-  };
 
   const handleLogout = async () => {
     const payload = {
@@ -101,20 +89,14 @@ const Header: React.FC = () => {
               <BsBookmarkPlus className={styles.menuIcon} />
             </NavLink>
           </div>
-          <div className={styles.menuUser} onClick={onOpenSubUser}>
-            <img
-              src={
-                getUserData.user.avatar === null
-                  ? `/assets/images/user-vacant.jpg`
-                  : `${getUserData.user.avatar}`
-              }
-              alt="avatar_account"
-            />
-            {openSubUser ? (
-              <div
-                className={styles.subUserMenu}
-                onClick={(e) => e.stopPropagation()}
-              >
+
+          {/* TOOLTIP USER */}
+          <Tooltip
+            color="#fff"
+            trigger="hover"
+            placement="bottom"
+            title={() => (
+              <div className={styles.subUserMenu}>
                 <Link to="/profile" className={styles.subMenuItem}>
                   <AiOutlineUser className={styles.iconSub} />
                   <label className={styles.subUserLabel}>Profile</label>
@@ -128,12 +110,24 @@ const Header: React.FC = () => {
                   <label className={styles.subUserLabel}>Saved</label>
                 </Link>
                 <span className={styles.line}></span>
-                <div className={styles.logout} onClick={handleLogout}>
-                  Log out
+                <div className={styles.subMenuItem} onClick={handleLogout}>
+                  <BiLogOutCircle className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Log out</label>
                 </div>
               </div>
-            ) : null}
-          </div>
+            )}
+          >
+            <div className={styles.menuUser}>
+              <img
+                src={
+                  getUserData.user.avatar === null
+                    ? `/assets/images/user-vacant.jpg`
+                    : `${getUserData.user.avatar}`
+                }
+                alt="avatar_account"
+              />
+            </div>
+          </Tooltip>
         </div>
       </div>
 
@@ -157,6 +151,7 @@ const Header: React.FC = () => {
             <BsBookmarkPlus className={styles.menuIcon} />
           </NavLink>
         </div>
+
         <Link to="/profile" className={styles.menuUser}>
           <img
             src={
