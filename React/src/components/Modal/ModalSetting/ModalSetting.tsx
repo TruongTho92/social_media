@@ -1,8 +1,12 @@
 import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineSetting } from "react-icons/ai";
+import { BiLogOutCircle } from "react-icons/bi";
 import { MdPassword, MdSettingsEthernet } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { logoutUser } from "~/features/User/userApi";
+import { getUser } from "~/features/User/userSlice";
 
 import styles from "./modalSettingStyles.module.scss";
 
@@ -11,7 +15,11 @@ type Props = {
 };
 
 const ModalSetting = ({ classNameIconSetting }: Props) => {
+  const dispatch = useAppDispatch();
+  const getUserData = useAppSelector(getUser);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const showModal = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsModalOpen(true);
@@ -25,6 +33,17 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
       window.removeEventListener("click", handleClick);
     };
   });
+
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getUserData.user.email,
+        authentication_token: getUserData.user.authentication_token,
+      },
+    };
+    dispatch(logoutUser(payload));
+  };
+
   return (
     <>
       <AiOutlineSetting className={classNameIconSetting} onClick={showModal} />
@@ -51,6 +70,14 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
               className={styles.iconLink}
             />
             <span> Delete Account</span>
+          </div>
+          <div className={styles.deleteAccount} onClick={handleLogout}>
+            <BiLogOutCircle
+              size={20}
+              style={{ marginRight: 12 }}
+              className={styles.iconLink}
+            />
+            <span>Log out</span>
           </div>
         </div>
       </Modal>
