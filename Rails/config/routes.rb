@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api, default: {fomat: :json} do
     namespace :v1 do
       devise_scope :user do
-        post "sign_up", :to => 'registrations#create'
+        post "registration", :to => 'registrations#register'
         post "sign_in", :to => 'sessions#create'
         post "sign_out", :to => 'sessions#destroy'
       end
@@ -12,11 +12,8 @@ Rails.application.routes.draw do
       get "logged_in", :to => 'application#is_logged_in?'
       get "load_user", :to => 'application#current_user'
 
-      get "posts", :to => 'posts#index'
-      get "show_posts", :to => 'posts#show'
-      post "create_post", :to => 'posts#create'
-      post "update_post", :to => 'posts#update'
-      delete "delete_post", :to => 'posts#destroy'
+      resources :posts
+      get "posts_of_user", :to => 'posts#posts_of_user'
     end
   end
 end
