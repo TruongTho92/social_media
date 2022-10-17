@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { loginUser } from "~/features/User/userApi";
+import { userApi } from "~/features/User/userApi";
 
 import styles from "./LoginStyles.module.scss";
 
@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
       },
     };
 
-    dispatch(loginUser(data));
+    dispatch(userApi.loginUser(data));
   };
 
   return (

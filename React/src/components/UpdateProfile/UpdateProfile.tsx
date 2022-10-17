@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
-import { loadUser, updateProfile } from "~/features/User/userApi";
+import { userApi } from "~/features/User/userApi";
 import { getLoading, getUser } from "~/features/User/userSlice";
 import styles from "./updateProfileStyles.module.scss";
 
@@ -53,8 +53,8 @@ const UpdateProfile: React.FC = () => {
     };
 
     if (username.length <= 20 || prevAvatar.length > 0) {
-      await dispatch(updateProfile(payload));
-      dispatch(loadUser());
+      await dispatch(userApi.updateProfile(payload));
+      dispatch(userApi.loadUser());
     }
     return;
   };

@@ -3,7 +3,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { loadUser, updateProfile } from "~/features/User/userApi";
+import { userApi } from "~/features/User/userApi";
 import { getUser } from "~/features/User/userSlice";
 import styles from "./updatePassStyles.module.scss";
 
@@ -53,8 +53,8 @@ const UpdatePassword: React.FC<Props> = (props: Props) => {
       passValidate.pwdLengthCheck
     ) {
       setIsValidatePassword(false);
-      await dispatch(updateProfile(data));
-      dispatch(loadUser());
+      await dispatch(userApi.updateProfile(data));
+      dispatch(userApi.loadUser());
     } else {
       setIsValidatePassword(true);
       return;

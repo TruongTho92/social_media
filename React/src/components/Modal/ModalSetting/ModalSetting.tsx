@@ -5,7 +5,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { MdPassword, MdSettingsEthernet } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { logoutUser } from "~/features/User/userApi";
+import { userApi } from "~/features/User/userApi";
 import { getUser } from "~/features/User/userSlice";
 
 import styles from "./modalSettingStyles.module.scss";
@@ -41,7 +41,7 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
         authentication_token: getUserData.user.authentication_token,
       },
     };
-    dispatch(logoutUser(payload));
+    dispatch(userApi.logoutUser(payload));
   };
 
   return (
