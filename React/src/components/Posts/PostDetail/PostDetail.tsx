@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./postDetailStyles.module.scss";
 import { Link, useParams } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -22,6 +22,10 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
 
   const [isOpenComment, setisOpenComment] = useState(false);
   const inputRef = useRef<TextAreaRef>(null);
+
+  useEffect(() => {
+    // Call Api here
+  }, []);
 
   return (
     <div className={` ${styles.postDetail}`}>

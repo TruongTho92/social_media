@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./notfoundStyles.module.scss";
 import { SiFacepunch } from "react-icons/si";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <div className={`container-fluid pt-80 ${styles.notfound}`}>
       <SiFacepunch className={styles.iconEyes} />

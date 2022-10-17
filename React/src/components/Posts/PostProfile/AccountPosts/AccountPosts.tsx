@@ -10,21 +10,13 @@ type Props = {
 };
 
 const AccountPosts: React.FC<Props> = ({ postList, isAccount }) => {
+  const reversed = [...postList].reverse();
   return (
     <div className={styles.postList}>
       {postList &&
         postList.length > 0 &&
-        postList.map((post) => (
-          <div
-            // xs={24}
-            // sm={24}
-            // md={12}
-            // lg={8}
-            // xl={8}
-            // xxl={8}
-            className={styles.postItem}
-            key={post.id}
-          >
+        reversed.map((post) => (
+          <div className={styles.postItem} key={post.id}>
             <AccountPost
               id={post.id}
               image={post.image}

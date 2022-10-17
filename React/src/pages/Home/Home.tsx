@@ -3,13 +3,7 @@ import PostList from "~/components/Posts/PostMain/PostList";
 import UserList from "~/components/UserList";
 import styles from "./homeStyles.module.scss";
 
-export interface postsTypes {
-  id: number;
-  title: string;
-  description: string;
-}
-
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className={`container-fluid pt-80 ${styles.homePage} `}>
       <Row gutter={[24, 24]}>

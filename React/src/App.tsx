@@ -15,7 +15,8 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
 import Profile from "./pages/Profile";
-import UpdatePasswordPage from "./pages/UpdatePassword/UpdatePasswordPage";
+import SearchPage from "./pages/SearchPage";
+import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 import UserProfilePage from "./pages/UserProfilePage";
 
 const App: React.FC = () => {
@@ -65,6 +66,12 @@ const App: React.FC = () => {
         <Route
           path="profile/update-password"
           element={isAuthenticated ? <UpdatePasswordPage /> : <Login />}
+        />
+
+        {/* SEARCH */}
+        <Route
+          path="search"
+          element={isAuthenticated ? <SearchPage /> : <Login />}
         />
 
         {/* 404 PAGE */}

@@ -5,11 +5,13 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import postsReducer from "~/features/Posts/postsSlice";
+import postsUserReducer from "~/features/postsUser/postsUserSlice";
 import UserReducer from "~/features/User/userSlice";
 
 const rootReducer = combineReducers({
   user: UserReducer,
   post: postsReducer,
+  postuser: postsUserReducer,
 });
 
 export const store = configureStore({

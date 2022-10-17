@@ -1,9 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Account from "~/components/Account";
 
-type Props = {};
-
-const Profile = (props: Props) => {
+const Profile: React.FC = () => {
   return (
     <div className="">
       <Account />

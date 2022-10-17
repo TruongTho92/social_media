@@ -1,9 +1,7 @@
 import React from "react";
 import UserProfile from "~/components/UserProfile";
 
-type Props = {};
-
-const UserProfilePage = (props: Props) => {
+const UserProfilePage: React.FC = () => {
   return (
     <div>
       <UserProfile />
