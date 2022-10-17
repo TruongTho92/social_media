@@ -8,10 +8,9 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @post = @user.posts
+    @post = Post.find_by(id: params[:id])
     render json: {
-      message: "Get Posts of User Successfully",
+      message: "Get Post Successfully",
       data: {post: @post}
     }
   end
@@ -24,7 +23,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
         data: {post: @post}
       }
     else
-      message json: {
+      render json: {
         message: "Create Failed!",
         data:{}
       }
@@ -53,6 +52,15 @@ class Api::V1::PostsController < Api::V1::ApplicationController
         message: "Delete Post Successfully!",
       }
     end
+  end
+
+  def posts_of_user
+    @user = User.find(params[:id])
+    @post = @user.posts
+    render json: {
+      message: "Get Posts of User Successfully",
+      data: {post: @post}
+    }
   end
 
   private
