@@ -3,8 +3,8 @@ import React, { SyntheticEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { userApi } from "~/features/User/userApi";
-import { getUser } from "~/features/User/userSlice";
+import { userApi } from "~/features/user/userApi";
+import { getUser } from "~/features/user/userSlice";
 import styles from "./updatePassStyles.module.scss";
 
 type Props = {};

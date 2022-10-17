@@ -11,7 +11,7 @@ import {
 
 export const postDetailApi = {
   // [GET]: /post/:id
-  getPost: (id: number) => async (dispatch: any) => {
+  getPost: (id: number | null) => async (dispatch: any) => {
     try {
       dispatch({
         type: GetPostRequest.toString(),
@@ -19,7 +19,7 @@ export const postDetailApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`api/v1/post/${id}`, {
+      const { data } = await apiClient.get(`api/v1/posts/${id}`, {
         headers: {
           token: token,
         },
@@ -46,15 +46,11 @@ export const postDetailApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.put(
-        `api/v1/update_post/${id}`,
-        payload,
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
+      const { data } = await apiClient.put(`api/v1/posts/${id}`, payload, {
+        headers: {
+          token: token,
+        },
+      });
 
       dispatch({
         type: UpdatePostSuccess.toString(),

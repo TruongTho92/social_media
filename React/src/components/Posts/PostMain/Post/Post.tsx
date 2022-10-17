@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Comments from "~/components/Comments";
 import PostDetail from "../../PostProfile/PostDetail";
 import { BiMessageRounded } from "react-icons/bi";
+import PostMainDetail from "../PostMainDetail";
 
 const Post = ({ userId = 1, postId = 1 }) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false);
@@ -56,7 +57,7 @@ const Post = ({ userId = 1, postId = 1 }) => {
           footer={false}
         >
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <PostDetail isAccount={false} id={1} />
+            <PostMainDetail isAccount={false} id={1} />
           </div>
         </Modal>
       </div>

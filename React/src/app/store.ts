@@ -4,22 +4,22 @@ import {
   configureStore,
   ThunkAction,
 } from "@reduxjs/toolkit";
-import postDetailSlice from "~/features/AccountPost/postDetail/postDetailSlice";
-import postsUserSlice from "~/features/UserPost/postsUser/postsUserSlice";
+import postDetailSlice from "~/features/accountPost/postDetail/postDetailSlice";
 
-import postsUserReducer from "~/features/UserPost/postsUser/postsUserSlice";
-import UserReducer from "~/features/User/userSlice";
-import postDetailUserSlice from "../features/UserPost/postDetail/postDetailSlice";
+import UserReducer from "~/features/user/userSlice";
+import postsSlice from "~/features/accountPost/Posts/postsSlice";
+import postsUserSlice from "~/features/userPost/postsUser/postsUserSlice";
+import postDetailUserSlice from "~/features/userPost/postDetailUser/postDetailUserSlice";
 
 const rootReducer = combineReducers({
   user: UserReducer,
 
-  // ACCOUNT
-  posts: postsUserSlice,
+  // ACCOUNT POST
+  posts: postsSlice,
   postDetail: postDetailSlice,
 
-  // USER
-  postuser: postsUserReducer,
+  // USER POST
+  postsUser: postsUserSlice,
   postDetailUser: postDetailUserSlice,
 });
 

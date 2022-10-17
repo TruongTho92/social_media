@@ -7,7 +7,7 @@ import {
   UpdatePostFailure,
   UpdatePostRequest,
   UpdatePostSuccess,
-} from "./postDetailSlice";
+} from "./postDetailUserSlice";
 
 export const postDetailApi = {
   // [GET]: /post/:id

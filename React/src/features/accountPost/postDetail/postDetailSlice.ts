@@ -18,7 +18,7 @@ const initialState: StateTypes = {
 };
 
 const postDetailSlice = createSlice({
-  name: "posts",
+  name: "postDetail",
   initialState,
   reducers: {
     // [GET]: /post/:id => GET POST ACCOUNT

@@ -176,6 +176,11 @@
   }
 }
 
+.iconLoading {
+  font-size: 30px;
+  animation: Rotate 1s linear infinite;
+}
+
 @media screen and (max-width: 767px) {
   .login {
     padding: 0 6%;

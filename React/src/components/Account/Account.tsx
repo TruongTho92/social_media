@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { postsApi } from "~/features/AccountPost/Posts/postsApi";
+import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import {
   getAllPost,
   getLoadingPosts,
-} from "~/features/AccountPost/Posts/postsSlice";
-import { getUser } from "~/features/User/userSlice";
+} from "~/features/accountPost/Posts/postsSlice";
+import { getUser } from "~/features/user/userSlice";
 import ModalSetting from "../Modal/ModalSetting";
 import AccountPosts from "../Posts/PostProfile/AccountPosts";
 import styles from "./accountStyles.module.scss";

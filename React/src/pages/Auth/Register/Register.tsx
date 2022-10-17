@@ -1,5 +1,6 @@
 import { Col, Input, Row } from "antd";
 import React, { useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -9,7 +10,7 @@ import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { userApi } from "~/features/User/userApi";
+import { userApi } from "~/features/user/userApi";
 
 import styles from "./registerStyles.module.scss";
 
@@ -149,6 +150,7 @@ const Register: React.FC = () => {
           {/* ERROR AND REGISTED MESSAGE */}
 
           <ToastContainer
+            icon={<AiOutlineLoading className={styles.iconLoading} />}
             position="top-right"
             autoClose={false}
             theme="dark"
