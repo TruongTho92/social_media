@@ -6,6 +6,13 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     }
   end
 
+  def show
+    @user = User.find(params[:id])
+    render json: {
+      data: {user: @users}
+    }
+  end
+
   def update
     if current_user.update(user_params)
       render json: {
