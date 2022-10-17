@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
-import { userApi } from "~/features/User/userApi";
-import { getLoading, getUser } from "~/features/User/userSlice";
+import { userApi } from "~/features/user/userApi";
+import { getLoading, getUser } from "~/features/user/userSlice";
 import styles from "./updateProfileStyles.module.scss";
 
 const UpdateProfile: React.FC = () => {

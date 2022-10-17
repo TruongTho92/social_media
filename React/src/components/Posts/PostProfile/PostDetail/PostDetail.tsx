@@ -10,13 +10,13 @@ import Comments from "~/components/Comments";
 import { TextAreaRef } from "antd/lib/input/TextArea";
 import Tooltip from "antd/es/tooltip";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { postsApi } from "~/features/AccountPost/Posts/postsApi";
-import { getUser } from "~/features/User/userSlice";
-import { postDetailApi } from "~/features/AccountPost/postDetail/postDetailApi";
+import { postsApi } from "~/features/accountPost/Posts/postsApi";
+import { getUser } from "~/features/user/userSlice";
+import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLoadingPosts,
   getPostDetail,
-} from "~/features/AccountPost/postDetail/postDetailSlice";
+} from "~/features/accountPost/postDetail/postDetailSlice";
 
 export type Props = {
   id: number | null;
@@ -35,10 +35,9 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
   const postDetailData = useAppSelector(getPostDetail);
-  console.log(loadingPost);
 
   useEffect(() => {
-    // Call Api here
+    dispatch(postDetailApi.getPost(id));
   }, []);
 
   const handleUpdatePost = () => {
@@ -47,12 +46,12 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
         caption: editCaption,
       },
     };
-
     dispatch(postDetailApi.update(id, data));
   };
 
   const handleDeletePost = () => {
-    dispatch(postsApi.delete(id));
+    dispatch(postsApi.delete(postDetailData.id));
+    dispatch(postsApi.getAll());
   };
 
   const handleLike = () => {
@@ -71,7 +70,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
           <div className={styles.postDetailContainer}>
             <div className={styles.top}>
               <div className={styles.postDetailImg}>
-                <img src="/assets/images/post_img.jpg" alt="" />
+                <img src={postDetailData.image} alt="" />
               </div>
               <div className={styles.postDetailContent}>
                 {/* HEADER */}
@@ -136,7 +135,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                 {isOpenEdit ? (
                   <div className={styles.editContainer}>
                     <Input.TextArea
-                      defaultValue={"1"}
+                      defaultValue={postDetailData.caption}
                       className={styles.inputEdit}
                       onChange={(e) => setEditCaption(e.target.value)}
                     />
@@ -168,9 +167,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                     }
                     className={styles.caption}
                   >
-                    adkjhdahsh ahjdh akshdjka shdjkhajk dhajksdh jkashd ahd
-                    haksdjka djkasdjk sda dasd asd asd ada lajsdkl alskdj
-                    aklsdjkla jkld klaslk asda dd da sd ad adasdad adawd awd
+                    {postDetailData.caption}
                   </Typography.Paragraph>
                 )}
 

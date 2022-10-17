@@ -27,7 +27,7 @@ export const userApi = {
         type: RegisterRequest.toString(),
       });
 
-      const { data } = await apiClient.post(`/api/v1/sign_up`, payload);
+      const { data } = await apiClient.post(`/api/v1/registration`, payload);
 
       dispatch({
         type: RegisterSuccess.toString(),

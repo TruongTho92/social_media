@@ -5,8 +5,8 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { MdPassword, MdSettingsEthernet } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { userApi } from "~/features/User/userApi";
-import { getUser } from "~/features/User/userSlice";
+import { userApi } from "~/features/user/userApi";
+import { getUser } from "~/features/user/userSlice";
 
 import styles from "./modalSettingStyles.module.scss";
 

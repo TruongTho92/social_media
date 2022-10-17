@@ -50,7 +50,7 @@ export const postsApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.post(`api/v1/create_post`, payload, {
+      const { data } = await apiClient.post(`api/v1/posts`, payload, {
         headers: {
           token: token,
         },
@@ -76,11 +76,13 @@ export const postsApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.delete(`api/v1/delete_post/${id}`, {
+      const { data } = await apiClient.delete(`api/v1/posts/${id}`, {
         headers: {
           token: token,
         },
       });
+
+      console.log(data);
 
       dispatch({
         type: DeletePostSuccess.toString(),
@@ -89,7 +91,7 @@ export const postsApi = {
     } catch (error: any) {
       dispatch({
         type: DeletePostFailure.toString(),
-        payload: error.response.data,
+        // payload: error.response.data,
       });
     }
   },

@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { userApi } from "~/features/User/userApi";
+import { userApi } from "~/features/user/userApi";
 
 import styles from "./LoginStyles.module.scss";
 

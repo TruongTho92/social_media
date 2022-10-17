@@ -4,19 +4,20 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiMessageRounded } from "react-icons/bi";
 import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import styles from "./postDetailStyles.module.scss";
 
 import Tooltip from "antd/es/tooltip";
 import { TextAreaRef } from "antd/lib/input/TextArea";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import Comments from "~/components/Comments";
-import { postDetailApi } from "~/features/AccountPost/postDetail/postDetailApi";
+import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLoadingPosts,
   getPostDetail,
-} from "~/features/AccountPost/postDetail/postDetailSlice";
-import { postsApi } from "~/features/AccountPost/Posts/postsApi";
-import { getUser } from "~/features/User/userSlice";
+} from "~/features/accountPost/postDetail/postDetailSlice";
+import { postsApi } from "~/features/accountPost/Posts/postsApi";
+import { getUser } from "~/features/user/userSlice";
+
+import styles from "./postMainDetailStyles.module.scss";
 
 export type Props = {
   id: number | null;
