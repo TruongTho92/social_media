@@ -20,8 +20,8 @@ import {
 
 import Cookies from "js-cookie";
 
-export const registerUser =
-  (payload: UserDataTypes) => async (dispatch: any) => {
+export const userApi = {
+  registerUser: (payload: UserDataTypes) => async (dispatch: any) => {
     try {
       dispatch({
         type: RegisterRequest.toString(),
@@ -39,60 +39,56 @@ export const registerUser =
         payload: error.response.data,
       });
     }
-  };
+  },
+  loginUser: (payload: UserDataTypes) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: LoginRequest.toString(),
+      });
 
-export const loginUser = (payload: UserDataTypes) => async (dispatch: any) => {
-  try {
-    dispatch({
-      type: LoginRequest.toString(),
-    });
+      const { data } = await apiClient.post(`/api/v1/sign_in`, payload);
 
-    const { data } = await apiClient.post(`/api/v1/sign_in`, payload);
+      Cookies.set(
+        "access_token",
+        JSON.stringify(data.data.user.authentication_token)
+      );
 
-    Cookies.set(
-      "access_token",
-      JSON.stringify(data.data.user.authentication_token)
-    );
+      dispatch({
+        type: LoginSuccess.toString(),
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: LoginFailure.toString(),
+        payload: error.response.data,
+      });
+    }
+  },
+  loadUser: () => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: LoadUserRequest.toString(),
+      });
 
-    dispatch({
-      type: LoginSuccess.toString(),
-      payload: data,
-    });
-  } catch (error: any) {
-    dispatch({
-      type: LoginFailure.toString(),
-      payload: error.response.data,
-    });
-  }
-};
+      const token = JSON.parse(Cookies.get("access_token") || "");
 
-export const loadUser = () => async (dispatch: any) => {
-  try {
-    dispatch({
-      type: LoadUserRequest.toString(),
-    });
-
-    const token = JSON.parse(Cookies.get("access_token") || "");
-
-    const { data } = await apiClient.get(`/api/v1/logged_in`, {
-      headers: {
-        token: token,
-      },
-    });
-    dispatch({
-      type: LoadUserSuccess.toString(),
-      payload: data,
-    });
-  } catch (error: any) {
-    dispatch({
-      type: LoadUserFailure.toString(),
-      // payload: error.response.data,
-    });
-  }
-};
-
-export const updateProfile =
-  (payload: DataUpdateUser) => async (dispatch: any) => {
+      const { data } = await apiClient.get(`/api/v1/logged_in`, {
+        headers: {
+          token: token,
+        },
+      });
+      dispatch({
+        type: LoadUserSuccess.toString(),
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: LoadUserFailure.toString(),
+        // payload: error.response.data,
+      });
+    }
+  },
+  updateProfile: (payload: DataUpdateUser) => async (dispatch: any) => {
     try {
       dispatch({
         type: UpdateProfileRequest.toString(),
@@ -115,31 +111,31 @@ export const updateProfile =
         payload: error.response.data,
       });
     }
-  };
+  },
+  logoutUser: (payload: PayloadLogout) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: LogoutRequest.toString(),
+      });
+      const token = JSON.parse(Cookies.get("access_token") || "");
 
-export const logoutUser = (payload: PayloadLogout) => async (dispatch: any) => {
-  try {
-    dispatch({
-      type: LogoutRequest.toString(),
-    });
-    const token = JSON.parse(Cookies.get("access_token") || "");
+      const { data } = await apiClient.post("/api/v1/sign_out", {
+        data: payload,
+        headers: {
+          token: token,
+        },
+      });
+      Cookies.remove("access_token");
 
-    const { data } = await apiClient.post("/api/v1/sign_out", {
-      data: payload,
-      headers: {
-        token: token,
-      },
-    });
-    Cookies.remove("access_token");
-
-    dispatch({
-      type: LogoutSuccess.toString(),
-      payload: data,
-    });
-  } catch (error: any) {
-    dispatch({
-      type: LogoutFailure.toString(),
-      // payload: error.response.data,
-    });
-  }
+      dispatch({
+        type: LogoutSuccess.toString(),
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: LogoutFailure.toString(),
+        // payload: error.response.data,
+      });
+    }
+  },
 };

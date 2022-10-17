@@ -13,10 +13,10 @@ import { Link, NavLink } from "react-router-dom";
 import { BiLogOutCircle } from "react-icons/bi";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { logoutUser } from "~/features/User/userApi";
 import { getUser } from "~/features/User/userSlice";
 
 import styles from "./headerStyles.module.scss";
+import { userApi } from "~/features/User/userApi";
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
         authentication_token: getUserData.user.authentication_token,
       },
     };
-    dispatch(logoutUser(payload));
+    dispatch(userApi.logoutUser(payload));
   };
 
   return (

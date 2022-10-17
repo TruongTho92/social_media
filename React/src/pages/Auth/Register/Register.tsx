@@ -9,8 +9,7 @@ import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { registerUser } from "~/features/User/userApi";
-import { getUser } from "~/features/User/userSlice";
+import { userApi } from "~/features/User/userApi";
 
 import styles from "./registerStyles.module.scss";
 
@@ -52,7 +51,7 @@ const Register: React.FC = () => {
       passValidate.pwdLengthCheck
     ) {
       setIsValidatePassword(false);
-      dispatch(registerUser(data));
+      dispatch(userApi.registerUser(data));
     } else {
       setIsValidatePassword(true);
     }

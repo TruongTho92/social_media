@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
 import UpdateProfile from "./components/UpdateProfile";
-import { loadUser } from "./features/User/userApi";
+import { userApi } from "./features/User/userApi";
 import { getAuthenticated } from "./features/User/userSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -25,7 +25,7 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadUser());
+    dispatch(userApi.loadUser());
   }, [dispatch]);
 
   return (
