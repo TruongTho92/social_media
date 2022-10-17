@@ -7,8 +7,8 @@ import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostPayloadCreate } from "~/common/types";
-import { postsApi } from "~/features/Posts/postsApi";
-import { getLoadingPosts } from "~/features/Posts/postsSlice";
+import { postsApi } from "~/features/AccountPost/Posts/postsApi";
+import { getLoadingPosts } from "~/features/AccountPost/Posts/postsSlice";
 import { getUser } from "~/features/User/userSlice";
 
 import styles from "./postCreate.module.scss";

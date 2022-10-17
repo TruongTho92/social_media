@@ -19,9 +19,8 @@ export interface UserDataResponse {
       user_name: string;
       nick_name: string;
       bio: string;
-      posted: [];
-      commented: [];
-      liked: [];
+      followers?: [];
+      followings?: [];
       gender: string;
       authentication_token: string;
     };
@@ -64,8 +63,12 @@ export interface PostAccount {
 }
 
 export interface PostDataResponse {
-  post: PostAccount;
   posts: PostAccount[];
+  is_success: boolean;
+  message: string;
+}
+export interface PostDetailResponse {
+  post: PostAccount;
   is_success: boolean;
   message: string;
 }

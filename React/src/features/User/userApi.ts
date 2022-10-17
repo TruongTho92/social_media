@@ -36,7 +36,7 @@ export const userApi = {
     } catch (error: any) {
       dispatch({
         type: RegisterFailure.toString(),
-        payload: error.response.data,
+        // payload: error.response.data,
       });
     }
   },

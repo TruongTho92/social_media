@@ -6,7 +6,7 @@ import { GoComment } from "react-icons/go";
 import styles from "./postStyles.module.scss";
 import { useEffect, useState } from "react";
 import Comments from "~/components/Comments";
-import PostDetail from "../../PostDetail";
+import PostDetail from "../../PostProfile/PostDetail";
 import { BiMessageRounded } from "react-icons/bi";
 
 const Post = ({ userId = 1, postId = 1 }) => {
