@@ -2,7 +2,7 @@
 
 .commentList {
   overflow-y: scroll;
-  height: 160px;
+  height: 200px;
   width: 100%;
 }
 .commentItem {
@@ -55,7 +55,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .commentList {
-    height: 180px;
+    height: 220px;
   }
 }
 

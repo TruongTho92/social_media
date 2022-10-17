@@ -1,23 +1,29 @@
+import { Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { BsThreeDots } from "react-icons/bs";
+
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postsApi } from "~/features/Posts/postsApi";
 import { getAllPost, getLoadingPosts } from "~/features/Posts/postsSlice";
 import { getUser } from "~/features/User/userSlice";
-import ModalSetting from "../Modal/ModalSetting";
 import AccountPosts from "../Posts/PostProfile/AccountPosts";
-import styles from "./accountStyles.module.scss";
+
+import styles from "./userProfileStyles.module.scss";
+
 type Props = {};
 
 const Account: React.FC = (props: Props) => {
   const dispatch = useAppDispatch();
+  const [isFollow, setIsFollow] = useState(false);
 
   const getUserData = useAppSelector(getUser);
   const loadingPosts = useAppSelector(getLoadingPosts);
-
   const allAccountPost = useAppSelector(getAllPost);
 
   useEffect(() => {
+    // More api get user profile
+
+    // Change api post user id
     dispatch(postsApi.getAll());
   }, []);
 
@@ -26,9 +32,9 @@ const Account: React.FC = (props: Props) => {
       {loadingPosts ? (
         "Loading..."
       ) : (
-        <div className={`container-fluid ${styles.account}`}>
-          <div className={styles.accountContainer}>
-            <div className={styles.accountInfo}>
+        <div className={`container-fluid ${styles.userProfile}`}>
+          <div className={styles.userProfileContainer}>
+            <div className={styles.userProfileInfo}>
               <div className={styles.image}>
                 <img
                   src={
@@ -46,17 +52,41 @@ const Account: React.FC = (props: Props) => {
                       getUserData.user.user_name
                     ) : (
                       <span className={styles.errorUpdate}>
-                        * Update your name
+                        * User hasn't name
                       </span>
                     )}
                   </span>
+                  {isFollow ? (
+                    <button className={styles.btnUnFollow}>Unfollow</button>
+                  ) : (
+                    <button className={styles.btnFollow}>Follow</button>
+                  )}
 
-                  <Link to="/profile/update" className={styles.linkEdit}>
-                    Edit profile
-                  </Link>
-                  <div style={{ lineHeight: 0 }}>
-                    <ModalSetting classNameIconSetting={styles.settingIcon} />
-                  </div>
+                  <Tooltip
+                    color="#fff"
+                    placement="right"
+                    trigger={"click"}
+                    title={
+                      <div
+                        className={styles.settingContent}
+                        style={{ color: "#000" }}
+                      >
+                        <Typography className={styles.settingText}>
+                          Block
+                        </Typography>
+                        <Typography className={styles.settingText}>
+                          Report
+                        </Typography>
+                      </div>
+                    }
+                  >
+                    <div
+                      style={{ lineHeight: 0 }}
+                      className={styles.settingIconContainer}
+                    >
+                      <BsThreeDots className={styles.settingIcon} />
+                    </div>
+                  </Tooltip>
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
@@ -72,31 +102,17 @@ const Account: React.FC = (props: Props) => {
                 <div className={styles.infoItem}>
                   <div>
                     <span className={styles.username}>
-                      {getUserData.user.nick_name ? (
-                        getUserData.user.nick_name
-                      ) : (
-                        <span className={styles.errorUpdate}>
-                          * Update your nick name
-                        </span>
-                      )}
+                      {getUserData.user.nick_name}
                     </span>
-                    <div className={styles.bio}>
-                      {getUserData.user.bio ? (
-                        getUserData.user.bio
-                      ) : (
-                        <span className={styles.errorUpdate}>
-                          * Update your Biography
-                        </span>
-                      )}
-                    </div>
+                    <div className={styles.bio}>{getUserData.user.bio}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <span className={styles.line}></span>
-          <div className={styles.accountPost}>
-            <AccountPosts postList={allAccountPost} isAccount={true} />
+          <div className={styles.userProfilePost}>
+            <AccountPosts postList={allAccountPost} isAccount={false} />
           </div>
         </div>
       )}

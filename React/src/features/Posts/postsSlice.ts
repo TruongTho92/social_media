@@ -22,6 +22,33 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    // [GET]: /posts => GET ALL POST ACCOUNT
+    GetPostsRequest: (state) => {
+      state.loading = true;
+    },
+    GetPostsSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data.posts = action.payload.post;
+    },
+    GetPostsFailure: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      state.data.posts = action.payload.post;
+    },
+
+    // [GET]: /post/:id => GET POST ACCOUNT
+    GetPostRequest: (state) => {
+      state.loading = true;
+    },
+    GetPostSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data.post = action.payload.post;
+    },
+    GetPostFailure: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      state.data.posts = action.payload.post;
+    },
+
+    // [POST]: /create_post => CREATE POST
     CreatePostRequest: (state) => {
       state.loading = true;
     },
@@ -42,14 +69,48 @@ const postsSlice = createSlice({
       state.loading = true;
     },
 
-    GetPostsRequest: (state) => {
+    // [PUT] /update_post => UPDATE POST
+    UpdatePostRequest: (state) => {
       state.loading = true;
     },
-    GetPostsSuccess: (state, action: PayloadAction<any>) => {
+    UpdatePostSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.data.posts = action.payload.post;
+      toast(action.payload.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     },
-    GetPostsFailure: (state, action: PayloadAction<any>) => {
+    UpdatePostFailure: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      state.data.posts = action.payload.post;
+    },
+
+    // [DELETE]: /delete_post => DELETE POST
+    DeletePostRequest: (state) => {
+      state.loading = true;
+    },
+    DeletePostSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data.posts = action.payload.post;
+      toast(action.payload.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    },
+    DeletePostFailure: (state, action: PayloadAction<any>) => {
       state.loading = true;
       state.data.posts = action.payload.post;
     },
@@ -64,6 +125,15 @@ export const {
   GetPostsRequest,
   GetPostsSuccess,
   GetPostsFailure,
+  DeletePostRequest,
+  DeletePostSuccess,
+  DeletePostFailure,
+  UpdatePostRequest,
+  UpdatePostSuccess,
+  UpdatePostFailure,
+  GetPostRequest,
+  GetPostSuccess,
+  GetPostFailure,
 } = postsSlice.actions;
 
 // SELECTOR
