@@ -10,4 +10,5 @@ class User < ApplicationRecord
   validates :password, length: { maximum: 64 }, confirmation: true, :on => :update
 
   has_many :posts
+  has_many :likes
 end
