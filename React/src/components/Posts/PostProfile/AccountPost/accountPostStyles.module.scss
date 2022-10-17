@@ -1,0 +1,48 @@
+@import "../../../../global/scss/rootStyles.scss";
+
+.postItem {
+  height: 272px;
+}
+.modal {
+}
+.postImg {
+  height: 100%;
+  width: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.closeModal {
+  display: none;
+}
+
+@include desktop {
+  .postItem {
+    height: 260px;
+  }
+}
+@include tablet {
+  .postItem {
+    height: 340px;
+  }
+}
+@include mobile {
+  .postItem {
+    width: 300px;
+    height: 300px;
+  }
+  .closeModal {
+    display: block;
+    width: 100%;
+    @include d-flex(end, center);
+    padding: 12px 12px 0 12px;
+    .closeText {
+      font-size: 16px;
+      font-weight: 600;
+      color: $mainBlue;
+    }
+  }
+}

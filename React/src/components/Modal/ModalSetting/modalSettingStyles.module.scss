@@ -1,0 +1,46 @@
+@import "../../../global/scss/rootStyles.scss";
+.modalSetting {
+  padding: 16px 0;
+  width: 300px;
+}
+.linkUpdatePass,
+.deleteAccount {
+  margin: 0 16px;
+  @include d-flex(start, center);
+  font-size: 18px;
+  font-weight: 400;
+  color: $blackColor;
+  border-bottom: 1px solid $greyLight;
+  padding: 8px 0;
+  cursor: pointer;
+  .iconLink,
+  span {
+    transition: all 0.2s linear;
+  }
+  &:hover .iconLink {
+    transform: scale(1.2);
+    color: red;
+    transition: all 0.2s linear;
+  }
+  &:hover span {
+    color: $mainBlue;
+    transform: translateX(20px);
+    cursor: pointer;
+    transition: all 0.2s linear;
+  }
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .ethernetIcon {
+    color: $mainBlue;
+    transition: all 0.2s linear;
+    &:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+      transition: all 0.2s linear;
+    }
+  }
+}

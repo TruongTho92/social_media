@@ -1,0 +1,205 @@
+@import "../../global/scss/rootStyles.scss";
+.userProfile {
+  padding: 60px 20% 40px;
+  background-color: #fff;
+}
+.line {
+  display: block;
+  background-color: $greyLight;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 40px;
+}
+
+.errorUpdate {
+  font-size: 18px;
+  color: red;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.userProfileInfo {
+  @include d-flex(start, center);
+  .image {
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 180px;
+      width: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  .info {
+    margin-left: 30px;
+  }
+  .infoItem {
+    @include d-flex(start, center);
+    margin-bottom: 20px;
+    .name {
+      font-size: 36px;
+      font-weight: 500;
+      // width: 300px;
+      word-break: break-word;
+    }
+
+    .btnFollow,
+    .btnUnFollow {
+      padding: 8px 20px;
+      font-size: 16px;
+      color: $whiteColor;
+
+      font-weight: 500;
+      border: 0;
+      border-radius: 6px;
+      margin: 0 24px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .btnFollow {
+      background-color: $mainBlue;
+    }
+    .btnUnFollow {
+      background-color: red;
+    }
+    .settingIcon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .posts,
+    .follower,
+    .following {
+      font-size: 18px;
+      font-weight: 400;
+      span {
+        font-weight: 600;
+      }
+    }
+    .follower,
+    .following {
+      margin-left: 24px;
+    }
+    .username {
+      display: block;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .bio {
+      width: 100%;
+      word-wrap: break-word;
+    }
+  }
+}
+
+.userProfilePost {
+}
+
+.settingContent {
+  padding: 6px 18px;
+  .settingText {
+    font-size: 16px;
+    font-weight: 500;
+    color: red;
+    cursor: pointer;
+    &:not(:first-child) {
+      margin-top: 4px;
+    }
+  }
+}
+
+@include desktop {
+  .userProfile {
+    padding: 60px 10% 40px;
+  }
+}
+@include tablet {
+  .userProfile {
+    padding: 60px 4% 40px;
+  }
+  .userProfileInfo {
+    .image {
+      padding: 40px;
+    }
+  }
+  .userProfilePost {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@include mobile {
+  .userProfile {
+    padding: 60px 4% 80px;
+  }
+  .userProfileInfo {
+    @include d-flex(center, center);
+    flex-direction: column;
+    .image {
+      padding: 40px 40px 24px 40px;
+    }
+    .info {
+      width: 100%;
+      margin-left: 0;
+    }
+    .infoItem {
+      @include d-flex(space-evenly, center);
+      margin-bottom: 20px;
+      &.infoItemMobile {
+        flex-direction: column;
+        margin-bottom: 24px;
+      }
+      &.infoItemFollow {
+        border-top: 1px solid $greyLight;
+        border-bottom: 1px solid $greyLight;
+        width: 100%;
+        padding: 12px 0px;
+      }
+      .name {
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .linkEdit {
+        padding: 4px 8px;
+        background-color: $whiteColor;
+        color: $blackColor;
+        border: 2px solid $greyLight;
+        border-radius: 6px;
+        font-size: 14px;
+        margin: 0 24px;
+      }
+      .settingIconContainer {
+        position: absolute;
+        top: 80px;
+        right: 20px;
+      }
+
+      .posts,
+      .follower,
+      .following {
+        font-size: 14px;
+        span {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+      .follower,
+      .following {
+        margin-left: 0;
+      }
+      .username {
+        display: block;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .bio {
+        width: 100%;
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  .userProfilePost {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

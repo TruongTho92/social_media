@@ -1,8 +1,20 @@
 @import "../../../global/scss/rootStyles.scss";
+
 .login {
-  height: 100vh;
   background-color: $bgColor;
+  height: 100vh;
   padding: 0 16%;
+}
+
+.loginLeft {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 94%;
+    object-fit: cover;
+  }
 }
 
 .loginRight {
