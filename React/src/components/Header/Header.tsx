@@ -139,7 +139,9 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <div className={styles.icon}>
-          <FiSearch className={styles.menuIcon} />
+          <NavLink to="/search">
+            <FiSearch className={styles.menuIcon} />
+          </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/create-post">

@@ -1,9 +1,8 @@
 import React from "react";
 import UpdatePassword from "~/components/UpdatePassword";
 import styles from "./updatePassStyles.module.scss";
-type Props = {};
 
-const UpdatePasswordPage = (props: Props) => {
+const UpdatePasswordPage: React.FC = () => {
   return (
     <div className={styles.udpatePage}>
       <UpdatePassword />
