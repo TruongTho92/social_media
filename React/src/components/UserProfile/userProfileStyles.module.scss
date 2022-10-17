@@ -1,5 +1,5 @@
 @import "../../global/scss/rootStyles.scss";
-.account {
+.userProfile {
   padding: 60px 20% 40px;
   background-color: #fff;
 }
@@ -18,9 +18,7 @@
   font-style: italic;
 }
 
-.accountContainer {
-}
-.accountInfo {
+.userProfileInfo {
   @include d-flex(start, center);
   .image {
     padding: 60px;
@@ -46,17 +44,29 @@
       // width: 300px;
       word-break: break-word;
     }
-    .linkEdit {
-      padding: 4px 8px;
-      background-color: $whiteColor;
-      color: $blackColor;
-      border: 2px solid $greyLight;
+
+    .btnFollow,
+    .btnUnFollow {
+      padding: 8px 20px;
+      font-size: 16px;
+      color: $whiteColor;
+
+      font-weight: 500;
+      border: 0;
       border-radius: 6px;
       margin: 0 24px;
       white-space: nowrap;
+      cursor: pointer;
+    }
+    .btnFollow {
+      background-color: $mainBlue;
+    }
+    .btnUnFollow {
+      background-color: red;
     }
     .settingIcon {
-      font-size: 30px;
+      font-size: 24px;
+      cursor: pointer;
     }
     .posts,
     .follower,
@@ -83,32 +93,45 @@
   }
 }
 
-.accountPost {
+.userProfilePost {
+}
+
+.settingContent {
+  padding: 6px 18px;
+  .settingText {
+    font-size: 16px;
+    font-weight: 500;
+    color: red;
+    cursor: pointer;
+    &:not(:first-child) {
+      margin-top: 4px;
+    }
+  }
 }
 
 @include desktop {
-  .account {
+  .userProfile {
     padding: 60px 10% 40px;
   }
 }
 @include tablet {
-  .account {
+  .userProfile {
     padding: 60px 4% 40px;
   }
-  .accountInfo {
+  .userProfileInfo {
     .image {
       padding: 40px;
     }
   }
-  .accountPost {
+  .userProfilePost {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @include mobile {
-  .account {
+  .userProfile {
     padding: 60px 4% 80px;
   }
-  .accountInfo {
+  .userProfileInfo {
     @include d-flex(center, center);
     flex-direction: column;
     .image {
@@ -144,11 +167,10 @@
         font-size: 14px;
         margin: 0 24px;
       }
-      .settingIcon {
+      .settingIconContainer {
         position: absolute;
         top: 80px;
         right: 20px;
-        cursor: pointer;
       }
 
       .posts,
@@ -177,7 +199,7 @@
     }
   }
 
-  .accountPost {
+  .userProfilePost {
     grid-template-columns: repeat(1, 1fr);
   }
 }

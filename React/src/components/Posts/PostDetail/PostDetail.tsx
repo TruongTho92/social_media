@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
 import { BiMessageRounded } from "react-icons/bi";
-import { Input, Typography } from "antd";
+import { Button, Col, Input, Row, Typography } from "antd";
 
 import Comments from "~/components/Comments";
 import { TextAreaRef } from "antd/lib/input/TextArea";
@@ -16,7 +16,9 @@ export type Props = {
 };
 const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [ellipsis, setEllipsis] = useState(true);
 
   const [isOpenComment, setisOpenComment] = useState(false);
   const inputRef = useRef<TextAreaRef>(null);
@@ -53,7 +55,9 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                         <Typography className={`${styles.text} ${styles.warn}`}>
                           Delete
                         </Typography>
-                        <Typography className={styles.text}>Edit</Typography>
+                        <div onClick={() => setIsOpenEdit(true)}>
+                          <Typography className={styles.text}>Edit</Typography>
+                        </div>
                       </div>
                     )}
                   >
@@ -66,12 +70,44 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
               ) : null}
             </div>
 
-            {/* CAPTION */}
-            <Typography className={styles.caption}>
-              adkjhdahsh ahjdh akshdjka shdjkhajk dhajksdh jkashd ahd haksdjka
-              djkasdjk sda dasd asd asd ada lajsdkl alskdj aklsdjkla jkld klaslk
-              asda dd da sd ad adasdad adawd awd
-            </Typography>
+            {/* CAPTION AND EDIT */}
+            {isOpenEdit ? (
+              <div className={styles.editContainer}>
+                {" "}
+                <Input.TextArea
+                  value={
+                    "adkjhdahsh ahjdh akshdjka shdjkhajk dhajksdh jkashd ahd haksdjka djkasdjk sda dasd asd asd ada lajsdkl alskdj aklsdjkla jklaslk asda dd da sd ad adasdad adawd awd"
+                  }
+                  className={styles.inputEdit}
+                />
+                <Row gutter={[12, 12]} justify="center">
+                  <Col>
+                    <Button
+                      onClick={() => setIsOpenEdit(false)}
+                      className={styles.btnEditCancel}
+                    >
+                      Cancel
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button className={styles.btnEditSave}>Save</Button>
+                  </Col>
+                </Row>
+              </div>
+            ) : (
+              <Typography.Paragraph
+                ellipsis={
+                  ellipsis
+                    ? { rows: 2, expandable: true, symbol: "more" }
+                    : false
+                }
+                className={styles.caption}
+              >
+                adkjhdahsh ahjdh akshdjka shdjkhajk dhajksdh jkashd ahd haksdjka
+                djkasdjk sda dasd asd asd ada lajsdkl alskdj aklsdjkla jkld
+                klaslk asda dd da sd ad adasdad adawd awd
+              </Typography.Paragraph>
+            )}
 
             {/* COMMENT */}
             <div className={styles.comment}>

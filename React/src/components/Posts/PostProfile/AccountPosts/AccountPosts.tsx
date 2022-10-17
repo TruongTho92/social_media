@@ -6,9 +6,10 @@ import styles from "./accountPostStyles.module.scss";
 
 type Props = {
   postList: PostAccount[];
+  isAccount: boolean;
 };
 
-const AccountPosts: React.FC<Props> = ({ postList }) => {
+const AccountPosts: React.FC<Props> = ({ postList, isAccount }) => {
   return (
     <div className={styles.postList}>
       {postList &&
@@ -24,7 +25,11 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
             className={styles.postItem}
             key={post.id}
           >
-            <AccountPost id={post.id} image={post.image} />
+            <AccountPost
+              id={post.id}
+              image={post.image}
+              isAccount={isAccount}
+            />
           </div>
         ))}
     </div>

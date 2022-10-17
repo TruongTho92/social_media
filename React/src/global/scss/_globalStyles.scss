@@ -26,7 +26,7 @@ body {
   margin: 0 auto;
 }
 .pt-80 {
-  padding-top: 80px;
+  padding-top: 80px !important;
 }
 .animation-left-to-right {
   animation: LeftToRight 0.25s linear;
@@ -37,6 +37,7 @@ body {
   width: fit-content !important;
   @media screen and (max-width: 767px) {
     width: 100% !important;
+    padding: 0 4% 40px;
   }
 }
 .ant-modal-body {

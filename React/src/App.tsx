@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
 import Profile from "./pages/Profile";
 import UpdatePasswordPage from "./pages/UpdatePassword/UpdatePasswordPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
@@ -52,6 +53,10 @@ const App: React.FC = () => {
         <Route
           path="profile"
           element={isAuthenticated ? <Profile /> : <Login />}
+        />
+        <Route
+          path="profile/:id"
+          element={isAuthenticated ? <UserProfilePage /> : <Login />}
         />
         <Route
           path="profile/update"
