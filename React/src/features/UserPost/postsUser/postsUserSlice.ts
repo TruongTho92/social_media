@@ -9,7 +9,6 @@ export interface StateTypes {
 const initialState: StateTypes = {
   loading: false,
   data: {
-    post: { id: null, image: "", caption: "" },
     posts: [{ id: null, image: "", caption: "" }],
     is_success: false,
     message: "",

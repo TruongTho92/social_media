@@ -9,9 +9,8 @@ export interface StateTypes {
 }
 
 const initialState: StateTypes = {
-  loading: null,
+  loading: true,
   data: {
-    post: { id: null, image: "", caption: "" },
     posts: [{ id: null, image: "", caption: "" }],
     is_success: false,
     message: "",
@@ -35,19 +34,6 @@ const postsSlice = createSlice({
       state.data.posts = action.payload.post;
     },
 
-    // [GET]: /post/:id => GET POST ACCOUNT
-    GetPostRequest: (state) => {
-      state.loading = true;
-    },
-    GetPostSuccess: (state, action: PayloadAction<any>) => {
-      state.loading = false;
-      state.data.post = action.payload.post;
-    },
-    GetPostFailure: (state, action: PayloadAction<any>) => {
-      state.loading = true;
-      state.data.posts = action.payload.post;
-    },
-
     // [POST]: /create_post => CREATE POST
     CreatePostRequest: (state) => {
       state.loading = true;
@@ -67,29 +53,6 @@ const postsSlice = createSlice({
     },
     CreatePostFailure: (state, action: PayloadAction<PostDataResponse>) => {
       state.loading = true;
-    },
-
-    // [PUT] /update_post => UPDATE POST
-    UpdatePostRequest: (state) => {
-      state.loading = true;
-    },
-    UpdatePostSuccess: (state, action: PayloadAction<any>) => {
-      state.loading = false;
-      state.data.posts = action.payload.post;
-      toast(action.payload.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    },
-    UpdatePostFailure: (state, action: PayloadAction<any>) => {
-      state.loading = true;
-      state.data.posts = action.payload.post;
     },
 
     // [DELETE]: /delete_post => DELETE POST
@@ -128,17 +91,11 @@ export const {
   DeletePostRequest,
   DeletePostSuccess,
   DeletePostFailure,
-  UpdatePostRequest,
-  UpdatePostSuccess,
-  UpdatePostFailure,
-  GetPostRequest,
-  GetPostSuccess,
-  GetPostFailure,
 } = postsSlice.actions;
 
 // SELECTOR
-export const getLoadingPosts = (state: RootState) => state.post.loading;
-export const getAllPost = (state: RootState) => state.post.data.posts;
+export const getLoadingPosts = (state: RootState) => state.posts.loading;
+export const getAllPost = (state: RootState) => state.posts.data.posts;
 
 // REDUCER
 export default postsSlice.reducer;

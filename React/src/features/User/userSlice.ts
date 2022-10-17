@@ -24,9 +24,7 @@ const initialState: stateType = {
         user_name: "",
         nick_name: "",
         bio: "",
-        posted: [],
-        commented: [],
-        liked: [],
+
         gender: "",
         authentication_token: "",
       },

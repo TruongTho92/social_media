@@ -2,7 +2,7 @@ import { Col, Modal, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import PostDetail from "../../PostDetail";
+import PostDetail from "../PostDetail";
 
 import styles from "./accountPostStyles.module.scss";
 

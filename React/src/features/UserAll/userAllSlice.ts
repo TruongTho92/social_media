@@ -1,11 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserDataResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
+  data: UserDataResponse[];
 }
 
 const initialState: StateTypes = {
   loading: false,
+  data: [],
 };
 
 const userAllSlice = createSlice({
@@ -15,8 +18,9 @@ const userAllSlice = createSlice({
     GetAllUserRequest: (state) => {
       state.loading = true;
     },
-    GetAllUserSucceess: (state) => {
+    GetAllUserSucceess: (state, action: PayloadAction<any>) => {
       state.loading = false;
+      state.data = action.payload;
     },
     GetAllUserFailure: (state) => {
       state.loading = false;

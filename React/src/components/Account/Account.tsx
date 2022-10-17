@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { postsApi } from "~/features/Posts/postsApi";
-import { getAllPost, getLoadingPosts } from "~/features/Posts/postsSlice";
+import { postsApi } from "~/features/AccountPost/Posts/postsApi";
+import {
+  getAllPost,
+  getLoadingPosts,
+} from "~/features/AccountPost/Posts/postsSlice";
 import { getUser } from "~/features/User/userSlice";
 import ModalSetting from "../Modal/ModalSetting";
 import AccountPosts from "../Posts/PostProfile/AccountPosts";
