@@ -5,7 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
 
+<<<<<<< Updated upstream
   validates :user_name, length: { maximum: 20}, presence: true
   validates :avatar, presence: true
   validates :password, length: { maximum: 64 }, confirmation: true
+=======
+  validates :user_name, length: { maximum: 20}, presence: true, :on => :update
+  validates :avatar, presence: true, :on => :update
+  validates :password, length: { maximum: 64 }, confirmation: true, :on => :update
+
+  has_many :posts
+>>>>>>> Stashed changes
 end
