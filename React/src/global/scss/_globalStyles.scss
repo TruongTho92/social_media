@@ -26,7 +26,29 @@ body {
   margin: 0 auto;
 }
 .pt-80 {
-  padding-top: 80px;
+  padding-top: 80px !important;
+}
+.animation-left-to-right {
+  animation: LeftToRight 0.25s linear;
+}
+
+// CUSTOM ANTD
+.ant-modal {
+  width: fit-content !important;
+  @media screen and (max-width: 767px) {
+    width: 100% !important;
+    padding: 0 4% 40px;
+  }
+}
+.ant-modal-body {
+  padding: 0 !important;
+}
+.ant-modal-content {
+  border-radius: 8px !important;
+}
+.ant-tooltip-inner {
+  padding: 0;
+  border-radius: 6px;
 }
 
 @mixin d-flex($justify, $align) {
@@ -40,9 +62,31 @@ body {
   height: $height * 1px;
 }
 
+@mixin avatar($width, $height) {
+  width: $width * 1px;
+  height: $height * 1px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
 // COVER BACKGROUND
 @mixin cover-background {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

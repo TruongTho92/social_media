@@ -1,18 +1,41 @@
-import { Input } from "antd";
+import { Input, Tooltip } from "antd";
 import React, { useState } from "react";
-import { AiFillHome } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiOutlineSave,
+  AiOutlineSetting,
+  AiOutlineUser,
+} from "react-icons/ai";
 import { BsBookmarkPlus, BsChatDots, BsPlusSquare } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import { TbSearchOff } from "react-icons/tb";
-
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+import { BiLogOutCircle } from "react-icons/bi";
+
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { getUser } from "~/features/User/userSlice";
 
 import styles from "./headerStyles.module.scss";
+import { userApi } from "~/features/User/userApi";
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
+  const getUserData = useAppSelector(getUser);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getUserData.user.email,
+        // password: getUserData.data.data.user.password,
+        authentication_token: getUserData.user.authentication_token,
+      },
+    };
+    dispatch(userApi.logoutUser(payload));
+  };
+
   return (
     <>
       <div className={`${styles.headerContainer} container-fluid`}>
@@ -57,7 +80,7 @@ const Header: React.FC = () => {
             </NavLink>
           </div>
           <div className={styles.icon}>
-            <NavLink to="/posts">
+            <NavLink to="/create-post">
               <BsPlusSquare className={styles.menuIcon} />
             </NavLink>
           </div>
@@ -66,9 +89,45 @@ const Header: React.FC = () => {
               <BsBookmarkPlus className={styles.menuIcon} />
             </NavLink>
           </div>
-          <div className={styles.menuUser}>
-            <img src="/assets/images/user-img.jpg" alt="" />
-          </div>
+
+          {/* TOOLTIP USER */}
+          <Tooltip
+            color="#fff"
+            trigger="hover"
+            placement="bottom"
+            title={() => (
+              <div className={styles.subUserMenu}>
+                <Link to="/profile" className={styles.subMenuItem}>
+                  <AiOutlineUser className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Profile</label>
+                </Link>
+                <Link to="/settings" className={styles.subMenuItem}>
+                  <AiOutlineSetting className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Settings</label>
+                </Link>
+                <Link to="/profile/saves" className={styles.subMenuItem}>
+                  <AiOutlineSave className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Saved</label>
+                </Link>
+                <span className={styles.line}></span>
+                <div className={styles.subMenuItem} onClick={handleLogout}>
+                  <BiLogOutCircle className={styles.iconSub} />
+                  <label className={styles.subUserLabel}>Log out</label>
+                </div>
+              </div>
+            )}
+          >
+            <div className={styles.menuUser}>
+              <img
+                src={
+                  getUserData.user.avatar === null
+                    ? `/assets/images/user-vacant.jpg`
+                    : `${getUserData.user.avatar}`
+                }
+                alt="avatar_account"
+              />
+            </div>
+          </Tooltip>
         </div>
       </div>
 
@@ -80,13 +139,12 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <div className={styles.icon}>
-          <FiSearch
-            className={styles.menuIcon}
-            onClick={() => setIsOpenInput(!isOpenInput)}
-          />
+          <NavLink to="/search">
+            <FiSearch className={styles.menuIcon} />
+          </NavLink>
         </div>
         <div className={styles.icon}>
-          <NavLink to="/posts">
+          <NavLink to="/create-post">
             <BsPlusSquare className={styles.menuIcon} />
           </NavLink>
         </div>
@@ -95,9 +153,17 @@ const Header: React.FC = () => {
             <BsBookmarkPlus className={styles.menuIcon} />
           </NavLink>
         </div>
-        <div className={styles.menuUser}>
-          <img src="/assets/images/user-img.jpg" alt="" />
-        </div>
+
+        <Link to="/profile" className={styles.menuUser}>
+          <img
+            src={
+              getUserData.user.avatar === null
+                ? `/assets/images/user-vacant.jpg`
+                : `${getUserData.user.avatar}`
+            }
+            alt=""
+          />
+        </Link>
       </div>
     </>
   );

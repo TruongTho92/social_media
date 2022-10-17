@@ -25,11 +25,12 @@
     .name {
       font-size: 18px;
       font-weight: 600;
-      width: 200px;
+      width: fit-content;
       margin: 0;
       line-height: 1;
       margin-bottom: 4px;
-      white-space: nowrap;
+      // white-space: nowrap;
+      word-wrap: break-word;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -40,6 +41,18 @@
       font-style: italic;
       color: #8e8e8e;
       line-height: normal;
+    }
+  }
+  .ticked {
+    @include d-flex(center, center);
+    width: 14px;
+    height: 14px;
+    background-color: $mainBlue;
+    border-radius: 50%;
+    .tickedIcon {
+      font-size: 10px;
+      font-weight: bold;
+      color: $whiteColor;
     }
   }
 }
