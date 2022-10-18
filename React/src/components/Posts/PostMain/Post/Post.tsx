@@ -1,37 +1,19 @@
-import { Input, Modal } from "antd";
+import { Input, InputRef } from "antd";
+import { useRef } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsBookmarkPlus } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
-import { GoComment } from "react-icons/go";
-import styles from "./postStyles.module.scss";
-import { useEffect, useState } from "react";
-import Comments from "~/components/Comments";
-import PostDetail from "../../PostProfile/PostDetail";
 import { BiMessageRounded } from "react-icons/bi";
-import PostMainDetail from "../PostMainDetail";
+import { BsBookmarkPlus } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import Comments from "~/components/Comments";
+import styles from "./postStyles.module.scss";
 
 const Post = ({ userId = 1, postId = 1 }) => {
-  const [isOpenDetail, setIsOpenDetail] = useState(false);
-
-  const handleOpenDetail = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    setIsOpenDetail(true);
-  };
-
-  useEffect(() => {
-    const handleClick = (window.onclick = () => {
-      setIsOpenDetail(false);
-    });
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
-  });
-
+  const ref = useRef<InputRef>(null);
   return (
     <div className={styles.post}>
       <div className={styles.user}>
         <div className={styles.userName}>
-          <Link to={`/profile/${userId}`}>
+          <Link to={`/user-profile/${userId}`}>
             <div className={styles.image}>
               <img src="/assets/images/user-img.jpg" alt="" />
             </div>
@@ -45,34 +27,28 @@ const Post = ({ userId = 1, postId = 1 }) => {
       </div>
 
       <div className={styles.postImage}>
-        <img
-          src="/assets/images/post_img.jpg"
-          alt=""
-          onClick={handleOpenDetail}
-        />
-        <Modal
-          style={{ width: "fit-content" }}
-          open={isOpenDetail}
-          closable={false}
-          footer={false}
-        >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <PostMainDetail isAccount={false} id={1} />
-          </div>
-        </Modal>
+        <img src="/assets/images/post_img.jpg" alt="" />
       </div>
-
+      <div className={styles.comment}>
+        <Comments />
+      </div>
       <div className={styles.emotion}>
         <div className={styles.left}>
           <AiOutlineHeart className={styles.likeIcon} />
 
-          <div onClick={handleOpenDetail} style={{ lineHeight: 0 }}>
+          <div style={{ lineHeight: 0 }} onClick={() => ref.current?.focus()}>
             <BiMessageRounded className={styles.commentIcon} />
           </div>
         </div>
 
         <BsBookmarkPlus className={styles.saveIcon} />
       </div>
+      <Input
+        ref={ref}
+        suffix={<div className={styles.inputText}>Post</div>}
+        className={styles.inputComment}
+        placeholder="write a comment..."
+      />
     </div>
   );
 };

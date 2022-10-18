@@ -13,10 +13,10 @@ import { Link, NavLink } from "react-router-dom";
 import { BiLogOutCircle } from "react-icons/bi";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { getUser } from "~/features/user/userSlice";
+import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./headerStyles.module.scss";
-import { userApi } from "~/features/user/userApi";
+import { userApi } from "~/features/Auth/userApi";
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");

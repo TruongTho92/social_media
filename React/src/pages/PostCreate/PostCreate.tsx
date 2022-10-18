@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostPayloadCreate } from "~/common/types";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getLoadingPosts } from "~/features/accountPost/Posts/postsSlice";
-import { getUser } from "~/features/user/userSlice";
+import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./postCreate.module.scss";
 

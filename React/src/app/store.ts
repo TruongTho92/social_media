@@ -6,10 +6,11 @@ import {
 } from "@reduxjs/toolkit";
 import postDetailSlice from "~/features/accountPost/postDetail/postDetailSlice";
 
-import UserReducer from "~/features/user/userSlice";
+import UserReducer from "~/features/Auth/userSlice";
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
 import postsUserSlice from "~/features/userPost/postsUser/postsUserSlice";
 import postDetailUserSlice from "~/features/userPost/postDetailUser/postDetailUserSlice";
+import likedSlice from "~/features/liked/likedSlice";
 
 const rootReducer = combineReducers({
   user: UserReducer,
@@ -21,6 +22,9 @@ const rootReducer = combineReducers({
   // USER POST
   postsUser: postsUserSlice,
   postDetailUser: postDetailUserSlice,
+
+  // LIKE
+  like: likedSlice,
 });
 
 export const store = configureStore({
