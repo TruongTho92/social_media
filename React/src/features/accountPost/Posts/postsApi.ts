@@ -29,10 +29,12 @@ export const postsApi = {
         },
       });
 
-      dispatch({
-        type: GetPostsSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: GetPostsSuccess.toString(),
+          payload: data.data,
+        });
+      }, 2000);
     } catch (error: any) {
       dispatch({
         type: GetPostsFailure.toString(),
@@ -55,6 +57,7 @@ export const postsApi = {
           token: token,
         },
       });
+
       dispatch({
         type: CreatePostSuccess.toString(),
         payload: data,
@@ -83,11 +86,12 @@ export const postsApi = {
       });
 
       console.log(data);
-
-      dispatch({
-        type: DeletePostSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: DeletePostSuccess.toString(),
+          payload: data.data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: DeletePostFailure.toString(),

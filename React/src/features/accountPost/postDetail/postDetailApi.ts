@@ -24,11 +24,12 @@ export const postDetailApi = {
           token: token,
         },
       });
-
-      dispatch({
-        type: GetPostSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: GetPostSuccess.toString(),
+          payload: data.data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: GetPostFailure.toString(),
@@ -52,10 +53,12 @@ export const postDetailApi = {
         },
       });
 
-      dispatch({
-        type: UpdatePostSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: UpdatePostSuccess.toString(),
+          payload: data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: UpdatePostFailure.toString(),

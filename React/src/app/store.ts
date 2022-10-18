@@ -11,8 +11,11 @@ import postsSlice from "~/features/accountPost/Posts/postsSlice";
 import postsUserSlice from "~/features/userPost/postsUser/postsUserSlice";
 import postDetailUserSlice from "~/features/userPost/postDetailUser/postDetailUserSlice";
 import likedSlice from "~/features/liked/likedSlice";
+import commentSlice from "~/features/comment/commentSlice";
+import profileUserSlice from "~/features/profileUser/profileUserSlice";
 
 const rootReducer = combineReducers({
+  // AUTH and PROFILE ACCOUNT
   user: UserReducer,
 
   // ACCOUNT POST
@@ -23,6 +26,11 @@ const rootReducer = combineReducers({
   postsUser: postsUserSlice,
   postDetailUser: postDetailUserSlice,
 
+  // USER PROFILE
+  profileUser: profileUserSlice,
+
+  // COMMENT
+  comment: commentSlice,
   // LIKE
   like: likedSlice,
 });

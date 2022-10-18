@@ -40,7 +40,7 @@ const postDetailSlice = createSlice({
     },
     UpdatePostSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data.post = action.payload.post;
+      state.data.post = action.payload.data.post;
       toast(action.payload.message, {
         position: "top-center",
         autoClose: 5000,

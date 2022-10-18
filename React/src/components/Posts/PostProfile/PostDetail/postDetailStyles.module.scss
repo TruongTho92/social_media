@@ -7,19 +7,26 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
-  top: 0;
-  background-color: rgba(91, 112, 131, 0.4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
+  padding: 10% 16%;
 }
 
 .postDetailContainer {
-  @include d-flex(center, flex-start);
-  flex-direction: column;
+  // @include d-flex(center, flex-start);
+  // flex-direction: column;
   background-color: #fff;
   border-radius: 8px;
+  height: fit-content;
+  width: 100%;
+  animation: FadeOut 0.25s linear;
 }
 .top {
   @include d-flex(center, flex-start);

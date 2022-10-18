@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { RootState } from "~/app/store";
 import { LikeDataResponse } from "~/common/types";
 

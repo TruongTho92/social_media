@@ -19,6 +19,9 @@ import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
 import { likedApi } from "~/features/liked/likedApi";
 import { getLikeData } from "~/features/liked/likedSlice";
+import { ToastContainer } from "react-toastify";
+import Loading from "~/components/Loading";
+import { MdOutlineDone } from "react-icons/md";
 
 export type Props = {
   isAccount: boolean;
@@ -77,7 +80,7 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   return (
     <>
       {loadingPost ? (
-        "Loading..."
+        <Loading />
       ) : (
         <div className={` ${styles.postDetail}`} onClick={() => navigate(-1)}>
           <div
@@ -255,6 +258,19 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
           </div>
         </div>
       )}
+      <ToastContainer
+        icon={<MdOutlineDone size={30} />}
+        position="top-center"
+        autoClose={false}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

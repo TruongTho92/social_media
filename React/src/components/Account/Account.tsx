@@ -7,6 +7,7 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
+import Loading from "../Loading";
 import ModalSetting from "../Modal/ModalSetting";
 import AccountPosts from "../Posts/PostProfile/AccountPosts";
 import styles from "./accountStyles.module.scss";
@@ -27,7 +28,7 @@ const Account: React.FC = (props: Props) => {
   return (
     <>
       {loadingPosts ? (
-        "Loading..."
+        <Loading />
       ) : (
         <div className={`container-fluid ${styles.account}`}>
           <div className={styles.accountContainer}>
