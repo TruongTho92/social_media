@@ -61,7 +61,7 @@ const postsSlice = createSlice({
     },
     DeletePostSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data.posts = action.payload;
+      state.data.posts = action.payload.data;
       toast(action.payload.message, {
         position: "top-center",
         autoClose: 5000,

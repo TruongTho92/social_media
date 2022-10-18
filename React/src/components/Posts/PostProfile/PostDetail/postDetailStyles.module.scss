@@ -16,41 +16,41 @@
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  padding: 10% 16%;
+  padding: 18%;
 }
 
 .postDetailContainer {
-  // @include d-flex(center, flex-start);
-  // flex-direction: column;
+  display: grid;
+  grid-template-columns: 60% 40%;
   background-color: #fff;
   border-radius: 8px;
-  height: fit-content;
-  width: 100%;
   animation: FadeOut 0.25s linear;
 }
-.top {
-  @include d-flex(center, flex-start);
-  border-bottom: 1px solid $greyLight;
-}
-.bottom {
-  @include d-flex(center, center);
+// .top {
+//   @include d-flex(center, flex-start);
+//   border-bottom: 1px solid $greyLight;
+// }
+// .bottom {
+//   @include d-flex(center, center);
 
-  width: 100%;
-  padding: 12px 16px 12px 0px;
-}
+//   width: 100%;
+//   padding: 12px 16px 12px 0px;
+// }
 
 .postDetailImg {
-  position: relative;
-  width: 100%;
+  // position: relative;
+  // width: 100%;
+  // height: 100%;
+  aspect-ratio: 1;
 
-  &::after {
-    content: "";
-    display: block;
-    height: 100%;
-    padding-bottom: 100%;
-  }
+  // &::after {
+  //   content: "";
+  //   display: block;
+  //   height: 100%;
+  //   padding-bottom: 100%;
+  // }
   img {
-    position: absolute;
+    // position: absolute;
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -58,12 +58,18 @@
   }
 }
 .postDetailContent {
-  @include d-flex(start, flex-start);
+  @include d-flex(space-between, flex-start);
   width: 100%;
-  height: 340px;
+  height: 100%;
   overflow-y: scroll;
   padding: 12px 12px 6px 12px;
   flex-direction: column;
+  aspect-ratio: 1;
+}
+
+.contentTop,
+.contentBottom {
+  width: 100%;
 }
 
 .postDetailHeader {
@@ -254,6 +260,9 @@
 }
 
 @include desktop {
+  .postDetail {
+    padding: 4%;
+  }
   .settingPost {
     .settingPostContent {
       left: 10px;
@@ -272,16 +281,21 @@
 }
 
 @include tablet {
+  .postDetail {
+    padding: 4%;
+  }
+  .caption {
+    width: 240px;
+  }
 }
 
 @include mobile {
-  .top {
-    width: 100%;
-    flex-direction: column-reverse;
+  .postDetail {
+    padding: 4%;
   }
-  .bottom {
-    flex-direction: column;
-    padding: 0 0 12px 0;
+  .postDetailContainer {
+    display: grid;
+    grid-template-columns: 1fr;
   }
   .postDetailImg {
     width: 100%;

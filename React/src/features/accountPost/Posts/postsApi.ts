@@ -34,7 +34,7 @@ export const postsApi = {
           type: GetPostsSuccess.toString(),
           payload: data.data,
         });
-      }, 2000);
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: GetPostsFailure.toString(),
@@ -89,9 +89,9 @@ export const postsApi = {
       setTimeout(() => {
         dispatch({
           type: DeletePostSuccess.toString(),
-          payload: data.data,
+          payload: data,
         });
-      }, 1000);
+      }, 500);
     } catch (error: any) {
       dispatch({
         type: DeletePostFailure.toString(),
