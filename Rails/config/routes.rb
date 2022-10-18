@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
       resources :posts do
         resources :likes, only:[:create, :destroy]
+        resources :comments, only:[:create, :update, :destroy]
       end
       get "posts_of_user", :to => 'posts#posts_of_user'
     end
