@@ -22,6 +22,7 @@ import { getLikeData } from "~/features/liked/likedSlice";
 import { ToastContainer } from "react-toastify";
 import Loading from "~/components/Loading";
 import { MdOutlineDone } from "react-icons/md";
+import { commnetApi } from "~/features/comment/commentApi";
 
 export type Props = {
   isAccount: boolean;
@@ -34,6 +35,7 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   const [ellipsis, setEllipsis] = useState(true);
   const [editCaption, setEditCaption] = useState("");
   const [isOpenComment, setisOpenComment] = useState(false);
+  const [comment, setComment] = useState("");
   const inputRef = useRef<TextAreaRef>(null);
 
   const getUserData = useAppSelector(getUser);
@@ -65,7 +67,7 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   const handleDeletePost = () => {
     dispatch(postsApi.delete(postId));
     navigate("/profile");
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleLike = () => {
@@ -75,6 +77,17 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   const handleDisLike = () => {
     setLiked(false);
     // dispatch(likedApi.disLike(id, likeId));
+  };
+
+  const handleComment = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const payload = {
+      comment: {
+        content: comment,
+      },
+    };
+    setComment("");
+    dispatch(commnetApi.comment(payload, id));
   };
 
   return (
@@ -87,12 +100,12 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
             className={styles.postDetailContainer}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.top}>
-              <div className={styles.postDetailImg}>
-                <img src={postDetailData.image} alt="" />
-              </div>
-              <div className={styles.postDetailContent}>
-                {/* HEADER */}
+            <div className={styles.postDetailImg}>
+              <img src={postDetailData.image} alt="" />
+            </div>
+            <div className={styles.postDetailContent}>
+              {/* HEADER */}
+              <div className={styles.contentTop}>
                 <div className={styles.postDetailHeader}>
                   <div className={styles.userName}>
                     <div className={styles.image}>
@@ -194,66 +207,72 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
                   <Comments />
                 </div>
               </div>
-            </div>
 
-            <div className={styles.bottom}>
-              {/* Like */}
-              <div className={styles.emotion}>
-                <div className={styles.iconEmotion}>
-                  {liked ? (
-                    <AiFillHeart
-                      onClick={handleDisLike}
-                      className={`${styles.icon} ${styles.active} `}
-                    />
-                  ) : (
-                    <AiOutlineHeart
-                      onClick={handleLike}
+              <div className={styles.contentBottom}>
+                {/* Like */}
+                <div className={styles.emotion}>
+                  <div className={styles.iconEmotion}>
+                    {liked ? (
+                      <AiFillHeart
+                        onClick={handleDisLike}
+                        className={`${styles.icon} ${styles.active} `}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        onClick={handleLike}
+                        className={styles.icon}
+                      />
+                    )}
+                    <BiMessageRounded
                       className={styles.icon}
+                      onClick={() => inputRef.current?.focus()}
                     />
-                  )}
-                  <BiMessageRounded
-                    className={styles.icon}
-                    onClick={() => inputRef.current?.focus()}
+                    <Typography className={styles.likeNumber}>
+                      <span>20</span> Liked
+                    </Typography>
+                  </div>
+                  <div className={styles.save} style={{ lineHeight: 0 }}>
+                    <BsBookmarkPlus size={26} />
+                  </div>
+                </div>
+
+                {/* COMMENT */}
+                {/* <div
+                  className={
+                    isOpenComment
+                      ? `${styles.commentMobile} ${styles.open} `
+                      : `${styles.commentMobile}`
+                  }
+                >
+                  <Comments />
+                </div> */}
+
+                <Typography.Text
+                  className={styles.seeComment}
+                  onClick={() => setisOpenComment(!isOpenComment)}
+                >
+                  {isOpenComment ? "Hide comments..." : "View comments..."}
+                </Typography.Text>
+
+                {/* FORM To Comment */}
+                <form action="" className={styles.form}>
+                  <Input.TextArea
+                    value={comment}
+                    ref={inputRef}
+                    id={"input-comment"}
+                    placeholder="Add a comment..."
+                    className={styles.inputComment}
+                    onChange={(e) => setComment(e.target.value)}
                   />
-                  <Typography className={styles.likeNumber}>
-                    <span>20</span> Liked
-                  </Typography>
-                </div>
-                <div className={styles.save} style={{ lineHeight: 0 }}>
-                  <BsBookmarkPlus size={26} />
-                </div>
+                  <button
+                    type="submit"
+                    className={styles.btnComment}
+                    onClick={handleComment}
+                  >
+                    Post
+                  </button>
+                </form>
               </div>
-
-              {/* COMMENT */}
-              <div
-                className={
-                  isOpenComment
-                    ? `${styles.commentMobile} ${styles.open} `
-                    : `${styles.commentMobile}`
-                }
-              >
-                <Comments />
-              </div>
-
-              <Typography.Text
-                className={styles.seeComment}
-                onClick={() => setisOpenComment(!isOpenComment)}
-              >
-                {isOpenComment ? "Hide comments..." : "View comments..."}
-              </Typography.Text>
-
-              {/* FORM To Comment */}
-              <form action="" className={styles.form}>
-                <Input.TextArea
-                  ref={inputRef}
-                  id={"input-comment"}
-                  placeholder="Add a comment..."
-                  className={styles.inputComment}
-                />
-                <button type="submit" className={styles.btnComment}>
-                  Post
-                </button>
-              </form>
             </div>
           </div>
         </div>

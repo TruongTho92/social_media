@@ -3,7 +3,7 @@ import apiClient from "~/apiClient/apiClient";
 import { commentFailure, commentRequest, commentSuccess } from "./commentSlice";
 
 export const commnetApi = {
-  comment: () => async (dispatch: any) => {
+  comment: (payload: any, idPost: any) => async (dispatch: any) => {
     try {
       dispatch({
         type: commentRequest.toString(),
@@ -11,11 +11,15 @@ export const commnetApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.post(`/api/v1/`, {
-        headers: {
-          token: token,
-        },
-      });
+      const { data } = await apiClient.post(
+        `/api/v1/posts/${idPost}/comments`,
+        payload,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
       dispatch({
         type: commentSuccess.toString(),
         payload: data,
