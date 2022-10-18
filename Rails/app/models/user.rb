@@ -9,6 +9,6 @@ class User < ApplicationRecord
   validates :avatar, presence: true, :on => :update
   validates :password, length: { maximum: 64 }, confirmation: true, :on => :update
 
-  has_many :posts
-  has_many :likes
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
 end
