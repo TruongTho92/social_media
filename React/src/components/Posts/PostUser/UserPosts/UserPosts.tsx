@@ -1,16 +1,15 @@
-import { Col, Row } from "antd";
 import React from "react";
-import { PostAccount } from "~/common/types";
-import AccountPost from "../AccountPost/AccountPost";
-import styles from "./accountPostStyles.module.scss";
 import { FaMehRollingEyes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { PostAccount } from "~/common/types";
+import UserPost from "../UserPost/UserPost";
+import styles from "./userPostStyles.module.scss";
 
 type Props = {
   postList: PostAccount[];
 };
 
-const AccountPosts: React.FC<Props> = ({ postList }) => {
+const UserPosts: React.FC<Props> = ({ postList }) => {
   const reversed = [...postList].reverse();
 
   return (
@@ -18,7 +17,7 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
       {postList && postList.length > 0 ? (
         reversed.map((post) => (
           <div className={styles.postItem} key={post.id}>
-            <AccountPost id={post.id} image={post.image} />
+            <UserPost id={post.id} image={post.image} />
           </div>
         ))
       ) : (
@@ -38,4 +37,4 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
   );
 };
 
-export default AccountPosts;
+export default UserPosts;

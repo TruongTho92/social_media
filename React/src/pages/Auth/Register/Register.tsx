@@ -10,7 +10,7 @@ import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
-import { userApi } from "~/features/user/userApi";
+import { userApi } from "~/features/Auth/userApi";
 
 import styles from "./registerStyles.module.scss";
 

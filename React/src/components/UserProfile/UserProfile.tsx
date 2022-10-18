@@ -8,14 +8,14 @@ import {
   getAllPost,
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
-import { getUser } from "~/features/user/userSlice";
-import AccountPosts from "../Posts/PostProfile/AccountPosts";
+import { getUser } from "~/features/Auth/userSlice";
+import UserPosts from "../Posts/PostUser/UserPosts";
 
 import styles from "./userProfileStyles.module.scss";
 
 type Props = {};
 
-const Account: React.FC = (props: Props) => {
+const UserProfile: React.FC = (props: Props) => {
   const dispatch = useAppDispatch();
   const [isFollow, setIsFollow] = useState(false);
 
@@ -115,7 +115,7 @@ const Account: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.userProfilePost}>
-            <AccountPosts postList={allAccountPost} isAccount={false} />
+            <UserPosts postList={allAccountPost} />
           </div>
         </div>
       )}
@@ -123,4 +123,4 @@ const Account: React.FC = (props: Props) => {
   );
 };
 
-export default Account;
+export default UserProfile;

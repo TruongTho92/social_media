@@ -6,7 +6,7 @@ import {
   getAllPost,
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
-import { getUser } from "~/features/user/userSlice";
+import { getUser } from "~/features/Auth/userSlice";
 import ModalSetting from "../Modal/ModalSetting";
 import AccountPosts from "../Posts/PostProfile/AccountPosts";
 import styles from "./accountStyles.module.scss";
@@ -99,7 +99,7 @@ const Account: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.accountPost}>
-            <AccountPosts postList={allAccountPost} isAccount={true} />
+            <AccountPosts postList={allAccountPost} />
           </div>
         </div>
       )}

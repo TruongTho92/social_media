@@ -1,28 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./postDetailStyles.module.scss";
-import { Link, useParams } from "react-router-dom";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
-import { BiMessageRounded } from "react-icons/bi";
 import { Button, Col, Input, Row, Typography } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { BiMessageRounded } from "react-icons/bi";
+import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import styles from "./postDetailStyles.module.scss";
 
-import Comments from "~/components/Comments";
-import { TextAreaRef } from "antd/lib/input/TextArea";
 import Tooltip from "antd/es/tooltip";
+import { TextAreaRef } from "antd/lib/input/TextArea";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { postsApi } from "~/features/accountPost/Posts/postsApi";
-import { getUser } from "~/features/user/userSlice";
+import Comments from "~/components/Comments";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLoadingPosts,
   getPostDetail,
 } from "~/features/accountPost/postDetail/postDetailSlice";
+import { postsApi } from "~/features/accountPost/Posts/postsApi";
+import { getUser } from "~/features/Auth/userSlice";
+import { likedApi } from "~/features/liked/likedApi";
+import { getLikeData } from "~/features/liked/likedSlice";
 
 export type Props = {
-  id: number | null;
   isAccount: boolean;
 };
-const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
+const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   const dispatch = useAppDispatch();
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -36,8 +37,16 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
   const loadingPost = useAppSelector(getLoadingPosts);
   const postDetailData = useAppSelector(getPostDetail);
 
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const postId = Number(id);
+
   useEffect(() => {
-    dispatch(postDetailApi.getPost(id));
+    dispatch(postDetailApi.getPost(postId));
+
+    // if (getUserData.user.id === likedData.userId) {
+    //   setLiked(true);
+    // }
   }, []);
 
   const handleUpdatePost = () => {
@@ -46,19 +55,23 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
         caption: editCaption,
       },
     };
-    dispatch(postDetailApi.update(id, data));
+    dispatch(postDetailApi.update(postId, data));
+    setIsOpenEdit(false);
   };
 
   const handleDeletePost = () => {
-    dispatch(postsApi.delete(postDetailData.id));
-    dispatch(postsApi.getAll());
+    dispatch(postsApi.delete(postId));
+    navigate("/profile");
+    window.location.reload();
   };
 
   const handleLike = () => {
     setLiked(true);
+    dispatch(likedApi.like(postId));
   };
   const handleDisLike = () => {
     setLiked(false);
+    // dispatch(likedApi.disLike(id, likeId));
   };
 
   return (
@@ -66,8 +79,11 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
       {loadingPost ? (
         "Loading..."
       ) : (
-        <div className={` ${styles.postDetail}`}>
-          <div className={styles.postDetailContainer}>
+        <div className={` ${styles.postDetail}`} onClick={() => navigate(-1)}>
+          <div
+            className={styles.postDetailContainer}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className={styles.top}>
               <div className={styles.postDetailImg}>
                 <img src={postDetailData.image} alt="" />
@@ -76,18 +92,16 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                 {/* HEADER */}
                 <div className={styles.postDetailHeader}>
                   <div className={styles.userName}>
-                    <Link to={`/profile/id`}>
-                      <div className={styles.image}>
-                        <img
-                          src={
-                            getUserData.user.avatar
-                              ? getUserData.user.avatar
-                              : `/assets/images/user-vacant.jpg`
-                          }
-                          alt=""
-                        />
-                      </div>
-                    </Link>
+                    <div className={styles.image}>
+                      <img
+                        src={
+                          getUserData.user.avatar
+                            ? getUserData.user.avatar
+                            : `/assets/images/user-vacant.jpg`
+                        }
+                        alt=""
+                      />
+                    </div>
                     <div className={styles.info}>
                       <p className={styles.name}>
                         {getUserData.user.user_name}
@@ -103,6 +117,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                         trigger={"click"}
                         placement="right"
                         color="#fff"
+                        zIndex={20001}
                         title={() => (
                           <div className={styles.settingPostContent}>
                             <div onClick={handleDeletePost}>

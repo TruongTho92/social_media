@@ -7,10 +7,10 @@ const HomePage: React.FC = () => {
   return (
     <div className={`container-fluid pt-80 ${styles.homePage} `}>
       <Row gutter={[24, 24]}>
-        <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+        <Col xs={24} sm={24} md={14} lg={14} xl={14}>
           <PostList />
         </Col>
-        <Col xs={0} sm={0} md={8} lg={8} xl={8}>
+        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
           <UserList />
         </Col>
       </Row>

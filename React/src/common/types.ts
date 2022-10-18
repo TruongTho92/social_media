@@ -48,7 +48,7 @@ export interface PayloadLogout {
   };
 }
 
-// [POST]
+// POST
 export interface PostPayloadCreate {
   post: {
     image: string;
@@ -71,4 +71,13 @@ export interface PostDetailResponse {
   post: PostAccount;
   is_success: boolean;
   message: string;
+}
+
+// LIKE
+export interface LikeDataResponse {
+  like: {
+    likeId: number | null;
+    userId: number | null;
+    postId: number | null;
+  };
 }
