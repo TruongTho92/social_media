@@ -15,7 +15,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
       @likes << like.user
     end
     @post.comments.each do |comment|
-      @comments << {content: comment.content, user_name: comment.user.user_name, avatar: comment.user.avatar}
+      @comments << {id: comment.id, content: comment.content, user_name: comment.user.user_name, avatar: comment.user.avatar}
     end
     render json: {
       message: "Get Post Successfully",
