@@ -30,7 +30,7 @@ const Post = ({ userId = 1, postId = 1 }) => {
         <img src="/assets/images/post_img.jpg" alt="" />
       </div>
       <div className={styles.comment}>
-        <Comments />
+        <Comments postId={1} />
       </div>
       <div className={styles.emotion}>
         <div className={styles.left}>

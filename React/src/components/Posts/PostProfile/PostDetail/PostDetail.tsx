@@ -12,7 +12,7 @@ import { MdOutlineDone } from "react-icons/md";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import {
-  CommentDataResponse,
+  UserCommentResponse,
   PostAccount,
   userLikedTypes,
 } from "~/common/types";
@@ -26,13 +26,14 @@ import {
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
 import { commenttApi } from "~/features/comment/commentApi";
+import { getCommentData } from "~/features/comment/commentSlice";
 
 export type Props = {
   isAccount: boolean;
   postDetailData: PostAccount;
   postId: number;
   userLiked: userLikedTypes[];
-  commentData: CommentDataResponse[];
+  commentData: UserCommentResponse[];
 };
 const PostDetail: React.FC<Props> = ({
   isAccount,
@@ -98,7 +99,7 @@ const PostDetail: React.FC<Props> = ({
     setLiked(false);
   };
 
-  const handleComment = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const payload = {
       comment: {
@@ -106,7 +107,7 @@ const PostDetail: React.FC<Props> = ({
       },
     };
     setComment("");
-    dispatch(commenttApi.comment(payload, postId));
+    await dispatch(commenttApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
   };
 
@@ -229,7 +230,11 @@ const PostDetail: React.FC<Props> = ({
 
                 {/* COMMENT */}
                 <div className={styles.comment}>
-                  <Comments commentList={commentData} />
+                  <Comments
+                    postId={postId}
+                    isAccount={isAccount}
+                    commentList={commentData}
+                  />
                 </div>
               </div>
 
@@ -273,7 +278,11 @@ const PostDetail: React.FC<Props> = ({
                       : `${styles.commentMobile}`
                   }
                 >
-                  <Comments commentList={commentData} />
+                  <Comments
+                    postId={postId}
+                    isAccount={isAccount}
+                    commentList={commentData}
+                  />
                 </div>
 
                 <Typography.Text

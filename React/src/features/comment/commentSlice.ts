@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "~/app/store";
+import { CommentDataResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
-  data: any;
+  data: CommentDataResponse;
 }
 
 export const initialState = {
   loading: true,
-  data: null,
+  data: {
+    id: null,
+    post_id: null,
+    user_id: null,
+  },
 };
 
 const commentSlice = createSlice({
@@ -29,5 +35,7 @@ const commentSlice = createSlice({
 
 export const { commentRequest, commentSuccess, commentFailure } =
   commentSlice.actions;
+
+export const getCommentData = (state: RootState) => state.comment.data;
 
 export default commentSlice.reducer;

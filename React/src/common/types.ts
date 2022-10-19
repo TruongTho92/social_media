@@ -89,7 +89,7 @@ export interface userLikedTypes {
   avatar: string;
 }
 
-export interface CommentDataResponse {
+export interface UserCommentResponse {
   id: number | null;
   user_name: string;
   nick_name: string;
@@ -97,4 +97,10 @@ export interface CommentDataResponse {
   content: string;
   user_id?: number | null;
   post_id?: number | null;
+}
+
+export interface CommentDataResponse {
+  id: number | null;
+  post_id: number | null;
+  user_id: number | null;
 }
