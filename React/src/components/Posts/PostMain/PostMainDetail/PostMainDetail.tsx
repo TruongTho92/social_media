@@ -177,7 +177,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
 
                 {/* COMMENT */}
                 <div className={styles.comment}>
-                  <Comments />
+                  <Comments postId={1} />
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@ const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
                     : `${styles.commentMobile}`
                 }
               >
-                <Comments />
+                <Comments postId={1} />
               </div>
 
               <Typography.Text

@@ -1,15 +1,30 @@
 import { Typography } from "antd";
 import React, { useState } from "react";
-import { CommentDataResponse } from "~/common/types";
+import { UserCommentResponse } from "~/common/types";
 import styles from "./commentsStyles.module.scss";
+import { IoIosRemove } from "react-icons/io";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { getCommentData } from "~/features/comment/commentSlice";
+import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
+import { commenttApi } from "~/features/comment/commentApi";
 
 type Props = {
-  commentList?: CommentDataResponse[];
+  commentList?: UserCommentResponse[];
+  postId: number | null;
+  isAccount?: boolean;
 };
 
-const Comments: React.FC<Props> = ({ commentList }) => {
+const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
+  const dispatch = useAppDispatch();
   const [ellipsis, setEllipsis] = useState(true);
+  const commentDataId = useAppSelector(getCommentData);
 
+  const handleDeleteComment = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    await dispatch(commenttApi.deleteComment(postId, commentDataId.id));
+    dispatch(postDetailApi.getPost(postId));
+  };
   return (
     <>
       <div
@@ -23,10 +38,17 @@ const Comments: React.FC<Props> = ({ commentList }) => {
           ? commentList.map((comment, index) => (
               <div className={styles.commentItem} key={index}>
                 <div className={styles.userImage}>
-                  <img src="/assets/images/user-img.jpg" alt="" />
+                  <img
+                    src={
+                      comment.avatar
+                        ? comment.avatar
+                        : `/assets/user-vacant.jpg`
+                    }
+                    alt=""
+                  />
                 </div>
                 <div className={styles.content}>
-                  <span className={styles.name}>Minh Tai</span>
+                  <span className={styles.name}>{comment.user_name}</span>
                   <Typography.Paragraph
                     ellipsis={
                       ellipsis
@@ -38,6 +60,11 @@ const Comments: React.FC<Props> = ({ commentList }) => {
                     {comment.content}
                   </Typography.Paragraph>
                 </div>
+                {isAccount ? (
+                  <div className="iconRemove">
+                    <IoIosRemove size={24} cursor={"pointer"} />
+                  </div>
+                ) : null}
               </div>
             ))
           : null}
