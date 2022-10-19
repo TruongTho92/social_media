@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import PostDetail from "~/components/Posts/PostAccount/PostDetail";
+import PostDetail from "~/components/Posts/PostProfile/PostDetail";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
-import { getPostDetail, getUsersLiked } from "./postDetailSlice";
+import {
+  getPostDetail,
+  getUsersCommented,
+  getUsersLiked,
+} from "./postDetailSlice";
 
 export type Props = {
   isAccount: boolean;
@@ -14,7 +18,7 @@ const PostDetailAction: React.FC<Props> = ({ isAccount }) => {
 
   const postDetaiData = useAppSelector(getPostDetail);
   const userLikedData = useAppSelector(getUsersLiked);
-
+  const userCommentedData = useAppSelector(getUsersCommented);
   const { id } = useParams();
   const postId = Number(id);
 
@@ -27,7 +31,9 @@ const PostDetailAction: React.FC<Props> = ({ isAccount }) => {
       <PostDetail
         postDetailData={postDetaiData}
         userLiked={userLikedData}
+        commentData={userCommentedData}
         isAccount={isAccount}
+        postId={postId}
       />
     </>
   );

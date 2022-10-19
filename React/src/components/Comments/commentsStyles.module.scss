@@ -8,6 +8,9 @@
   &::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
+  &.hidden {
+    height: 0;
+  }
 }
 .commentItem {
   display: flex;

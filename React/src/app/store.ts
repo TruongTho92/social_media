@@ -10,7 +10,6 @@ import UserReducer from "~/features/Auth/userSlice";
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
 import postsUserSlice from "~/features/userPost/postsUser/postsUserSlice";
 import postDetailUserSlice from "~/features/userPost/postDetailUser/postDetailUserSlice";
-import commentSlice from "~/features/comment/commentSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
 
 const rootReducer = combineReducers({
@@ -27,9 +26,6 @@ const rootReducer = combineReducers({
 
   // USER PROFILE
   profileUser: profileUserSlice,
-
-  // COMMENT
-  comment: commentSlice,
 });
 
 export const store = configureStore({

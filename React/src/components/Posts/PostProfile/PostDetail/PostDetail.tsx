@@ -11,7 +11,11 @@ import { TextAreaRef } from "antd/lib/input/TextArea";
 import { MdOutlineDone } from "react-icons/md";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { PostAccount, userLikedTypes } from "~/common/types";
+import {
+  CommentDataResponse,
+  PostAccount,
+  userLikedTypes,
+} from "~/common/types";
 import Comments from "~/components/Comments";
 import Loading from "~/components/Loading";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
@@ -21,17 +25,21 @@ import {
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
-import { commnetApi } from "~/features/comment/commentApi";
+import { commenttApi } from "~/features/comment/commentApi";
 
 export type Props = {
   isAccount: boolean;
   postDetailData: PostAccount;
+  postId: number;
   userLiked: userLikedTypes[];
+  commentData: CommentDataResponse[];
 };
 const PostDetail: React.FC<Props> = ({
   isAccount,
   postDetailData,
+  postId,
   userLiked,
+  commentData,
 }) => {
   const dispatch = useAppDispatch();
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
@@ -48,8 +56,6 @@ const PostDetail: React.FC<Props> = ({
   const likeData = useAppSelector(getLikeData);
 
   const navigate = useNavigate();
-  const { id } = useParams();
-  const postId = Number(id);
 
   useEffect(() => {
     if (userLiked.length > 0) {
@@ -86,8 +92,8 @@ const PostDetail: React.FC<Props> = ({
     dispatch(postDetailApi.getPost(postId));
     setLiked(true);
   };
-  const handleDisLike = () => {
-    dispatch(postDetailApi.disLike(postId, likeData.id));
+  const handleDisLike = async () => {
+    await dispatch(postDetailApi.disLike(postId, likeData.id));
     dispatch(postDetailApi.getPost(postId));
     setLiked(false);
   };
@@ -100,7 +106,8 @@ const PostDetail: React.FC<Props> = ({
       },
     };
     setComment("");
-    dispatch(commnetApi.comment(payload, id));
+    dispatch(commenttApi.comment(payload, postId));
+    dispatch(postDetailApi.getPost(postId));
   };
 
   return (
@@ -222,7 +229,7 @@ const PostDetail: React.FC<Props> = ({
 
                 {/* COMMENT */}
                 <div className={styles.comment}>
-                  <Comments />
+                  <Comments commentList={commentData} />
                 </div>
               </div>
 
@@ -250,7 +257,7 @@ const PostDetail: React.FC<Props> = ({
                       onClick={() => inputRef.current?.focus()}
                     />
                     <Typography className={styles.likeNumber}>
-                      <span>20</span> Liked
+                      <span>{userLiked.length}</span> Liked
                     </Typography>
                   </div>
                   <div className={styles.save} style={{ lineHeight: 0 }}>
@@ -266,7 +273,7 @@ const PostDetail: React.FC<Props> = ({
                       : `${styles.commentMobile}`
                   }
                 >
-                  <Comments />
+                  <Comments commentList={commentData} />
                 </div>
 
                 <Typography.Text

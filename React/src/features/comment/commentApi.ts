@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
 import { commentFailure, commentRequest, commentSuccess } from "./commentSlice";
 
-export const commnetApi = {
+export const commenttApi = {
   comment: (payload: any, idPost: any) => async (dispatch: any) => {
     try {
       dispatch({

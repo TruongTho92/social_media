@@ -88,3 +88,13 @@ export interface userLikedTypes {
   nick_name: string;
   avatar: string;
 }
+
+export interface CommentDataResponse {
+  id: number | null;
+  user_name: string;
+  nick_name: string;
+  avatar: string;
+  content: string;
+  user_id?: number | null;
+  post_id?: number | null;
+}

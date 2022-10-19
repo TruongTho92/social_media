@@ -33,6 +33,7 @@ const postDetailSlice = createSlice({
       state.loading = false;
       state.data.post = action.payload.post;
       state.data.likes = action.payload.like;
+      state.data.comments = action.payload.comment;
     },
     GetPostFailure: (state, action: PayloadAction<any>) => {
       state.loading = true;
@@ -106,6 +107,9 @@ export const {
 export const getLoadingPosts = (state: RootState) => state.postDetail.loading;
 export const getPostDetail = (state: RootState) => state.postDetail.data.post;
 export const getUsersLiked = (state: RootState) => state.postDetail.data.likes;
+export const getUsersCommented = (state: RootState) =>
+  state.postDetail.data.comments;
+
 export const getLikeData = (state: RootState) => state.postDetail.like;
 
 // REDUCER
