@@ -12,8 +12,11 @@ Rails.application.routes.draw do
       get "logged_in", :to => 'application#is_logged_in?'
       get "load_user", :to => 'application#current_user'
 
-      resources :posts
-      get "posts_of_user", :to => 'posts#posts_of_user'
+      resources :posts do
+        resources :likes, only:[:create, :destroy]
+        resources :comments, only:[:create, :update, :destroy]
+      end
+      get "posts_of_user/:id", :to => 'posts#posts_of_user'
     end
   end
 end
