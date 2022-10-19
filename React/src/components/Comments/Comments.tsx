@@ -1,36 +1,32 @@
 import { Typography } from "antd";
-import Input from "antd/lib/input/Input";
 import React, { useState } from "react";
+import { CommentDataResponse } from "~/common/types";
 import styles from "./commentsStyles.module.scss";
 
-type Props = {};
+type Props = {
+  commentList?: CommentDataResponse[];
+};
 
-const Comments = (props: Props) => {
-  const [comments, setComments] = useState([
-    { name: "Minh Tai", data: "hay qu di" },
-    {
-      name: "My Tien",
-      data: "hay qu hjhjhjhjhjhjsdlkfjv ldjflfjdsa kjj dkj asjdasj ljd klad jklasdj lkasdjlk ajkl klj kljkl jkl jklsajkl djklasddi",
-    },
-    { name: "Truong Tho", data: "hay qu di" },
-    { name: "Truong Tho", data: "hay qu di" },
-    { name: "Truong Tho", data: "hay qu di" },
-    { name: "Truong Tho", data: "hay qu di" },
-  ]);
-
+const Comments: React.FC<Props> = ({ commentList }) => {
   const [ellipsis, setEllipsis] = useState(true);
 
   return (
     <>
-      <div className={styles.commentList}>
-        {comments && comments.length > 0
-          ? comments.map((item, index) => (
+      <div
+        className={
+          commentList
+            ? `${styles.commentList}`
+            : `${styles.commentList} ${styles.hidden}`
+        }
+      >
+        {commentList && commentList.length > 0
+          ? commentList.map((comment, index) => (
               <div className={styles.commentItem} key={index}>
                 <div className={styles.userImage}>
                   <img src="/assets/images/user-img.jpg" alt="" />
                 </div>
                 <div className={styles.content}>
-                  <span className={styles.name}>{item.name}</span>
+                  <span className={styles.name}>Minh Tai</span>
                   <Typography.Paragraph
                     ellipsis={
                       ellipsis
@@ -39,7 +35,7 @@ const Comments = (props: Props) => {
                     }
                     className={styles.commentText}
                   >
-                    {item.data}
+                    {comment.content}
                   </Typography.Paragraph>
                 </div>
               </div>

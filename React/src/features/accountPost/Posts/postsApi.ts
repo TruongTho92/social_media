@@ -23,7 +23,7 @@ export const postsApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`api/v1/posts/${id}`, {
+      const { data } = await apiClient.get(`api/v1/posts_of_user/${id}`, {
         headers: {
           token: token,
         },

@@ -73,6 +73,7 @@ export const postDetailApi = {
     }
   },
 
+  // LIKE
   like: (id: number | null) => async (dispatch: any) => {
     try {
       dispatch({

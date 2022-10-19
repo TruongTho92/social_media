@@ -10,21 +10,18 @@ import {
 import { getUser } from "~/features/Auth/userSlice";
 import Loading from "../Loading";
 import ModalSetting from "../Modal/ModalSetting";
-import AccountPosts from "../Posts/PostAccount/AccountPosts";
+import AccountPosts from "../Posts/PostProfile/AccountPosts";
 import styles from "./accountStyles.module.scss";
-type Props = {};
 
-const Account: React.FC = (props: Props) => {
+const Account: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const getUserData = useAppSelector(getUser);
   const loadingPosts = useAppSelector(getLoadingPosts);
 
   const allAccountPost = useAppSelector(getAllPost);
-
   useEffect(() => {
     dispatch(postsApi.getAll(getUserData.user.id));
-    // dispatch(postDetailApi.getPost());
   }, [dispatch]);
 
   return (
