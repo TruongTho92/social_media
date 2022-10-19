@@ -208,6 +208,10 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
                 </div>
               </div>
 
+              <div className={`${styles.postDetailImg} ${styles.mobile}`}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+
               <div className={styles.contentBottom}>
                 {/* Like */}
                 <div className={styles.emotion}>
@@ -236,8 +240,8 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
                   </div>
                 </div>
 
-                {/* COMMENT */}
-                {/* <div
+                {/* COMMENT MOBILE */}
+                <div
                   className={
                     isOpenComment
                       ? `${styles.commentMobile} ${styles.open} `
@@ -245,7 +249,7 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
                   }
                 >
                   <Comments />
-                </div> */}
+                </div>
 
                 <Typography.Text
                   className={styles.seeComment}

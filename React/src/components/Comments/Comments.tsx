@@ -1,3 +1,4 @@
+import { Typography } from "antd";
 import Input from "antd/lib/input/Input";
 import React, { useState } from "react";
 import styles from "./commentsStyles.module.scss";
@@ -16,6 +17,9 @@ const Comments = (props: Props) => {
     { name: "Truong Tho", data: "hay qu di" },
     { name: "Truong Tho", data: "hay qu di" },
   ]);
+
+  const [ellipsis, setEllipsis] = useState(true);
+
   return (
     <>
       <div className={styles.commentList}>
@@ -27,7 +31,16 @@ const Comments = (props: Props) => {
                 </div>
                 <div className={styles.content}>
                   <span className={styles.name}>{item.name}</span>
-                  <span className={styles.commentText}>{item.data}</span>
+                  <Typography.Paragraph
+                    ellipsis={
+                      ellipsis
+                        ? { rows: 1, expandable: true, symbol: "more" }
+                        : false
+                    }
+                    className={styles.commentText}
+                  >
+                    {item.data}
+                  </Typography.Paragraph>
                 </div>
               </div>
             ))

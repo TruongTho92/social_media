@@ -1,6 +1,6 @@
 @import "../../global/scss/rootStyles.scss";
 .account {
-  padding: 60px 20% 40px;
+  padding: 60px 20% 0 20%;
   background-color: #fff;
 }
 .line {
@@ -88,12 +88,12 @@
 
 @include desktop {
   .account {
-    padding: 60px 10% 40px;
+    padding: 60px 10% 0 10%;
   }
 }
 @include tablet {
   .account {
-    padding: 60px 4% 40px;
+    padding: 60px 4% 0 4%;
   }
   .accountInfo {
     .image {

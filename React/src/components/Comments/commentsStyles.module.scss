@@ -4,13 +4,19 @@
   overflow-y: scroll;
   height: 200px;
   width: 100%;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 }
 .commentItem {
   display: flex;
   justify-content: start;
   align-items: flex-start;
   width: fit-content;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+  width: 100%;
+
   .userImage {
     width: 30px;
     height: 30px;
@@ -28,10 +34,7 @@
     align-items: flex-start;
     flex-direction: column;
     margin-left: 8px;
-    // padding: 4px 12px;
     border-radius: 8px;
-    width: fit-content;
-    // background-color: #f0f2f5;
     word-wrap: break-word;
     text-overflow: ellipsis;
 
@@ -43,6 +46,7 @@
       display: block;
       font-size: 14px;
       font-weight: 400;
+      width: 260px;
     }
   }
 }
