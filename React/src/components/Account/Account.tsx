@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import {
   getAllPost,
@@ -9,7 +10,7 @@ import {
 import { getUser } from "~/features/Auth/userSlice";
 import Loading from "../Loading";
 import ModalSetting from "../Modal/ModalSetting";
-import AccountPosts from "../Posts/PostProfile/AccountPosts";
+import AccountPosts from "../Posts/PostAccount/AccountPosts";
 import styles from "./accountStyles.module.scss";
 type Props = {};
 
@@ -22,8 +23,9 @@ const Account: React.FC = (props: Props) => {
   const allAccountPost = useAppSelector(getAllPost);
 
   useEffect(() => {
-    dispatch(postsApi.getAll());
-  }, []);
+    dispatch(postsApi.getAll(getUserData.user.id));
+    // dispatch(postDetailApi.getPost());
+  }, [dispatch]);
 
   return (
     <>

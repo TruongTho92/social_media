@@ -71,13 +71,20 @@ export interface PostDetailResponse {
   post: PostAccount;
   is_success: boolean;
   message: string;
+  likes: [];
+  comments: [];
 }
 
 // LIKE
 export interface LikeDataResponse {
-  like: {
-    likeId: number | null;
-    userId: number | null;
-    postId: number | null;
-  };
+  id: number | null;
+  post_id: number | null;
+  user_id: number | null;
+}
+
+export interface userLikedTypes {
+  id: number | null;
+  user_name: string;
+  nick_name: string;
+  avatar: string;
 }

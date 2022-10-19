@@ -14,6 +14,8 @@ const initialState: StateTypes = {
     post: { id: null, image: "", caption: "" },
     is_success: false,
     message: "",
+    likes: [],
+    comments: [],
   },
 };
 

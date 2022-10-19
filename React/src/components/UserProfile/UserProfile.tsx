@@ -25,9 +25,8 @@ const UserProfile: React.FC = (props: Props) => {
 
   useEffect(() => {
     // More api get user profile
-
     // Change api post user id
-    dispatch(postsApi.getAll());
+    // dispatch(postsApi.getAll());
   }, []);
 
   return (

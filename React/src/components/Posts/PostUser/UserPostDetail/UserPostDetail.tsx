@@ -16,7 +16,7 @@ import {
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
-import { likedApi } from "~/features/liked/likedApi";
+// import { likedApi } from "~/features/liked/likedApi";
 
 import styles from "./userPostDetailStyles.module.scss";
 
@@ -60,12 +60,12 @@ const UserPostDetail: React.FC<Props> = ({ isAccount = false }) => {
 
   const handleDeletePost = () => {
     dispatch(postsApi.delete(postId));
-    dispatch(postsApi.getAll());
+    // dispatch(postsApi.getAll());
   };
 
   const handleLike = () => {
     setLiked(true);
-    dispatch(likedApi.like(postId));
+    // dispatch(likedApi.like(postId));
   };
   const handleDisLike = () => {
     setLiked(false);
