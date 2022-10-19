@@ -17,13 +17,14 @@ body {
   font-size: 1.6rem;
   margin: 0 auto;
   background-color: $bgMain;
-}
-
-.container-fluid {
   width: 1440px;
   min-width: 100%;
   max-width: 100%;
   margin: 0 auto;
+}
+
+.container-fluid {
+  height: 100%;
 }
 .pt-80 {
   padding-top: 80px !important;
