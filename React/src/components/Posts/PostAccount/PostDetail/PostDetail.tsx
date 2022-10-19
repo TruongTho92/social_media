@@ -3,31 +3,36 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiMessageRounded } from "react-icons/bi";
 import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./postDetailStyles.module.scss";
 
 import Tooltip from "antd/es/tooltip";
 import { TextAreaRef } from "antd/lib/input/TextArea";
+import { MdOutlineDone } from "react-icons/md";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { PostAccount, userLikedTypes } from "~/common/types";
 import Comments from "~/components/Comments";
+import Loading from "~/components/Loading";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
+  getLikeData,
   getLoadingPosts,
-  getPostDetail,
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
-import { likedApi } from "~/features/liked/likedApi";
-import { getLikeData } from "~/features/liked/likedSlice";
-import { ToastContainer } from "react-toastify";
-import Loading from "~/components/Loading";
-import { MdOutlineDone } from "react-icons/md";
 import { commnetApi } from "~/features/comment/commentApi";
 
 export type Props = {
   isAccount: boolean;
+  postDetailData: PostAccount;
+  userLiked: userLikedTypes[];
 };
-const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
+const PostDetail: React.FC<Props> = ({
+  isAccount,
+  postDetailData,
+  userLiked,
+}) => {
   const dispatch = useAppDispatch();
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -40,18 +45,24 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
 
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
-  const postDetailData = useAppSelector(getPostDetail);
+  const likeData = useAppSelector(getLikeData);
 
   const navigate = useNavigate();
   const { id } = useParams();
   const postId = Number(id);
 
   useEffect(() => {
-    dispatch(postDetailApi.getPost(postId));
-
-    // if (getUserData.user.id === likedData.userId) {
-    //   setLiked(true);
-    // }
+    if (userLiked.length > 0) {
+      userLiked.map((item: any) => {
+        if (item.id === getUserData.user.id) {
+          return setLiked(true);
+        } else {
+          return setLiked(false);
+        }
+      });
+    } else {
+      return;
+    }
   }, []);
 
   const handleUpdatePost = () => {
@@ -67,16 +78,18 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
   const handleDeletePost = () => {
     dispatch(postsApi.delete(postId));
     navigate("/profile");
-    // window.location.reload();
+    window.location.reload();
   };
 
-  const handleLike = () => {
+  const handleLike = async () => {
+    await dispatch(postDetailApi.like(postId));
+    dispatch(postDetailApi.getPost(postId));
     setLiked(true);
-    dispatch(likedApi.like(postId));
   };
   const handleDisLike = () => {
+    dispatch(postDetailApi.disLike(postId, likeData.id));
+    dispatch(postDetailApi.getPost(postId));
     setLiked(false);
-    // dispatch(likedApi.disLike(id, likeId));
   };
 
   const handleComment = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -95,7 +108,12 @@ const PostDetail: React.FC<Props> = ({ isAccount = false }) => {
       {loadingPost ? (
         <Loading />
       ) : (
-        <div className={` ${styles.postDetail}`} onClick={() => navigate(-1)}>
+        <div
+          className={` ${styles.postDetail}`}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
           <div
             className={styles.postDetailContainer}
             onClick={(e) => e.stopPropagation()}

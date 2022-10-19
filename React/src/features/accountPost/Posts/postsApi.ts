@@ -15,7 +15,7 @@ import {
 
 export const postsApi = {
   // [GET]: /posts
-  getAll: () => async (dispatch: any) => {
+  getAll: (id: number | null) => async (dispatch: any) => {
     try {
       dispatch({
         type: GetPostsRequest.toString(),
@@ -23,7 +23,7 @@ export const postsApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`api/v1/posts`, {
+      const { data } = await apiClient.get(`api/v1/posts/${id}`, {
         headers: {
           token: token,
         },
