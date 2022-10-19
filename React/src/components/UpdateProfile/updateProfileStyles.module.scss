@@ -1,0 +1,142 @@
+@import "../../global/scss/rootStyles.scss";
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  font: 1em sans-serif;
+  margin-top: 6px;
+}
+.profile {
+  padding: 80px 20% 0;
+}
+.profileContainer {
+  background-color: #fff;
+  padding: 24px 60px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.profileHeader {
+  @include d-flex(start, flex-start);
+  .image {
+    width: 60px;
+    height: 60px;
+    border-radius: 100rem;
+
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 100rem;
+      object-fit: cover;
+    }
+  }
+  .info {
+    margin-left: 8px;
+    .username {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .labelInputAvatar {
+      background-color: $mainBlue;
+      padding: 6px 8px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 4px;
+      color: $whiteColor;
+    }
+  }
+}
+
+.form {
+  .formHeading {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  margin-top: 24px;
+  .validateInput {
+    width: 100%;
+  }
+  .formItem {
+    @include d-flex(start, center);
+    margin-bottom: 12px;
+    .formLabel {
+      width: 140px;
+      font-size: 16px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .inputInfo {
+      width: 60%;
+      padding: 6px 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      &.inputBio {
+        height: 100px;
+      }
+    }
+  }
+
+  .btnCancel {
+    padding: 8px 12px;
+    margin-top: 24px;
+    border: 1.6px solid $mainBlue;
+    background-color: transparent;
+    color: $mainBlue;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btnSubmit {
+    margin-left: 8px;
+    padding: 9px 12px;
+    margin-top: 24px;
+    background-color: $mainBlue;
+    border: none;
+    color: $whiteColor;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .profile {
+    padding: 80px 10% 0;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .profile {
+    padding: 80px 4% 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profileContainer {
+    padding: 24px 24px;
+  }
+  .form {
+    .formHeading {
+      font-size: 18px;
+      text-align: center;
+      font-weight: 600;
+    }
+    margin-top: 24px;
+    .formItem {
+      @include d-flex(start, flex-start);
+      flex-direction: column;
+      margin-bottom: 12px;
+
+      .inputInfo {
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 16px;
+      }
+    }
+  }
+  .profile {
+    padding: 90px 4%;
+  }
+}

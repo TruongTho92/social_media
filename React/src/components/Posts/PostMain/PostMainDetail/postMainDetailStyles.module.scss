@@ -1,0 +1,327 @@
+@import "../../../../global/scss/rootStyles.scss";
+.warn {
+  color: red;
+}
+
+.postDetail {
+  overflow: hidden;
+}
+.modalContainer {
+  width: fit-content;
+  height: fit-content;
+}
+.postDetailContainer {
+  @include d-flex(center, flex-start);
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.top {
+  @include d-flex(center, flex-start);
+  border-bottom: 1px solid $greyLight;
+}
+.bottom {
+  @include d-flex(center, center);
+
+  width: 100%;
+  padding: 12px 16px 12px 0px;
+}
+
+.postDetailImg {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 100%;
+    padding-bottom: 100%;
+  }
+  img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+  }
+}
+.postDetailContent {
+  @include d-flex(start, flex-start);
+  width: 100%;
+  height: 340px;
+  overflow-y: scroll;
+  padding: 12px 12px 6px 12px;
+  flex-direction: column;
+}
+
+.postDetailHeader {
+  width: 100%;
+  @include d-flex(space-between, center);
+  .userName {
+    @include d-flex(start, center);
+    .image {
+      width: 40px;
+      height: 40px;
+      border-radius: 100rem;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100rem;
+      }
+    }
+    .info {
+      margin-left: 8px;
+
+      .name {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .description {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: italic;
+        color: $greyBold;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+.caption {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 12px 0;
+  width: 300px;
+}
+.editContainer {
+  padding: 12px 0;
+  width: 100%;
+
+  .inputEdit {
+    margin-bottom: 8px;
+    // padding: 8px 12px;
+    height: fit-content;
+    border: 1px solid $greyLight;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btnEditCancel,
+  .btnEditSave {
+    @include d-flex(center, center);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btnEditCancel {
+    background-color: transparent;
+    border: none;
+    color: $blackColor;
+  }
+  .btnEditSave {
+    background-color: $mainBlue;
+    border: none;
+    color: $whiteColor;
+  }
+}
+
+.settingPost {
+  position: relative;
+  .iconSettingPost {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}
+.settingPostContent {
+  background-color: #fff;
+  box-shadow: $boxShadow;
+  padding: 8px 0;
+  width: 100px;
+  border-radius: 4px;
+  transition: all 0.2s linear;
+
+  .text {
+    margin-left: 12px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    &:first-child {
+      margin-bottom: 4px;
+    }
+    &:hover {
+      transform: translateX(10px);
+      transition: all 0.2s linear;
+    }
+  }
+}
+
+.emotion {
+  @include d-flex(space-between, center);
+  width: 100%;
+  padding: 6px 12px;
+  border-right: 1px solid $greyLight;
+
+  .iconEmotion {
+    @include d-flex(start, center);
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      &:first-child {
+        margin-right: 10px;
+      }
+      &.active {
+        color: red;
+      }
+      cursor: pointer;
+    }
+  }
+  .likeNumber {
+    font-size: 14px;
+    list-style: 0;
+    margin-left: 12px;
+    span {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}
+
+.comment {
+}
+.commentMobile {
+  padding: 0 12px 12px 12px;
+
+  display: none;
+}
+
+.seeComment {
+  width: 100%;
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: $mainBlue;
+  cursor: pointer;
+  display: none;
+}
+.form {
+  @include d-flex(start, center);
+  width: 100%;
+
+  .inputComment {
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    height: 40px;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .btnComment {
+    float: right;
+    font-size: 16px;
+    font-weight: 500;
+    color: $mainBlue;
+    margin-left: 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+@include desktop {
+  .settingPost {
+    .settingPostContent {
+      left: 10px;
+      &::before {
+        top: 50%;
+        left: 80px;
+      }
+      &.active {
+        opacity: 1;
+        transition: all 0.2s linear;
+        left: -60px;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+}
+
+@include tablet {
+}
+
+@include mobile {
+  .top {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .bottom {
+    flex-direction: column;
+    padding: 0 0 12px 0;
+  }
+  .postDetailImg {
+    width: 100%;
+
+    img {
+      border-top-left-radius: 0;
+    }
+  }
+  .postDetailContent {
+    margin-left: 0 !important;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 0;
+  }
+  .caption {
+    margin-bottom: 0px !important;
+    width: 100%;
+  }
+  .emotion {
+    padding: 12px 8px;
+  }
+  .comment {
+    display: none;
+  }
+  .commentMobile {
+    display: none;
+    &.open {
+      display: block;
+    }
+  }
+  .seeComment {
+    display: block;
+  }
+  .form {
+    padding-right: 8px;
+  }
+
+  .settingPost {
+    .settingPostContent {
+      left: 10px;
+      &::before {
+        top: 40px;
+        transform: rotate(-45deg);
+        left: 62%;
+      }
+      &.active {
+        opacity: 1;
+        transition: all 0.2s linear;
+        left: -16px;
+        top: -60px;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+}

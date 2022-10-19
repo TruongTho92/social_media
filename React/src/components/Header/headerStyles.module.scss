@@ -1,4 +1,5 @@
 @import "../../global/scss/rootStyles.scss";
+
 .menuMobile,
 .iconOpenMenu,
 .chatIconMobile,
@@ -76,20 +77,79 @@
     }
     .menuUser {
       @include d-flex(center, center);
+      position: relative;
       width: 3rem;
       height: 3rem;
-      border: 2px solid #000;
-      overflow: hidden;
+      border: 1px solid #000;
+      // overflow: hidden;
       border-radius: 100rem;
       margin-left: 2.6rem;
       cursor: pointer;
       img {
         height: 100%;
         width: 100%;
+        border-radius: 100rem;
         object-fit: cover;
       }
     }
   }
+}
+
+.subUserMenu {
+  z-index: 10000;
+  width: 180px;
+  height: fit-content;
+  padding: 8px 16px;
+  .iconSub {
+    font-size: 18px;
+    transition: all 0.2s ease-out;
+  }
+  a {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+  .subMenuItem {
+    @include d-flex(start, center);
+    cursor: pointer;
+    color: $blackColor;
+    &:hover .iconSub {
+      color: $mainBlue;
+      transform: scale(1.1);
+      transition: all 0.2s ease-out;
+    }
+    &:hover .subUserLabel {
+      transform: translateX(10px);
+      transition: all 0.2s ease-out;
+    }
+  }
+  .subUserLabel {
+    margin-left: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+  }
+  .line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: $greyBold;
+    border-bottom: 1px solid $greyLight;
+    margin-bottom: 8px;
+  }
+  // .logout {
+  //   font-size: 16px;
+  //   font-weight: 400;
+  //   color: red;
+  //   cursor: pointer;
+  //   transition: all 0.2s ease-out;
+
+  //   &:hover {
+  //     transform: translateX(10px);
+  //     transition: all 0.2s ease-out;
+  //   }
+  // }
 }
 
 .nav-link.activated {
@@ -101,21 +161,21 @@
 }
 
 // RESPONSIVE
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
+@include desktop {
   .headerContainer {
     padding: 0 10%;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@include tablet {
   .headerContainer {
     padding: 0 4%;
   }
 }
 
-@media screen and (max-width: 767px) {
+@include mobile {
   .headerContainer {
     height: fit-content;
-    padding: 12px 6%;
+    padding: 6px 6%;
   }
   .headerMenu {
     display: none !important;
@@ -135,7 +195,7 @@
     &.active {
       display: flex;
 
-      width: 220px !important;
+      width: 140px !important;
     }
   }
   .menuMobile {
@@ -152,15 +212,15 @@
     width: 100%;
     height: fit-content;
     background-color: $whiteColor;
-    padding: 20px 6%;
+    padding: 12px 6%;
     z-index: 100;
     .icon {
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      width: 3.2rem;
-      height: 3.2rem;
+      width: 3rem;
+      height: 3rem;
       height: 100%;
 
       &:hover a {
@@ -169,8 +229,8 @@
         transition: all 0.2s ease-out;
       }
       a {
-        width: 3.2rem;
-        height: 3.2rem;
+        width: 3rem;
+        height: 3rem;
         display: block;
         text-decoration: none;
         color: $blackColor;
@@ -178,13 +238,13 @@
       }
     }
     .menuIcon {
-      width: 3.2rem;
-      height: 3.2rem;
+      width: 3rem;
+      height: 3rem;
     }
     .menuUser {
       @include d-flex(center, center);
-      width: 3.2rem;
-      height: 3.2rem;
+      width: 3rem;
+      height: 3rem;
       border: 2px solid #000;
       overflow: hidden;
       border-radius: 100rem;

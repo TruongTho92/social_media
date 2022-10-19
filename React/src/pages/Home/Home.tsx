@@ -1,25 +1,16 @@
 import { Col, Row } from "antd";
-import { useEffect } from "react";
-import { useAppDispatch } from "~/app/hooks";
-import PostList from "~/components/PostList";
+import PostList from "~/components/Posts/PostMain/PostList";
 import UserList from "~/components/UserList";
-import { loadUserAsync } from "~/features/User/UserSlice";
 import styles from "./homeStyles.module.scss";
 
-export interface postsTypes {
-  id: number;
-  title: string;
-  description: string;
-}
-
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className={`container-fluid pt-80 ${styles.homePage} `}>
       <Row gutter={[24, 24]}>
-        <Col span={16}>
+        <Col xs={24} sm={24} md={14} lg={14} xl={14}>
           <PostList />
         </Col>
-        <Col span={8}>
+        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
           <UserList />
         </Col>
       </Row>

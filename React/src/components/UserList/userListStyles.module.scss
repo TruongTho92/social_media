@@ -1,45 +1,123 @@
 @import "../../global/scss/rootStyles.scss";
 .userList {
-  padding: 30px;
-  background-color: $whiteColor;
+  padding: 12px 48px 12px 24px;
   border-radius: 12px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.account {
+  width: 100%;
+  .userName {
+    @include d-flex(space-between, center);
+    .infoLeft {
+      @include d-flex(start, center);
+    }
+    .image {
+      width: 60px;
+      height: 60px;
+      border-radius: 100rem;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100rem;
+      }
+    }
+    .info {
+      margin-left: 8px;
+
+      .name {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .description {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: $greyBold;
+        line-height: normal;
+        white-space: nowrap;
+      }
+    }
+    .btnLogout {
+      font-size: 14px;
+      font-weight: 600;
+      color: $mainBlue;
+      cursor: pointer;
+    }
+  }
+}
+.textSuggestion {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  margin: 16px 0;
 }
 .userItem {
   display: flex;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 12px;
   .userImg {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 100rem;
     object-fit: cover;
   }
   .userInfo {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-left: 8px;
+    align-items: center;
+    .info {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left: 8px;
+    }
     .name {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
-      width: 200px;
+      width: fit-content;
       margin: 0;
       line-height: 1;
-      margin-bottom: 4px;
+      // margin-bottom: 4px;
       white-space: nowrap;
+      word-wrap: break-word;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .description {
       margin: 0;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: normal;
-      font-style: italic;
       color: #8e8e8e;
       line-height: normal;
+      white-space: nowrap;
     }
+  }
+  .ticked {
+    @include d-flex(center, center);
+    position: absolute;
+    top: -4px;
+    right: -12px;
+    width: 14px;
+    height: 14px;
+    background-color: $mainBlue;
+    border-radius: 50%;
+    .tickedIcon {
+      font-size: 10px;
+      font-weight: bold;
+      color: $whiteColor;
+    }
+  }
+  .textFollow {
+    font-size: 14px;
+    font-weight: 600;
+    color: $mainBlue;
+    cursor: pointer;
   }
 }

@@ -16,6 +16,6 @@ class Api::V1::ApplicationController < ApplicationController
   end
 
   def current_user
-    @current_user = User.find_by(authentication_token: request.headers["token"])
+    @current_user = User.find_by(authentication_token: request.headers["token"]) || User.find_by(authentication_token: params[:headers][:token])
   end
 end

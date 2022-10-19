@@ -1,12 +1,12 @@
 import { Col, Input, Row } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
-import { getLoginData, loginUserAsync } from "~/features/Auth/AuthSlice";
+import { userApi } from "~/features/Auth/userApi";
 
 import styles from "./LoginStyles.module.scss";
 
@@ -16,14 +16,6 @@ const LoginPage: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { is_success } = useAppSelector(getLoginData);
-
-  useEffect(() => {
-    if (is_success) {
-      navigate("/");
-    }
-  }, [dispatch, is_success, navigate]);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -35,16 +27,26 @@ const LoginPage: React.FC = () => {
       },
     };
 
-    dispatch(loginUserAsync(data));
+    dispatch(userApi.loginUser(data));
   };
 
   return (
-    <>
+    <div className={`container-fluid ${styles.login}`}>
       <Row
         justify="center"
         align="middle"
         style={{ width: "100%", height: "100%" }}
       >
+        <Col
+          sm={24}
+          md={12}
+          lg={12}
+          span={12}
+          xl={12}
+          className={styles.loginLeft}
+        >
+          <img src="/assets/images/login-background.png" alt="" />
+        </Col>
         <Col
           xs={24}
           sm={24}
@@ -112,7 +114,7 @@ const LoginPage: React.FC = () => {
         draggable
         pauseOnHover
       />
-    </>
+    </div>
   );
 };
 

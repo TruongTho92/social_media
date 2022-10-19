@@ -1,0 +1,166 @@
+@import "../../global/scss/rootStyles.scss";
+
+// MANUAL
+.widthFull {
+  width: 100%;
+}
+
+.createPost {
+  padding: 80px 20% 40px;
+}
+
+.createPostContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: $boxShadow;
+  padding: 0 0 24px 0;
+  height: fit-content;
+}
+.createPostHeader {
+  @include d-flex(space-between, center);
+  border-bottom: 1px solid $greyLight;
+  padding: 10px 24px;
+  .iconBack {
+    font-size: 24px;
+    color: $blackColor;
+  }
+  .heading {
+    text-align: center;
+    line-height: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .share {
+    color: $mainBlue;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 0;
+    cursor: pointer;
+  }
+}
+
+.account {
+  @include d-flex(start, center);
+  .imageAccount {
+    @include avatar(40, 40);
+  }
+  .nameAccount {
+    margin-left: 8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.form {
+  @include d-flex(start, flex-start);
+  margin-top: 12px;
+  .formItem {
+    margin-left: 24px;
+  }
+
+  .labelInputImage {
+    @include d-flex(center, center);
+    color: $whiteColor;
+    width: 300px;
+    background-color: $mainBlue;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    &:hover .uploadIcon {
+      animation: Jumb 1s ease-out infinite;
+    }
+    .uploadIcon {
+      width: 24px;
+      height: 24px;
+      z-index: 1000;
+    }
+  }
+  .imagePost {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      border-radius: 4px;
+
+      object-fit: cover;
+    }
+  }
+
+  .inputForm {
+    font-size: 16px;
+    font-weight: 400;
+    width: 90%;
+    height: 300px;
+    border-radius: 4px;
+    margin-top: 12px;
+    border: none;
+    &:focus {
+      box-shadow: $boxShadow;
+    }
+  }
+}
+
+// RESPONSIVE
+@include desktop {
+  .createPost {
+    padding: 80px 10% 40px;
+  }
+}
+
+@include tablet {
+  .createPost {
+    padding: 80px 4% 40px;
+  }
+}
+@include mobile {
+  .createPost {
+    padding: 80px 6% 40px;
+  }
+  .createPostContainer {
+    padding: 0;
+  }
+
+  .form {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    .labelInputImage {
+      width: 100%;
+    }
+    .formItem {
+      width: 100%;
+      margin-left: 0;
+    }
+    .inputForm {
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+@keyframes Jumb {
+  0% {
+    transform: translateY(-40px);
+  }
+  25% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
