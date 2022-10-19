@@ -9,15 +9,19 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @comments = []
     @likes = []
     @post.likes.each do |like|
       @likes << like.user
+    end
+    @post.comments.each do |comment|
+      @comments << {content: comment.content, user_name: comment.user.user_name, avatar: comment.user.avatar}
     end
     render json: {
       message: "Get Post Successfully",
       data: {
         post: @post,
-        comment: @post.comments,
+        comment: @comments,
         like: @likes
       }
     }, status: :ok
