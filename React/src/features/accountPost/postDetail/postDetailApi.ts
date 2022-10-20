@@ -1,6 +1,12 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
 import {
+  CommentFailure,
+  CommentRequest,
+  CommentSuccess,
+  DeleteCommentFailure,
+  DeleteCommentRequest,
+  DeleteCommentSuccess,
   disLikeFailure,
   disLikeRequest,
   disLikeSuccess,
@@ -30,6 +36,7 @@ export const postDetailApi = {
           token: token,
         },
       });
+
       setTimeout(() => {
         dispatch({
           type: GetPostSuccess.toString(),
@@ -62,7 +69,7 @@ export const postDetailApi = {
       setTimeout(() => {
         dispatch({
           type: UpdatePostSuccess.toString(),
-          payload: data,
+          payload: data.data,
         });
       }, 1000);
     } catch (error: any) {
@@ -74,33 +81,49 @@ export const postDetailApi = {
   },
 
   // LIKE
-  like: (id: number | null) => async (dispatch: any) => {
-    try {
-      dispatch({
-        type: likeRequest.toString(),
-      });
-      const token = JSON.parse(Cookies.get("access_token") || "");
+  like:
+    (id: number | null, post: any, userData: any) => async (dispatch: any) => {
+      console.log(post);
 
-      const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
-        headers: {
-          token: token,
-        },
-      });
+      const newPost = { ...post, likes: [...post.like, userData.user] };
 
       dispatch({
-        type: likeSuccess.toString(),
-        payload: data,
+        type: UpdatePostSuccess.toString(),
+        payload: newPost,
       });
-    } catch (error: any) {
-      dispatch({
-        type: likeFailure.toString(),
-        payload: error.response.data,
-      });
-    }
-  },
+      try {
+        dispatch({
+          type: likeRequest.toString(),
+        });
+        const token = JSON.parse(Cookies.get("access_token") || "");
+
+        const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
+          headers: {
+            token: token,
+          },
+        });
+
+        dispatch({
+          type: likeSuccess.toString(),
+          payload: data,
+        });
+      } catch (error: any) {
+        dispatch({
+          type: likeFailure.toString(),
+          payload: error.response.data,
+        });
+      }
+    },
 
   disLike:
-    (id: number | null, idLike: number | null) => async (dispatch: any) => {
+    (id: number | null, idLike: number | null, post: any, userData: any) =>
+    async (dispatch: any) => {
+      // const newPost = { ...post, likes: post.likes.filter(like => like.id !== userData.user.id) };
+      // console.log(newPost);
+      // dispatch({
+      //   type: UpdatePostSuccess.toString(),
+      //   payload: newPost,
+      // });
       try {
         dispatch({
           type: disLikeRequest.toString(),
@@ -123,6 +146,66 @@ export const postDetailApi = {
       } catch (error: any) {
         dispatch({
           type: disLikeFailure.toString(),
+          payload: error.response.data,
+        });
+      }
+    },
+
+  // COMMENT
+  comment: (payload: any, idPost: any) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: CommentRequest.toString(),
+      });
+
+      const token = JSON.parse(Cookies.get("access_token") || "");
+
+      const { data } = await apiClient.post(
+        `/api/v1/posts/${idPost}/comments`,
+        payload,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      dispatch({
+        type: CommentSuccess.toString(),
+        payload: data.data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: CommentFailure.toString(),
+        // payload: error.response.data,
+      });
+    }
+  },
+
+  deleteComment:
+    (idPost: any, idComment: number | null) => async (dispatch: any) => {
+      try {
+        dispatch({
+          type: DeleteCommentRequest.toString(),
+        });
+
+        const token = JSON.parse(Cookies.get("access_token") || "");
+
+        const { data } = await apiClient.delete(
+          `/api/v1/posts/${idPost}/comments/${idComment}`,
+
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+        dispatch({
+          type: DeleteCommentSuccess.toString(),
+          payload: data,
+        });
+      } catch (error: any) {
+        dispatch({
+          type: DeleteCommentFailure.toString(),
           payload: error.response.data,
         });
       }

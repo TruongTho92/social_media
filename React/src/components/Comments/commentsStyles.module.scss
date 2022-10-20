@@ -13,9 +13,12 @@
     height: 0;
   }
 }
+.infoComment {
+  @include d-flex(start, flex-start);
+}
 .commentItem {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: flex-start;
   width: fit-content;
   margin-bottom: 16px;
@@ -50,7 +53,7 @@
       display: block;
       font-size: 14px;
       font-weight: 400;
-      width: 260px;
+      width: 160px;
       margin-bottom: 0 !important;
     }
   }

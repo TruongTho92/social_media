@@ -1,12 +1,12 @@
 import { Typography } from "antd";
 import React, { useState } from "react";
-import { UserCommentResponse } from "~/common/types";
-import styles from "./commentsStyles.module.scss";
 import { IoIosRemove } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { getCommentData } from "~/features/comment/commentSlice";
+import { UserCommentResponse } from "~/common/types";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
-import { commenttApi } from "~/features/comment/commentApi";
+import { getCommentData } from "~/features/accountPost/postDetail/postDetailSlice";
+
+import styles from "./commentsStyles.module.scss";
 
 type Props = {
   commentList?: UserCommentResponse[];
@@ -17,14 +17,12 @@ type Props = {
 const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
   const dispatch = useAppDispatch();
   const [ellipsis, setEllipsis] = useState(true);
-  const commentDataId = useAppSelector(getCommentData);
 
-  const handleDeleteComment = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    await dispatch(commenttApi.deleteComment(postId, commentDataId.id));
+  const handleDeleteComment = async (idComment: number | null) => {
+    await dispatch(postDetailApi.deleteComment(postId, idComment));
     dispatch(postDetailApi.getPost(postId));
   };
+
   return (
     <>
       <div
@@ -35,33 +33,38 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
         }
       >
         {commentList && commentList.length > 0
-          ? commentList.map((comment, index) => (
-              <div className={styles.commentItem} key={index}>
-                <div className={styles.userImage}>
-                  <img
-                    src={
-                      comment.avatar
-                        ? comment.avatar
-                        : `/assets/user-vacant.jpg`
-                    }
-                    alt=""
-                  />
-                </div>
-                <div className={styles.content}>
-                  <span className={styles.name}>{comment.user_name}</span>
-                  <Typography.Paragraph
-                    ellipsis={
-                      ellipsis
-                        ? { rows: 1, expandable: true, symbol: "more" }
-                        : false
-                    }
-                    className={styles.commentText}
-                  >
-                    {comment.content}
-                  </Typography.Paragraph>
+          ? commentList.map((comment) => (
+              <div className={styles.commentItem} key={comment.id}>
+                <div className={styles.infoComment}>
+                  <div className={styles.userImage}>
+                    <img
+                      src={
+                        comment.avatar
+                          ? comment.avatar
+                          : `/assets/user-vacant.jpg`
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <div className={styles.content}>
+                    <span className={styles.name}>{comment.user_name}</span>
+                    <Typography.Paragraph
+                      ellipsis={
+                        ellipsis
+                          ? { rows: 1, expandable: true, symbol: "more" }
+                          : false
+                      }
+                      className={styles.commentText}
+                    >
+                      {comment.content}
+                    </Typography.Paragraph>
+                  </div>
                 </div>
                 {isAccount ? (
-                  <div className="iconRemove">
+                  <div
+                    className="iconRemove"
+                    onClick={() => handleDeleteComment(comment.id)}
+                  >
                     <IoIosRemove size={24} cursor={"pointer"} />
                   </div>
                 ) : null}
