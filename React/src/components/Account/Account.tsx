@@ -29,7 +29,7 @@ const Account: React.FC = () => {
       {loadingPosts ? (
         <Loading />
       ) : (
-        <div className={`container-fluid ${styles.account}`}>
+        <div className={` ${styles.account}`}>
           <div className={styles.accountContainer}>
             <div className={styles.accountInfo}>
               <div className={styles.image}>

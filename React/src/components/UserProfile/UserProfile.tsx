@@ -31,9 +31,7 @@ const UserProfile: React.FC = (props: Props) => {
   const userId = Number(id);
 
   useEffect(() => {
-    // More api get user profile
     dispatch(profileUserApi.getProfileUser(userId));
-    // Change api post user id
     dispatch(postsApi.getAll(userId));
   }, []);
 

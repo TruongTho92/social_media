@@ -1,7 +1,7 @@
 @import "../../global/scss/rootStyles.scss";
 
 .commentList {
-  height: 200px;
+  height: 300px;
   width: 100%;
   scrollbar-width: none;
   overflow-y: scroll;
@@ -11,6 +11,7 @@
   }
   &.hidden {
     height: 0;
+    padding: 0;
   }
 }
 .infoComment {
@@ -59,20 +60,28 @@
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
+@include desktop {
   .commentList {
     height: 200px;
+    &.hidden {
+      height: 0;
+    }
   }
 }
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@include tablet {
   .commentList {
     height: 180px;
+    &.hidden {
+      height: 0;
+    }
   }
 }
 
-@media screen and (max-width: 767px) {
+@include mobile {
   .commentList {
     height: 160px;
+    &.hidden {
+      height: 0;
+    }
   }
 }
