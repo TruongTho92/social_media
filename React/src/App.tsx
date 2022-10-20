@@ -6,7 +6,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header";
 import PostDetail from "./components/Posts/PostAccount/PostDetail";
-import UserPostDetail from "./components/Posts/PostUser/UserPostDetail";
+// import UserPostDetail from "./components/Posts/PostUser/UserPostDetail";
 import UpdateProfile from "./components/UpdateProfile";
 import { userApi } from "./features/Auth/userApi";
 import { getAuthenticated } from "./features/Auth/userSlice";
@@ -78,12 +78,12 @@ const App: React.FC = () => {
           path="user-profile/:id"
           element={isAuthenticated ? <UserProfilePage /> : <Login />}
         />
-        <Route
+        {/* <Route
           path="user-post/:id"
           element={
             isAuthenticated ? <UserPostDetail isAccount={false} /> : <Login />
           }
-        />
+        /> */}
 
         {/* SEARCH */}
         <Route

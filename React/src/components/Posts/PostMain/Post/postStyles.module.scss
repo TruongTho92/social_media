@@ -4,7 +4,7 @@
   padding: 16px 0 0 0;
   margin-bottom: 40px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -122,13 +122,14 @@
   border-bottom: none;
   border-right: none;
   margin-top: 12px;
+  margin-bottom: 8px;
+  box-shadow: none !important;
+  &:hover {
+    border-top: 1px solid $greyLight !important;
+  }
 
   &:focus {
-    border-left: none;
-    border-bottom: none;
-    border-right: none;
-
-    box-shadow: none;
+    box-shadow: none !important;
   }
 }
 .inputText {

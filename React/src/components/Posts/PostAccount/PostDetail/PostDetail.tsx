@@ -24,6 +24,7 @@ import {
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
 import { getAllPost } from "~/features/accountPost/Posts/postsSlice";
+import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 
 export type Props = {};
 const PostDetail: React.FC<Props> = () => {
@@ -44,10 +45,12 @@ const PostDetail: React.FC<Props> = () => {
   const loadingPost = useAppSelector(getLoadingPosts);
   const likeData = useAppSelector(getLikeData);
 
+  const userProfile = useAppSelector(getProfileUser);
   const allPostData = useAppSelector(getAllPost);
   const postDetailData = useAppSelector(getPostDetail);
   const userLikedData = useAppSelector(getUsersLiked);
   const commentData = useAppSelector(getUsersCommented);
+
   const { id } = useParams();
   const postId = Number(id);
 
@@ -59,16 +62,13 @@ const PostDetail: React.FC<Props> = () => {
     if (allPostData.find((post) => post.user_id === getUserData.user.id)) {
       setIsAccount(true);
     }
-  }, []);
-
-  useEffect(() => {
     if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {
       setLiked(true);
       console.log(123);
     } else {
       setLiked(false);
     }
-  }, [getUserData.user.id, userLikedData]);
+  }, [allPostData, getUserData.user.id, userLikedData]);
 
   // UPDATE POST
   const handleUpdatePost = () => {
@@ -195,11 +195,22 @@ const PostDetail: React.FC<Props> = () => {
                   <div className={styles.postDetailHeader}>
                     <div className={styles.userName}>
                       <div className={styles.image}>
-                        <img src={`/assets/images/user-vacant.jpg`} alt="" />
+                        <img
+                          src={
+                            userProfile.user.avatar
+                              ? userProfile.user.avatar
+                              : `/assets/images/user-vacant.jpg`
+                          }
+                          alt=""
+                        />
                       </div>
                       <div className={styles.info}>
-                        <p className={styles.name}>user1</p>
-                        <p className={styles.description}>nickname1</p>
+                        <p className={styles.name}>
+                          {userProfile.user.user_name}
+                        </p>
+                        <p className={styles.description}>
+                          {userProfile.user.nick_name}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -288,19 +299,22 @@ const PostDetail: React.FC<Props> = () => {
                 </div>
 
                 {/* COMMENT MOBILE */}
-                <div
+                {/* <div
                   className={
                     isOpenComment
                       ? `${styles.commentMobile} ${styles.open} `
                       : `${styles.commentMobile}`
                   }
-                >
+                > */}
+                {isOpenComment && (
                   <Comments
                     postId={postId}
                     isAccount={isAccount}
                     commentList={commentData}
                   />
-                </div>
+                )}
+
+                {/* </div> */}
 
                 <Typography.Text
                   className={styles.seeComment}
