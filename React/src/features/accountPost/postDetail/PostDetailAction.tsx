@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import PostDetail from "~/components/Posts/PostProfile/PostDetail";
+import PostDetail from "~/components/Posts/PostAccount/PostDetail";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getPostDetail,

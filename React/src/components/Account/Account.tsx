@@ -10,7 +10,7 @@ import {
 import { getUser } from "~/features/Auth/userSlice";
 import Loading from "../Loading";
 import ModalSetting from "../Modal/ModalSetting";
-import AccountPosts from "../Posts/PostProfile/AccountPosts";
+import AccountPosts from "../Posts/PostAccount/AccountPosts";
 import styles from "./accountStyles.module.scss";
 
 const Account: React.FC = () => {
