@@ -111,8 +111,6 @@ export interface UserProfile {
   user: {
     id: number | null;
     email: string;
-    password: string;
-    password_confirmation: string;
     avatar: string;
     user_name: string;
     nick_name: string;

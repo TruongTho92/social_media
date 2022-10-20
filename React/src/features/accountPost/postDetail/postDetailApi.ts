@@ -83,15 +83,6 @@ export const postDetailApi = {
   // LIKE
   like:
     (id: number | null, post: any, userData: any) => async (dispatch: any) => {
-      console.log(post);
-
-      const newPost = { ...post, likes: [...post.like, userData.user] };
-      console.log(newPost);
-
-      dispatch({
-        type: UpdatePostSuccess.toString(),
-        payload: newPost,
-      });
       try {
         dispatch({
           type: likeRequest.toString(),
@@ -119,12 +110,6 @@ export const postDetailApi = {
   disLike:
     (id: number | null, idLike: number | null, post: any, userData: any) =>
     async (dispatch: any) => {
-      // const newPost = { ...post, likes: post.likes.filter(like => like.id !== userData.user.id) };
-      // console.log(newPost);
-      // dispatch({
-      //   type: UpdatePostSuccess.toString(),
-      //   payload: newPost,
-      // });
       try {
         dispatch({
           type: disLikeRequest.toString(),
@@ -177,13 +162,14 @@ export const postDetailApi = {
     } catch (error: any) {
       dispatch({
         type: CommentFailure.toString(),
-        // payload: error.response.data,
+        payload: error.response.data,
       });
     }
   },
 
   deleteComment:
     (idPost: any, idComment: number | null) => async (dispatch: any) => {
+      console.log({ idPost, idComment });
       try {
         dispatch({
           type: DeleteCommentRequest.toString(),

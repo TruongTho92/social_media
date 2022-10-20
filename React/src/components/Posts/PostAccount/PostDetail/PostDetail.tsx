@@ -61,11 +61,14 @@ const PostDetail: React.FC<Props> = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if(postDetailData.likes.find(like => liked.id === getUserData.user.id)){
-  //     setLiked(true)
-  //   }
-  // }, [post.likes,getUserData.user.id]);
+  useEffect(() => {
+    if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {
+      setLiked(true);
+      console.log(123);
+    } else {
+      setLiked(false);
+    }
+  }, [getUserData.user.id, userLikedData]);
 
   // UPDATE POST
   const handleUpdatePost = () => {

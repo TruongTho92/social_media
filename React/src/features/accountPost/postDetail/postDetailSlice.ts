@@ -71,7 +71,6 @@ const postDetailSlice = createSlice({
     likeSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.like = action.payload.data;
-      state.data.likes = action.payload.likes;
     },
     likeFailure: (state) => {
       state.loading = true;
