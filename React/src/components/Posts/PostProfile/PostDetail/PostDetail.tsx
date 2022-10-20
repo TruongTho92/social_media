@@ -25,8 +25,6 @@ import {
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
-import { commenttApi } from "~/features/comment/commentApi";
-import { getCommentData } from "~/features/comment/commentSlice";
 
 export type Props = {
   isAccount: boolean;
@@ -58,20 +56,13 @@ const PostDetail: React.FC<Props> = ({
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userLiked.length > 0) {
-      userLiked.map((item: any) => {
-        if (item.id === getUserData.user.id) {
-          return setLiked(true);
-        } else {
-          return setLiked(false);
-        }
-      });
-    } else {
-      return;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(postDetailData.likes.find(like => liked.id === getUserData.user.id)){
+  //     setLiked(true)
+  //   }
+  // }, [post.likes,getUserData.user.id]);
 
+  // UPDATE POST
   const handleUpdatePost = () => {
     const data = {
       post: {
@@ -88,17 +79,21 @@ const PostDetail: React.FC<Props> = ({
     window.location.reload();
   };
 
+  // LIKE
   const handleLike = async () => {
-    await dispatch(postDetailApi.like(postId));
-    dispatch(postDetailApi.getPost(postId));
     setLiked(true);
+    await dispatch(postDetailApi.like(postId, postDetailData, getUserData));
+    // dispatch(postDetailApi.getPost(postId));
   };
   const handleDisLike = async () => {
-    await dispatch(postDetailApi.disLike(postId, likeData.id));
-    dispatch(postDetailApi.getPost(postId));
     setLiked(false);
+    await dispatch(
+      postDetailApi.disLike(postId, likeData.id, postDetailData, getUserData)
+    );
+    // dispatch(postDetailApi.getPost(postId));
   };
 
+  // COMMENT
   const handleComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const payload = {
@@ -107,7 +102,7 @@ const PostDetail: React.FC<Props> = ({
       },
     };
     setComment("");
-    await dispatch(commenttApi.comment(payload, postId));
+    await dispatch(postDetailApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
   };
 

@@ -7,6 +7,7 @@ export interface StateTypes {
   loading: boolean | null;
   data: PostDetailResponse;
   like: LikeDataResponse;
+  comment: any;
 }
 
 const initialState: StateTypes = {
@@ -19,6 +20,7 @@ const initialState: StateTypes = {
     comments: [],
   },
   like: { id: null, post_id: null, user_id: null },
+  comment: { id: null, post_id: null, user_id: null },
 };
 
 const postDetailSlice = createSlice({
@@ -46,7 +48,7 @@ const postDetailSlice = createSlice({
     },
     UpdatePostSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data.post = action.payload.data.post;
+      state.data.post = action.payload.post;
       toast(action.payload.message, {
         position: "top-center",
         autoClose: 5000,
@@ -69,6 +71,7 @@ const postDetailSlice = createSlice({
     likeSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.like = action.payload.data;
+      state.data.likes = action.payload.likes;
     },
     likeFailure: (state) => {
       state.loading = true;
@@ -82,6 +85,28 @@ const postDetailSlice = createSlice({
       state.like = action.payload.data;
     },
     disLikeFailure: (state) => {
+      state.loading = true;
+    },
+
+    // COMMENT
+    CommentRequest: (state) => {
+      state.loading = true;
+    },
+    CommentSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.comment = action.payload.comment;
+    },
+    CommentFailure: (state) => {
+      state.loading = true;
+    },
+    DeleteCommentRequest: (state) => {
+      state.loading = true;
+    },
+    DeleteCommentSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.comment = action.payload.comment;
+    },
+    DeleteCommentFailure: (state) => {
       state.loading = true;
     },
   },
@@ -101,6 +126,12 @@ export const {
   disLikeRequest,
   disLikeSuccess,
   disLikeFailure,
+  CommentRequest,
+  CommentSuccess,
+  CommentFailure,
+  DeleteCommentRequest,
+  DeleteCommentSuccess,
+  DeleteCommentFailure,
 } = postDetailSlice.actions;
 
 // SELECTOR
@@ -111,6 +142,7 @@ export const getUsersCommented = (state: RootState) =>
   state.postDetail.data.comments;
 
 export const getLikeData = (state: RootState) => state.postDetail.like;
+export const getCommentData = (state: RootState) => state.postDetail.comment;
 
 // REDUCER
 export default postDetailSlice.reducer;
