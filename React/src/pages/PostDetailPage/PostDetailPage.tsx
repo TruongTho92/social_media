@@ -1,9 +1,9 @@
-import PostDetailAction from "~/features/accountPost/postDetail/PostDetailAction";
+import PostDetail from "~/components/Posts/PostAccount/PostDetail";
 
 const PostDetailPage = () => {
   return (
     <div>
-      <PostDetailAction isAccount={true} />
+      <PostDetail />
     </div>
   );
 };

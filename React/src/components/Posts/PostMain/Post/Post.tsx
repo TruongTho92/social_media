@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Comments from "~/components/Comments";
 import styles from "./postStyles.module.scss";
 
-const Post = ({ userId = 1, postId = 1 }) => {
+const Post = ({ userId = 134, postId = 1 }) => {
   const ref = useRef<InputRef>(null);
   return (
     <div className={styles.post}>

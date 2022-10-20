@@ -86,6 +86,7 @@ export const postDetailApi = {
       console.log(post);
 
       const newPost = { ...post, likes: [...post.like, userData.user] };
+      console.log(newPost);
 
       dispatch({
         type: UpdatePostSuccess.toString(),

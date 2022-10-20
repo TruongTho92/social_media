@@ -1,4 +1,4 @@
-// [USER]
+// [ACCOUNT]
 
 export interface UserDataTypes {
   user: {
@@ -60,6 +60,7 @@ export interface PostAccount {
   id: number | null;
   image: string;
   caption: string;
+  user_id: number | null;
 }
 
 export interface PostDataResponse {
@@ -71,6 +72,7 @@ export interface PostDetailResponse {
   post: PostAccount;
   is_success: boolean;
   message: string;
+
   likes: [];
   comments: [];
 }
@@ -103,4 +105,21 @@ export interface CommentDataResponse {
   id: number | null;
   post_id: number | null;
   user_id: number | null;
+}
+
+export interface UserProfile {
+  user: {
+    id: number | null;
+    email: string;
+    password: string;
+    password_confirmation: string;
+    avatar: string;
+    user_name: string;
+    nick_name: string;
+    bio: string;
+    followers?: [];
+    followings?: [];
+    gender: string;
+    authentication_token: string;
+  };
 }

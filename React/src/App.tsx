@@ -58,12 +58,11 @@ const App: React.FC = () => {
         <Route
           path="profile"
           element={isAuthenticated ? <Profile /> : <Login />}
-        >
-          <Route
-            path="account-post/:id"
-            element={isAuthenticated ? <PostDetailPage /> : <Login />}
-          />
-        </Route>
+        ></Route>
+        <Route
+          path="account-post/:id"
+          element={isAuthenticated ? <PostDetailPage /> : <Login />}
+        />
 
         <Route
           path="profile/update"
@@ -98,7 +97,7 @@ const App: React.FC = () => {
 
       {background && (
         <Routes>
-          <Route path="profile/account-post/:id" element={<PostDetailPage />} />
+          <Route path="/account-post/:id" element={<PostDetailPage />} />
         </Routes>
       )}
     </div>
