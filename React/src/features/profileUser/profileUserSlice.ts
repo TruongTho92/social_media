@@ -7,9 +7,22 @@ export interface StateTypes {
   data: UserProfile;
 }
 
-export const initialState = {
+export const initialState: StateTypes = {
   loading: true,
-  data: null,
+  data: {
+    user: {
+      id: null,
+      email: "",
+      avatar: "",
+      user_name: "",
+      nick_name: "",
+      bio: "",
+      followers: [],
+      followings: [],
+      gender: "",
+      authentication_token: "",
+    },
+  },
 };
 
 const profileUserSlice = createSlice({
@@ -21,7 +34,7 @@ const profileUserSlice = createSlice({
     },
     profileUserSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data = action.payload;
+      state.data = action.payload.data;
     },
     profileUserFailure: (state) => {
       state.loading = true;

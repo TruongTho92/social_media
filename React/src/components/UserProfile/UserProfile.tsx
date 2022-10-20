@@ -23,7 +23,7 @@ const UserProfile: React.FC = (props: Props) => {
   const dispatch = useAppDispatch();
   const [isFollow, setIsFollow] = useState(false);
 
-  const getUserData = useAppSelector(getUser);
+  const profileUser = useAppSelector(getProfileUser);
   const loadingPosts = useAppSelector(getLoadingPosts);
   const allAccountPost = useAppSelector(getAllPost);
 
@@ -48,8 +48,8 @@ const UserProfile: React.FC = (props: Props) => {
               <div className={styles.image}>
                 <img
                   src={
-                    getUserData.user.avatar
-                      ? getUserData.user.avatar
+                    profileUser.user.avatar
+                      ? profileUser.user.avatar
                       : "/assets/images/user-vacant.jpg"
                   }
                   alt=""
@@ -58,8 +58,8 @@ const UserProfile: React.FC = (props: Props) => {
               <div className={styles.info}>
                 <div className={`${styles.infoItem} ${styles.infoItemMobile}`}>
                   <span className={styles.name}>
-                    {getUserData.user.user_name ? (
-                      getUserData.user.user_name
+                    {profileUser.user.user_name ? (
+                      profileUser.user.user_name
                     ) : (
                       <span className={styles.errorUpdate}>
                         * User hasn't name
@@ -112,9 +112,9 @@ const UserProfile: React.FC = (props: Props) => {
                 <div className={styles.infoItem}>
                   <div>
                     <span className={styles.username}>
-                      {getUserData.user.nick_name}
+                      {profileUser.user.nick_name}
                     </span>
-                    <div className={styles.bio}>{getUserData.user.bio}</div>
+                    <div className={styles.bio}>{profileUser.user.bio}</div>
                   </div>
                 </div>
               </div>

@@ -20,7 +20,6 @@ export const profileUserApi = {
           token: token,
         },
       });
-      console.log(data);
 
       dispatch({
         type: profileUserSuccess.toString(),
