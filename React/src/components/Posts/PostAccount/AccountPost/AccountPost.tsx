@@ -14,7 +14,7 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
   return (
     <>
       <div className={styles.postImg}>
-        <Link to={`account-post/${id}`} state={{ background: location }}>
+        <Link to={`/account-post/${id}`} state={{ background: location }}>
           <img src={`${image}`} alt="" />
         </Link>
         <Outlet />

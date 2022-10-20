@@ -1,6 +1,7 @@
 import { Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
@@ -9,7 +10,10 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
-import UserPosts from "../Posts/PostUser/UserPosts";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import { getProfileUser } from "~/features/profileUser/profileUserSlice";
+import Loading from "../Loading";
+import AccountPosts from "../Posts/PostAccount/AccountPosts";
 
 import styles from "./userProfileStyles.module.scss";
 
@@ -23,16 +27,20 @@ const UserProfile: React.FC = (props: Props) => {
   const loadingPosts = useAppSelector(getLoadingPosts);
   const allAccountPost = useAppSelector(getAllPost);
 
+  const { id } = useParams();
+  const userId = Number(id);
+
   useEffect(() => {
     // More api get user profile
+    dispatch(profileUserApi.getProfileUser(userId));
     // Change api post user id
-    // dispatch(postsApi.getAll());
+    dispatch(postsApi.getAll(userId));
   }, []);
 
   return (
     <>
       {loadingPosts ? (
-        "Loading..."
+        <Loading />
       ) : (
         <div className={`container-fluid ${styles.userProfile}`}>
           <div className={styles.userProfileContainer}>
@@ -114,7 +122,7 @@ const UserProfile: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.userProfilePost}>
-            <UserPosts postList={allAccountPost} />
+            <AccountPosts postList={allAccountPost} />
           </div>
         </div>
       )}

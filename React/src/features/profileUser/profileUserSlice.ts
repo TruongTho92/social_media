@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "~/app/store";
+import { UserProfile } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
-  data: any;
+  data: UserProfile;
 }
 
 export const initialState = {
@@ -29,5 +31,7 @@ const profileUserSlice = createSlice({
 
 export const { profileUserRequest, profileUserSuccess, profileUserFailure } =
   profileUserSlice.actions;
+
+export const getProfileUser = (state: RootState) => state.profileUser.data;
 
 export default profileUserSlice.reducer;
