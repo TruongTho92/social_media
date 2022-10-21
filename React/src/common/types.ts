@@ -73,8 +73,8 @@ export interface PostDetailResponse {
   is_success: boolean;
   message: string;
 
-  likes: [];
-  comments: [];
+  like: [];
+  comment: [];
 }
 
 // LIKE
@@ -91,6 +91,13 @@ export interface userLikedTypes {
   avatar: string;
 }
 
+// COMMENT
+export interface CommentDataResponse {
+  id: number | null;
+  post_id: number | null;
+  user_id: number | null;
+}
+
 export interface UserCommentResponse {
   id: number | null;
   user_name: string;
@@ -101,12 +108,7 @@ export interface UserCommentResponse {
   post_id?: number | null;
 }
 
-export interface CommentDataResponse {
-  id: number | null;
-  post_id: number | null;
-  user_id: number | null;
-}
-
+// USER
 export interface UserProfile {
   user: {
     id: number | null;

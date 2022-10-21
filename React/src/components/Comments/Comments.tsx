@@ -27,7 +27,7 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
     <>
       <div
         className={
-          commentList
+          commentList && commentList?.length > 0
             ? `${styles.commentList}`
             : `${styles.commentList} ${styles.hidden}`
         }

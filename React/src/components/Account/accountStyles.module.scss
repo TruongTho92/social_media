@@ -1,7 +1,8 @@
 @import "../../global/scss/rootStyles.scss";
 .account {
-  padding: 60px 20% 0 20%;
+  padding: 60px 20% 20px 20%;
   background-color: #fff;
+  height: fit-content;
 }
 .line {
   display: block;
@@ -88,12 +89,12 @@
 
 @include desktop {
   .account {
-    padding: 60px 10% 0 10%;
+    padding: 60px 10% 20px 10%;
   }
 }
 @include tablet {
   .account {
-    padding: 60px 4% 0 4%;
+    padding: 60px 4% 20px 4%;
   }
   .accountInfo {
     .image {
@@ -106,7 +107,7 @@
 }
 @include mobile {
   .account {
-    padding: 60px 4% 80px;
+    padding: 60px 4% 60px;
   }
   .accountInfo {
     @include d-flex(center, center);

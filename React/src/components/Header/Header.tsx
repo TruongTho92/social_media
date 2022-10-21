@@ -17,9 +17,9 @@ import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./headerStyles.module.scss";
 import { userApi } from "~/features/Auth/userApi";
+import SearchHeader from "../SearchHeader";
 
 const Header: React.FC = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
   const getUserData = useAppSelector(getUser);
 
@@ -50,19 +50,7 @@ const Header: React.FC = () => {
         </div>
 
         <>
-          <Input
-            className={
-              isOpenInput
-                ? `${styles.searchInput} ${styles.active}`
-                : styles.searchInput
-            }
-            placeholder="Search"
-            value={searchValue}
-            prefix={<IoSearchOutline className={styles.searchIcon} />}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearchValue(e.target.value)
-            }
-          />
+          <SearchHeader />
           <Link to="/chat">
             <BsChatDots className={styles.chatIconMobile} />
           </Link>

@@ -22,27 +22,6 @@
   .logoImg {
     width: 140px;
   }
-  .searchInput {
-    @include box(268, 36);
-    border-radius: $borderRadius;
-    background: rgb(239, 239, 239);
-    border: none;
-
-    &:hover,
-    &:focus {
-      box-shadow: none;
-      border: none;
-    }
-    input {
-      background: rgb(239, 239, 239);
-    }
-
-    .searchIcon {
-      width: 1.8rem;
-      height: 1.8rem;
-      color: #8e8e8e;
-    }
-  }
 
   .headerMenu {
     @include d-flex(center, center);

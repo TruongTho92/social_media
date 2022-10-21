@@ -1,5 +1,6 @@
 import React from "react";
 import { FiCheck } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
 import styles from "./userListStyles.module.scss";
@@ -37,11 +38,13 @@ const User: React.FC = () => {
       {/* LIST USER */}
       <div className={styles.userItem}>
         <div className={styles.userInfo}>
-          <img
-            src="/assets/images/user-img.jpg"
-            alt=""
-            className={styles.userImg}
-          />
+          <Link to={`/user-profile/`}>
+            <img
+              src="/assets/images/user-img.jpg"
+              alt=""
+              className={styles.userImg}
+            />
+          </Link>
           <div className={styles.info}>
             <span className={styles.name}>Minh Tài</span>
             <span className={styles.description}>Conian Guys</span>
