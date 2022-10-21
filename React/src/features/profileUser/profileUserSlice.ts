@@ -32,9 +32,9 @@ const profileUserSlice = createSlice({
     profileUserRequest: (state) => {
       state.loading = true;
     },
-    profileUserSuccess: (state, action: PayloadAction<any>) => {
+    profileUserSuccess: (state, action: PayloadAction<UserProfile>) => {
       state.loading = false;
-      state.data = action.payload.data;
+      state.data = action.payload;
     },
     profileUserFailure: (state) => {
       state.loading = true;

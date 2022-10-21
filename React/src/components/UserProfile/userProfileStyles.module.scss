@@ -1,7 +1,8 @@
 @import "../../global/scss/rootStyles.scss";
 .userProfile {
-  padding: 60px 20% 0;
+  padding: 60px 20% 20px;
   background-color: #fff;
+  height: fit-content;
 }
 .line {
   display: block;
@@ -111,7 +112,7 @@
 
 @include desktop {
   .userProfile {
-    padding: 60px 10% 0;
+    padding: 60px 10% 20px;
   }
 }
 @include tablet {

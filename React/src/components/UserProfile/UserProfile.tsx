@@ -40,7 +40,7 @@ const UserProfile: React.FC = (props: Props) => {
       {loadingPosts ? (
         <Loading />
       ) : (
-        <div className={`container-fluid ${styles.userProfile}`}>
+        <div className={`${styles.userProfile}`}>
           <div className={styles.userProfileContainer}>
             <div className={styles.userProfileInfo}>
               <div className={styles.image}>

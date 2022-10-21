@@ -32,7 +32,7 @@ export const postsApi = {
       setTimeout(() => {
         dispatch({
           type: GetPostsSuccess.toString(),
-          payload: data.data,
+          payload: data.data.post,
         });
       }, 1000);
     } catch (error: any) {

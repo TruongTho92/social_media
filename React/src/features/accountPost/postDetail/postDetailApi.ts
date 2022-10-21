@@ -97,7 +97,7 @@ export const postDetailApi = {
 
         dispatch({
           type: likeSuccess.toString(),
-          payload: data,
+          payload: data.data,
         });
       } catch (error: any) {
         dispatch({
@@ -157,7 +157,7 @@ export const postDetailApi = {
       );
       dispatch({
         type: CommentSuccess.toString(),
-        payload: data.data,
+        payload: data.data.comment,
       });
     } catch (error: any) {
       dispatch({

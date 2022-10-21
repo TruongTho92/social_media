@@ -23,7 +23,7 @@ export const profileUserApi = {
 
       dispatch({
         type: profileUserSuccess.toString(),
-        payload: data,
+        payload: data.data,
       });
     } catch (error: any) {
       dispatch({
