@@ -98,6 +98,9 @@
     }
   }
 }
+.iconSave {
+  font-size: 24px;
+}
 
 .caption {
   font-size: 14px;
@@ -182,10 +185,9 @@
     @include d-flex(start, center);
 
     .icon {
-      width: 30px;
-      height: 30px;
+      font-size: 24px;
       &:first-child {
-        margin-right: 10px;
+        margin-right: 16px;
       }
       &.active {
         color: red;
@@ -193,14 +195,17 @@
       cursor: pointer;
     }
   }
-  .likeNumber {
-    font-size: 14px;
-    list-style: 0;
-    margin-left: 12px;
-    span {
-      font-size: 16px;
-      font-weight: 700;
-    }
+}
+
+.likeNumber {
+  font-size: 14px;
+  list-style: 0;
+  margin-left: 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  span {
+    font-size: 16px;
+    font-weight: 700;
   }
 }
 
@@ -253,6 +258,10 @@
   .postDetail {
     padding: 4%;
   }
+  .postDetailImg {
+    height: 100%;
+    width: 100%;
+  }
   .settingPost {
     .settingPostContent {
       left: 10px;
@@ -276,6 +285,10 @@
   }
   .caption {
     // width: 240px;
+  }
+  .postDetailImg {
+    height: 100%;
+    width: 100%;
   }
 }
 

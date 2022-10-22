@@ -14,7 +14,7 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
   const reversed = [...postList].reverse();
 
   return (
-    <div className={styles.postList}>
+    <section className={styles.postList}>
       {postList && postList.length > 0 ? (
         reversed.map((post) => (
           <div className={styles.postItem} key={post.id}>
@@ -34,7 +34,7 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
           </Link>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -62,10 +62,10 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
                 </div>
                 {isAccount ? (
                   <div
-                    className="iconRemove"
+                    className={styles.iconRemove}
                     onClick={() => handleDeleteComment(comment.id)}
                   >
-                    <IoIosRemove size={24} cursor={"pointer"} />
+                    <i className={`far fa-backspace ${styles.deleteIcon}`}></i>
                   </div>
                 ) : null}
               </div>

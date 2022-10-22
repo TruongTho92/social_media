@@ -37,7 +37,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <>
+    <header>
       <div className={`${styles.headerContainer}`}>
         <div className="logo">
           <Link to="/">
@@ -59,17 +59,19 @@ const Header: React.FC = () => {
         <div className={styles.headerMenu}>
           <div className={styles.icon}>
             <NavLink to="/">
-              <AiFillHome className={styles.menuIcon} />
+              <i className={`fas fa-home-alt ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
             <NavLink to="/chat">
-              <BsChatDots className={styles.menuIcon} />
+              <i className={`far fa-comment ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
             <NavLink to="/create-post">
-              <BsPlusSquare className={styles.menuIcon} />
+              <i
+                className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
+              ></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
@@ -153,7 +155,7 @@ const Header: React.FC = () => {
           />
         </Link>
       </div>
-    </>
+    </header>
   );
 };
 
