@@ -119,7 +119,7 @@ const PostDetail: React.FC<Props> = () => {
       {loadingPost ? (
         <Loading />
       ) : (
-        <div
+        <section
           className={` ${styles.postDetail}`}
           onClick={() => {
             navigate(-1);
@@ -275,37 +275,32 @@ const PostDetail: React.FC<Props> = () => {
                 <div className={styles.emotion}>
                   <div className={styles.iconEmotion}>
                     {liked ? (
-                      <AiFillHeart
+                      <i
                         onClick={handleDisLike}
-                        className={`${styles.icon} ${styles.active} `}
-                      />
+                        className={`fas fa-heart ${styles.icon} ${styles.active}`}
+                      ></i>
                     ) : (
-                      <AiOutlineHeart
+                      <i
                         onClick={handleLike}
-                        className={styles.icon}
-                      />
+                        className={`far fa-heart ${styles.icon}`}
+                      ></i>
                     )}
-                    <BiMessageRounded
-                      className={styles.icon}
+
+                    <i
                       onClick={() => inputRef.current?.focus()}
-                    />
-                    <Typography className={styles.likeNumber}>
-                      <span>{userLikedData.length}</span> Liked
-                    </Typography>
+                      className={`far fa-comment ${styles.icon}`}
+                    ></i>
                   </div>
+
                   <div className={styles.save} style={{ lineHeight: 0 }}>
-                    <BsBookmarkPlus size={26} />
+                    <i className={`far fa-file-plus ${styles.iconSave}`}></i>
                   </div>
                 </div>
-
+                <Typography className={styles.likeNumber}>
+                  <span>{userLikedData.length}</span> Likes
+                </Typography>
                 {/* COMMENT MOBILE */}
-                {/* <div
-                  className={
-                    isOpenComment
-                      ? `${styles.commentMobile} ${styles.open} `
-                      : `${styles.commentMobile}`
-                  }
-                > */}
+
                 {isOpenComment && (
                   <Comments
                     postId={postId}
@@ -313,8 +308,6 @@ const PostDetail: React.FC<Props> = () => {
                     commentList={commentData}
                   />
                 )}
-
-                {/* </div> */}
 
                 <Typography.Text
                   className={styles.seeComment}
@@ -344,7 +337,7 @@ const PostDetail: React.FC<Props> = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
       <ToastContainer
         icon={<MdOutlineDone size={30} />}

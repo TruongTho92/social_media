@@ -1,8 +1,6 @@
 import { Input, InputRef } from "antd";
 import { useRef } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { BiMessageRounded } from "react-icons/bi";
-import { BsBookmarkPlus } from "react-icons/bs";
+
 import { Link } from "react-router-dom";
 import Comments from "~/components/Comments";
 import styles from "./postStyles.module.scss";
@@ -29,19 +27,20 @@ const Post = ({ userId = 134, postId = 1 }) => {
       <div className={styles.postImage}>
         <img src="/assets/images/post_img.jpg" alt="" />
       </div>
-      <div className={styles.comment}>
-        <Comments postId={1} />
-      </div>
+
       <div className={styles.emotion}>
         <div className={styles.left}>
-          <AiOutlineHeart className={styles.likeIcon} />
+          <i className={`far fa-heart ${styles.likeIcon}`}></i>
 
           <div style={{ lineHeight: 0 }} onClick={() => ref.current?.focus()}>
-            <BiMessageRounded className={styles.commentIcon} />
+            <i className={`far fa-comment ${styles.commentIcon}`}></i>
           </div>
         </div>
 
-        <BsBookmarkPlus className={styles.saveIcon} />
+        <i className={`far fa-file-plus ${styles.saveIcon}`}></i>
+      </div>
+      <div className={styles.comment}>
+        <Comments postId={1} />
       </div>
       <Input
         ref={ref}
