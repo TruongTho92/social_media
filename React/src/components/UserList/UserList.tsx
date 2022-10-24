@@ -15,14 +15,16 @@ const User: React.FC = () => {
         <div className={styles.userName}>
           <div className={styles.infoLeft}>
             <div className={styles.image}>
-              <img
-                src={
-                  getUserData.user.avatar
-                    ? getUserData.user.avatar
-                    : `/assets/images/user-vacant.jpg`
-                }
-                alt=""
-              />
+              <Link to="/profile">
+                <img
+                  src={
+                    getUserData.user.avatar
+                      ? getUserData.user.avatar
+                      : `/assets/images/user-vacant.jpg`
+                  }
+                  alt=""
+                />
+              </Link>
             </div>
             <div className={styles.info}>
               <p className={styles.name}>{getUserData.user.user_name}</p>

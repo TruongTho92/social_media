@@ -14,7 +14,7 @@ export interface StateTypes {
 const initialState: StateTypes = {
   loading: true,
   data: {
-    post: { id: null, image: "", caption: "", user_id: null },
+    post: { id: 0, image: "", caption: "", user_id: null },
     is_success: false,
     message: "",
     like: [],

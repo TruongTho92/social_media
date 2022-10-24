@@ -57,7 +57,7 @@ export interface PostPayloadCreate {
 }
 
 export interface PostAccount {
-  id: number | null;
+  id: number;
   image: string;
   caption: string;
   user_id: number | null;
@@ -101,7 +101,6 @@ export interface CommentDataResponse {
 export interface UserCommentResponse {
   id: number | null;
   user_name: string;
-  nick_name: string;
   avatar: string;
   content: string;
   user_id?: number | null;

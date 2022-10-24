@@ -1,10 +1,12 @@
 import { Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosRemove } from "react-icons/io";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserCommentResponse } from "~/common/types";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import { getCommentData } from "~/features/accountPost/postDetail/postDetailSlice";
+import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./commentsStyles.module.scss";
 
@@ -17,6 +19,17 @@ type Props = {
 const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
   const dispatch = useAppDispatch();
   const [ellipsis, setEllipsis] = useState(true);
+  const [isAccountComment, setIsAccountComment] = useState(false);
+
+  const getUserData = useAppSelector(getUser);
+
+  useEffect(() => {
+    if (
+      commentList?.find((comment) => comment.user_id === getUserData.user.id)
+    ) {
+      setIsAccountComment(true);
+    }
+  }, []);
 
   const handleDeleteComment = async (idComment: number | null) => {
     await dispatch(postDetailApi.deleteComment(postId, idComment));
@@ -37,14 +50,18 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
               <div className={styles.commentItem} key={comment.id}>
                 <div className={styles.infoComment}>
                   <div className={styles.userImage}>
-                    <img
-                      src={
-                        comment.avatar
-                          ? comment.avatar
-                          : `/assets/user-vacant.jpg`
-                      }
-                      alt=""
-                    />
+                    <Link
+                      to={isAccountComment ? "/profile" : "/user-profile/133"}
+                    >
+                      <img
+                        src={
+                          comment.avatar
+                            ? comment.avatar
+                            : `/assets/user-vacant.jpg`
+                        }
+                        alt=""
+                      />
+                    </Link>
                   </div>
                   <div className={styles.content}>
                     <span className={styles.name}>{comment.user_name}</span>
