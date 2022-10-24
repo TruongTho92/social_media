@@ -12,6 +12,13 @@ Rails.application.routes.draw do
       post "update_user", :to => 'users#update'
       get "logged_in", :to => 'application#is_logged_in?'
       get "load_user", :to => 'application#current_user'
+      resources :users do
+        member do
+          get :following, :followers
+        end
+      end
+
+      resources :relationships, only: [:create, :destroy]
 
       resources :posts do
         resources :likes, only:[:create, :destroy]

@@ -9,7 +9,11 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   def show
     @user = User.find(params[:id])
     render json: {
-      data: {user: @user}
+      data: {
+        user: @user,
+        following: @user.following,
+        followers: @user.followers,
+      }
     }
   end
 
@@ -26,6 +30,16 @@ class Api::V1::UsersController < Api::V1::ApplicationController
         is_success: false,
       }, status: :ok
     end
+  end
+
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.following
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers
   end
 
   private
