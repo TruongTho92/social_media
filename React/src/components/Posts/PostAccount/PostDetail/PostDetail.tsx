@@ -56,6 +56,11 @@ const PostDetail: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(postDetailApi.getPost(postId));
+
+    document.body.classList.add("postDetailOpen");
+    return function cleanup() {
+      document.body.classList.remove("postDetailOpen");
+    };
   }, []);
 
   useEffect(() => {
@@ -81,9 +86,10 @@ const PostDetail: React.FC<Props> = () => {
     setIsOpenEdit(false);
   };
 
-  const handleDeletePost = () => {
-    dispatch(postsApi.delete(postId));
+  const handleDeletePost = async () => {
+    await dispatch(postsApi.delete(postId));
     navigate("/profile");
+
     window.location.reload();
   };
 

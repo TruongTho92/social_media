@@ -11,7 +11,7 @@ type Props = {
 };
 
 const AccountPosts: React.FC<Props> = ({ postList }) => {
-  const reversed = [...postList].reverse();
+  const reversed = [...postList].sort((a, b) => b.id - a.id);
 
   return (
     <section className={styles.postList}>
