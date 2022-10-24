@@ -8,6 +8,11 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import {
+  getUserFollowers,
+  getUserFollowings,
+} from "~/features/profileUser/profileUserSlice";
 import Loading from "../Loading";
 import ModalFollowers from "../Modal/ModalFollowers";
 import ModalFollowing from "../Modal/ModalFollowing";
@@ -19,13 +24,18 @@ const Account: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const getUserData = useAppSelector(getUser);
-  const loadingPosts = useAppSelector(getLoadingPosts);
 
+  const userFollowers = useAppSelector(getUserFollowers);
+  const userFollowings = useAppSelector(getUserFollowings);
+  const loadingPosts = useAppSelector(getLoadingPosts);
   const allAccountPost = useAppSelector(getAllPost);
+
   useEffect(() => {
     dispatch(postsApi.getAll(getUserData.user.id));
-  }, [dispatch, getUserData.user.id]);
+    dispatch(profileUserApi.getProfileUser(getUserData.user.id));
+  }, []);
 
+  console.log({ userFollowings });
   return (
     <>
       {loadingPosts ? (
@@ -69,8 +79,8 @@ const Account: React.FC = () => {
                   </span>
 
                   {/* MODAL FOLLOW */}
-                  <ModalFollowers />
-                  <ModalFollowing />
+                  <ModalFollowers followers={userFollowers} />
+                  <ModalFollowing followings={userFollowings} />
                 </div>
                 <div className={styles.infoItem}>
                   <div>

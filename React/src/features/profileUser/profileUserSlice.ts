@@ -17,11 +17,12 @@ export const initialState: StateTypes = {
       user_name: "",
       nick_name: "",
       bio: "",
-      followers: [],
-      followings: [],
+
       gender: "",
       authentication_token: "",
     },
+    followers: [],
+    following: [],
   },
 };
 
@@ -35,6 +36,8 @@ const profileUserSlice = createSlice({
     profileUserSuccess: (state, action: PayloadAction<UserProfile>) => {
       state.loading = false;
       state.data = action.payload;
+      state.data.followers = action.payload.followers;
+      state.data.following = action.payload.following;
     },
     profileUserFailure: (state) => {
       state.loading = true;
@@ -46,5 +49,12 @@ export const { profileUserRequest, profileUserSuccess, profileUserFailure } =
   profileUserSlice.actions;
 
 export const getProfileUser = (state: RootState) => state.profileUser.data;
+export const getloadingProfile = (state: RootState) =>
+  state.profileUser.loading;
+
+export const getUserFollowers = (state: RootState) =>
+  state.profileUser.data.followers;
+export const getUserFollowings = (state: RootState) =>
+  state.profileUser.data.following;
 
 export default profileUserSlice.reducer;

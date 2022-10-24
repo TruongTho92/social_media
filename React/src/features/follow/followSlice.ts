@@ -24,10 +24,27 @@ const followSlice = createSlice({
     followFailure: (state) => {
       state.loading = true;
     },
+
+    unFollowRequest: (state) => {
+      state.loading = true;
+    },
+    unFollowSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data = action.payload;
+    },
+    unFollowFailure: (state) => {
+      state.loading = true;
+    },
   },
 });
 
-export const { followRequest, followSuccess, followFailure } =
-  followSlice.actions;
+export const {
+  followRequest,
+  followSuccess,
+  followFailure,
+  unFollowRequest,
+  unFollowSuccess,
+  unFollowFailure,
+} = followSlice.actions;
 
 export default followSlice.reducer;

@@ -64,7 +64,7 @@ const PostDetail: React.FC<Props> = () => {
   }, []);
 
   useEffect(() => {
-    if (allPostData.find((post) => post.user_id === getUserData.user.id)) {
+    if (allPostData.find((post: any) => post.user_id === getUserData.user.id)) {
       setIsAccount(true);
     }
     if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {

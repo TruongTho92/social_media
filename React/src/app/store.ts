@@ -10,6 +10,7 @@ import UserReducer from "~/features/Auth/userSlice";
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
 // import commentSlice from "~/features/comment/commentSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
+import followSlice from "~/features/follow/followSlice";
 
 const rootReducer = combineReducers({
   // AUTH and PROFILE ACCOUNT
@@ -22,8 +23,8 @@ const rootReducer = combineReducers({
   // USER PROFILE
   profileUser: profileUserSlice,
 
-  // // COMMENT
-  // comment: commentSlice,
+  // FOLLOW
+  follow: followSlice,
 });
 
 export const store = configureStore({

@@ -10,9 +10,17 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
+import { followApi } from "~/features/follow/followApi";
 import { profileUserApi } from "~/features/profileUser/profileUserApi";
-import { getProfileUser } from "~/features/profileUser/profileUserSlice";
+import {
+  getloadingProfile,
+  getProfileUser,
+  getUserFollowers,
+  getUserFollowings,
+} from "~/features/profileUser/profileUserSlice";
 import Loading from "../Loading";
+import ModalFollowers from "../Modal/ModalFollowers";
+import ModalFollowing from "../Modal/ModalFollowing";
 import AccountPosts from "../Posts/PostAccount/AccountPosts";
 
 import styles from "./userProfileStyles.module.scss";
@@ -23,8 +31,14 @@ const UserProfile: React.FC = (props: Props) => {
   const dispatch = useAppDispatch();
   const [isFollow, setIsFollow] = useState(false);
 
+  const getUserData = useAppSelector(getUser);
+
   const profileUser = useAppSelector(getProfileUser);
+  const userFollowers = useAppSelector(getUserFollowers);
+  const userFollowings = useAppSelector(getUserFollowings);
+
   const loadingPosts = useAppSelector(getLoadingPosts);
+  const loadingProfile = useAppSelector(getloadingProfile);
   const allAccountPost = useAppSelector(getAllPost);
 
   const { id } = useParams();
@@ -35,9 +49,30 @@ const UserProfile: React.FC = (props: Props) => {
     dispatch(postsApi.getAll(userId));
   }, []);
 
+  useEffect(() => {
+    if (userFollowers.find((follow) => follow.id === getUserData.user.id)) {
+      setIsFollow(true);
+    }
+  }, [getUserData.user.id, userFollowers]);
+
+  const handleFollow = async () => {
+    const data = {
+      id: userId,
+    };
+    await dispatch(followApi.follow(data));
+    setIsFollow(true);
+    dispatch(profileUserApi.getProfileUser(userId));
+  };
+
+  const handleUnFollow = async () => {
+    setIsFollow(false);
+    await dispatch(followApi.unFollow(userId));
+    dispatch(profileUserApi.getProfileUser(userId));
+  };
+
   return (
     <>
-      {loadingPosts ? (
+      {loadingPosts && loadingProfile ? (
         <Loading />
       ) : (
         <div className={`${styles.userProfile}`}>
@@ -65,9 +100,16 @@ const UserProfile: React.FC = (props: Props) => {
                     )}
                   </span>
                   {isFollow ? (
-                    <button className={styles.btnUnFollow}>Unfollow</button>
+                    <button
+                      onClick={handleUnFollow}
+                      className={styles.btnUnFollow}
+                    >
+                      Unfollow
+                    </button>
                   ) : (
-                    <button className={styles.btnFollow}>Follow</button>
+                    <button onClick={handleFollow} className={styles.btnFollow}>
+                      Follow
+                    </button>
                   )}
 
                   <Tooltip
@@ -100,12 +142,8 @@ const UserProfile: React.FC = (props: Props) => {
                   <span className={styles.posts}>
                     <span>12</span> posts
                   </span>
-                  <span className={styles.follower}>
-                    <span>122312</span> followers
-                  </span>
-                  <span className={styles.following}>
-                    <span>200000</span> following
-                  </span>
+                  <ModalFollowers followers={userFollowers} />
+                  <ModalFollowing followings={userFollowings} />
                 </div>
                 <div className={styles.infoItem}>
                   <div>

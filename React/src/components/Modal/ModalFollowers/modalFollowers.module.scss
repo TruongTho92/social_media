@@ -66,7 +66,7 @@
     @include d-flex(center, center);
     position: absolute;
     top: -4px;
-    right: -12px;
+    right: -16px;
     width: 14px;
     height: 14px;
     background-color: $mainBlue;
@@ -82,6 +82,18 @@
     font-weight: 600;
     color: $mainBlue;
     cursor: pointer;
+  }
+}
+.textNoneFl {
+  @include d-flex(space-between, center);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: $mainBlue;
+  i {
+    margin-left: 12px;
+    font-size: 24px;
+    color: $blackColor;
   }
 }
 

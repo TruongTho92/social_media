@@ -11,7 +11,7 @@ export interface UserDataTypes {
 export interface UserDataResponse {
   data: {
     user: {
-      id: number | null;
+      id: number;
       email: string;
       password: string;
       password_confirmation: string;
@@ -108,6 +108,13 @@ export interface UserCommentResponse {
 }
 
 // USER
+export interface UserFollowResponse {
+  id: number | null;
+  email: string;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+}
 export interface UserProfile {
   user: {
     id: number | null;
@@ -116,9 +123,19 @@ export interface UserProfile {
     user_name: string;
     nick_name: string;
     bio: string;
-    followers?: [];
-    followings?: [];
+
     gender: string;
     authentication_token: string;
   };
+  followers: UserFollowResponse[];
+  following: UserFollowResponse[];
+}
+
+// POST OF FOLLOWING
+export interface PostOfFollowingResponse {
+  user_id: number;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+  posts: PostAccount[];
 }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Comments from "~/components/Comments";
 import styles from "./postStyles.module.scss";
 
-const Post = ({ userId = 134, postId = 1 }) => {
+const Post = ({ userId = 133, postId = 1 }) => {
   const ref = useRef<InputRef>(null);
   return (
     <div className={styles.post}>
@@ -21,7 +21,6 @@ const Post = ({ userId = 134, postId = 1 }) => {
             <p className={styles.description}>Conianguys</p>
           </div>
         </div>
-        <button className={styles.userFollowBtn}>Follow</button>
       </div>
 
       <div className={styles.postImage}>
