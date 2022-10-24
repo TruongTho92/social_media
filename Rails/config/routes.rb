@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         resources :comments, only:[:create, :update, :destroy]
       end
       get "posts_of_user/:id", :to => 'posts#posts_of_user'
+      get "posts_of_following", :to => 'posts#posts_of_following'
     end
   end
 end
