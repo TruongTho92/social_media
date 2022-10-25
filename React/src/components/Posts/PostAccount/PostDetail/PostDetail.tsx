@@ -69,7 +69,6 @@ const PostDetail: React.FC<Props> = () => {
     }
     if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {
       setLiked(true);
-      console.log(123);
     } else {
       setLiked(false);
     }

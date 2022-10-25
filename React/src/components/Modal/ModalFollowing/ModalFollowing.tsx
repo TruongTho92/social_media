@@ -45,8 +45,8 @@ const ModalFollowing: React.FC<Props> = ({ followings }) => {
       >
         <div className={styles.followerContainer}>
           {followings?.length > 0 ? (
-            followings.map((user) => (
-              <div className={styles.userItem}>
+            followings.map((user, index) => (
+              <div className={styles.userItem} key={user.id}>
                 <div className={styles.userInfo}>
                   <Link
                     to={isAccount ? `/profile` : `/user-profile/${user.id}`}

@@ -125,17 +125,19 @@ const Header: React.FC = () => {
       <div className={styles.menuMobile}>
         <div className={styles.icon}>
           <NavLink to="/">
-            <AiFillHome className={styles.menuIcon} />
+            <i className={`fas fa-window ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/search">
-            <FiSearch className={styles.menuIcon} />
+            <i className={`far fa-search ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/create-post">
-            <BsPlusSquare className={styles.menuIcon} />
+            <i
+              className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
+            ></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
