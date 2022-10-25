@@ -19,10 +19,11 @@ export const userAllApi = {
           token: token,
         },
       });
+      console.log(data.data.user);
 
       dispatch({
         type: GetAllUserSucceess.toString(),
-        payload: data.data,
+        payload: data.data.user,
       });
     } catch (error: any) {
       dispatch({

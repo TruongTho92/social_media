@@ -18,12 +18,12 @@ const postOfFollowingSlice = createSlice({
     postFollowingRequest: (state) => {
       state.loading = true;
     },
-    postFollowingSuccess: (
-      state,
-      action: PayloadAction<PostOfFollowingResponse[]>
-    ) => {
+    postFollowingSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      // state.data = action.payload;
+      state.data = action.payload;
+      console.log("====================================");
+      console.log(state.data);
+      console.log("====================================");
     },
     postFollowingFailure: (state) => {
       state.loading = true;

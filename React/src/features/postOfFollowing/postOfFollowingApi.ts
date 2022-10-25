@@ -15,11 +15,12 @@ export const postOfFollowingApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`/api/v1/`, {
+      const { data } = await apiClient.get(`/api/v1/posts_of_following`, {
         headers: {
           token: token,
         },
       });
+      console.log(data.data);
 
       dispatch({
         type: postFollowingSuccess.toString(),
