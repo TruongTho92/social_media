@@ -75,6 +75,16 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     }
   end
 
+  def posts_of_following
+    @posts = []
+    current_user.following.each do |user|
+      @posts << [posts: user.posts, user_id: user.id,avatar: user.avatar,user_name: user.user_name, nick_name: user.nick_name]
+    end
+    render json: {
+      data: @posts
+    }
+  end
+
   private
   def post_params
     params.require(:post).permit(:image, :caption)
