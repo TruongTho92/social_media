@@ -35,7 +35,6 @@ const Account: React.FC = () => {
     dispatch(profileUserApi.getProfileUser(getUserData.user.id));
   }, []);
 
-  console.log({ userFollowings });
   return (
     <>
       {loadingPosts ? (

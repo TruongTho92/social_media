@@ -23,12 +23,18 @@ const postOfFollowingSlice = createSlice({
       action: PayloadAction<PostOfFollowingResponse[]>
     ) => {
       state.loading = false;
-      // state.data.concat(action.payload);
+      // state.data = action.payload;
     },
     postFollowingFailure: (state) => {
       state.loading = true;
     },
   },
 });
+
+export const {
+  postFollowingRequest,
+  postFollowingSuccess,
+  postFollowingFailure,
+} = postOfFollowingSlice.actions;
 
 export default postOfFollowingSlice;

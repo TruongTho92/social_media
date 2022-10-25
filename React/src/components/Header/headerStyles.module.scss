@@ -130,18 +130,6 @@
     border-bottom: 1px solid $greyLight;
     margin-bottom: 8px;
   }
-  // .logout {
-  //   font-size: 16px;
-  //   font-weight: 400;
-  //   color: red;
-  //   cursor: pointer;
-  //   transition: all 0.2s ease-out;
-
-  //   &:hover {
-  //     transform: translateX(10px);
-  //     transition: all 0.2s ease-out;
-  //   }
-  // }
 }
 
 .nav-link.activated {
@@ -206,6 +194,16 @@
     background-color: $whiteColor;
     padding: 12px 6%;
     z-index: 100;
+    .addIcon {
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px !important;
+      border: 2px solid $blackColor;
+      border-radius: 6px;
+    }
     .icon {
       display: flex;
       justify-content: center;
@@ -215,23 +213,15 @@
       height: 3rem;
       height: 100%;
 
-      &:hover a {
-        color: blue;
-        transform: translateY(-10px);
-        transition: all 0.2s ease-out;
-      }
       a {
-        width: 3rem;
-        height: 3rem;
-        display: block;
+        @include d-flex(center, center);
         text-decoration: none;
         color: $blackColor;
         transition: all 0.2s ease-out;
       }
     }
     .menuIcon {
-      width: 3rem;
-      height: 3rem;
+      font-size: 2.4rem;
     }
     .menuUser {
       @include d-flex(center, center);
