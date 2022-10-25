@@ -51,7 +51,11 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
                 <div className={styles.infoComment}>
                   <div className={styles.userImage}>
                     <Link
-                      to={isAccountComment ? "/profile" : "/user-profile/133"}
+                      to={
+                        isAccountComment
+                          ? "/profile"
+                          : `/user-profile/${comment.user_id}`
+                      }
                     >
                       <img
                         src={

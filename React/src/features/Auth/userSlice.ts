@@ -16,7 +16,7 @@ const initialState: stateType = {
   data: {
     data: {
       user: {
-        id: null,
+        id: 0,
         email: "",
         password: "",
         password_confirmation: "",
