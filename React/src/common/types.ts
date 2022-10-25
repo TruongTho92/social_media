@@ -139,3 +139,19 @@ export interface PostOfFollowingResponse {
   nick_name: string;
   posts: PostAccount[];
 }
+
+// ALL ACCOUNT
+export interface AllAccountResponse {
+  id: number;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+  bio: string;
+  followers?: [];
+  followings?: [];
+  gender: string;
+  authentication_token: string;
+}
