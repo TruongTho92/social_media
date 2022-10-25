@@ -78,10 +78,14 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   def posts_of_following
     @posts = []
     current_user.following.each do |user|
-      @posts << [posts: user.posts, user_id: user.id,avatar: user.avatar,user_name: user.user_name, nick_name: user.nick_name]
+      user.posts.each do |post|
+        @posts << {id: post.id, image: post.image, caption: post.caption, 
+                  user_id: post.user_id, avatar: post.user.avatar, user_name: post.user.user_name, 
+                  nick_name: post.user.nick_name, comment: post.comments, like: post.likes}
+      end
     end
     render json: {
-      data: @posts
+      data: {post: @posts}
     }
   end
 
