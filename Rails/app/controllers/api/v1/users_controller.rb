@@ -1,6 +1,8 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
   def index
-    @users = User.all
+    users = User.all
+    current_user_following = current_user.following
+    @users = users - current_user_following - [current_user]
     render json: {
       data: {user: @users}
     }
