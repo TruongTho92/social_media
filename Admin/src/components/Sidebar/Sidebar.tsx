@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./sidebarStyles.scss";
 
 type Props = {
@@ -20,12 +20,17 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
     <>
       {isOpenSidebar && <div className="sidebar__mark"></div>}
       <aside className={isOpenSidebar ? "sidebar open" : "sidebar"}>
-        <div className="sidebar__close" onClick={handleCloseSidebar}>
-          X
+        <div
+          className={isOpenSidebar ? "sidebar__close open" : "sidebar__close"}
+          onClick={handleCloseSidebar}
+        >
+          <i className="fas fa-hand-point-left close__icon"></i>
         </div>
         <div className="logo">
           <div className="logo__img">
-            <img src="/assets/images/user-img.jpg" alt="" />
+            <Link to="/profile">
+              <img src="/assets/images/user-img.jpg" alt="" />
+            </Link>
           </div>
           <div className="logo__username">
             <span className="name">Minh Tai</span>
@@ -37,7 +42,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
             <li className="menu__item">
               <NavLink to="/dashboard" className="menu__item-link">
                 <div className="link__content">
-                  <i className="fas fa-th-large menu__icon"></i>
+                  <div style={{ lineHeight: 0 }}>
+                    <i className="fas fa-th-large menu__icon"></i>
+                  </div>
                   <span> Dashboard</span>
                 </div>
               </NavLink>
@@ -48,7 +55,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                 onClick={() => setOpenManageMenu(!openManageMenu)}
               >
                 <div className="link__content">
-                  <i className="far fa-radiation menu__icon"></i>
+                  <div style={{ lineHeight: 0 }}>
+                    <i className="far fa-radiation menu__icon"></i>
+                  </div>
                   <span>Manage App</span>
                 </div>
                 <i
@@ -75,7 +84,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                 </li>
                 <li className="manage__item">
                   <NavLink to="/manage-users" className="manage__item-link">
-                    <i className="far fa-users manage__icon"></i>
+                    <div style={{ lineHeight: 0 }}>
+                      <i className="far fa-users manage__icon"></i>
+                    </div>
                     <span>User</span>
                   </NavLink>
                 </li>
@@ -84,7 +95,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
             <li className="menu__item">
               <NavLink to="/more-account" className="menu__item-link">
                 <div className="link__content">
-                  <i className="far fa-tire-rugged menu__icon"></i>
+                  <div style={{ lineHeight: 0 }}>
+                    <i className="far fa-tire-rugged menu__icon"></i>
+                  </div>
                   <span> More account</span>
                 </div>
               </NavLink>
@@ -93,7 +106,10 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
           <div className="menu__item">
             <NavLink to="/settings" className="menu__item-link">
               <div className="link__content">
-                <i className="far fa-cog menu__icon"></i>
+                <div style={{ lineHeight: 0 }}>
+                  <i className="far fa-cog menu__icon"></i>
+                </div>
+
                 <span>Settings</span>
               </div>
             </NavLink>
