@@ -59,7 +59,7 @@ const Header: React.FC = () => {
         <div className={styles.headerMenu}>
           <div className={styles.icon}>
             <NavLink to="/">
-              <i className={`fas fa-home-alt ${styles.menuIcon}`}></i>
+              <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
           </div>
           <div className={styles.icon}>
             <NavLink to="/saves">
-              <BsBookmarkPlus className={styles.menuIcon} />
+              <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
 
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
       <div className={styles.menuMobile}>
         <div className={styles.icon}>
           <NavLink to="/">
-            <i className={`fas fa-window ${styles.menuIcon}`}></i>
+            <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
@@ -142,7 +142,7 @@ const Header: React.FC = () => {
         </div>
         <div className={styles.icon}>
           <NavLink to="/saves">
-            <BsBookmarkPlus className={styles.menuIcon} />
+            <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
 

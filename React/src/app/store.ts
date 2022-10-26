@@ -12,6 +12,7 @@ import postsSlice from "~/features/accountPost/Posts/postsSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
 import followSlice from "~/features/follow/followSlice";
 import userAllSlice from "~/features/userAll/userAllSlice";
+import postOfFollowingSlice from "../features/postOfFollowing/postOfFollowingSlice";
 
 const rootReducer = combineReducers({
   // AUTH and PROFILE ACCOUNT
@@ -19,6 +20,9 @@ const rootReducer = combineReducers({
 
   // ALL ACCOUNT
   allAccount: userAllSlice,
+
+  // POST FOLLOWING
+  postOfFollowing: postOfFollowingSlice,
 
   // ACCOUNT POST
   posts: postsSlice,

@@ -7,7 +7,7 @@ import {
 } from "./profileUserSlice";
 
 export const profileUserApi = {
-  getProfileUser: (id: number) => async (dispatch: any) => {
+  getProfileUser: (id: number | null) => async (dispatch: any) => {
     try {
       dispatch({
         type: profileUserRequest.toString(),
@@ -20,11 +20,12 @@ export const profileUserApi = {
           token: token,
         },
       });
-
-      dispatch({
-        type: profileUserSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: profileUserSuccess.toString(),
+          payload: data.data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: profileUserFailure.toString(),

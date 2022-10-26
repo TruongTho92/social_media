@@ -74,7 +74,7 @@ const Account: React.FC = () => {
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
-                    <span>12</span> posts
+                    <span>{allAccountPost?.length}</span> posts
                   </span>
 
                   {/* MODAL FOLLOW */}

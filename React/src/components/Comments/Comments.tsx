@@ -1,11 +1,9 @@
 import { Typography } from "antd";
-import React, { useEffect, useState } from "react";
-import { IoIosRemove } from "react-icons/io";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserCommentResponse } from "~/common/types";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
-import { getCommentData } from "~/features/accountPost/postDetail/postDetailSlice";
 import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./commentsStyles.module.scss";
@@ -19,17 +17,8 @@ type Props = {
 const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
   const dispatch = useAppDispatch();
   const [ellipsis, setEllipsis] = useState(true);
-  const [isAccountComment, setIsAccountComment] = useState(false);
 
   const getUserData = useAppSelector(getUser);
-
-  useEffect(() => {
-    if (
-      commentList?.find((comment) => comment.user_id === getUserData.user.id)
-    ) {
-      setIsAccountComment(true);
-    }
-  }, []);
 
   const handleDeleteComment = async (idComment: number | null) => {
     await dispatch(postDetailApi.deleteComment(postId, idComment));
@@ -52,7 +41,7 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
                   <div className={styles.userImage}>
                     <Link
                       to={
-                        isAccountComment
+                        comment.user_id === getUserData.user.id
                           ? "/profile"
                           : `/user-profile/${comment.user_id}`
                       }
@@ -81,7 +70,7 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
                     </Typography.Paragraph>
                   </div>
                 </div>
-                {isAccount ? (
+                {comment.user_id === getUserData.user.id || isAccount ? (
                   <div
                     className={styles.iconRemove}
                     onClick={() => handleDeleteComment(comment.id)}

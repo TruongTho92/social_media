@@ -81,35 +81,33 @@ export const postDetailApi = {
   },
 
   // LIKE
-  like:
-    (id: number | null, post: any, userData: any) => async (dispatch: any) => {
-      try {
-        dispatch({
-          type: likeRequest.toString(),
-        });
-        const token = JSON.parse(Cookies.get("access_token") || "");
+  like: (id: number | null) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: likeRequest.toString(),
+      });
+      const token = JSON.parse(Cookies.get("access_token") || "");
 
-        const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
-          headers: {
-            token: token,
-          },
-        });
+      const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
+        headers: {
+          token: token,
+        },
+      });
 
-        dispatch({
-          type: likeSuccess.toString(),
-          payload: data.data,
-        });
-      } catch (error: any) {
-        dispatch({
-          type: likeFailure.toString(),
-          payload: error.response.data,
-        });
-      }
-    },
+      dispatch({
+        type: likeSuccess.toString(),
+        payload: data.data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: likeFailure.toString(),
+        payload: error.response.data,
+      });
+    }
+  },
 
   disLike:
-    (id: number | null, idLike: number | null, post: any, userData: any) =>
-    async (dispatch: any) => {
+    (id: number | null, idLike: number | null) => async (dispatch: any) => {
       try {
         dispatch({
           type: disLikeRequest.toString(),

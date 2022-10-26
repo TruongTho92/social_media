@@ -19,7 +19,6 @@ export const userAllApi = {
           token: token,
         },
       });
-      console.log(data.data.user);
 
       dispatch({
         type: GetAllUserSucceess.toString(),

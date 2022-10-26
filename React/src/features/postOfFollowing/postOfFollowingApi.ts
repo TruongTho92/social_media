@@ -20,7 +20,6 @@ export const postOfFollowingApi = {
           token: token,
         },
       });
-      console.log(data.data);
 
       dispatch({
         type: postFollowingSuccess.toString(),
