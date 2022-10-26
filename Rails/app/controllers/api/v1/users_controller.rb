@@ -39,6 +39,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     render json: {
       data: {user: @users}
     }, status: :ok
+  end
 
   def following
     @user  = User.find(params[:id])
