@@ -22,27 +22,6 @@
   .logoImg {
     width: 140px;
   }
-  .searchInput {
-    @include box(268, 36);
-    border-radius: $borderRadius;
-    background: rgb(239, 239, 239);
-    border: none;
-
-    &:hover,
-    &:focus {
-      box-shadow: none;
-      border: none;
-    }
-    input {
-      background: rgb(239, 239, 239);
-    }
-
-    .searchIcon {
-      width: 1.8rem;
-      height: 1.8rem;
-      color: #8e8e8e;
-    }
-  }
 
   .headerMenu {
     @include d-flex(center, center);
@@ -72,8 +51,21 @@
       }
     }
     .menuIcon {
+      font-size: 2.2rem;
+    }
+
+    .addIcon {
       width: 2.2rem;
       height: 2.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      border: 2px solid $blackColor;
+      border-radius: 6px;
+      &:hover {
+        border: 2px solid $mainBlue;
+      }
     }
     .menuUser {
       @include d-flex(center, center);
@@ -138,18 +130,6 @@
     border-bottom: 1px solid $greyLight;
     margin-bottom: 8px;
   }
-  // .logout {
-  //   font-size: 16px;
-  //   font-weight: 400;
-  //   color: red;
-  //   cursor: pointer;
-  //   transition: all 0.2s ease-out;
-
-  //   &:hover {
-  //     transform: translateX(10px);
-  //     transition: all 0.2s ease-out;
-  //   }
-  // }
 }
 
 .nav-link.activated {
@@ -214,6 +194,16 @@
     background-color: $whiteColor;
     padding: 12px 6%;
     z-index: 100;
+    .addIcon {
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px !important;
+      border: 2px solid $blackColor;
+      border-radius: 6px;
+    }
     .icon {
       display: flex;
       justify-content: center;
@@ -223,23 +213,15 @@
       height: 3rem;
       height: 100%;
 
-      &:hover a {
-        color: blue;
-        transform: translateY(-10px);
-        transition: all 0.2s ease-out;
-      }
       a {
-        width: 3rem;
-        height: 3rem;
-        display: block;
+        @include d-flex(center, center);
         text-decoration: none;
         color: $blackColor;
         transition: all 0.2s ease-out;
       }
     }
     .menuIcon {
-      width: 3rem;
-      height: 3rem;
+      font-size: 2.4rem;
     }
     .menuUser {
       @include d-flex(center, center);

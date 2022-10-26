@@ -15,7 +15,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
       @likes << like.user
     end
     @post.comments.each do |comment|
-      @comments << {content: comment.content, user_name: comment.user.user_name, avatar: comment.user.avatar}
+      @comments << {id: comment.id, content: comment.content, user_id: comment.user.id ,user_name: comment.user.user_name, avatar: comment.user.avatar}
     end
     render json: {
       message: "Get Post Successfully",
@@ -72,6 +72,20 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     render json: {
       message: "Get Posts of User Successfully",
       data: {post: @post}
+    }
+  end
+
+  def posts_of_following
+    @posts = []
+    current_user.following.each do |user|
+      user.posts.each do |post|
+        @posts << {id: post.id, image: post.image, caption: post.caption, 
+                  user_id: post.user_id, avatar: post.user.avatar, user_name: post.user.user_name, 
+                  nick_name: post.user.nick_name, comment: post.comments, like: post.likes}
+      end
+    end
+    render json: {
+      data: {post: @posts}
     }
   end
 

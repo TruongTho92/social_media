@@ -1,0 +1,113 @@
+@import "../../../global/scss/rootStyles.scss";
+
+.follower {
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 24px;
+  span {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+}
+.followerContainer {
+  width: 400px !important;
+  padding: 16px;
+}
+
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  &:not(:first-child) {
+    margin-top: 12px;
+    border-top: 1px solid $greyLight;
+    padding-top: 12px;
+  }
+  .userImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 100rem;
+    object-fit: cover;
+  }
+  .userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .info {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left: 8px;
+    }
+    .name {
+      font-size: 14px;
+      font-weight: 600;
+      width: fit-content;
+      margin: 0;
+      line-height: 1;
+      // margin-bottom: 4px;
+      white-space: nowrap;
+      word-wrap: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .description {
+      margin: 0;
+      font-size: 12px;
+      font-weight: normal;
+      color: #8e8e8e;
+      line-height: normal;
+      white-space: nowrap;
+    }
+  }
+  .ticked {
+    @include d-flex(center, center);
+    position: absolute;
+    top: -4px;
+    right: -16px;
+    width: 14px;
+    height: 14px;
+    background-color: $mainBlue;
+    border-radius: 50%;
+    .tickedIcon {
+      font-size: 10px;
+      font-weight: bold;
+      color: $whiteColor;
+    }
+  }
+  .textFollow {
+    font-size: 14px;
+    font-weight: 600;
+    color: $mainBlue;
+    cursor: pointer;
+  }
+}
+.textNoneFl {
+  @include d-flex(space-between, center);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  color: $mainBlue;
+  i {
+    margin-left: 12px;
+    font-size: 24px;
+    color: $blackColor;
+  }
+}
+
+@include mobile {
+  .followerContainer {
+    width: 100% !important;
+  }
+  .follower {
+    text-align: center;
+    font-size: 14px;
+    span {
+      display: block;
+    }
+  }
+}

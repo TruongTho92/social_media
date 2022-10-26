@@ -17,9 +17,9 @@ import { getUser } from "~/features/Auth/userSlice";
 
 import styles from "./headerStyles.module.scss";
 import { userApi } from "~/features/Auth/userApi";
+import SearchHeader from "../SearchHeader";
 
 const Header: React.FC = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [isOpenInput, setIsOpenInput] = useState(false);
   const getUserData = useAppSelector(getUser);
 
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <>
+    <header>
       <div className={`${styles.headerContainer}`}>
         <div className="logo">
           <Link to="/">
@@ -50,19 +50,7 @@ const Header: React.FC = () => {
         </div>
 
         <>
-          <Input
-            className={
-              isOpenInput
-                ? `${styles.searchInput} ${styles.active}`
-                : styles.searchInput
-            }
-            placeholder="Search"
-            value={searchValue}
-            prefix={<IoSearchOutline className={styles.searchIcon} />}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearchValue(e.target.value)
-            }
-          />
+          <SearchHeader />
           <Link to="/chat">
             <BsChatDots className={styles.chatIconMobile} />
           </Link>
@@ -71,17 +59,19 @@ const Header: React.FC = () => {
         <div className={styles.headerMenu}>
           <div className={styles.icon}>
             <NavLink to="/">
-              <AiFillHome className={styles.menuIcon} />
+              <i className={`fas fa-home-alt ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
             <NavLink to="/chat">
-              <BsChatDots className={styles.menuIcon} />
+              <i className={`far fa-comment ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
             <NavLink to="/create-post">
-              <BsPlusSquare className={styles.menuIcon} />
+              <i
+                className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
+              ></i>
             </NavLink>
           </div>
           <div className={styles.icon}>
@@ -135,17 +125,19 @@ const Header: React.FC = () => {
       <div className={styles.menuMobile}>
         <div className={styles.icon}>
           <NavLink to="/">
-            <AiFillHome className={styles.menuIcon} />
+            <i className={`fas fa-window ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/search">
-            <FiSearch className={styles.menuIcon} />
+            <i className={`far fa-search ${styles.menuIcon}`}></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/create-post">
-            <BsPlusSquare className={styles.menuIcon} />
+            <i
+              className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
+            ></i>
           </NavLink>
         </div>
         <div className={styles.icon}>
@@ -165,7 +157,7 @@ const Header: React.FC = () => {
           />
         </Link>
       </div>
-    </>
+    </header>
   );
 };
 

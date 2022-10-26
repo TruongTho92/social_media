@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  margin: 0 auto;
+  min-width: 100%;
+
+  background-color: $bgMain;
+}
+.postDetailOpen {
+  overflow: hidden;
+}
+
+.container-fluid {
+  width: 1440px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+}
+.pt-80 {
+  padding-top: 80px !important;
+}
+.animation-left-to-right {
+  animation: LeftToRight 0.25s linear;
+}
+
+// CUSTOM ANTD
+.ant-modal {
+  width: fit-content !important;
+  @media screen and (max-width: 767px) {
+    width: 100% !important;
+    padding: 0 4% 40px;
+  }
+}
+.ant-modal-body {
+  padding: 0 !important;
+}
+.ant-modal-content {
+  border-radius: 8px !important;
+}
+.ant-tooltip-inner {
+  padding: 0;
+  border-radius: 6px;
+}
+
+@mixin d-flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin box($width, $height) {
+  width: $width * 1px;
+  height: $height * 1px;
+}
+
+@mixin avatar($width, $height) {
+  width: $width * 1px;
+  height: $height * 1px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+// COVER BACKGROUND
+@mixin cover-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes FadeOut {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

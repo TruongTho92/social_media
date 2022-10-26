@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { RootState } from "~/app/store";
-import { PostDataResponse } from "~/common/types";
+import { PostAccount, PostDataResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean | null;
@@ -11,7 +11,7 @@ export interface StateTypes {
 const initialState: StateTypes = {
   loading: true,
   data: {
-    posts: [{ id: null, image: "", caption: "" }],
+    posts: [{ id: 0, image: "", caption: "", user_id: null }],
     is_success: false,
     message: "",
   },
@@ -25,13 +25,13 @@ const postsSlice = createSlice({
     GetPostsRequest: (state) => {
       state.loading = true;
     },
-    GetPostsSuccess: (state, action: PayloadAction<any>) => {
+    GetPostsSuccess: (state, action: PayloadAction<PostAccount[]>) => {
       state.loading = false;
-      state.data.posts = action.payload.post;
+      state.data.posts = action.payload;
     },
-    GetPostsFailure: (state, action: PayloadAction<any>) => {
+    GetPostsFailure: (state, action: PayloadAction<PostAccount[]>) => {
       state.loading = true;
-      state.data.posts = action.payload.post;
+      state.data.posts = action.payload;
     },
 
     // [POST]: /create_post => CREATE POST

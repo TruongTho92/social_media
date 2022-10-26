@@ -59,7 +59,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className={`container-fluid ${styles.login}`}>
+    <div className={` ${styles.login}`}>
       <Row
         justify="center"
         align="middle"

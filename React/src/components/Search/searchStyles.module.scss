@@ -3,11 +3,15 @@
   padding: 80px 4% 40px;
 }
 .searchInput {
-  padding: 8px 12px;
+  padding: 10px 12px;
   font-size: 14px;
   border-radius: 6px;
   border: 1px solid $greyLight;
   margin-bottom: 12px;
+  &:hover {
+    box-shadow: none;
+    border: 1px solid $greyLight !important;
+  }
   &:focus {
     box-shadow: none;
     border: 1px solid $greyLight;

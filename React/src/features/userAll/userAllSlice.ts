@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserDataResponse } from "~/common/types";
+import { RootState } from "~/app/store";
+import { AllAccountResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
-  data: UserDataResponse[];
+  data: AllAccountResponse[];
 }
 
 const initialState: StateTypes = {
@@ -18,7 +19,10 @@ const userAllSlice = createSlice({
     GetAllUserRequest: (state) => {
       state.loading = true;
     },
-    GetAllUserSucceess: (state, action: PayloadAction<any>) => {
+    GetAllUserSucceess: (
+      state,
+      action: PayloadAction<AllAccountResponse[]>
+    ) => {
       state.loading = false;
       state.data = action.payload;
     },
@@ -30,5 +34,7 @@ const userAllSlice = createSlice({
 
 export const { GetAllUserRequest, GetAllUserSucceess, GetAllUserFailure } =
   userAllSlice.actions;
+
+export const getAllUser = (state: RootState) => state.allAccount.data;
 
 export default userAllSlice.reducer;

@@ -1,4 +1,4 @@
-// [USER]
+// [ACCOUNT]
 
 export interface UserDataTypes {
   user: {
@@ -11,7 +11,7 @@ export interface UserDataTypes {
 export interface UserDataResponse {
   data: {
     user: {
-      id: number | null;
+      id: number;
       email: string;
       password: string;
       password_confirmation: string;
@@ -57,9 +57,10 @@ export interface PostPayloadCreate {
 }
 
 export interface PostAccount {
-  id: number | null;
+  id: number;
   image: string;
   caption: string;
+  user_id: number | null;
 }
 
 export interface PostDataResponse {
@@ -71,8 +72,9 @@ export interface PostDetailResponse {
   post: PostAccount;
   is_success: boolean;
   message: string;
-  likes: [];
-  comments: [];
+
+  like: [];
+  comment: [];
 }
 
 // LIKE
@@ -89,12 +91,67 @@ export interface userLikedTypes {
   avatar: string;
 }
 
+// COMMENT
 export interface CommentDataResponse {
   id: number | null;
+  post_id: number | null;
+  user_id: number | null;
+}
+
+export interface UserCommentResponse {
+  id: number | null;
   user_name: string;
-  nick_name: string;
   avatar: string;
   content: string;
   user_id?: number | null;
   post_id?: number | null;
+}
+
+// USER
+export interface UserFollowResponse {
+  id: number | null;
+  email: string;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+}
+export interface UserProfile {
+  user: {
+    id: number | null;
+    email: string;
+    avatar: string;
+    user_name: string;
+    nick_name: string;
+    bio: string;
+
+    gender: string;
+    authentication_token: string;
+  };
+  followers: UserFollowResponse[];
+  following: UserFollowResponse[];
+}
+
+// POST OF FOLLOWING
+export interface PostOfFollowingResponse {
+  user_id: number;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+  posts: PostAccount[];
+}
+
+// ALL ACCOUNT
+export interface AllAccountResponse {
+  id: number;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+  bio: string;
+  followers?: [];
+  followings?: [];
+  gender: string;
+  authentication_token: string;
 }
