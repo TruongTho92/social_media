@@ -23,7 +23,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Sidebar />
-      {/* {isAuthenticated && <Sidebar />} */}
 
       <Routes>
         {/* AUTH */}
