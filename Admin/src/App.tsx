@@ -4,12 +4,12 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { getAuthenticated } from "./features/Auth/userSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/DashboardPage";
+import MoreAccount from "./pages/MoreAccount";
 import NotFound from "./pages/NotFound";
 
 const App: React.FC = () => {
@@ -23,13 +23,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Sidebar />
-      {/* {isAuthenticated && <Sidebar />} */}
-
       <Routes>
         {/* AUTH */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/more-account" element={<MoreAccount />} />
 
         {/* 404 PAGE */}
         <Route path="*" element={<NotFound />} />

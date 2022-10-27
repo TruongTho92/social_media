@@ -1,3 +1,88 @@
-.dashboard {
-  padding-left: 30rem;
+@import "../../global/scss/rootStyles.scss";
+// CUSTOM SLICK
+
+.dashboard__container {
+  padding: 12px 0;
+  padding-left: 32rem;
+  padding-right: 2.4rem;
+}
+
+.dashboard__body {
+  margin-top: 24px;
+}
+
+// BODY
+
+.static__img {
+  &-container {
+    padding-bottom: 24px;
+  }
+  position: relative;
+  background: url("../../../public/assets/images/bg-static.jpg") no-repeat
+    center / cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: $boxShadowCard;
+
+  &-content {
+    color: $whiteColor;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  i {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    margin-top: 8px;
+    font-size: 32px;
+    color: yellow;
+    animation: Rotate 1.6s linear infinite;
+  }
+}
+
+@include tablet {
+  .dashboard__container {
+    padding: 12px 2rem;
+  }
+
+  .user__list {
+    margin-left: 24px;
+  }
+
+  .static__img {
+    height: 200px;
+    &-content {
+      color: $whiteColor;
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+}
+@include mobile {
+  .dashboard__container {
+    padding: 12px 2rem;
+  }
+  .dashboard__header {
+    padding: 8px 24px 8px 24px;
+    .menu__bar {
+      display: block;
+      line-height: 0;
+    }
+  }
+  .static__img {
+    height: 200px;
+    &-content {
+      color: $whiteColor;
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
 }

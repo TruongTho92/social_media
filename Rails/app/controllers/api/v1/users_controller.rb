@@ -1,6 +1,8 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
   def index
-    @users = User.all
+    users = User.all
+    current_user_following = current_user.following
+    @users = users - current_user_following - [current_user]
     render json: {
       data: {user: @users}
     }
@@ -30,6 +32,13 @@ class Api::V1::UsersController < Api::V1::ApplicationController
         is_success: false,
       }, status: :ok
     end
+  end
+
+  def search
+    @users = User.where("user_name LIKE ?", "%#{params[:search]}%")
+    render json: {
+      data: {user: @users}
+    }, status: :ok
   end
 
   def following
