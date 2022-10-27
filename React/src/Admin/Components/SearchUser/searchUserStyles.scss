@@ -1,0 +1,109 @@
+@import "../../../global/scss/rootStyles.scss";
+.search {
+  overflow-y: scroll;
+  height: 380px;
+  background-color: $whiteColor;
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: $boxShadowCard;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  &__heading {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  &__input {
+    margin-bottom: 24px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid $greyBold !important;
+    .search__icon {
+      font-size: 16px;
+    }
+    input {
+      font-size: 14px;
+
+      color: $greyTextColor;
+    }
+
+    &:hover {
+      border: 1px solid $greyLight !important;
+    }
+
+    &:focus {
+      border: 1px solid $greyLight !important;
+      box-shadow: none !important;
+    }
+  }
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none !important;
+  }
+  &__icon {
+  }
+  &__user-list {
+  }
+  &__user-item {
+    background-color: $mainBlue;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    box-shadow: $boxShadow;
+  }
+}
+
+.user {
+  &__item-left {
+    cursor: pointer;
+  }
+  &__item-img {
+    @include avatar(45, 45);
+    border-radius: 100rem;
+    border: 2px solid $whiteColor;
+  }
+  &__item-info {
+    margin-left: 8px;
+  }
+  &__item-name {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    color: $whiteColor;
+  }
+  &__item-role {
+    font-size: 14px;
+    font-weight: 400;
+    color: $menuColor;
+    font-style: italic;
+    color: $whiteColor;
+  }
+  &__item-right {
+    cursor: pointer;
+    white-space: nowrap;
+
+    i {
+      font-size: 20px;
+      color: $whiteColor;
+
+      animation: Rotate 1s linear infinite;
+    }
+  }
+}
+
+@include desktop {
+  .user__item-right {
+    font-size: 12px !important;
+  }
+}
+
+@include mobile {
+  .search {
+    margin-top: 24px;
+  }
+}

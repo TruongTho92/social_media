@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostPayloadCreate } from "~/common/types";
+import Header from "~/components/Header";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getLoadingPosts } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
@@ -52,6 +53,7 @@ const PostCreate: React.FC = () => {
 
   return (
     <>
+      <Header />
       <div className={`container-fluid ${styles.createPost}`}>
         <div className={styles.createPostContainer}>
           <div className={styles.createPostHeader}>

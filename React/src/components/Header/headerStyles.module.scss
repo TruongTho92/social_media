@@ -89,20 +89,23 @@
 
 .subUserMenu {
   z-index: 10000;
-  width: 180px;
+  width: fit-content;
   height: fit-content;
-  padding: 8px 16px;
+  padding: 16px 48px 16px 16px;
   .iconSub {
+    text-align: center;
+    width: 20px;
     font-size: 18px;
     transition: all 0.2s ease-out;
   }
   a {
     &:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
   }
   .subMenuItem {
     @include d-flex(start, center);
+    line-height: 0;
     cursor: pointer;
     color: $blackColor;
     &:hover .iconSub {
@@ -116,7 +119,8 @@
     }
   }
   .subUserLabel {
-    margin-left: 8px;
+    margin-left: 16px;
+    margin-bottom: 0;
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;

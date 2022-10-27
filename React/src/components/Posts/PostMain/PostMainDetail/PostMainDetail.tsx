@@ -1,9 +1,9 @@
-import { Button, Col, Input, Row, Typography } from "antd";
+import { Input, Typography } from "antd";
 import { TextAreaRef } from "antd/lib/input/TextArea";
 import React, { useEffect, useRef, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
@@ -17,9 +17,7 @@ import {
   getUsersCommented,
   getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
-import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
-import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 
 import styles from "./postMainDetailStyles.module.scss";
