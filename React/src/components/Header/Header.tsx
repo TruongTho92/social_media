@@ -83,25 +83,40 @@ const Header: React.FC = () => {
           {/* TOOLTIP USER */}
           <Tooltip
             color="#fff"
-            trigger="hover"
+            trigger="click"
             placement="bottom"
             title={() => (
               <div className={styles.subUserMenu}>
                 <Link to="/profile" className={styles.subMenuItem}>
-                  <AiOutlineUser className={styles.iconSub} />
+                  <div style={{ lineHeight: 0 }}>
+                    <i className={`fal fa-user ${styles.iconSub}`}></i>
+                  </div>
                   <label className={styles.subUserLabel}>Profile</label>
                 </Link>
                 <Link to="/settings" className={styles.subMenuItem}>
-                  <AiOutlineSetting className={styles.iconSub} />
+                  <div style={{ lineHeight: 0 }}>
+                    <i className={`fal fa-cog ${styles.iconSub}`}></i>
+                  </div>
                   <label className={styles.subUserLabel}>Settings</label>
                 </Link>
-                <Link to="/profile/saves" className={styles.subMenuItem}>
-                  <AiOutlineSave className={styles.iconSub} />
+                <Link to="/saves" className={styles.subMenuItem}>
+                  <div style={{ lineHeight: 0 }}>
+                    <i className={`fal fa-bookmark ${styles.iconSub}`}></i>
+                  </div>
                   <label className={styles.subUserLabel}>Saved</label>
+                </Link>
+                <Link to="/admin" className={styles.subMenuItem}>
+                  <div style={{ lineHeight: 0 }}>
+                    <i className={`fal fa-user-cog ${styles.iconSub}`}></i>
+                  </div>
+
+                  <label className={styles.subUserLabel}>Admin manage</label>
                 </Link>
                 <span className={styles.line}></span>
                 <div className={styles.subMenuItem} onClick={handleLogout}>
-                  <BiLogOutCircle className={styles.iconSub} />
+                  <div style={{ lineHeight: 0 }}>
+                    <i className={`fal fa-sign-out-alt ${styles.iconSub}`}></i>
+                  </div>
                   <label className={styles.subUserLabel}>Log out</label>
                 </div>
               </div>

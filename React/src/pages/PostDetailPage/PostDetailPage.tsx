@@ -1,10 +1,14 @@
 import PostDetail from "~/components/Posts/PostAccount/PostDetail";
+import Header from "~/components/Header";
 
 const PostDetailPage = () => {
   return (
-    <div>
-      <PostDetail />
-    </div>
+    <>
+      <Header />
+      <div>
+        <PostDetail />
+      </div>
+    </>
   );
 };
 

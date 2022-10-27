@@ -1,11 +1,15 @@
 import React from "react";
 import Search from "~/components/Search";
+import Header from "~/components/Header";
 
 const SearchPage: React.FC = () => {
   return (
-    <div>
-      <Search />
-    </div>
+    <>
+      <Header />
+      <div>
+        <Search />
+      </div>
+    </>
   );
 };
 
