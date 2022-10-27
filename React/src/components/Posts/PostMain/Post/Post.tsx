@@ -1,12 +1,17 @@
 import { Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { Link, Route, Routes } from "react-router-dom";
 
-import { useAppDispatch } from "~/app/hooks";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import PostMainDetail from "../PostMainDetail";
 import styles from "./postStyles.module.scss";
+import { LikeDataResponse } from "~/common/types";
+import { getUser } from "~/features/Auth/userSlice";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
+import { getLikeData } from "~/features/accountPost/postDetail/postDetailSlice";
+import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
 
 type Props = {
   avatar: string;
@@ -16,6 +21,8 @@ type Props = {
   nickName: string;
   caption: string;
   imagePost: string;
+  likes: LikeDataResponse[];
+  comments: LikeDataResponse[];
 };
 
 const Post: React.FC<Props> = ({
@@ -26,22 +33,35 @@ const Post: React.FC<Props> = ({
   nickName,
   imagePost,
   caption,
+  likes,
+  comments,
 }) => {
   const [liked, setLiked] = useState(false);
   const [ellipsis, setEllipsis] = useState(true);
 
   const dispatch = useAppDispatch();
 
+  const getUserData = useAppSelector(getUser);
+  const likePostMain = useAppSelector(getLikePostMain);
+
+  useEffect(() => {
+    if (likes?.find((post) => post.user_id === getUserData.user.id)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [getUserData.user.id, likes]);
+
   // LIKE
   const handleLike = async () => {
     setLiked(true);
-    await dispatch(postDetailApi.like(postId));
-    // dispatch(postDetailApi.getPost(postId));
+    await dispatch(postOfFollowingApi.like(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
   const handleDisLike = async () => {
     setLiked(false);
-    // await dispatch(postDetailApi.disLike(postId, likeData.id));
-    dispatch(postDetailApi.getPost(postId));
+    await dispatch(postOfFollowingApi.disLike(postId, likePostMain.id));
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
 
   return (
@@ -72,10 +92,17 @@ const Post: React.FC<Props> = ({
 
         <div className={styles.emotion}>
           <div className={styles.left}>
-            <i
-              onClick={handleLike}
-              className={`far fa-heart ${styles.likeIcon}`}
-            ></i>
+            {liked ? (
+              <i
+                onClick={handleDisLike}
+                className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
+              ></i>
+            ) : (
+              <i
+                onClick={handleLike}
+                className={`far fa-heart ${styles.likeIcon}`}
+              ></i>
+            )}
 
             <Link
               to={`/post-newfeeds/${postId}`}
@@ -91,7 +118,7 @@ const Post: React.FC<Props> = ({
           />
         </div>
         <Typography className={styles.textUserLiked}>
-          <span>12</span> likes
+          <span>{likes?.length}</span> likes
         </Typography>
         <div className={styles.captionContainer}>
           <Typography className={styles.userNameCaption}>{userName}</Typography>

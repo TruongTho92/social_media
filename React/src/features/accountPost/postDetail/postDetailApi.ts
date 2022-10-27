@@ -36,13 +36,14 @@ export const postDetailApi = {
           token: token,
         },
       });
-
-      setTimeout(() => {
-        dispatch({
-          type: GetPostSuccess.toString(),
-          payload: data.data,
-        });
-      }, 1000);
+      if (data) {
+        setTimeout(() => {
+          dispatch({
+            type: GetPostSuccess.toString(),
+            payload: data.data,
+          });
+        }, 1000);
+      }
     } catch (error: any) {
       dispatch({
         type: GetPostFailure.toString(),

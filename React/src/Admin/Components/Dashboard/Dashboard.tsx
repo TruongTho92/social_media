@@ -13,16 +13,8 @@ import "./dashboardStyles.scss";
 type Props = {};
 
 const Dashboard = (props: Props) => {
-  const [openSidebar, setOpenSidebar] = useState(false);
-
   return (
     <div className="dashboard__container container-fluid">
-      {/* Sider */}
-      <Sidebar setIsOpenSidebar={setOpenSidebar} isOpenSidebar={openSidebar} />
-
-      {/* HEADER */}
-      <Header setIsOpenSidebar={setOpenSidebar} isOpenSidebar={openSidebar} />
-
       {/* BODY */}
       <div className="dashboard__body">
         {/* INFO Thong ke */}

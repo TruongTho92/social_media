@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "~/app/hooks";
+import { getUser } from "~/features/Auth/userSlice";
 import "./sidebarStyles.scss";
 
 type Props = {
@@ -9,7 +11,9 @@ type Props = {
 
 const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
   const [openManageMenu, setOpenManageMenu] = useState(false);
-  console.log(isOpenSidebar);
+
+  const getAdminData = useAppSelector(getUser);
+
   const handleCloseSidebar = () => {
     if (setIsOpenSidebar) {
       setIsOpenSidebar(false);
@@ -30,12 +34,19 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
         {/* LOGO */}
         <div className="logo">
           <div className="logo__img">
-            <Link to="profile">
-              <img src="/assets/images/user-img.jpg" alt="" />
+            <Link to="/admin/profile">
+              <img
+                src={
+                  getAdminData.user.avatar
+                    ? getAdminData.user.avatar
+                    : "/assets/images/user-vacant.jpg"
+                }
+                alt=""
+              />
             </Link>
           </div>
           <div className="logo__username">
-            <span className="name">Minh Tai</span>
+            <span className="name">{getAdminData.user.user_name}</span>
             <span className="role">Admin</span>
           </div>
         </div>
@@ -79,7 +90,10 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                 }
               >
                 <li className="manage__item">
-                  <NavLink to="manage-posts" className="manage__item-link">
+                  <NavLink
+                    to="/admin/manage-posts"
+                    className="manage__item-link"
+                  >
                     <div className="link__content">
                       <i className="far fa-clone manage__icon"></i>
                       <span>Posts</span>
@@ -87,7 +101,10 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                   </NavLink>
                 </li>
                 <li className="manage__item">
-                  <NavLink to="manage-users" className="manage__item-link">
+                  <NavLink
+                    to="/admin/manage-users"
+                    className="manage__item-link"
+                  >
                     <div style={{ lineHeight: 0 }}>
                       <i className="far fa-users manage__icon"></i>
                     </div>

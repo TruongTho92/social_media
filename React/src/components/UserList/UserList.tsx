@@ -28,7 +28,7 @@ const User: React.FC = () => {
   };
 
   return (
-    <div className={styles.userList}>
+    <>
       {/* ACCOUNT */}
       <div className={styles.account}>
         <div className={styles.userName}>
@@ -57,48 +57,50 @@ const User: React.FC = () => {
       <div className={styles.textSuggestion}>Suggestions For You</div>
 
       {/* LIST USER */}
-      {allAccount?.length > 0
-        ? allAccount.map((account, index) => (
-            <div className={styles.userItem} key={account.id}>
-              <div className={styles.userInfo}>
-                <Link to={`/user-profile/${account.id}`}>
-                  <img
-                    src={
-                      account.avatar
-                        ? account.avatar
-                        : `/assets/images/user-vacant.jpg`
-                    }
-                    alt=""
-                    className={styles.userImg}
-                  />
-                </Link>
-                <div className={styles.info}>
-                  <span className={styles.name}>{account.user_name}</span>
-                  <span className={styles.description}>
-                    {account.nick_name}
-                  </span>
+      <div className={styles.userList}>
+        {allAccount?.length > 0
+          ? allAccount.map((account, index) => (
+              <div className={styles.userItem} key={account.id}>
+                <div className={styles.userInfo}>
+                  <Link to={`/user-profile/${account.id}`}>
+                    <img
+                      src={
+                        account.avatar
+                          ? account.avatar
+                          : `/assets/images/user-vacant.jpg`
+                      }
+                      alt=""
+                      className={styles.userImg}
+                    />
+                  </Link>
+                  <div className={styles.info}>
+                    <span className={styles.name}>{account.user_name}</span>
+                    <span className={styles.description}>
+                      {account.nick_name}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {isFollow ? (
-                <div
-                  onClick={() => handleFollow(account.id)}
-                  className={styles.textFollowing}
-                >
-                  Following
-                </div>
-              ) : (
-                <div
-                  onClick={() => handleFollow(account.id)}
-                  className={styles.textFollow}
-                >
-                  Follow
-                </div>
-              )}
-            </div>
-          ))
-        : null}
-    </div>
+                {isFollow ? (
+                  <div
+                    onClick={() => handleFollow(account.id)}
+                    className={styles.textFollowing}
+                  >
+                    Following
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => handleFollow(account.id)}
+                    className={styles.textFollow}
+                  >
+                    Follow
+                  </div>
+                )}
+              </div>
+            ))
+          : null}
+      </div>
+    </>
   );
 };
 

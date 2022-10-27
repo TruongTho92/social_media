@@ -3,6 +3,9 @@ import "./headerStyles.scss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import { useAppSelector } from "~/app/hooks";
+import { getUser } from "~/features/Auth/userSlice";
+import { settings } from "~/Admin/config/slickConfig";
 
 type Props = {
   setIsOpenSidebar?: (e: boolean) => void;
@@ -10,47 +13,7 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    className: "slider variable-width",
-    nextArrow: <i className="bi bi-arrow-right-short">123</i>,
-    prevArrow: <i className="bi bi-arrow-left-short"></i>,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1025,
-        settings: {
-          dots: false,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          dots: false,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          dots: false,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  const getAdminData = useAppSelector(getUser);
 
   const handeOpenSidebar = () => {
     if (setIsOpenSidebar) {
@@ -59,7 +22,7 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
   };
 
   return (
-    <header>
+    <header className="header__container">
       <div className="dashboard__header d-flex justify-content-between ">
         <div className="menu__bar" onClick={handeOpenSidebar}>
           <i className="far fa-bars menu__bar-icon"></i>
@@ -143,7 +106,14 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
             )}
           >
             <div className="dashboard__header__search-img">
-              <img src="/assets/images/user-img.jpg" alt="" />
+              <img
+                src={
+                  getAdminData.user.avatar
+                    ? getAdminData.user.avatar
+                    : "/assets/images/user-vacant.jpg"
+                }
+                alt=""
+              />
             </div>
           </Tooltip>
         </div>

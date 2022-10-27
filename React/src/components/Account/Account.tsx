@@ -108,7 +108,7 @@ const Account: React.FC = () => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.accountPost}>
-            <AccountPosts postList={allAccountPost} />
+            <AccountPosts isAccount={true} postList={allAccountPost} />
           </div>
         </div>
       )}
