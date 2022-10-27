@@ -159,3 +159,13 @@ export interface AllAccountResponse {
   gender: string;
   authentication_token: string;
 }
+
+// SEARCH USER
+export interface SearchUserResponse {
+  id: number;
+  email: string;
+  avatar: string;
+  user_name: string;
+  nick_name: string;
+  bio: string;
+}

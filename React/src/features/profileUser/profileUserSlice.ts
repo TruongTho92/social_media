@@ -51,10 +51,11 @@ export const { profileUserRequest, profileUserSuccess, profileUserFailure } =
 export const getProfileUser = (state: RootState) => state.profileUser.data;
 export const getloadingProfile = (state: RootState) =>
   state.profileUser.loading;
-
 export const getUserFollowers = (state: RootState) =>
   state.profileUser.data.followers;
 export const getUserFollowings = (state: RootState) =>
   state.profileUser.data.following;
+export const getLoadingProfile = (state: RootState) =>
+  state.profileUser.loading;
 
 export default profileUserSlice.reducer;

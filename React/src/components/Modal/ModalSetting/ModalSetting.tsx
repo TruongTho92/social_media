@@ -15,6 +15,8 @@ type Props = {
 };
 
 const ModalSetting = ({ classNameIconSetting }: Props) => {
+  const [isAdmin, setIsAdmin] = useState(true);
+
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
 
@@ -71,6 +73,18 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
             />
             <span> Delete Account</span>
           </div>
+          {isAdmin && (
+            <Link to="/admin" className={styles.deleteAccount}>
+              <div style={{ lineHeight: 0 }}>
+                <i
+                  className={`fal fa-user-cog ${styles.iconLink}`}
+                  style={{ marginRight: 12 }}
+                ></i>
+              </div>
+
+              <span className={styles.subUserLabel}>Admin manage</span>
+            </Link>
+          )}
           <div className={styles.deleteAccount} onClick={handleLogout}>
             <BiLogOutCircle
               size={20}

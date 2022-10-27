@@ -68,7 +68,6 @@ const ModalFollowers: React.FC<Props> = ({ followers }) => {
                     </span>
                   </div>
                 </div>
-                <div className={styles.textFollow}>Follow</div>
               </div>
             ))
           ) : (
