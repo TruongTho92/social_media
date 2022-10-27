@@ -7,10 +7,11 @@ import { FaMehRollingEyes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 type Props = {
+  isAccount: boolean;
   postList: PostAccount[];
 };
 
-const AccountPosts: React.FC<Props> = ({ postList }) => {
+const AccountPosts: React.FC<Props> = ({ postList, isAccount = false }) => {
   const reversed = [...postList].sort((a, b) => b.id - a.id);
 
   return (
@@ -29,9 +30,11 @@ const AccountPosts: React.FC<Props> = ({ postList }) => {
               Oh No! You dont have post...
             </span>
           </div>
-          <Link className={styles.nonePostLink} to="/create-post">
-            Create post now
-          </Link>
+          {isAccount && (
+            <Link className={styles.nonePostLink} to="/create-post">
+              Create post now
+            </Link>
+          )}
         </div>
       )}
     </section>

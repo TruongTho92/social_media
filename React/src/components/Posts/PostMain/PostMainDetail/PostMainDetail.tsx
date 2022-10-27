@@ -18,6 +18,7 @@ import {
   getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { getUser } from "~/features/Auth/userSlice";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 
 import styles from "./postMainDetailStyles.module.scss";
@@ -71,7 +72,7 @@ const PostMainDetail: React.FC<Props> = ({
     } else {
       setLiked(false);
     }
-  }, [getUserData.user.id, userLikedData]);
+  }, [getUserData.user.id]);
 
   // LIKE
   const handleLike = async () => {
@@ -106,6 +107,7 @@ const PostMainDetail: React.FC<Props> = ({
         <section
           className={` ${styles.postDetail}`}
           onClick={() => {
+            dispatch(postOfFollowingApi.getPostFollowing());
             navigate(-1);
           }}
         >

@@ -4,10 +4,15 @@
   width: 50%;
   height: 50px;
 }
-
+.header__container {
+  padding-left: 32rem;
+  padding-right: 24px;
+  margin-top: 12px;
+}
 .dashboard__header {
   background-color: $whiteColor;
   padding: 8px;
+
   border-radius: 6px;
   box-shadow: $boxShadow;
   display: flex;
@@ -154,6 +159,7 @@
       line-height: 0;
     }
   }
+
   .user__list {
     display: none;
   }

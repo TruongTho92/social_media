@@ -140,8 +140,8 @@ export interface PostOfFollowingResponse {
   nick_name: string;
   image: string;
   caption: string;
-  like?: [];
-  comment?: [];
+  like: LikeDataResponse[];
+  comment: LikeDataResponse[];
 }
 
 // ALL ACCOUNT

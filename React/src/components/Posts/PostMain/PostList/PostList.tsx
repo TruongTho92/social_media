@@ -8,14 +8,14 @@ import styles from "./postListStyles.module.scss";
 
 const PostList = () => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(postOfFollowingApi.getPostFollowing());
-  }, []);
 
   const allPostFollowing = useAppSelector(getAllPostOfFollowing);
   const sortAllPostFollowing = [...allPostFollowing].sort(
     (a, b) => b.id - a.id
   );
+  useEffect(() => {
+    dispatch(postOfFollowingApi.getPostFollowing());
+  }, []);
 
   return (
     <div className={styles.posts}>
@@ -30,6 +30,8 @@ const PostList = () => {
               userId={post.user_id}
               postId={post.id}
               caption={post.caption}
+              likes={post.like}
+              comments={post.comment}
             />
           </div>
         ))

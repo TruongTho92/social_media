@@ -1,0 +1,50 @@
+@import "../../../global/scss/rootStyles.scss";
+.profile__admin {
+  padding-left: 32rem;
+  padding-right: 24px;
+  padding-top: 12px;
+}
+.profile {
+  &__admin-info {
+    position: relative;
+    background-color: $blackColor;
+    padding: 24px;
+    border-radius: 6px;
+    box-shadow: $boxShadowCard;
+  }
+  &__admin-img {
+    @include avatar(200, 200);
+    border-radius: 100rem;
+    border: 6px solid $mainBlue;
+  }
+  &__admin-content {
+    width: 400px;
+    margin-left: 48px;
+  }
+  &__admin-content-username {
+    font-size: 36px;
+    font-weight: 600;
+    color: $whiteColor;
+  }
+  &__admin-content-email {
+    font-size: 24px;
+    font-weight: 400;
+    color: $menuColor;
+    font-style: italic;
+  }
+}
+
+.sun__icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: yellow;
+  font-size: 30px;
+  animation: Rotate 2s ease-out infinite;
+}
+.account__list {
+  background-color: $blackColor;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: $boxShadowCard;
+}

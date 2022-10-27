@@ -2,10 +2,18 @@
 .userList {
   padding: 12px 48px 12px 24px;
   border-radius: 12px;
+  height: 300px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 }
 
 .account {
   width: 100%;
+  padding: 12px 48px 12px 24px;
+
   .userName {
     @include d-flex(space-between, center);
     .infoLeft {
@@ -53,7 +61,8 @@
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.2px;
-  margin: 16px 0;
+  padding-left: 24px;
+  margin: 6px 0;
 }
 .userItem {
   display: flex;

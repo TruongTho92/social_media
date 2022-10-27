@@ -160,7 +160,7 @@ const UserProfile: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.userProfilePost}>
-            <AccountPosts postList={allAccountPost} />
+            <AccountPosts isAccount={false} postList={allAccountPost} />
           </div>
         </div>
       )}

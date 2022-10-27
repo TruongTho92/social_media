@@ -1,12 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "~/app/store";
-import { PostOfFollowingResponse } from "~/common/types";
+import {
+  CommentDataResponse,
+  LikeDataResponse,
+  PostOfFollowingResponse,
+} from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
   data: {
     posts: PostOfFollowingResponse[];
   };
+  like: LikeDataResponse;
+  comment: CommentDataResponse;
 }
 
 const initialState: StateTypes = {
@@ -26,6 +32,8 @@ const initialState: StateTypes = {
       },
     ],
   },
+  like: { id: null, post_id: null, user_id: null },
+  comment: { id: null, post_id: null, user_id: null },
 };
 
 const postOfFollowingSlice = createSlice({
@@ -42,6 +50,28 @@ const postOfFollowingSlice = createSlice({
     postFollowingFailure: (state) => {
       state.loading = true;
     },
+
+    likeRequest: (state) => {
+      state.loading = true;
+    },
+    likeSuccess: (state, action: PayloadAction<LikeDataResponse>) => {
+      state.loading = false;
+      state.like = action.payload;
+    },
+    likeFailure: (state) => {
+      state.loading = true;
+    },
+
+    disLikeRequest: (state) => {
+      state.loading = true;
+    },
+    disLikeSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.like = action.payload.data;
+    },
+    disLikeFailure: (state) => {
+      state.loading = true;
+    },
   },
 });
 
@@ -49,8 +79,16 @@ export const {
   postFollowingRequest,
   postFollowingSuccess,
   postFollowingFailure,
+  likeRequest,
+  likeSuccess,
+  likeFailure,
+  disLikeRequest,
+  disLikeSuccess,
+  disLikeFailure,
 } = postOfFollowingSlice.actions;
 
+// SELECTOR
+export const getLikePostMain = (state: RootState) => state.postDetail.like;
 export const getAllPostOfFollowing = (state: RootState) =>
   state.postOfFollowing.data.posts;
 

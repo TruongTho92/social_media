@@ -51,47 +51,10 @@
   &__user-item {
     background-color: $mainBlue;
     padding: 12px;
-    margin-bottom: 18px;
     border-radius: 6px;
     box-shadow: $boxShadow;
-  }
-}
-
-.user {
-  &__item-left {
-    cursor: pointer;
-  }
-  &__item-img {
-    @include avatar(45, 45);
-    border-radius: 100rem;
-    border: 2px solid $whiteColor;
-  }
-  &__item-info {
-    margin-left: 8px;
-  }
-  &__item-name {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1;
-    white-space: nowrap;
-    color: $whiteColor;
-  }
-  &__item-role {
-    font-size: 14px;
-    font-weight: 400;
-    color: $menuColor;
-    font-style: italic;
-    color: $whiteColor;
-  }
-  &__item-right {
-    cursor: pointer;
-    white-space: nowrap;
-
-    i {
-      font-size: 20px;
-      color: $whiteColor;
-
-      animation: Rotate 1s linear infinite;
+    &:not(:first-child) {
+      margin-top: 18px;
     }
   }
 }
