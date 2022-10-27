@@ -26,6 +26,11 @@ Rails.application.routes.draw do
       end
       get "posts_of_user/:id", :to => 'posts#posts_of_user'
       get "posts_of_following", :to => 'posts#posts_of_following'
+
+      get "users_admin", :to => 'admin#index'
+      delete "delete_user_admin", :to => 'admin#destroy'
+      get "posts_admin", :to => 'admin#post_admin'
+      delete "delete_post_admin", :to => 'admin#delete_post_admin'
     end
   end
 end
