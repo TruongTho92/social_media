@@ -1,251 +1,243 @@
 import { Button, Col, Input, Row, Typography } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { BiMessageRounded } from "react-icons/bi";
-import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
-import { Link } from "react-router-dom";
-
-import Tooltip from "antd/es/tooltip";
 import { TextAreaRef } from "antd/lib/input/TextArea";
+import React, { useEffect, useRef, useState } from "react";
+import { IoBookmarkOutline } from "react-icons/io5";
+import { MdOutlineDone } from "react-icons/md";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import Comments from "~/components/Comments";
+import Loading from "~/components/Loading";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
+  getLikeData,
   getLoadingPosts,
   getPostDetail,
+  getUsersCommented,
+  getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 
 import styles from "./postMainDetailStyles.module.scss";
 
 export type Props = {
-  id: number | null;
-  isAccount: boolean;
+  avatar?: string;
+  userId?: number;
+  userName?: string;
+  nickName?: string;
+  caption?: string;
 };
-const PostDetail: React.FC<Props> = ({ id, isAccount = false }) => {
+const PostMainDetail: React.FC<Props> = ({
+  avatar,
+  userId,
+  userName,
+  nickName,
+  caption,
+}) => {
   const dispatch = useAppDispatch();
-  const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const navigate = useNavigate();
+
   const [liked, setLiked] = useState(false);
-  const [ellipsis, setEllipsis] = useState(true);
-  const [editCaption, setEditCaption] = useState("");
   const [isOpenComment, setisOpenComment] = useState(false);
+  const [comment, setComment] = useState("");
   const inputRef = useRef<TextAreaRef>(null);
 
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
+  const likeData = useAppSelector(getLikeData);
+  const userProfile = useAppSelector(getProfileUser);
+
   const postDetailData = useAppSelector(getPostDetail);
-  console.log(loadingPost);
+  const userLikedData = useAppSelector(getUsersLiked);
+  const commentData = useAppSelector(getUsersCommented);
+
+  const { id } = useParams();
+  const postId = Number(id);
 
   useEffect(() => {
-    // Call Api here
+    dispatch(postDetailApi.getPost(postId));
+
+    document.body.classList.add("postDetailOpen");
+    return function cleanup() {
+      document.body.classList.remove("postDetailOpen");
+    };
   }, []);
 
-  const handleUpdatePost = () => {
-    const data = {
-      post: {
-        caption: editCaption,
+  useEffect(() => {
+    if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [getUserData.user.id, userLikedData]);
+
+  // LIKE
+  const handleLike = async () => {
+    setLiked(true);
+    await dispatch(postDetailApi.like(postId));
+    dispatch(postDetailApi.getPost(postId));
+  };
+  const handleDisLike = async () => {
+    setLiked(false);
+    await dispatch(postDetailApi.disLike(postId, likeData.id));
+    dispatch(postDetailApi.getPost(postId));
+  };
+
+  // COMMENT
+  const handleComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const payload = {
+      comment: {
+        content: comment,
       },
     };
-
-    dispatch(postDetailApi.update(id, data));
-  };
-
-  const handleDeletePost = () => {
-    dispatch(postsApi.delete(id));
-  };
-
-  const handleLike = () => {
-    setLiked(true);
-  };
-  const handleDisLike = () => {
-    setLiked(false);
+    setComment("");
+    await dispatch(postDetailApi.comment(payload, postId));
+    dispatch(postDetailApi.getPost(postId));
   };
 
   return (
     <>
       {loadingPost ? (
-        "Loading..."
+        <Loading />
       ) : (
-        <div className={` ${styles.postDetail}`}>
-          <div className={styles.postDetailContainer}>
-            <div className={styles.top}>
-              <div className={styles.postDetailImg}>
-                <img src="/assets/images/post_img.jpg" alt="" />
-              </div>
-              <div className={styles.postDetailContent}>
+        <section
+          className={` ${styles.postDetail}`}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <div
+            className={styles.postDetailContainer}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.postDetailImg}>
+              <img src={postDetailData.image} alt="" />
+            </div>
+            <div className={styles.postDetailContent}>
+              <div className={styles.contentTop}>
                 {/* HEADER */}
-                <div className={styles.postDetailHeader}>
+                {/* <div className={styles.postDetailHeader}>
                   <div className={styles.userName}>
-                    <Link to={`/profile/id`}>
-                      <div className={styles.image}>
+                    <div className={styles.image}>
+                      <Link to={`/user-profile/${userId}`}>
                         <img
                           src={
-                            getUserData.user.avatar
-                              ? getUserData.user.avatar
-                              : `/assets/images/user-vacant.jpg`
+                            avatar ? avatar : `/assets/images/user-vacant.jpg`
                           }
                           alt=""
                         />
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                     <div className={styles.info}>
-                      <p className={styles.name}>
-                        {getUserData.user.user_name}
-                      </p>
-                      <p className={styles.description}>
-                        {getUserData.user.nick_name}
-                      </p>
+                      <p className={styles.name}>{userName}</p>
+                      <p className={styles.description}>{nickName}</p>
                     </div>
                   </div>
-                  {isAccount ? (
-                    <div className={styles.settingPost}>
-                      <Tooltip
-                        trigger={"click"}
-                        placement="right"
-                        color="#fff"
-                        title={() => (
-                          <div className={styles.settingPostContent}>
-                            <div onClick={handleDeletePost}>
-                              <Typography
-                                className={`${styles.text} ${styles.warn}`}
-                              >
-                                Delete
-                              </Typography>
-                            </div>
-                            <div onClick={() => setIsOpenEdit(true)}>
-                              <Typography className={styles.text}>
-                                Edit
-                              </Typography>
-                            </div>
-                          </div>
-                        )}
-                      >
-                        <BsThreeDots
-                          className={styles.iconSettingPost}
-                          onClick={() =>
-                            setIsOpenSettingPost(!isOpenSettingPost)
-                          }
-                        />
-                      </Tooltip>
-                    </div>
-                  ) : null}
-                </div>
+                </div> */}
 
-                {/* CAPTION AND EDIT */}
-                {isOpenEdit ? (
-                  <div className={styles.editContainer}>
-                    <Input.TextArea
-                      defaultValue={"1"}
-                      className={styles.inputEdit}
-                      onChange={(e) => setEditCaption(e.target.value)}
-                    />
-                    <Row gutter={[12, 12]} justify="center">
-                      <Col>
-                        <Button
-                          onClick={() => setIsOpenEdit(false)}
-                          className={styles.btnEditCancel}
-                        >
-                          Cancel
-                        </Button>
-                      </Col>
-                      <Col>
-                        <Button
-                          onClick={handleUpdatePost}
-                          className={styles.btnEditSave}
-                        >
-                          Save
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                ) : (
-                  <Typography.Paragraph
-                    ellipsis={
-                      ellipsis
-                        ? { rows: 2, expandable: true, symbol: "more" }
-                        : false
-                    }
-                    className={styles.caption}
-                  >
-                    adkjhdahsh ahjdh akshdjka shdjkhajk dhajksdh jkashd ahd
-                    haksdjka djkasdjk sda dasd asd asd ada lajsdkl alskdj
-                    aklsdjkla jkld klaslk asda dd da sd ad adasdad adawd awd
-                  </Typography.Paragraph>
-                )}
+                <Typography className={styles.caption}>
+                  {postDetailData.caption}
+                </Typography>
 
                 {/* COMMENT */}
                 <div className={styles.comment}>
-                  <Comments postId={1} />
+                  <Comments postId={postId} commentList={commentData} />
                 </div>
               </div>
-            </div>
 
-            <div className={styles.bottom}>
-              {/* Like */}
-              <div className={styles.emotion}>
-                <div className={styles.iconEmotion}>
-                  {liked ? (
-                    <AiFillHeart
-                      onClick={handleDisLike}
-                      className={`${styles.icon} ${styles.active} `}
+              <div className={`${styles.postDetailImg} ${styles.mobile}`}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+
+              <div className={styles.contentBottom}>
+                {/* Like */}
+                <div className={styles.emotion}>
+                  <div className={styles.iconEmotion}>
+                    {liked ? (
+                      <i
+                        onClick={handleDisLike}
+                        className={`fas fa-heart ${styles.icon} ${styles.active}`}
+                      ></i>
+                    ) : (
+                      <i
+                        onClick={handleLike}
+                        className={`far fa-heart ${styles.icon}`}
+                      ></i>
+                    )}
+
+                    <i
+                      onClick={() => inputRef.current?.focus()}
+                      className={`far fa-comment ${styles.icon}`}
+                    ></i>
+                  </div>
+
+                  <div className={styles.save} style={{ lineHeight: 0 }}>
+                    <IoBookmarkOutline
+                      color={"#00000"}
+                      // title={}
+                      className={styles.iconSave}
                     />
-                  ) : (
-                    <AiOutlineHeart
-                      onClick={handleLike}
-                      className={styles.icon}
-                    />
-                  )}
-                  <BiMessageRounded
-                    className={styles.icon}
-                    onClick={() => inputRef.current?.focus()}
+                  </div>
+                </div>
+                <Typography className={styles.likeNumber}>
+                  <span>{userLikedData.length}</span> Likes
+                </Typography>
+                {/* COMMENT MOBILE */}
+
+                {isOpenComment && (
+                  <Comments postId={postId} commentList={commentData} />
+                )}
+
+                <Typography.Text
+                  className={styles.seeComment}
+                  onClick={() => setisOpenComment(!isOpenComment)}
+                >
+                  {isOpenComment ? "Hide comments..." : "View comments..."}
+                </Typography.Text>
+
+                {/* FORM To Comment */}
+                <form action="" className={styles.form}>
+                  <Input.TextArea
+                    value={comment}
+                    ref={inputRef}
+                    id={"input-comment"}
+                    placeholder="Add a comment..."
+                    className={styles.inputComment}
+                    onChange={(e) => setComment(e.target.value)}
                   />
-                  <Typography className={styles.likeNumber}>
-                    <span>20</span> Liked
-                  </Typography>
-                </div>
-                <div className={styles.save} style={{ lineHeight: 0 }}>
-                  <BsBookmarkPlus size={26} />
-                </div>
+                  <button
+                    type="submit"
+                    className={styles.btnComment}
+                    onClick={handleComment}
+                  >
+                    Post
+                  </button>
+                </form>
               </div>
-
-              {/* COMMENT */}
-              <div
-                className={
-                  isOpenComment
-                    ? `${styles.commentMobile} ${styles.open} `
-                    : `${styles.commentMobile}`
-                }
-              >
-                <Comments postId={1} />
-              </div>
-
-              <Typography.Text
-                className={styles.seeComment}
-                onClick={() => setisOpenComment(!isOpenComment)}
-              >
-                {isOpenComment ? "Hide comments..." : "View comments..."}
-              </Typography.Text>
-
-              {/* FORM To Comment */}
-              <form action="" className={styles.form}>
-                <Input.TextArea
-                  ref={inputRef}
-                  id={"input-comment"}
-                  placeholder="Add a comment..."
-                  className={styles.inputComment}
-                />
-                <button type="submit" className={styles.btnComment}>
-                  Post
-                </button>
-              </form>
             </div>
           </div>
-        </div>
+        </section>
       )}
+      <ToastContainer
+        icon={<MdOutlineDone size={30} />}
+        position="top-center"
+        autoClose={false}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };
 
-export default PostDetail;
+export default PostMainDetail;

@@ -133,11 +133,15 @@ export interface UserProfile {
 
 // POST OF FOLLOWING
 export interface PostOfFollowingResponse {
+  id: number;
   user_id: number;
   avatar: string;
   user_name: string;
   nick_name: string;
-  posts: PostAccount[];
+  image: string;
+  caption: string;
+  like?: [];
+  comment?: [];
 }
 
 // ALL ACCOUNT

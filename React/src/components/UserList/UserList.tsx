@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FiCheck } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
-import { getUserFollowings } from "~/features/profileUser/profileUserSlice";
+import { followApi } from "~/features/follow/followApi";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { userAllApi } from "~/features/userAll/userAllApi";
 import { getAllUser } from "~/features/userAll/userAllSlice";
 import styles from "./userListStyles.module.scss";
@@ -13,17 +13,18 @@ const User: React.FC = () => {
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
   const allAccount = useAppSelector(getAllUser);
-  const userFollowings = useAppSelector(getUserFollowings);
 
   useEffect(() => {
     dispatch(userAllApi.getAllUser());
   }, []);
 
-  useEffect(() => {
-    // if (userFollowings.find((user) => user.id === getUserData.user.id)) {
-    //   setIsFollow(true);
-    // }
-  }, []);
+  const handleFollow = async (userId: number) => {
+    const data = {
+      id: userId,
+    };
+    await dispatch(followApi.follow(data));
+    setIsFollow(true);
+  };
 
   return (
     <div className={styles.userList}>
@@ -77,10 +78,21 @@ const User: React.FC = () => {
                   </span>
                 </div>
               </div>
+
               {isFollow ? (
-                <div className={styles.textFollow}>unfollow</div>
+                <div
+                  onClick={() => handleFollow(account.id)}
+                  className={styles.textFollowing}
+                >
+                  Following
+                </div>
               ) : (
-                <div className={styles.textFollow}>Follow</div>
+                <div
+                  onClick={() => handleFollow(account.id)}
+                  className={styles.textFollow}
+                >
+                  Follow
+                </div>
               )}
             </div>
           ))

@@ -1,33 +1,34 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
 import {
-  postFollowingFailure,
-  postFollowingRequest,
-  postFollowingSuccess,
-} from "./postOfFollowingSlice";
+  searchFailure,
+  searchRequest,
+  searchSuccess,
+} from "./searchAccountSlice";
 
-export const postOfFollowingApi = {
-  getPostFollowing: () => async (dispatch: any) => {
+export const searchAccountApi = {
+  search: (name: string) => async (dispatch: any) => {
     try {
       dispatch({
-        type: postFollowingRequest.toString(),
+        type: searchRequest.toString(),
       });
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`/api/v1/posts_of_following`, {
+      const { data } = await apiClient.get(`/api/v1/search?search=${name}`, {
         headers: {
           token: token,
         },
       });
+      console.log(data.data);
 
       dispatch({
-        type: postFollowingSuccess.toString(),
+        type: searchSuccess.toString(),
         payload: data.data,
       });
     } catch (error: any) {
       dispatch({
-        type: postFollowingFailure.toString(),
+        type: searchFailure.toString(),
         payload: error.response.data,
       });
     }

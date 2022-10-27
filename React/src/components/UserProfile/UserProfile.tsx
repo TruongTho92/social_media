@@ -36,7 +36,6 @@ const UserProfile: React.FC = (props: Props) => {
   const profileUser = useAppSelector(getProfileUser);
   const userFollowers = useAppSelector(getUserFollowers);
   const userFollowings = useAppSelector(getUserFollowings);
-
   const loadingPosts = useAppSelector(getLoadingPosts);
   const loadingProfile = useAppSelector(getloadingProfile);
   const allAccountPost = useAppSelector(getAllPost);
@@ -47,12 +46,15 @@ const UserProfile: React.FC = (props: Props) => {
   useEffect(() => {
     dispatch(profileUserApi.getProfileUser(userId));
     dispatch(postsApi.getAll(userId));
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (userFollowers.find((follow) => follow.id === getUserData.user.id)) {
       setIsFollow(true);
     }
+    return () => {
+      setIsFollow(false);
+    };
   }, [getUserData.user.id, userFollowers]);
 
   const handleFollow = async () => {
@@ -140,7 +142,7 @@ const UserProfile: React.FC = (props: Props) => {
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
-                    <span>12</span> posts
+                    <span>{allAccountPost?.length}</span> posts
                   </span>
                   <ModalFollowers followers={userFollowers} />
                   <ModalFollowing followings={userFollowings} />

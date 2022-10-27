@@ -25,6 +25,7 @@ import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getUser } from "~/features/Auth/userSlice";
 import { getAllPost } from "~/features/accountPost/Posts/postsSlice";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
+import { IoBookmarkOutline } from "react-icons/io5";
 
 export type Props = {};
 const PostDetail: React.FC<Props> = () => {
@@ -95,14 +96,12 @@ const PostDetail: React.FC<Props> = () => {
   // LIKE
   const handleLike = async () => {
     setLiked(true);
-    await dispatch(postDetailApi.like(postId, postDetailData, getUserData));
+    await dispatch(postDetailApi.like(postId));
     dispatch(postDetailApi.getPost(postId));
   };
   const handleDisLike = async () => {
     setLiked(false);
-    await dispatch(
-      postDetailApi.disLike(postId, likeData.id, postDetailData, getUserData)
-    );
+    await dispatch(postDetailApi.disLike(postId, likeData.id));
     dispatch(postDetailApi.getPost(postId));
   };
 
@@ -298,7 +297,11 @@ const PostDetail: React.FC<Props> = () => {
                   </div>
 
                   <div className={styles.save} style={{ lineHeight: 0 }}>
-                    <i className={`far fa-file-plus ${styles.iconSave}`}></i>
+                    <IoBookmarkOutline
+                      color={"#00000"}
+                      // title={}
+                      className={styles.iconSave}
+                    />
                   </div>
                 </div>
                 <Typography className={styles.likeNumber}>

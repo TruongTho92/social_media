@@ -1,14 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "~/app/store";
 import { PostOfFollowingResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
-  data: PostOfFollowingResponse[];
+  data: {
+    posts: PostOfFollowingResponse[];
+  };
 }
 
-const initialState = {
+const initialState: StateTypes = {
   loading: false,
-  data: [{ user_id: 0, avatar: "", user_name: "", nick_name: "", posts: [] }],
+  data: {
+    posts: [
+      {
+        id: 0,
+        user_id: 0,
+        avatar: "",
+        user_name: "",
+        nick_name: "",
+        image: "",
+        caption: "",
+        like: [],
+        comment: [],
+      },
+    ],
+  },
 };
 
 const postOfFollowingSlice = createSlice({
@@ -20,10 +37,7 @@ const postOfFollowingSlice = createSlice({
     },
     postFollowingSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data = action.payload;
-      console.log("====================================");
-      console.log(state.data);
-      console.log("====================================");
+      state.data.posts = action.payload.post;
     },
     postFollowingFailure: (state) => {
       state.loading = true;
@@ -37,4 +51,7 @@ export const {
   postFollowingFailure,
 } = postOfFollowingSlice.actions;
 
-export default postOfFollowingSlice;
+export const getAllPostOfFollowing = (state: RootState) =>
+  state.postOfFollowing.data.posts;
+
+export default postOfFollowingSlice.reducer;

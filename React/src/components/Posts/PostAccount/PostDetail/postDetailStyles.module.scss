@@ -99,7 +99,8 @@
   }
 }
 .iconSave {
-  font-size: 24px;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 .caption {
@@ -178,8 +179,7 @@
 .emotion {
   @include d-flex(space-between, center);
   width: 100%;
-  padding: 6px 12px;
-  border-right: 1px solid $greyLight;
+  padding: 6px 4px 6px 12px;
 
   .iconEmotion {
     @include d-flex(start, center);

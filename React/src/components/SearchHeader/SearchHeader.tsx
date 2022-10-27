@@ -6,16 +6,24 @@ import useDebounce from "~/common/hooks/useDebounce";
 import { FiCheck } from "react-icons/fi";
 import { AiOutlineLoading } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { searchAccountApi } from "~/features/searchAccount/searchAccountApi";
+import { getSearchResults } from "~/features/searchAccount/searchAccountSlice";
 type Props = {};
 
 const SearchHeader = (props: Props) => {
+  const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const debouncedValue = useDebounce<string>(searchValue, 500);
+  const debouncedValue = useDebounce<string>(searchValue, 1000);
+
+  const resultSearch = useAppSelector(getSearchResults);
 
   // CALL API SEARCH USER
   useEffect(() => {
-    console.log(searchValue);
+    if (searchValue.length <= 0) return;
+    dispatch(searchAccountApi.search(searchValue));
   }, [debouncedValue]);
+
   return (
     <div className={styles.searchHeader}>
       <Tooltip
@@ -24,7 +32,7 @@ const SearchHeader = (props: Props) => {
         placement="bottom"
         color={"#fff"}
         title={
-          searchValue.length ? (
+          resultSearch?.length > 0 ? (
             <div className={styles.userList}>
               <div className={styles.userItem}>
                 <div className={styles.userInfo}>
