@@ -1,35 +1,24 @@
-import { Input, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import React, { useState } from "react";
-import {
-  AiFillHome,
-  AiOutlineSave,
-  AiOutlineSetting,
-  AiOutlineUser,
-} from "react-icons/ai";
-import { BsBookmarkPlus, BsChatDots, BsPlusSquare } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
-import { IoSearchOutline } from "react-icons/io5";
+import { BsChatDots } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
-import { BiLogOutCircle } from "react-icons/bi";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
 
-import styles from "./headerStyles.module.scss";
 import { userApi } from "~/features/Auth/userApi";
 import SearchHeader from "../SearchHeader";
+import styles from "./headerStyles.module.scss";
 
 const Header: React.FC = () => {
-  const [isOpenInput, setIsOpenInput] = useState(false);
-  const getUserData = useAppSelector(getUser);
-
+  const [isAdmin, setIsAdmin] = useState(true);
   const dispatch = useAppDispatch();
+  const getUserData = useAppSelector(getUser);
 
   const handleLogout = async () => {
     const payload = {
       user: {
         email: getUserData.user.email,
-        // password: getUserData.data.data.user.password,
         authentication_token: getUserData.user.authentication_token,
       },
     };
@@ -39,7 +28,7 @@ const Header: React.FC = () => {
   return (
     <header>
       <div className={`${styles.headerContainer}`}>
-        <div className="logo">
+        <div className={styles.logo}>
           <Link to="/">
             <img
               className={styles.logoImg}
@@ -105,13 +94,17 @@ const Header: React.FC = () => {
                   </div>
                   <label className={styles.subUserLabel}>Saved</label>
                 </Link>
-                <Link to="/admin" className={styles.subMenuItem}>
-                  <div style={{ lineHeight: 0 }}>
-                    <i className={`fal fa-user-cog ${styles.iconSub}`}></i>
-                  </div>
 
-                  <label className={styles.subUserLabel}>Admin manage</label>
-                </Link>
+                {isAdmin && (
+                  <Link to="/admin" className={styles.subMenuItem}>
+                    <div style={{ lineHeight: 0 }}>
+                      <i className={`fal fa-user-cog ${styles.iconSub}`}></i>
+                    </div>
+
+                    <label className={styles.subUserLabel}>Admin manage</label>
+                  </Link>
+                )}
+
                 <span className={styles.line}></span>
                 <div className={styles.subMenuItem} onClick={handleLogout}>
                   <div style={{ lineHeight: 0 }}>

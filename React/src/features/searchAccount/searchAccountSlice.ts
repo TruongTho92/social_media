@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "~/app/store";
+import { SearchUserResponse } from "~/common/types";
 
 export interface StateTypes {
   loading: boolean;
-  data: any;
+  data: SearchUserResponse[];
 }
 
 const initialState: StateTypes = {
@@ -18,10 +19,9 @@ const searchAccountSlice = createSlice({
     searchRequest: (state) => {
       state.loading = true;
     },
-    searchSuccess: (state, action: PayloadAction<any>) => {
+    searchSuccess: (state, action: PayloadAction<SearchUserResponse[]>) => {
       state.loading = false;
       state.data = action.payload;
-      console.log(state.data);
     },
     searchFailure: (state) => {
       state.loading = true;
@@ -35,5 +35,7 @@ export const { searchRequest, searchSuccess, searchFailure } =
 
 // SELECTOR
 export const getSearchResults = (state: RootState) => state.searchAccount.data;
+export const getLoadingSearch = (state: RootState) =>
+  state.searchAccount.loading;
 
 export default searchAccountSlice.reducer;

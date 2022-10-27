@@ -189,7 +189,7 @@ const UpdateProfile: React.FC = () => {
               </div>
               <Row justify="center">
                 <Col>
-                  <Link to="/">
+                  <Link to="/profile">
                     <button type="button" className={styles.btnCancel}>
                       Cancel
                     </button>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
 import { followApi } from "~/features/follow/followApi";
-import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { userAllApi } from "~/features/userAll/userAllApi";
 import { getAllUser } from "~/features/userAll/userAllSlice";
 import styles from "./userListStyles.module.scss";
@@ -23,7 +23,8 @@ const User: React.FC = () => {
       id: userId,
     };
     await dispatch(followApi.follow(data));
-    setIsFollow(true);
+    dispatch(postOfFollowingApi.getPostFollowing());
+    dispatch(userAllApi.getAllUser());
   };
 
   return (

@@ -15,16 +15,15 @@ export const searchAccountApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.get(`/api/v1/search?search=${name}`, {
+      const { data } = await apiClient.post(`/api/v1/search?search=${name}`, {
         headers: {
           token: token,
         },
       });
-      console.log(data.data);
 
       dispatch({
         type: searchSuccess.toString(),
-        payload: data.data,
+        payload: data.data.user,
       });
     } catch (error: any) {
       dispatch({
