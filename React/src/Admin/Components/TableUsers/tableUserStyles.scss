@@ -10,8 +10,10 @@
 td.ant-table-cell {
   padding: 8px 24px !important;
 }
-td,
-.ant-table-cell {
+th.ant-table-cell {
+  white-space: nowrap !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important ;
 }
 
 .table__user tr:nth-child(2n) td {
@@ -21,13 +23,31 @@ td,
   background-color: #f1f1f1;
 }
 .ant-table-container {
-  box-shadow: $boxShadow;
+  box-shadow: $boxShadowCard;
+}
+.ant-select-selector,
+li.ant-pagination-options {
+  display: none;
+}
+li.ant-pagination-item {
+  border-radius: 8px !important;
+}
+li.ant-pagination-item-active {
+  background-color: $mainBlue;
+  color: $whiteColor;
+  font-weight: 500;
 }
 .ant-table-body {
+}
+.ant-table-filter-dropdown {
+  border-radius: 6px !important;
 }
 
 // SCSS
 .cell {
+  &__id {
+    width: 12%;
+  }
   &__avatar {
     width: 100px;
     white-space: nowrap;
@@ -96,7 +116,7 @@ td,
   }
   &__user-delete {
     .delete__icon {
-      font-size: 18px;
+      font-size: 20px;
       transition: all 0.25s linear;
 
       &:hover {
@@ -106,5 +126,44 @@ td,
         cursor: pointer;
       }
     }
+  }
+  &__user-search-name {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $menuColor;
+  }
+}
+
+@include desktop {
+  th.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 12px !important ;
+  }
+  td.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 24px !important ;
+  }
+}
+
+@include tablet {
+  th.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 12px !important ;
+  }
+  td.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 24px !important ;
+  }
+}
+@include mobile {
+  th.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 12px !important ;
+  }
+  td.ant-table-cell {
+    padding-left: 12px !important;
+    padding-right: 24px !important ;
   }
 }

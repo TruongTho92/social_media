@@ -9,13 +9,14 @@ type Props = {};
 const ManagePosts = (props: Props) => {
   const dispatch = useAppDispatch();
   const allPost = useAppSelector(getAllPost);
+  const allPostClone = [...allPost].sort((a, b) => a.id - b.id);
   useEffect(() => {
     dispatch(allPostApi.getAllPost());
   }, []);
 
   return (
     <div className="section">
-      <TablePosts />
+      <TablePosts data={allPostClone} />
     </div>
   );
 };
