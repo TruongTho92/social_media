@@ -44,10 +44,7 @@ const App: React.FC = () => {
           element={isAuthenticated ? <Admin /> : <Login />}
         />
         {/* AUTH */}
-        <Route
-          path="/*"
-          element={isAuthenticated ? <Home /> : <Login />}
-        ></Route>
+        <Route path="/*" element={isAuthenticated ? <Home /> : <Login />} />
         <Route
           path="post-newfeeds/:id"
           element={isAuthenticated ? <PostMainDetail /> : <Login />}
@@ -71,7 +68,7 @@ const App: React.FC = () => {
         <Route
           path="profile"
           element={isAuthenticated ? <Profile /> : <Login />}
-        ></Route>
+        />
         <Route
           path="account-post/:id"
           element={isAuthenticated ? <PostDetailPage /> : <Login />}
@@ -104,6 +101,10 @@ const App: React.FC = () => {
       {background && (
         <Routes>
           <Route path="/account-post/:id" element={<PostDetailPage />} />
+          <Route
+            path="post-newfeeds/:id"
+            element={isAuthenticated ? <PostMainDetail /> : <Login />}
+          />
         </Routes>
       )}
     </div>

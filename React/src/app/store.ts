@@ -7,9 +7,10 @@ import {
 import postDetailSlice from "~/features/accountPost/postDetail/postDetailSlice";
 
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
-import UserReducer from "~/features/Auth/userSlice";
 import AllPostSlice from "~/features/Admin/AllPost/AllPostSlice";
 import allUserSlice from "~/features/Admin/AllUser/allUserSlice";
+import deleteAdminSlice from "~/features/Admin/DeleteAccount/deleteAdminSlice";
+import UserReducer from "~/features/Auth/userSlice";
 import followSlice from "~/features/follow/followSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
 import searchAccountSlice from "~/features/searchAccount/searchAccountSlice";
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   // ADMIN
   adminAllUser: allUserSlice,
   adminAllPost: AllPostSlice,
+  deleteAdminMethod: deleteAdminSlice,
 });
 
 export const store = configureStore({

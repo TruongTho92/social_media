@@ -7,9 +7,8 @@ import Footer from "../Footer";
 import SearchUser from "../SearchUser";
 import StaticNumber from "../StaticNumber/StaticNumber";
 import "./dashboardStyles.scss";
-type Props = {};
 
-const Dashboard = (props: Props) => {
+const Dashboard = () => {
   const dispatch = useAppDispatch();
   const allUser = useAppSelector(getAllUser);
 

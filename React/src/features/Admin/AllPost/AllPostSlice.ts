@@ -33,6 +33,6 @@ export const { getAllPostRequest, getAllPostSuccess, getAllPostFailure } =
   allPostSlice.actions;
 
 // SELECTOR
-export const getAllPost = (state: RootState) => state.adminAllUser.data;
+export const getAllPost = (state: RootState) => state.adminAllPost.data;
 
 export default allPostSlice.reducer;
