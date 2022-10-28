@@ -22,6 +22,7 @@ const Admin = () => {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="manage-posts" element={<ManagePosts />} />
+        <Route path="manage-users" element={<ManagePosts />} />
 
         <Route path="more-account" element={<MoreAccount />} />
 
