@@ -6,14 +6,15 @@ import {
 } from "@reduxjs/toolkit";
 import postDetailSlice from "~/features/accountPost/postDetail/postDetailSlice";
 
-import UserReducer from "~/features/Auth/userSlice";
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
-// import commentSlice from "~/features/comment/commentSlice";
-import profileUserSlice from "~/features/profileUser/profileUserSlice";
+import UserReducer from "~/features/Auth/userSlice";
+import AllPostSlice from "~/features/Admin/AllPost/AllPostSlice";
+import allUserSlice from "~/features/Admin/AllUser/allUserSlice";
 import followSlice from "~/features/follow/followSlice";
+import profileUserSlice from "~/features/profileUser/profileUserSlice";
+import searchAccountSlice from "~/features/searchAccount/searchAccountSlice";
 import userAllSlice from "~/features/userAll/userAllSlice";
 import postOfFollowingSlice from "../features/postOfFollowing/postOfFollowingSlice";
-import searchAccountSlice from "~/features/searchAccount/searchAccountSlice";
 
 const rootReducer = combineReducers({
   // AUTH and PROFILE ACCOUNT
@@ -37,6 +38,10 @@ const rootReducer = combineReducers({
 
   // FOLLOW
   follow: followSlice,
+
+  // ADMIN
+  adminAllUser: allUserSlice,
+  adminAllPost: AllPostSlice,
 });
 
 export const store = configureStore({

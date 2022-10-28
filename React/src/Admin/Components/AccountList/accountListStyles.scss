@@ -1,5 +1,19 @@
 @import "../../../global/scss/rootStyles.scss";
-
+.search__user-list {
+  height: 300px;
+  overflow-y: scroll;
+  padding-bottom: 60px;
+  @include hidden-scrollbar;
+}
+.search__user-item {
+  background-color: $mainBlue;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: $boxShadow;
+  &:not(:first-child) {
+    margin-top: 18px;
+  }
+}
 .user {
   &__item-left {
     cursor: pointer;
@@ -18,6 +32,9 @@
     line-height: 1;
     white-space: nowrap;
     color: $whiteColor;
+    overflow: hidden;
+    width: 140px;
+    text-overflow: ellipsis;
   }
   &__item-role {
     font-size: 14px;

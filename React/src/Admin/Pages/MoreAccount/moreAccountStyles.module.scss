@@ -3,6 +3,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  object-fit: conver;
 }
 .loginBgRight {
   position: absolute;
@@ -10,12 +11,16 @@
   right: 0;
   width: 337px !important;
   height: 289px;
+  object-fit: cover;
 }
 
 .register {
-  background-color: $bgColor;
-  height: 100vh;
+  position: relative;
+  height: calc(100vh - 100px);
   // padding: 0 16%;
+  padding-left: 32rem;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 .heading {
   color: $greyTextColor;
@@ -139,7 +144,7 @@
 // RESPONSIVE
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
   .register {
-    padding: 0 6%;
+    padding-left: 32rem;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -151,6 +156,10 @@
     img {
       width: 100%;
     }
+  }
+  .loginBgLeft,
+  .loginBgRight {
+    display: none;
   }
 
   .signUp {

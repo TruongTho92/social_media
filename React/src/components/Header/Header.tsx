@@ -11,7 +11,6 @@ import SearchHeader from "../SearchHeader";
 import styles from "./headerStyles.module.scss";
 
 const Header: React.FC = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
 
@@ -95,7 +94,7 @@ const Header: React.FC = () => {
                   <label className={styles.subUserLabel}>Saved</label>
                 </Link>
 
-                {isAdmin && (
+                {getUserData.user.is_admin || getUserData.user.is_supervisor ? (
                   <Link to="/admin" className={styles.subMenuItem}>
                     <div style={{ lineHeight: 0 }}>
                       <i className={`fal fa-user-cog ${styles.iconSub}`}></i>
@@ -103,7 +102,7 @@ const Header: React.FC = () => {
 
                     <label className={styles.subUserLabel}>Admin manage</label>
                   </Link>
-                )}
+                ) : null}
 
                 <span className={styles.line}></span>
                 <div className={styles.subMenuItem} onClick={handleLogout}>
