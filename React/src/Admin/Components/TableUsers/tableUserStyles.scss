@@ -1,0 +1,110 @@
+@import "../../../global/scss/rootStyles.scss";
+
+// CUSTOM ANTD
+.ant-typography-expand {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  color: $mainBlue !important;
+}
+td.ant-table-cell {
+  padding: 8px 24px !important;
+}
+td,
+.ant-table-cell {
+}
+
+.table__user tr:nth-child(2n) td {
+  background-color: rgba($color: $mainBlue, $alpha: 0.1);
+}
+.table__user thead {
+  background-color: #f1f1f1;
+}
+.ant-table-container {
+  box-shadow: $boxShadow;
+}
+.ant-table-body {
+}
+
+// SCSS
+.cell {
+  &__avatar {
+    width: 100px;
+    white-space: nowrap;
+  }
+  &__name {
+    width: 20%;
+  }
+  &__nickname {
+    width: 20%;
+  }
+  &__email {
+    width: 20%;
+  }
+  &__bio {
+    width: 12%;
+  }
+  &__phone {
+    width: 16%;
+  }
+  &__role {
+    width: 10%;
+  }
+  &__delete {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.table {
+  &__user {
+    width: auto;
+  }
+  &__user-img {
+    @include avatar(45, 45);
+  }
+  &__user-name {
+    font-size: 16px;
+    font-weight: 500;
+    width: fit-content;
+    white-space: nowrap;
+  }
+  &__user-nickname {
+    font-size: 14px;
+    font-weight: 400;
+    color: $menuColor;
+  }
+  &__user-role-user {
+    padding: 4px 14px;
+    background-color: $mainBlue;
+    color: $whiteColor;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  &__user-bio {
+    font-size: 14px;
+    font-weight: 400;
+    width: 200px;
+  }
+  &__user-role-supervisor {
+    padding: 4px 14px;
+    background-color: $blackColor;
+    color: $whiteColor;
+    font-weight: 500;
+    border-radius: 4px;
+  }
+  &__user-delete {
+    .delete__icon {
+      font-size: 18px;
+      transition: all 0.25s linear;
+
+      &:hover {
+        color: red;
+        transition: all 0.25s linear;
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    }
+  }
+}

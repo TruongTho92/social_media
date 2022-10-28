@@ -7,7 +7,7 @@
 .header__container {
   padding-left: 32rem;
   padding-right: 24px;
-  margin-top: 12px;
+  padding-top: 12px;
 }
 .dashboard__header {
   background-color: $whiteColor;
@@ -138,6 +138,9 @@
 }
 
 @include tablet {
+  .header__container {
+    padding: 12px 24px;
+  }
   .dashboard__header {
     padding: 8px 24px 8px 24px;
     .menu__bar {
@@ -152,6 +155,9 @@
   }
 }
 @include mobile {
+  .header__container {
+    padding: 12px 24px;
+  }
   .dashboard__header {
     padding: 8px 24px 8px 24px;
     .menu__bar {

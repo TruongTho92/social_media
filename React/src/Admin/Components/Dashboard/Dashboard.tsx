@@ -1,18 +1,22 @@
-import { Input, Tooltip } from "antd";
-import React, { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import Slider from "react-slick";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
+import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 import ChartColumn from "../Charts/ChartColumn";
 import Footer from "../Footer";
-import Header from "../Header";
 import SearchUser from "../SearchUser";
-import Sidebar from "../Sidebar";
 import StaticNumber from "../StaticNumber/StaticNumber";
 import "./dashboardStyles.scss";
 type Props = {};
 
 const Dashboard = (props: Props) => {
+  const dispatch = useAppDispatch();
+  const allUser = useAppSelector(getAllUser);
+
+  useEffect(() => {
+    dispatch(allUserApi.getAllUser());
+  }, []);
+
   return (
     <div className="dashboard__container container-fluid">
       {/* BODY */}
@@ -23,24 +27,28 @@ const Dashboard = (props: Props) => {
             <div className="row">
               <div className="col">
                 <StaticNumber
+                  data={allUser}
                   title="Posts"
                   icon={<i className="far fa-heart-rate like_icon"></i>}
                 />
               </div>
               <div className="col">
                 <StaticNumber
+                  data={[]}
                   title="Users"
                   icon={<i className="far fa-user-chart"></i>}
                 />
               </div>
               <div className="col">
                 <StaticNumber
+                  data={[]}
                   title="Likes"
                   icon={<i className="far fa-chart-bar"></i>}
                 />
               </div>
               <div className="col">
                 <StaticNumber
+                  data={[]}
                   title="Comments"
                   icon={<i className="far fa-chart-pie-alt"></i>}
                 />

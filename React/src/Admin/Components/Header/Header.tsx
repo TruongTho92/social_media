@@ -1,11 +1,13 @@
 import { Tooltip } from "antd";
 import "./headerStyles.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { useAppSelector } from "~/app/hooks";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
 import { settings } from "~/Admin/config/slickConfig";
+import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
+import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 
 type Props = {
   setIsOpenSidebar?: (e: boolean) => void;
@@ -13,7 +15,14 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
+  const dispatch = useAppDispatch();
+
   const getAdminData = useAppSelector(getUser);
+  const allUser = useAppSelector(getAllUser);
+
+  useEffect(() => {
+    dispatch(allUserApi.getAllUser());
+  }, []);
 
   const handeOpenSidebar = () => {
     if (setIsOpenSidebar) {
@@ -30,33 +39,20 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
         <div className="dashboard__header__search-left col-8">
           <ul className="user__list ">
             <Slider {...settings}>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
-              <li className="user__item">
-                <img src="/assets/images/user-img.jpg" alt="" />
-              </li>
+              {allUser && allUser.length > 0
+                ? allUser.map((user) => (
+                    <li className="user__item" key={user.id}>
+                      <img
+                        src={
+                          user.avatar
+                            ? user.avatar
+                            : "/assets/images/user-vacant.jpg"
+                        }
+                        alt=""
+                      />
+                    </li>
+                  ))
+                : null}
             </Slider>
           </ul>
         </div>

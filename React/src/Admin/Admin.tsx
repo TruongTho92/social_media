@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
 import DashboardPage from "./Pages/DashboardPage";
 import ManagePosts from "./Pages/ManagePosts";
+import ManageUsers from "./Pages/ManageUsers";
 import MoreAccount from "./Pages/MoreAccount";
 import NotFound from "./Pages/NotFound";
 import ProfilePage from "./Pages/ProfilePage";
@@ -22,7 +23,7 @@ const Admin = () => {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="manage-posts" element={<ManagePosts />} />
-        <Route path="manage-users" element={<ManagePosts />} />
+        <Route path="manage-users" element={<ManageUsers />} />
 
         <Route path="more-account" element={<MoreAccount />} />
 

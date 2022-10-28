@@ -34,6 +34,7 @@ const MoreAccount: React.FC = () => {
         email,
         password,
         password_confirmation: passwordConfirmation,
+        is_supervisor: true,
       },
     };
 
@@ -59,21 +60,21 @@ const MoreAccount: React.FC = () => {
 
   return (
     <div className={` ${styles.register}`}>
-      <img
-        className={styles.loginBgLeft}
-        src="/assets/images/auth-v1-tree.png"
-        alt=""
-      />
-      <img
-        className={styles.loginBgRight}
-        src="/assets/images/auth-v1-tree-2.png"
-        alt=""
-      />
       <Row
         justify="center"
         align="middle"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", position: "relative" }}
       >
+        <img
+          className={styles.loginBgLeft}
+          src="/assets/images/auth-v1-tree.png"
+          alt=""
+        />
+        <img
+          className={styles.loginBgRight}
+          src="/assets/images/auth-v1-tree-2.png"
+          alt=""
+        />
         <Col className={styles.registerRight}>
           <div className={styles.registerForm}>
             <div className={styles.registerFormLogo}>
@@ -129,13 +130,6 @@ const MoreAccount: React.FC = () => {
                 <span>Privacy Policy</span> and <span>Cookies Policy</span> .
               </p>
             </form>
-          </div>
-          <div className={styles.signUp}>
-            <span className={styles.signUpText}>Back to Dashboard?</span>
-
-            <Link to="/admin" className={styles.signUpLink}>
-              Back
-            </Link>
           </div>
 
           {/* ERROR AND REGISTED MESSAGE */}

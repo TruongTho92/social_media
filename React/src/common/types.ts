@@ -1,10 +1,10 @@
 // [ACCOUNT]
-
 export interface UserDataTypes {
   user: {
     email: string;
     password: string;
     password_confirmation?: string;
+    is_supervisor?: boolean;
   };
 }
 
@@ -23,6 +23,8 @@ export interface UserDataResponse {
       followings?: [];
       gender: string;
       authentication_token: string;
+      is_admin: boolean;
+      is_supervisor: boolean;
     };
   };
   message: string | undefined;
@@ -168,4 +170,29 @@ export interface SearchUserResponse {
   user_name: string;
   nick_name: string;
   bio: string;
+}
+
+// ADMIN
+export interface UserResponse {
+  nick_name: string;
+  user_name: string;
+  avatar: string;
+  bio: string;
+  email: string;
+  gender: string;
+  id: number;
+  is_admin: string;
+  is_supervisor: false;
+  authentication_token: string;
+  updated_at: string;
+  created_at: string;
+}
+
+export interface PostResponse {
+  id: number;
+  image: string;
+  caption: string;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
 }
