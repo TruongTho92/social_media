@@ -1,0 +1,192 @@
+@import "../../../global/scss/rootStyles.scss";
+.updateAdminProfile {
+  background-color: $whiteColor;
+  height: fit-content;
+  padding: 16px 24px;
+  box-shadow: $boxShadow;
+}
+.errorInputMessage {
+  font-size: 16px;
+  color: red;
+  font-style: italic;
+}
+
+// HEADER
+.updateAdminProfile__header {
+  border-bottom: 1px solid $greyLight;
+  @include d-flex(start, center);
+  padding-bottom: 24px;
+}
+.updateAdminProfile__header-avatar {
+  width: 160px;
+  height: 160px;
+  background-color: $mainBlue;
+  padding: 4px;
+  border-radius: 100rem;
+
+  margin-right: 24px;
+  display: block;
+  cursor: pointer;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100rem;
+    object-fit: cover;
+  }
+}
+.updateAdminProfile__header-label-content {
+  @include d-flex(center, center);
+}
+.updateAdminProfile__header-lable,
+.updateAdminProfile__header-lable-reset {
+  padding: 8px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid $mainBlue;
+  cursor: pointer;
+}
+.updateAdminProfile__header-lable {
+  background-color: $mainBlue;
+  color: $whiteColor;
+}
+
+.updateAdminProfile__header-lable-reset {
+  background-color: transparent;
+  margin-left: 8px;
+}
+.updateAdminProfile__header-sublable {
+  color: $menuColor;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 24px;
+}
+
+// BODY
+.updateAdminProfile {
+  &__body {
+    padding-top: 24px;
+  }
+  &__body-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $menuColor;
+    margin-bottom: 0;
+    display: block;
+  }
+  &__body-input {
+    margin-top: 4px;
+    margin-bottom: 14px;
+    padding: 8px;
+    width: 80%;
+    color: $menuColor !important;
+    font-size: 16px;
+    border-radius: 6px;
+    &.textarea {
+      height: 200px;
+    }
+  }
+  &__body-inputPhone {
+    margin-top: 4px;
+    margin-bottom: 14px;
+    width: 80%;
+    input {
+      padding: 8px;
+      color: $menuColor !important;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid $greyTextColor !important;
+    }
+
+    input:focus {
+      border: 2px solid $mainBlue !important;
+    }
+  }
+  &__body-radio {
+    font-size: 16px;
+    font-weight: 400;
+    span {
+      color: $blackColor !important;
+    }
+  }
+}
+
+.updateAminProfile__btn {
+  margin-top: 24px;
+}
+.updateAminProfile__btn-cancel,
+.updateAminProfile__btn-save {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.updateAminProfile__btn-cancel {
+  background-color: transparent;
+  border: 1px solid $mainBlue;
+  color: $mainBlue;
+}
+.updateAminProfile__btn-save {
+  background-color: $mainBlue;
+  color: $whiteColor;
+  border: 1px solid $mainBlue;
+  margin-left: 24px;
+}
+
+@include desktop {
+  .updateAdminProfile {
+    &__body-input,
+    &__body-inputPhone {
+      width: 100%;
+    }
+  }
+}
+
+@include tablet {
+  .updateAdminProfile {
+    &__body-input,
+    &__body-inputPhone {
+      width: 100%;
+    }
+  }
+}
+
+@include mobile {
+  .updateAdminProfile__header {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .updateAdminProfile__header-lable-content {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .updateAdminProfile__header-avatar {
+    margin-right: 0;
+  }
+  .updateAdminProfile__header-lable,
+  .updateAdminProfile__header-lable-reset,
+  .updateAdminProfile__header-sublable {
+    font-size: 14px;
+  }
+  .updateAdminProfile__header-lable-reset {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  .updateAdminProfile__header-sublable {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .updateAdminProfile {
+    &__body-input,
+    &__body-inputPhone {
+      width: 100%;
+    }
+  }
+}

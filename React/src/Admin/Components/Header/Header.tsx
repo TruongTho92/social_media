@@ -8,6 +8,7 @@ import { getUser } from "~/features/Auth/userSlice";
 import { settings } from "~/Admin/config/slickConfig";
 import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
 import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
+import { userApi } from "~/features/Auth/userApi";
 
 type Props = {
   setIsOpenSidebar?: (e: boolean) => void;
@@ -28,6 +29,15 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
     if (setIsOpenSidebar) {
       setIsOpenSidebar(!isOpenSidebar);
     }
+  };
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getAdminData.user.email,
+        authentication_token: getAdminData.user.authentication_token,
+      },
+    };
+    await dispatch(userApi.logoutUser(payload));
   };
 
   return (
@@ -74,7 +84,7 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
                     </Link>
                   </li>
                   <li className="user__menu-item">
-                    <Link to="/settings" className="user__menu-link">
+                    <Link to="update-profile" className="user__menu-link">
                       <div style={{ lineHeight: 0 }}>
                         <i className="bi bi-gear user__menu-icon"></i>
                       </div>
@@ -96,7 +106,9 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
                   <div style={{ lineHeight: 0 }}>
                     <i className="bi bi-box-arrow-left user__menu-icon"></i>
                   </div>
-                  <span className="name">Logout</span>
+                  <span className="name" onClick={handleLogout}>
+                    Logout
+                  </span>
                 </li>
               </>
             )}

@@ -3058,6 +3058,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-phone-number-input@^3.0.14":
+  "integrity" "sha512-xOje1m+Z9n3kxj5/bCJzpDeokA95aYYuFbmcK8myyod+KLy3h5tKwCQwSEcU+603EeyfgTMkjz7GYY9S0aZLCQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-phone-number-input/-/react-phone-number-input-3.0.14.tgz"
+  "version" "3.0.14"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-slick@^0.23.10":
   "integrity" "sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA=="
   "resolved" "https://registry.npmjs.org/@types/react-slick/-/react-slick-0.23.10.tgz"
@@ -4770,6 +4777,11 @@
     "parse-json" "^5.0.0"
     "path-type" "^4.0.0"
     "yaml" "^1.10.0"
+
+"country-flag-icons@^1.5.4":
+  "integrity" "sha512-k4WXZ/WvWOSiYXRG1n8EYHNr1m/IX0GffKqAidaet5DrJsDOmJ8Q/8JvvONhZNnKYg24s4lvsm+9og1HcuIU/g=="
+  "resolved" "https://registry.npmjs.org/country-flag-icons/-/country-flag-icons-1.5.5.tgz"
+  "version" "1.5.5"
 
 "cross-spawn@^7.0.2", "cross-spawn@^7.0.3":
   "integrity" "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w=="
@@ -7045,6 +7057,13 @@
   dependencies:
     "css-in-js-utils" "^2.0.0"
 
+"input-format@^0.3.8":
+  "integrity" "sha512-tLR0XRig1xIcG1PtIpMd/uoltvkAI62CN9OIbtj4/tEJAkqTCQLNHUZ9N4M46w0dopny7Rlt/lRH5Xzp7e6F+g=="
+  "resolved" "https://registry.npmjs.org/input-format/-/input-format-0.3.8.tgz"
+  "version" "0.3.8"
+  dependencies:
+    "prop-types" "^15.8.1"
+
 "insert-css@^2.0.0":
   "integrity" "sha512-xGq5ISgcUP5cvGkS2MMFLtPDBtrtQPSFfC6gA6U8wHKqfjTIMZLZNxOItQnoSjdOzlXOLU/yD32RKC4SvjNbtA=="
   "resolved" "https://registry.npmjs.org/insert-css/-/insert-css-2.0.0.tgz"
@@ -8139,6 +8158,11 @@
   dependencies:
     "prelude-ls" "~1.1.2"
     "type-check" "~0.3.2"
+
+"libphonenumber-js@^1.10.14":
+  "integrity" "sha512-McGS7GV/WjJ2KjfOGhJU1oJn29RYeo7Q+RpANRbUNMQ9gj5XArpbjurSuyYPTejFwbaUojstQ4XyWCrAzGOUXw=="
+  "resolved" "https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.10.14.tgz"
+  "version" "1.10.14"
 
 "lilconfig@^2.0.3", "lilconfig@^2.0.5", "lilconfig@^2.0.6":
   "integrity" "sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg=="
@@ -10501,6 +10525,17 @@
   "integrity" "sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA=="
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
+
+"react-phone-number-input@^3.2.12":
+  "integrity" "sha512-bqfg4iz4KWIkCGi7nV69CG90iX9EZ5wBXKoMnoyw7NDv/e2KH2uobDSLHXC4HydUgB+InjERxRdbdWTBbEff2w=="
+  "resolved" "https://registry.npmjs.org/react-phone-number-input/-/react-phone-number-input-3.2.12.tgz"
+  "version" "3.2.12"
+  dependencies:
+    "classnames" "^2.3.1"
+    "country-flag-icons" "^1.5.4"
+    "input-format" "^0.3.8"
+    "libphonenumber-js" "^1.10.14"
+    "prop-types" "^15.8.1"
 
 "react-redux@^7.2.1 || ^8.0.2", "react-redux@^8.0.2":
   "integrity" "sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA=="

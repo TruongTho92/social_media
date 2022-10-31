@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useAppSelector } from "~/app/hooks";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { userApi } from "~/features/Auth/userApi";
 import { getUser } from "~/features/Auth/userSlice";
 import "./sidebarStyles.scss";
 
@@ -12,12 +13,23 @@ type Props = {
 const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
   const [openManageMenu, setOpenManageMenu] = useState(false);
 
+  const dispatch = useAppDispatch();
   const getAdminData = useAppSelector(getUser);
 
   const handleCloseSidebar = () => {
     if (setIsOpenSidebar) {
       setIsOpenSidebar(false);
     }
+  };
+
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getAdminData.user.email,
+        authentication_token: getAdminData.user.authentication_token,
+      },
+    };
+    await dispatch(userApi.logoutUser(payload));
   };
   return (
     <>
@@ -125,7 +137,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
             </li>
           </ul>
           <div className="menu__item">
-            <NavLink to="settings" className="menu__item-link">
+            <div className="menu__item-link">
               <div className="link__content">
                 <div style={{ lineHeight: 0 }}>
                   <i
@@ -133,9 +145,11 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                   ></i>
                 </div>
 
-                <span className="text__logout">Logout</span>
+                <span className="text__logout" onClick={handleLogout}>
+                  Logout
+                </span>
               </div>
-            </NavLink>
+            </div>
           </div>
         </div>
       </aside>
