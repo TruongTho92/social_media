@@ -137,6 +137,26 @@
   }
 }
 
+.setting {
+  &__list {
+    padding: 16px;
+    list-style: none;
+  }
+  &__item {
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
+  }
+  &__item-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: $menuColor;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
 @include tablet {
   .header__container {
     padding: 12px 24px;

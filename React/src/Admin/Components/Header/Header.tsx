@@ -83,15 +83,41 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
                       <span className="name">Profile</span>
                     </Link>
                   </li>
-                  <li className="user__menu-item">
-                    <Link to="update-profile" className="user__menu-link">
-                      <div style={{ lineHeight: 0 }}>
-                        <i className="bi bi-gear user__menu-icon"></i>
+                  <Tooltip
+                    color="#fff"
+                    trigger="click"
+                    placement="left"
+                    title={
+                      <ul className="setting__list">
+                        <li className="setting__item">
+                          <Link
+                            className="setting__item-link"
+                            to="update-profile"
+                          >
+                            Update profile
+                          </Link>
+                        </li>
+                        <li className="setting__item">
+                          <Link
+                            className="setting__item-link"
+                            to="update-password"
+                          >
+                            Change password
+                          </Link>
+                        </li>
+                      </ul>
+                    }
+                  >
+                    <li className="user__menu-item">
+                      <div className="user__menu-link">
+                        <div style={{ lineHeight: 0 }}>
+                          <i className="bi bi-gear user__menu-icon"></i>
+                        </div>
+                        <span className="name">Settings</span>
                       </div>
+                    </li>
+                  </Tooltip>
 
-                      <span className="name">Settings</span>
-                    </Link>
-                  </li>
                   <li className="user__menu-item">
                     <Link to="/" className="user__menu-link">
                       <div style={{ lineHeight: 0 }}>

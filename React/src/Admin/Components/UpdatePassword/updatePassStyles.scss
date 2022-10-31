@@ -1,0 +1,131 @@
+@import "../../../global/scss/rootStyles.scss";
+.updatePassword {
+  // padding: 80px 20% 40px;
+}
+.updatePassContainer {
+  background-color: $whiteColor;
+  padding: 0 36px 36px 24px;
+  border-radius: 8px;
+  box-shadow: $boxShadow;
+}
+
+.heading {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px 0;
+  border-bottom: 1px solid $greyLight;
+}
+
+.udpatePassContent {
+  @include d-flex(space-between, center);
+  padding-top: 24px;
+}
+
+.acccount {
+  border-right: 1px solid $greyLight;
+  @include d-flex(start, center);
+  flex-direction: column;
+  padding: 0 30px;
+  .accountImg {
+    @include avatar(240, 240);
+  }
+  .accountName {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+}
+
+.form {
+  width: 60%;
+  .labelInput {
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .formInput {
+    width: 70%;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .errorValidatePassword {
+    margin-top: 6px;
+    color: red;
+    animation: LeftToRight 0.25s ease-out;
+  }
+  .btnSubmit {
+    @include d-flex(center, center);
+    color: $whiteColor;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: $mainBlue;
+    padding: 18px 20px;
+    border-radius: 4px;
+  }
+}
+
+// RESPONSIVE
+@include desktop {
+  .form {
+    margin-left: 24px;
+    .formInput {
+      width: 100%;
+    }
+  }
+}
+
+@include tablet {
+  .form {
+    margin-left: 24px;
+    .formInput {
+      width: 100%;
+    }
+  }
+}
+
+@include mobile {
+  .updatePassContainer {
+    padding: 0 12px 12px 12px;
+  }
+
+  .udpatePassContent {
+    flex-direction: column;
+  }
+
+  .heading {
+    padding: 24px 0 12px 0;
+  }
+
+  .acccount {
+    border: none;
+    .accountImg {
+      @include avatar(140, 140);
+    }
+  }
+
+  .form {
+    margin-left: 0;
+    margin: 24px;
+    width: 100%;
+    display: block !important;
+    @include d-flex(center, center);
+    flex-direction: column;
+    .formInput {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes LeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,4 +1,4 @@
-import { Col, Input, Row } from "antd";
+import { Checkbox, Col, Input, Row } from "antd";
 import React, { useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { Link } from "react-router-dom";
