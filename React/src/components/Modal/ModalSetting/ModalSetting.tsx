@@ -71,6 +71,18 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
             />
             <span> Delete Account</span>
           </div>
+          {getUserData.user.is_admin || getUserData.user.is_supervisor ? (
+            <Link to="/admin" className={styles.deleteAccount}>
+              <div style={{ lineHeight: 0 }}>
+                <i
+                  className={`fal fa-user-cog ${styles.iconLink}`}
+                  style={{ marginRight: 12 }}
+                ></i>
+              </div>
+
+              <span className={styles.subUserLabel}>Admin manage</span>
+            </Link>
+          ) : null}
           <div className={styles.deleteAccount} onClick={handleLogout}>
             <BiLogOutCircle
               size={20}

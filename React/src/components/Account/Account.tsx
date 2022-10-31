@@ -8,28 +8,39 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import {
+  getUserFollowers,
+  getUserFollowings,
+} from "~/features/profileUser/profileUserSlice";
 import Loading from "../Loading";
+import ModalFollowers from "../Modal/ModalFollowers";
+import ModalFollowing from "../Modal/ModalFollowing";
 import ModalSetting from "../Modal/ModalSetting";
-import AccountPosts from "../Posts/PostProfile/AccountPosts";
+import AccountPosts from "../Posts/PostAccount/AccountPosts";
 import styles from "./accountStyles.module.scss";
 
 const Account: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const getUserData = useAppSelector(getUser);
-  const loadingPosts = useAppSelector(getLoadingPosts);
 
+  const userFollowers = useAppSelector(getUserFollowers);
+  const userFollowings = useAppSelector(getUserFollowings);
+  const loadingPosts = useAppSelector(getLoadingPosts);
   const allAccountPost = useAppSelector(getAllPost);
+
   useEffect(() => {
     dispatch(postsApi.getAll(getUserData.user.id));
-  }, [dispatch]);
+    dispatch(profileUserApi.getProfileUser(getUserData.user.id));
+  }, []);
 
   return (
     <>
       {loadingPosts ? (
         <Loading />
       ) : (
-        <div className={`container-fluid ${styles.account}`}>
+        <div className={`${styles.account}`}>
           <div className={styles.accountContainer}>
             <div className={styles.accountInfo}>
               <div className={styles.image}>
@@ -63,14 +74,12 @@ const Account: React.FC = () => {
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
-                    <span>12</span> posts
+                    <span>{allAccountPost?.length}</span> posts
                   </span>
-                  <span className={styles.follower}>
-                    <span>122312</span> followers
-                  </span>
-                  <span className={styles.following}>
-                    <span>200000</span> following
-                  </span>
+
+                  {/* MODAL FOLLOW */}
+                  <ModalFollowers followers={userFollowers} />
+                  <ModalFollowing followings={userFollowings} />
                 </div>
                 <div className={styles.infoItem}>
                   <div>
@@ -99,7 +108,7 @@ const Account: React.FC = () => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.accountPost}>
-            <AccountPosts postList={allAccountPost} />
+            <AccountPosts isAccount={true} postList={allAccountPost} />
           </div>
         </div>
       )}

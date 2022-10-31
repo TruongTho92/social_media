@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Account from "~/components/Account";
+import Header from "~/components/Header";
 
 const Profile: React.FC = () => {
   return (
-    <div className="">
-      <Account />
-      <Outlet />
-    </div>
+    <>
+      <Header />
+      <>
+        <Account />
+        <Outlet />
+      </>
+    </>
   );
 };
 

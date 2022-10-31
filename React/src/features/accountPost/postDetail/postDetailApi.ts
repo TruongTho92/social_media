@@ -1,6 +1,12 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
 import {
+  CommentFailure,
+  CommentRequest,
+  CommentSuccess,
+  DeleteCommentFailure,
+  DeleteCommentRequest,
+  DeleteCommentSuccess,
   disLikeFailure,
   disLikeRequest,
   disLikeSuccess,
@@ -30,12 +36,14 @@ export const postDetailApi = {
           token: token,
         },
       });
-      setTimeout(() => {
-        dispatch({
-          type: GetPostSuccess.toString(),
-          payload: data.data,
-        });
-      }, 1000);
+      if (data) {
+        setTimeout(() => {
+          dispatch({
+            type: GetPostSuccess.toString(),
+            payload: data.data,
+          });
+        }, 1000);
+      }
     } catch (error: any) {
       dispatch({
         type: GetPostFailure.toString(),
@@ -62,7 +70,7 @@ export const postDetailApi = {
       setTimeout(() => {
         dispatch({
           type: UpdatePostSuccess.toString(),
-          payload: data,
+          payload: data.data,
         });
       }, 1000);
     } catch (error: any) {
@@ -89,7 +97,7 @@ export const postDetailApi = {
 
       dispatch({
         type: likeSuccess.toString(),
-        payload: data,
+        payload: data.data,
       });
     } catch (error: any) {
       dispatch({
@@ -123,6 +131,67 @@ export const postDetailApi = {
       } catch (error: any) {
         dispatch({
           type: disLikeFailure.toString(),
+          payload: error.response.data,
+        });
+      }
+    },
+
+  // COMMENT
+  comment: (payload: any, idPost: any) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: CommentRequest.toString(),
+      });
+
+      const token = JSON.parse(Cookies.get("access_token") || "");
+
+      const { data } = await apiClient.post(
+        `/api/v1/posts/${idPost}/comments`,
+        payload,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      dispatch({
+        type: CommentSuccess.toString(),
+        payload: data.data.comment,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: CommentFailure.toString(),
+        payload: error.response.data,
+      });
+    }
+  },
+
+  deleteComment:
+    (idPost: any, idComment: number | null) => async (dispatch: any) => {
+      console.log({ idPost, idComment });
+      try {
+        dispatch({
+          type: DeleteCommentRequest.toString(),
+        });
+
+        const token = JSON.parse(Cookies.get("access_token") || "");
+
+        const { data } = await apiClient.delete(
+          `/api/v1/posts/${idPost}/comments/${idComment}`,
+
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+        dispatch({
+          type: DeleteCommentSuccess.toString(),
+          payload: data,
+        });
+      } catch (error: any) {
+        dispatch({
+          type: DeleteCommentFailure.toString(),
           payload: error.response.data,
         });
       }

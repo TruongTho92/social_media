@@ -1,0 +1,42 @@
+@import "../../../global/scss/rootStyles.scss";
+
+.notfound {
+  @include d-flex(center, center);
+  flex-direction: column;
+  height: 100vh;
+  background-color: #000;
+  .iconEyes {
+    font-size: 80px;
+    animation: rotate 0.45s linear infinite;
+    color: $whiteColor;
+  }
+  .content {
+    @include d-flex(center, center);
+    margin-top: 60px;
+  }
+  .title {
+    font-size: 100px;
+    font-weight: 700;
+    color: $mainBlue;
+    margin: 0;
+    transform: rotate(-45deg);
+  }
+  .description {
+    margin: 0;
+    color: $whiteColor;
+    font-size: 40px;
+    margin-left: 60px;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

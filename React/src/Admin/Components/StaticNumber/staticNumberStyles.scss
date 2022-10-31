@@ -1,0 +1,43 @@
+@import "../../../global/scss/rootStyles.scss";
+.post {
+  &__number {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: $boxShadowCard;
+  }
+  &__number-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: $mainBlue;
+    border-radius: 8px;
+    line-height: 0;
+
+    i {
+      color: $whiteColor;
+      font-size: 20px;
+    }
+  }
+  &__number-content {
+    .heading {
+      font-size: 14px;
+      font-weight: 500;
+      color: $menuColor;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+    .number {
+      font-size: 30px;
+      font-weight: 500;
+      color: $greyTextColor;
+      margin-bottom: 0;
+    }
+  }
+}

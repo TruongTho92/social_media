@@ -13,12 +13,24 @@ Rails.application.routes.draw do
       get "logged_in", :to => 'application#is_logged_in?'
       get "load_user", :to => 'application#current_user'
       post "/search", :to => 'users#search'
+      resources :users do
+        member do
+          get :following, :followers
+        end
+      end
+      resources :relationships, only: [:create, :destroy]
 
       resources :posts do
         resources :likes, only:[:create, :destroy]
         resources :comments, only:[:create, :update, :destroy]
       end
       get "posts_of_user/:id", :to => 'posts#posts_of_user'
+      get "posts_of_following", :to => 'posts#posts_of_following'
+
+      get "users_admin", :to => 'admin#index'
+      delete "delete_user_admin/:id", :to => 'admin#destroy'
+      get "posts_admin", :to => 'admin#post_admin'
+      delete "delete_post_admin/:id", :to => 'admin#delete_post_admin'
     end
   end
 end

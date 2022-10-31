@@ -1,23 +1,28 @@
 @import "../../global/scss/rootStyles.scss";
 
 .commentList {
-  overflow-y: scroll;
-  height: 200px;
+  height: 400px;
   width: 100%;
+  overflow-y: scroll;
+  padding: 12px 0;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
   &.hidden {
     height: 0;
+    padding: 0;
   }
+}
+.infoComment {
+  @include d-flex(start, flex-start);
 }
 .commentItem {
   display: flex;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   width: fit-content;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   width: 100%;
 
   .userImage {
@@ -49,25 +54,48 @@
       display: block;
       font-size: 14px;
       font-weight: 400;
-      width: 260px;
+      width: 160px;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+.iconRemove {
+  line-height: 0;
+}
+.deleteIcon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.45s linear;
+
+  &:hover {
+    color: red;
+    transform: translateX(-20px);
+    transition: all 0.2s linear;
+  }
+}
+
+@include desktop {
+  .commentList {
+    height: 340px;
+    &.hidden {
+      height: 0;
+    }
+  }
+}
+@include tablet {
+  .commentList {
+    height: 240px;
+    &.hidden {
+      height: 0;
     }
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .commentList {
-    height: 200px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .commentList {
-    height: 180px;
-  }
-}
-
-@media screen and (max-width: 767px) {
+@include mobile {
   .commentList {
     height: 160px;
+    &.hidden {
+      height: 0;
+    }
   }
 }

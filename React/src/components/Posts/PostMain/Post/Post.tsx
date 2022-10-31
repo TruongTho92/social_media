@@ -1,55 +1,153 @@
-import { Input, InputRef } from "antd";
-import { useRef } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { BiMessageRounded } from "react-icons/bi";
-import { BsBookmarkPlus } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import Comments from "~/components/Comments";
+import { Typography } from "antd";
+import { useEffect, useState } from "react";
+import { IoBookmarkOutline } from "react-icons/io5";
+import { Link, Route, Routes } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
+import PostMainDetail from "../PostMainDetail";
 import styles from "./postStyles.module.scss";
+import { LikeDataResponse } from "~/common/types";
+import { getUser } from "~/features/Auth/userSlice";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
+import { getLikeData } from "~/features/accountPost/postDetail/postDetailSlice";
+import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
 
-const Post = ({ userId = 1, postId = 1 }) => {
-  const ref = useRef<InputRef>(null);
+type Props = {
+  avatar: string;
+  userId: number;
+  postId: number;
+  userName: string;
+  nickName: string;
+  caption: string;
+  imagePost: string;
+  likes: LikeDataResponse[];
+  comments: LikeDataResponse[];
+};
+
+const Post: React.FC<Props> = ({
+  avatar,
+  userId,
+  postId,
+  userName,
+  nickName,
+  imagePost,
+  caption,
+  likes,
+  comments,
+}) => {
+  const [liked, setLiked] = useState(false);
+  const [ellipsis, setEllipsis] = useState(true);
+
+  const dispatch = useAppDispatch();
+
+  const getUserData = useAppSelector(getUser);
+  const likePostMain = useAppSelector(getLikePostMain);
+
+  useEffect(() => {
+    if (likes?.find((post) => post.user_id === getUserData.user.id)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [getUserData.user.id, likes]);
+
+  // LIKE
+  const handleLike = async () => {
+    setLiked(true);
+    await dispatch(postOfFollowingApi.like(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
+  };
+  const handleDisLike = async () => {
+    setLiked(false);
+    await dispatch(postOfFollowingApi.disLike(postId, likePostMain.id));
+    dispatch(postOfFollowingApi.getPostFollowing());
+  };
+
   return (
-    <div className={styles.post}>
-      <div className={styles.user}>
-        <div className={styles.userName}>
-          <Link to={`/user-profile/${userId}`}>
-            <div className={styles.image}>
-              <img src="/assets/images/user-img.jpg" alt="" />
+    <>
+      <div className={styles.post}>
+        <div className={styles.user}>
+          <div className={styles.userName}>
+            <Link to={`/user-profile/${userId}`}>
+              <div className={styles.image}>
+                <img
+                  src={avatar ? avatar : "/assets/images/user-img.jpg"}
+                  alt=""
+                />
+              </div>
+            </Link>
+            <div className={styles.info}>
+              <p className={styles.name}>{userName}</p>
+              <p className={styles.description}>{nickName} </p>
             </div>
+          </div>
+        </div>
+
+        <div className={styles.postImage}>
+          <Link to={`/post-newfeeds/${postId}`} className={styles.commentLink}>
+            <img src={imagePost} alt="" />
           </Link>
-          <div className={styles.info}>
-            <p className={styles.name}>Minh Tài</p>
-            <p className={styles.description}>Conianguys</p>
-          </div>
-        </div>
-        <button className={styles.userFollowBtn}>Follow</button>
-      </div>
-
-      <div className={styles.postImage}>
-        <img src="/assets/images/post_img.jpg" alt="" />
-      </div>
-      <div className={styles.comment}>
-        <Comments />
-      </div>
-      <div className={styles.emotion}>
-        <div className={styles.left}>
-          <AiOutlineHeart className={styles.likeIcon} />
-
-          <div style={{ lineHeight: 0 }} onClick={() => ref.current?.focus()}>
-            <BiMessageRounded className={styles.commentIcon} />
-          </div>
         </div>
 
-        <BsBookmarkPlus className={styles.saveIcon} />
+        <div className={styles.emotion}>
+          <div className={styles.left}>
+            {liked ? (
+              <i
+                onClick={handleDisLike}
+                className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
+              ></i>
+            ) : (
+              <i
+                onClick={handleLike}
+                className={`far fa-heart ${styles.likeIcon}`}
+              ></i>
+            )}
+
+            <Link
+              to={`/post-newfeeds/${postId}`}
+              className={styles.commentLink}
+            >
+              <i className={`far fa-comment ${styles.commentIcon}`}></i>
+            </Link>
+          </div>
+          <IoBookmarkOutline
+            color={"#00000"}
+            // title={}
+            className={styles.saveIcon}
+          />
+        </div>
+        <Typography className={styles.textUserLiked}>
+          <span>{likes?.length}</span> likes
+        </Typography>
+        <div className={styles.captionContainer}>
+          <Typography className={styles.userNameCaption}>{userName}</Typography>
+          <Typography.Paragraph
+            ellipsis={
+              ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
+            }
+            className={styles.caption}
+          >
+            {caption}
+          </Typography.Paragraph>
+        </div>
       </div>
-      <Input
-        ref={ref}
-        suffix={<div className={styles.inputText}>Post</div>}
-        className={styles.inputComment}
-        placeholder="write a comment..."
-      />
-    </div>
+
+      <Routes>
+        <Route
+          path="post-newfeeds/:id"
+          element={
+            <PostMainDetail
+              avatar={avatar}
+              userId={userId}
+              userName={userName}
+              nickName={nickName}
+              caption={caption}
+            />
+          }
+        />
+      </Routes>
+    </>
   );
 };
 

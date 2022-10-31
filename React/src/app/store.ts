@@ -6,26 +6,44 @@ import {
 } from "@reduxjs/toolkit";
 import postDetailSlice from "~/features/accountPost/postDetail/postDetailSlice";
 
-import UserReducer from "~/features/Auth/userSlice";
 import postsSlice from "~/features/accountPost/Posts/postsSlice";
-import postsUserSlice from "~/features/userPost/postsUser/postsUserSlice";
-import postDetailUserSlice from "~/features/userPost/postDetailUser/postDetailUserSlice";
+import AllPostSlice from "~/features/Admin/AllPost/AllPostSlice";
+import allUserSlice from "~/features/Admin/AllUser/allUserSlice";
+import deleteAdminSlice from "~/features/Admin/DeleteAccount/deleteAdminSlice";
+import UserReducer from "~/features/Auth/userSlice";
+import followSlice from "~/features/follow/followSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
+import searchAccountSlice from "~/features/searchAccount/searchAccountSlice";
+import userAllSlice from "~/features/userAll/userAllSlice";
+import postOfFollowingSlice from "../features/postOfFollowing/postOfFollowingSlice";
 
 const rootReducer = combineReducers({
   // AUTH and PROFILE ACCOUNT
   user: UserReducer,
 
+  // ALL ACCOUNT
+  allAccount: userAllSlice,
+
+  // SEACH ACCOUNT
+  searchAccount: searchAccountSlice,
+
+  // POST FOLLOWING
+  postOfFollowing: postOfFollowingSlice,
+
   // ACCOUNT POST
   posts: postsSlice,
   postDetail: postDetailSlice,
 
-  // USER POST
-  postsUser: postsUserSlice,
-  postDetailUser: postDetailUserSlice,
-
   // USER PROFILE
   profileUser: profileUserSlice,
+
+  // FOLLOW
+  follow: followSlice,
+
+  // ADMIN
+  adminAllUser: allUserSlice,
+  adminAllPost: AllPostSlice,
+  deleteAdminMethod: deleteAdminSlice,
 });
 
 export const store = configureStore({

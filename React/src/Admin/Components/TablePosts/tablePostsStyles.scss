@@ -1,0 +1,39 @@
+@import "../../../global/scss/rootStyles.scss";
+
+// SCSS
+.cell {
+}
+
+.table {
+  &__posts-image {
+    width: 100px;
+    height: 100px;
+    &:hover img {
+      transform: scale(1.1);
+      transition: all 0.25s linear;
+      cursor: pointer;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      transition: all 0.25s linear;
+    }
+  }
+  &__posts-caption {
+    font-style: 16px;
+    font-weight: 400;
+  }
+  &__posts-caption-error {
+    font-style: 14px;
+    font-weight: 400;
+    color: red;
+    font-style: italic;
+  }
+  &__posts-date {
+    font-size: 14px;
+    font-weight: 400;
+    color: $menuColor;
+  }
+}

@@ -2,12 +2,11 @@ import "antd/dist/antd.css";
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Admin from "./Admin";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import Header from "./components/Header";
-import PostDetail from "./components/Posts/PostProfile/PostDetail";
-import UserPostDetail from "./components/Posts/PostUser/UserPostDetail";
-import UpdateProfile from "./components/UpdateProfile";
+import PostMainDetail from "./components/Posts/PostMain/PostMainDetail";
+// import UserPostDetail from "./components/Posts/PostUser/UserPostDetail";
 import { userApi } from "./features/Auth/userApi";
 import { getAuthenticated } from "./features/Auth/userSlice";
 import Login from "./pages/Auth/Login";
@@ -20,6 +19,7 @@ import PostDetailPage from "./pages/PostDetailPage";
 import Profile from "./pages/Profile";
 import SearchPage from "./pages/SearchPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
+import UpdateProfilePage from "./pages/UpdateProfilePage";
 import UserProfilePage from "./pages/UserProfilePage";
 
 const App: React.FC = () => {
@@ -36,17 +36,27 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {isAuthenticated && <Header />}
-
+      {/* {isAuthenticated && <Header />} */}
       <Routes location={background || location}>
+        {/* ADMIN */}
+        <Route
+          path="/admin/*"
+          element={isAuthenticated ? <Admin /> : <Login />}
+        />
         {/* AUTH */}
-        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route path="/*" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route
+          path="post-newfeeds/:id"
+          element={isAuthenticated ? <PostMainDetail /> : <Login />}
+        />
+
         <Route
           path="/register"
           element={isAuthenticated ? <NotFound /> : <Register />}
         />
 
         <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
+        <Route path="saves" element={isAuthenticated ? <Chat /> : <Login />} />
 
         {/* POST */}
         <Route
@@ -58,16 +68,15 @@ const App: React.FC = () => {
         <Route
           path="profile"
           element={isAuthenticated ? <Profile /> : <Login />}
-        >
-          <Route
-            path="account-post/:id"
-            element={isAuthenticated ? <PostDetailPage /> : <Login />}
-          />
-        </Route>
+        />
+        <Route
+          path="account-post/:id"
+          element={isAuthenticated ? <PostDetailPage /> : <Login />}
+        />
 
         <Route
           path="profile/update"
-          element={isAuthenticated ? <UpdateProfile /> : <Login />}
+          element={isAuthenticated ? <UpdateProfilePage /> : <Login />}
         />
         <Route
           path="profile/update-password"
@@ -79,13 +88,6 @@ const App: React.FC = () => {
           path="user-profile/:id"
           element={isAuthenticated ? <UserProfilePage /> : <Login />}
         />
-        <Route
-          path="user-post/:id"
-          element={
-            isAuthenticated ? <UserPostDetail isAccount={false} /> : <Login />
-          }
-        />
-
         {/* SEARCH */}
         <Route
           path="search"
@@ -98,7 +100,11 @@ const App: React.FC = () => {
 
       {background && (
         <Routes>
-          <Route path="profile/account-post/:id" element={<PostDetailPage />} />
+          <Route path="/account-post/:id" element={<PostDetailPage />} />
+          <Route
+            path="post-newfeeds/:id"
+            element={isAuthenticated ? <PostMainDetail /> : <Login />}
+          />
         </Routes>
       )}
     </div>

@@ -16,7 +16,7 @@ const initialState: stateType = {
   data: {
     data: {
       user: {
-        id: null,
+        id: 0,
         email: "",
         password: "",
         password_confirmation: "",
@@ -24,9 +24,10 @@ const initialState: stateType = {
         user_name: "",
         nick_name: "",
         bio: "",
-
         gender: "",
         authentication_token: "",
+        is_admin: false,
+        is_supervisor: false,
       },
     },
     message: "",

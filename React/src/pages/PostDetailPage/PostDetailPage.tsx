@@ -1,10 +1,14 @@
-import PostDetailAction from "~/features/accountPost/postDetail/PostDetailAction";
+import PostDetail from "~/components/Posts/PostAccount/PostDetail";
+import Header from "~/components/Header";
 
 const PostDetailPage = () => {
   return (
-    <div>
-      <PostDetailAction isAccount={true} />
-    </div>
+    <>
+      <Header />
+      <div>
+        <PostDetail />
+      </div>
+    </>
   );
 };
 

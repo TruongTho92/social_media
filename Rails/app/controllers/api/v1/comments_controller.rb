@@ -31,6 +31,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   def destroy
     @comment = Comment.find_by(id: params[:id])
     if @comment
+      @comment.destroy
       render json: {
         message: "Delete Successfully!"
       },status: :ok

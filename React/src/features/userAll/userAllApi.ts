@@ -22,7 +22,7 @@ export const userAllApi = {
 
       dispatch({
         type: GetAllUserSucceess.toString(),
-        payload: data.data,
+        payload: data.data.user,
       });
     } catch (error: any) {
       dispatch({

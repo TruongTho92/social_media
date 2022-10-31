@@ -1,6 +1,7 @@
 import { Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
@@ -9,7 +10,18 @@ import {
   getLoadingPosts,
 } from "~/features/accountPost/Posts/postsSlice";
 import { getUser } from "~/features/Auth/userSlice";
-import UserPosts from "../Posts/PostUser/UserPosts";
+import { followApi } from "~/features/follow/followApi";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import {
+  getloadingProfile,
+  getProfileUser,
+  getUserFollowers,
+  getUserFollowings,
+} from "~/features/profileUser/profileUserSlice";
+import Loading from "../Loading";
+import ModalFollowers from "../Modal/ModalFollowers";
+import ModalFollowing from "../Modal/ModalFollowing";
+import AccountPosts from "../Posts/PostAccount/AccountPosts";
 
 import styles from "./userProfileStyles.module.scss";
 
@@ -20,28 +32,59 @@ const UserProfile: React.FC = (props: Props) => {
   const [isFollow, setIsFollow] = useState(false);
 
   const getUserData = useAppSelector(getUser);
+
+  const profileUser = useAppSelector(getProfileUser);
+  const userFollowers = useAppSelector(getUserFollowers);
+  const userFollowings = useAppSelector(getUserFollowings);
   const loadingPosts = useAppSelector(getLoadingPosts);
+  const loadingProfile = useAppSelector(getloadingProfile);
   const allAccountPost = useAppSelector(getAllPost);
 
+  const { id } = useParams();
+  const userId = Number(id);
+
   useEffect(() => {
-    // More api get user profile
-    // Change api post user id
-    // dispatch(postsApi.getAll());
-  }, []);
+    dispatch(profileUserApi.getProfileUser(userId));
+    dispatch(postsApi.getAll(userId));
+  }, [userId]);
+
+  useEffect(() => {
+    if (userFollowers.find((follow) => follow.id === getUserData.user.id)) {
+      setIsFollow(true);
+    }
+    return () => {
+      setIsFollow(false);
+    };
+  }, [getUserData.user.id, userFollowers]);
+
+  const handleFollow = async () => {
+    const data = {
+      id: userId,
+    };
+    await dispatch(followApi.follow(data));
+    setIsFollow(true);
+    dispatch(profileUserApi.getProfileUser(userId));
+  };
+
+  const handleUnFollow = async () => {
+    setIsFollow(false);
+    await dispatch(followApi.unFollow(userId));
+    dispatch(profileUserApi.getProfileUser(userId));
+  };
 
   return (
     <>
-      {loadingPosts ? (
-        "Loading..."
+      {loadingPosts && loadingProfile ? (
+        <Loading />
       ) : (
-        <div className={`container-fluid ${styles.userProfile}`}>
+        <div className={`${styles.userProfile}`}>
           <div className={styles.userProfileContainer}>
             <div className={styles.userProfileInfo}>
               <div className={styles.image}>
                 <img
                   src={
-                    getUserData.user.avatar
-                      ? getUserData.user.avatar
+                    profileUser.user.avatar
+                      ? profileUser.user.avatar
                       : "/assets/images/user-vacant.jpg"
                   }
                   alt=""
@@ -50,8 +93,8 @@ const UserProfile: React.FC = (props: Props) => {
               <div className={styles.info}>
                 <div className={`${styles.infoItem} ${styles.infoItemMobile}`}>
                   <span className={styles.name}>
-                    {getUserData.user.user_name ? (
-                      getUserData.user.user_name
+                    {profileUser.user.user_name ? (
+                      profileUser.user.user_name
                     ) : (
                       <span className={styles.errorUpdate}>
                         * User hasn't name
@@ -59,9 +102,16 @@ const UserProfile: React.FC = (props: Props) => {
                     )}
                   </span>
                   {isFollow ? (
-                    <button className={styles.btnUnFollow}>Unfollow</button>
+                    <button
+                      onClick={handleUnFollow}
+                      className={styles.btnUnFollow}
+                    >
+                      Unfollow
+                    </button>
                   ) : (
-                    <button className={styles.btnFollow}>Follow</button>
+                    <button onClick={handleFollow} className={styles.btnFollow}>
+                      Follow
+                    </button>
                   )}
 
                   <Tooltip
@@ -92,21 +142,17 @@ const UserProfile: React.FC = (props: Props) => {
                 </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
-                    <span>12</span> posts
+                    <span>{allAccountPost?.length}</span> posts
                   </span>
-                  <span className={styles.follower}>
-                    <span>122312</span> followers
-                  </span>
-                  <span className={styles.following}>
-                    <span>200000</span> following
-                  </span>
+                  <ModalFollowers followers={userFollowers} />
+                  <ModalFollowing followings={userFollowings} />
                 </div>
                 <div className={styles.infoItem}>
                   <div>
                     <span className={styles.username}>
-                      {getUserData.user.nick_name}
+                      {profileUser.user.nick_name}
                     </span>
-                    <div className={styles.bio}>{getUserData.user.bio}</div>
+                    <div className={styles.bio}>{profileUser.user.bio}</div>
                   </div>
                 </div>
               </div>
@@ -114,7 +160,7 @@ const UserProfile: React.FC = (props: Props) => {
           </div>
           <span className={styles.line}></span>
           <div className={styles.userProfilePost}>
-            <UserPosts postList={allAccountPost} />
+            <AccountPosts isAccount={false} postList={allAccountPost} />
           </div>
         </div>
       )}

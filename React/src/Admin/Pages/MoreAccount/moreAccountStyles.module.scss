@@ -1,0 +1,185 @@
+@import "../../../global/scss/rootStyles.scss";
+.loginBgLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  object-fit: conver;
+}
+.loginBgRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 337px !important;
+  height: 289px;
+  object-fit: cover;
+}
+
+.register {
+  position: relative;
+  height: calc(100vh - 100px);
+  // padding: 0 16%;
+  padding-left: 32rem;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.heading {
+  color: $greyTextColor;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.registerForm {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  height: fit;
+  background-color: $whiteColor;
+  border: 1px solid #dbdbdb;
+  padding: 12px 40px;
+  .registerFormLogo {
+    width: 260px;
+    height: 80px;
+    margin-top: 08px;
+    margin-bottom: 4px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+      margin-top: 16px;
+      margin-bottom: 30px;
+    }
+  }
+  .formInput {
+    height: 50px;
+    background-color: $whiteColor;
+    font-size: 18px;
+    border-radius: 6px;
+    &:not(:first-child) {
+      margin-top: 18px;
+    }
+  }
+
+  .registerBtn {
+    @include d-flex(center, center);
+
+    width: 100%;
+    height: 48px;
+    border-radius: 4px;
+    background-color: $mainBlue;
+    color: $whiteColor;
+    border: none;
+    margin-top: 18px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .formLine {
+    @include d-flex(center, center);
+    width: 100%;
+    margin: 8px 0;
+    .line {
+      width: 100%;
+      border-bottom: 2px solid $greyLight;
+    }
+    span {
+      text-transform: uppercase;
+      color: $greyBold;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 10px;
+    }
+  }
+  .forgotPass {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    color: #385185;
+  }
+  .policyText {
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 12px;
+    color: rgba(0, 0, 0, 0.4);
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.signUp {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+
+  height: fit-content;
+  background-color: $whiteColor;
+  border: 1px solid #dbdbdb;
+  padding: 20px 40px;
+  .signUpText {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 0;
+  }
+  .signUpLink {
+    color: $mainBlue;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+}
+
+// RESPONSIVE
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .register {
+    padding-left: 32rem;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .register {
+    padding: 0 0%;
+  }
+
+  .registerLeft {
+    img {
+      width: 100%;
+    }
+  }
+  .loginBgLeft,
+  .loginBgRight {
+    display: none;
+  }
+
+  .signUp {
+    margin-top: 8px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .register {
+    padding: 0 6%;
+  }
+  .registerForm,
+  .signUp {
+    width: 100%;
+  }
+  .registerLeft {
+    display: none !important;
+  }
+  .loginBgLeft,
+  .loginBgRight {
+    display: none;
+  }
+}

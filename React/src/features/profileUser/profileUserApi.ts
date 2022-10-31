@@ -6,8 +6,8 @@ import {
   profileUserSuccess,
 } from "./profileUserSlice";
 
-export const commnetApi = {
-  getProfileUser: (id: number) => async (dispatch: any) => {
+export const profileUserApi = {
+  getProfileUser: (id: number | null) => async (dispatch: any) => {
     try {
       dispatch({
         type: profileUserRequest.toString(),
@@ -15,19 +15,21 @@ export const commnetApi = {
 
       const token = JSON.parse(Cookies.get("access_token") || "");
 
-      const { data } = await apiClient.post(`/api/v1/`, {
+      const { data } = await apiClient.get(`/api/v1/users/${id}`, {
         headers: {
           token: token,
         },
       });
-      dispatch({
-        type: profileUserSuccess.toString(),
-        payload: data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: profileUserSuccess.toString(),
+          payload: data.data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: profileUserFailure.toString(),
-        // payload: error.response.data,
+        payload: error.response.data,
       });
     }
   },
