@@ -223,7 +223,7 @@ const UpdateAdminProfile: React.FC = () => {
               <button
                 className="updateAminProfile__btn-cancel"
                 type="submit"
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/admin")}
               >
                 Cancel
               </button>

@@ -1,9 +1,10 @@
 import { UserResponse } from "~/common/types";
 import "./staticNumberStyles.scss";
+import { PostResponse } from "../../../common/types";
 type Props = {
   icon: React.ReactNode;
   title: string;
-  data: UserResponse[];
+  data: UserResponse[] | PostResponse[];
 };
 
 const PostsNumber = ({ icon, title, data }: Props) => {

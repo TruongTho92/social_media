@@ -8,6 +8,7 @@ import ManageUsers from "./Pages/ManageUsers";
 import MoreAccount from "./Pages/MoreAccount";
 import NotFound from "./Pages/NotFound";
 import ProfilePage from "./Pages/ProfilePage";
+import UpdatePasswordPage from "./Pages/UpdatePasswordPage";
 import UpdateProfilePage from "./Pages/UpdateProfilePage";
 
 const Admin = () => {
@@ -24,6 +25,8 @@ const Admin = () => {
         <Route path="/" element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="update-profile" element={<UpdateProfilePage />} />
+        <Route path="update-password" element={<UpdatePasswordPage />} />
+
         <Route path="manage-posts" element={<ManagePosts />} />
         <Route path="manage-users" element={<ManageUsers />} />
 

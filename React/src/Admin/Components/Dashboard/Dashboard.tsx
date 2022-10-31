@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { allPostApi } from "~/features/Admin/AllPost/AllPostApi";
+import { getAllPost } from "~/features/Admin/AllPost/AllPostSlice";
 import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
 import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 import ChartColumn from "../Charts/ChartColumn";
@@ -11,10 +13,12 @@ import "./dashboardStyles.scss";
 const Dashboard = () => {
   const dispatch = useAppDispatch();
   const allUser = useAppSelector(getAllUser);
+  const allPost = useAppSelector(getAllPost);
 
   useEffect(() => {
     dispatch(allUserApi.getAllUser());
-  }, []);
+    dispatch(allPostApi.getAllPost());
+  }, [allUser, allPost]);
 
   return (
     <div className="dashboard__container container-fluid">
@@ -27,14 +31,14 @@ const Dashboard = () => {
               <div className="col">
                 <StaticNumber
                   data={allUser}
-                  title="Posts"
+                  title="Users"
                   icon={<i className="far fa-heart-rate like_icon"></i>}
                 />
               </div>
               <div className="col">
                 <StaticNumber
-                  data={[]}
-                  title="Users"
+                  data={allPost}
+                  title="Posts"
                   icon={<i className="far fa-user-chart"></i>}
                 />
               </div>

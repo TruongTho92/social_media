@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { DataUpdateUser } from "~/common/types";
 import { userApi } from "~/features/Auth/userApi";
 import { getLoading, getUser } from "~/features/Auth/userSlice";
+import InputPhone from "../Input/InputPhone";
 import styles from "./updateProfileStyles.module.scss";
 
 const UpdateProfile: React.FC = () => {
@@ -21,6 +22,8 @@ const UpdateProfile: React.FC = () => {
   const [validateUserName, setValidateUserName] = useState(false);
   const [nickName, setNickName] = useState(getUserData.user.nick_name);
   const [validateNickName, setValidateNickName] = useState(false);
+  const [phone, setPhone] = useState(getUserData.user.phone);
+
   const [bio, setBio] = useState(getUserData.user.bio);
   const [gender, setGender] = useState(getUserData.user.gender);
 
@@ -47,6 +50,7 @@ const UpdateProfile: React.FC = () => {
         avatar: prevAvatar,
         user_name: username,
         nick_name: nickName,
+        phone: phone,
         bio: bio,
         gender: gender,
       },
@@ -64,7 +68,7 @@ const UpdateProfile: React.FC = () => {
       {loading ? (
         "Loading..."
       ) : (
-        <section className={`container-fluid ${styles.profile}`}>
+        <section className={`${styles.profile}`}>
           <div className={styles.profileContainer}>
             <div className={styles.profileHeader}>
               <label htmlFor="input-avatar">
@@ -163,6 +167,17 @@ const UpdateProfile: React.FC = () => {
                       * Up to 20 characters
                     </div>
                   ) : null}
+                </div>
+              </div>
+              <div className={styles.formItem}>
+                <label className={styles.formLabel}>Phone</label>
+
+                <div className={styles.inputPhoneContainer}>
+                  <InputPhone
+                    className={styles.inputPhone}
+                    value={phone}
+                    setValue={setPhone}
+                  />
                 </div>
               </div>
               <div className={styles.formItem}>
