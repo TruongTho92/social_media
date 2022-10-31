@@ -24,6 +24,7 @@ const initialState: stateType = {
         user_name: "",
         nick_name: "",
         bio: "",
+        phone: "",
         gender: "",
         authentication_token: "",
         is_admin: false,

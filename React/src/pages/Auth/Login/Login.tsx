@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.SyntheticEvent) => {
+  const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const data: UserDataTypes = {

@@ -18,6 +18,7 @@ export interface UserDataResponse {
       avatar: string;
       user_name: string;
       nick_name: string;
+      phone: string;
       bio: string;
       followers?: [];
       followings?: [];
@@ -38,6 +39,7 @@ export interface DataUpdateUser {
     nick_name?: string;
     bio?: string;
     gender?: string;
+    phone?: string;
     password?: string;
     confirmation_password?: string;
   };

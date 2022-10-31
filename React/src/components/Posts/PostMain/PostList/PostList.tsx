@@ -37,7 +37,7 @@ const PostList = () => {
         ))
       ) : (
         <Typography className={styles.textErrorFL}>
-          Oh No!! You dont have user following
+          Oh No!! You dont have user following or <br /> User dont have post
         </Typography>
       )}
     </div>

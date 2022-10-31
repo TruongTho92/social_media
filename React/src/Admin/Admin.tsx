@@ -8,6 +8,7 @@ import ManageUsers from "./Pages/ManageUsers";
 import MoreAccount from "./Pages/MoreAccount";
 import NotFound from "./Pages/NotFound";
 import ProfilePage from "./Pages/ProfilePage";
+import UpdateProfilePage from "./Pages/UpdateProfilePage";
 
 const Admin = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -21,7 +22,8 @@ const Admin = () => {
       <Header setIsOpenSidebar={setOpenSidebar} isOpenSidebar={openSidebar} />
       <Routes>
         <Route path="/" element={<DashboardPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="update-profile" element={<UpdateProfilePage />} />
         <Route path="manage-posts" element={<ManagePosts />} />
         <Route path="manage-users" element={<ManageUsers />} />
 
