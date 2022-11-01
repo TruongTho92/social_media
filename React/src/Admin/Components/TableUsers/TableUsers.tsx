@@ -1,4 +1,4 @@
-import { Input, Table, Tag, Typography } from "antd";
+import { Input, Table, Tag, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "~/app/hooks";
@@ -67,13 +67,46 @@ const TableUsers = ({ data }: Props) => {
       dataIndex: "avatar",
       key: "avatar",
       className: "cell__avatar",
-      render: (avatar: string) => (
-        <div className="table__user-img">
-          <img
-            src={avatar ? avatar : "/assets/images/user-vacant.jpg"}
-            alt=""
-          />
-        </div>
+      render: (avatar: string, record) => (
+        <Tooltip
+          trigger={"hover"}
+          placement="right"
+          color="#fff"
+          title={
+            <div className="table__users-moreUser">
+              <div className="table__users-moreUser-avatar">
+                <img
+                  src={
+                    record.avatar
+                      ? record.avatar
+                      : "/assets/images/user-vacant.jpg"
+                  }
+                  alt="avatar-user"
+                />
+              </div>
+              <div className="table__users-moreUser-info">
+                <Typography className="name">{record.user_name}</Typography>
+                <Typography className="nickname">{record.nick_name}</Typography>
+                {record.is_supervisor ? (
+                  <Tag className="table__users-moreUser-role supervisor">
+                    Supervisor
+                  </Tag>
+                ) : (
+                  <Tag className="table__users-moreUser-role user">User</Tag>
+                )}
+              </div>
+
+              <i className="fas fa-sun table__users-moreUser-sunIcon"></i>
+            </div>
+          }
+        >
+          <div className="table__user-img">
+            <img
+              src={avatar ? avatar : "/assets/images/user-vacant.jpg"}
+              alt=""
+            />
+          </div>
+        </Tooltip>
       ),
     },
     {
@@ -101,9 +134,12 @@ const TableUsers = ({ data }: Props) => {
       dataIndex: "phone",
       key: "phone",
       className: "cell__phone",
-      render: (phone: string) => (
-        <Typography className="table__user-name">{phone}</Typography>
-      ),
+      render: (phone: string) =>
+        phone ? (
+          <Typography className="table__user-phone">{phone}</Typography>
+        ) : (
+          <Typography className="table__user-phone error">None</Typography>
+        ),
     },
     {
       title: "bio",

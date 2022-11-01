@@ -120,7 +120,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                     <div style={{ lineHeight: 0 }}>
                       <i className="far fa-users manage__icon"></i>
                     </div>
-                    <span>User</span>
+                    <span>Users</span>
                   </NavLink>
                 </li>
               </ul>

@@ -54,7 +54,7 @@ const Profile = (props: Props) => {
                   {getAdminData.user.email}
                 </Typography>
               </div>
-              <i className="fal fa-sun sun__icon"></i>
+              <i className="fas fa-sun sun__icon "></i>
             </div>
           </div>
           <div className="col-0 col-sm-0 col-md-6 col-lg-6 col-xl-3">

@@ -1,16 +1,15 @@
 import { Typography } from "antd";
-import { useAppSelector } from "~/app/hooks";
-import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
+import { SearchUserResponse, UserResponse } from "~/common/types";
 import "./accountListStyles.scss";
-type Props = {};
+type Props = {
+  data: UserResponse[] | SearchUserResponse[];
+};
 
-const AccountList = (props: Props) => {
-  const allUser = useAppSelector(getAllUser);
-
+const AccountList: React.FC<Props> = ({ data }) => {
   return (
     <div className=" search__user-list w-100 ">
-      {allUser && allUser.length > 0
-        ? allUser.map((user) => (
+      {data && data.length > 0
+        ? data.map((user) => (
             <div
               className="search__user-item w-100 d-flex justify-content-between align-items-center"
               key={user.id}
