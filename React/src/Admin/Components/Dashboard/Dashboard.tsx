@@ -26,30 +26,30 @@ const Dashboard = () => {
       <div className="dashboard__body">
         {/* INFO Thong ke */}
         <div className="row ">
-          <div className="col-xs-12 col-md-12 col-lg-8">
+          <div className="col-xs-12 col-md-12 col-lg-6 col-xl-8 ">
             <div className="row">
-              <div className="col">
+              <div className="col-md-6 col-lg-6 col-xl-3">
                 <StaticNumber
                   data={allUser}
                   title="Users"
                   icon={<i className="far fa-heart-rate like_icon"></i>}
                 />
               </div>
-              <div className="col">
+              <div className="col-md-6 col-lg-6 col-xl-3">
                 <StaticNumber
                   data={allPost}
                   title="Posts"
                   icon={<i className="far fa-user-chart"></i>}
                 />
               </div>
-              <div className="col">
+              <div className="col-md-6 col-lg-6 col-xl-3">
                 <StaticNumber
                   data={[]}
                   title="Likes"
                   icon={<i className="far fa-chart-bar"></i>}
                 />
               </div>
-              <div className="col">
+              <div className="col-md-6 col-lg-6 col-xl-3">
                 <StaticNumber
                   data={[]}
                   title="Comments"
@@ -58,7 +58,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-12 col-lg-4 static__img-container">
+          <div className="col-md-12 col-lg-6  col-xl-4 static__img-container">
             <div className="static__img">
               <h1 className="static__img-content">
                 Welcome to admin dashboard!! <br />{" "}
@@ -71,10 +71,10 @@ const Dashboard = () => {
 
         {/* CHART AND USERS */}
         <div className="row">
-          <div className="col-xs-12 col-md-6 col-lg-8">
+          <div className="col-xs-12 col-md-6 col-lg-6 col-xl-8">
             <ChartColumn />
           </div>
-          <div className="col-xs-12 col-md-6 col-lg-4">
+          <div className="col-xs-12 col-md-6 col-lg-6  col-xl-4 ">
             <SearchUser />
           </div>
         </div>

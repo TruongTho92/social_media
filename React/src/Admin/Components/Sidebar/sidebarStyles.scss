@@ -11,8 +11,8 @@
   bottom: 0;
   left: 0px;
   z-index: 20001;
-  background-color: $whiteColor;
-  box-shadow: $boxShadow;
+  background-color: var(--whiteColor);
+  box-shadow: var(--boxShadow);
   width: 280px;
   height: 100%;
   // border-top-right-radius: 8px;
@@ -25,7 +25,7 @@
   width: 36px;
   height: 36px;
   border-radius: 100rem;
-  background-color: $whiteColor;
+  background-color: var(--whiteColor);
   justify-content: center;
   align-items: center;
   z-index: 1000000;
@@ -42,8 +42,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $whiteColor;
-    background-color: $mainBlue;
+    color: var(--whiteColor);
+    background-color: var(--mainBlue);
   }
 }
 .sidebar__mark {
@@ -52,7 +52,7 @@
   height: 100vh;
   width: 100vw;
   z-index: 1;
-  background-color: rgba($color: $blackColor, $alpha: 0.3);
+  background-color: rgba($color: var(--blackColor), $alpha: 0.3);
 }
 .logo {
   width: 100%;
@@ -75,7 +75,7 @@
       font-size: 14px;
       font-weight: 400;
       font-style: italic;
-      color: $greyTextColor;
+      color: var(--greyTextColor);
     }
   }
 }
@@ -106,11 +106,11 @@
     border-radius: 6px;
     cursor: pointer;
     @include d-flex(space-between, center);
-    color: $menuColor;
+    color: var(--menuColor);
     font-weight: 500;
     &.active {
-      color: $whiteColor;
-      background-color: $mainBlue;
+      color: var(--whiteColor);
+      background-color: var(--mainBlue);
     }
     .right__icon {
       font-size: 20px;
@@ -122,8 +122,8 @@
       }
     }
     &:hover {
-      color: $mainBlue;
-      background-color: rgba($color: $mainBlue, $alpha: 0.2);
+      color: var(--mainBlue);
+      background-color: rgba($color: var(--mainBlue), $alpha: 0.2);
 
       transition: all 0.2s linear;
       border-radius: 6px;
@@ -169,19 +169,19 @@
   }
   &__item-link {
     @include d-flex(start, center);
-    color: $menuColor;
+    color: var(--menuColor);
     font-size: 16px;
     font-weight: 500;
     padding: 8px 8px;
     border-radius: 6px;
     &:hover {
-      background-color: rgba($color: $mainBlue, $alpha: 0.2);
+      background-color: rgba($color: var(--mainBlue), $alpha: 0.2);
 
-      color: $mainBlue;
+      color: var(--mainBlue);
     }
     &.active {
-      color: $whiteColor;
-      background-color: $mainBlue;
+      color: var(--whiteColor);
+      background-color: var(--mainBlue);
     }
   }
   &__icon {
