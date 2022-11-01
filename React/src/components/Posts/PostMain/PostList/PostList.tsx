@@ -1,9 +1,10 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getAllPostOfFollowing } from "~/features/postOfFollowing/postOfFollowingSlice";
-import Post from "../Post";
+import Post from "../Post/Post";
 import styles from "./postListStyles.module.scss";
 
 const PostList = () => {

@@ -195,6 +195,9 @@ export interface PostResponse {
   image: string;
   caption: string;
   user_id: number;
+  user_name: string;
+  nick_name: string;
+  avatar: string;
   created_at: string;
   updated_at: string;
 }

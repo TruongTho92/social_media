@@ -1,4 +1,4 @@
-import { Tag, Typography } from "antd";
+import { Tag, Tooltip, Typography } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
 import React, { useState } from "react";
 import { useAppDispatch } from "~/app/hooks";
@@ -40,14 +40,50 @@ const TablePosts = ({ data }: Props) => {
       ),
     },
     {
+      title: "Name",
+      dataIndex: "user_name",
+      key: "user_name",
+      className: "cell__user-username",
+      render: (username: number) => (
+        <Typography className="table__user-id">{username}</Typography>
+      ),
+    },
+    {
       title: "Image",
       dataIndex: "image",
       key: "image",
       className: "cell__image",
-      render: (image: number) => (
-        <div className="table__posts-image">
-          <img src={`${image}`} alt="" />
-        </div>
+      render: (image: number, record) => (
+        <Tooltip
+          trigger={"hover"}
+          placement="right"
+          color="#fff"
+          title={
+            <div className="table__posts-morePost">
+              <div className="table__posts-morePost-info">
+                <div className="avatar">
+                  <img
+                    src={
+                      record.avatar
+                        ? record.avatar
+                        : "/assets/images/user-vacant.jpg"
+                    }
+                    alt="avatar-user"
+                  />
+                </div>
+                <Typography className="name">{record.user_name}</Typography>
+              </div>
+              <div className="table__posts-morePost-img">
+                <img src={record.image} alt="" />
+              </div>
+              <i className="fas fa-sun table__posts-morePost-sunIcon"></i>
+            </div>
+          }
+        >
+          <div className="table__posts-image">
+            <img src={`${image}`} alt="" />
+          </div>
+        </Tooltip>
       ),
     },
 

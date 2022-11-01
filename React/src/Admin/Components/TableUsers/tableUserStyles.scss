@@ -102,6 +102,17 @@ li.ant-pagination-item-active {
     border-radius: 4px;
     cursor: pointer;
   }
+  &__user-phone {
+    font-size: 16px;
+    font-weight: 600;
+    &.error {
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      color: red;
+    }
+  }
+
   &__user-bio {
     font-size: 14px;
     font-weight: 400;
@@ -137,6 +148,60 @@ li.ant-pagination-item-active {
   }
 }
 
+.table {
+  &__users-moreUser {
+    position: relative;
+    background-color: $whiteColor;
+    padding-bottom: 8px;
+    box-shadow: $boxShadowCard;
+    border-radius: 4px;
+  }
+  &__users-moreUser-avatar {
+    aspect-ratio: 1;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__users-moreUser-info {
+    @include d-flex(center, center);
+    flex-direction: column;
+    margin-top: 6px;
+    .name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nickname {
+      font-size: 12px;
+      font-weight: 400;
+      color: $menuColor;
+    }
+  }
+  &__users-moreUser-role {
+    padding: 4px 16px;
+    border-radius: 4px;
+    color: $whiteColor;
+    font-weight: 600;
+    margin-right: 0 !important;
+    &.supervisor {
+      background-color: $blackColor;
+    }
+    &.user {
+      background-color: $mainBlue;
+    }
+  }
+  &__users-moreUser-sunIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: $blackColor;
+    animation: Rotate 1s linear infinite;
+  }
+}
+
 @include desktop {
   th.ant-table-cell {
     padding-left: 12px !important;
@@ -166,5 +231,16 @@ li.ant-pagination-item-active {
   td.ant-table-cell {
     padding-left: 12px !important;
     padding-right: 24px !important ;
+  }
+  .table {
+    &__users-moreUser-avatar {
+      width: 140px;
+      height: 140px;
+    }
+    &__users-moreUser-role {
+      padding: 2px 12px;
+      font-size: 10px;
+      font-weight: 500;
+    }
   }
 }

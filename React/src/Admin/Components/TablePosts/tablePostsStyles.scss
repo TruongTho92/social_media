@@ -37,3 +37,69 @@
     color: $menuColor;
   }
 }
+
+.table {
+  &__posts-morePost {
+    position: relative;
+    background-color: $whiteColor;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: $boxShadowCard;
+  }
+  &__posts-morePost-info {
+    @include d-flex(start, center);
+    width: 100%;
+    margin-bottom: 6px;
+    .avatar {
+      @include avatar(40, 40);
+    }
+    .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: $blackColor;
+    }
+  }
+  &__posts-morePost-img {
+    aspect-ratio: 1;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__posts-morePost-sunIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $blackColor;
+    font-size: 24px;
+    animation: Rotate 1s linear infinite;
+  }
+}
+
+@include mobile {
+  .table {
+    &__posts-morePost-img {
+      width: 100px;
+      height: 100px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    &__posts-morePost-info {
+      width: 100px;
+
+      // @include d-flex(start, flex-start);
+      // flex-direction: column;
+      .name {
+        width: 100px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
