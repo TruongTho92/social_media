@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
@@ -40,9 +40,9 @@ const Post: React.FC<Props> = ({
   const [ellipsis, setEllipsis] = useState(true);
 
   const dispatch = useAppDispatch();
-
   const getUserData = useAppSelector(getUser);
   const likePostMain = useAppSelector(getLikePostMain);
+  const location = useLocation();
 
   useEffect(() => {
     if (likes?.find((post) => post.user_id === getUserData.user.id)) {
@@ -65,7 +65,7 @@ const Post: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <div>
       <div className={styles.post}>
         <div className={styles.user}>
           <div className={styles.userName}>
@@ -85,7 +85,11 @@ const Post: React.FC<Props> = ({
         </div>
 
         <div className={styles.postImage}>
-          <Link to={`/post-newfeeds/${postId}`} className={styles.commentLink}>
+          <Link
+            to={`/post-newfeeds/${postId}`}
+            className={styles.commentLink}
+            state={{ background: location }}
+          >
             <img src={imagePost} alt="" />
           </Link>
         </div>
@@ -107,6 +111,7 @@ const Post: React.FC<Props> = ({
             <Link
               to={`/post-newfeeds/${postId}`}
               className={styles.commentLink}
+              state={{ background: location }}
             >
               <i className={`far fa-comment ${styles.commentIcon}`}></i>
             </Link>
@@ -133,7 +138,7 @@ const Post: React.FC<Props> = ({
         </div>
       </div>
 
-      <Routes>
+      {/* <Routes>
         <Route
           path="post-newfeeds/:id"
           element={
@@ -146,8 +151,8 @@ const Post: React.FC<Props> = ({
             />
           }
         />
-      </Routes>
-    </>
+      </Routes> */}
+    </div>
   );
 };
 

@@ -23,7 +23,6 @@ const SearchHeader: React.FC = () => {
   useEffect(() => {
     if (searchValue.length <= 0) return;
     dispatch(searchAccountApi.search(searchValue.trim()));
-    console.log(resultSearch);
   }, [debouncedValue.trim()]);
 
   return (

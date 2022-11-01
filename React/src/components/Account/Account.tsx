@@ -31,9 +31,11 @@ const Account: React.FC = () => {
   const allAccountPost = useAppSelector(getAllPost);
 
   useEffect(() => {
-    dispatch(postsApi.getAll(getUserData.user.id));
-    dispatch(profileUserApi.getProfileUser(getUserData.user.id));
-  }, []);
+    if (getUserData.user.id) {
+      dispatch(postsApi.getAll(getUserData.user.id));
+      dispatch(profileUserApi.getProfileUser(getUserData.user.id));
+    }
+  }, [getUserData.user.id]);
 
   return (
     <>

@@ -25,18 +25,16 @@ import UserProfilePage from "./pages/UserProfilePage";
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
 
-  const token = Cookies.get("access_isAuthenticated");
   const location = useLocation();
   const background = location.state && location.state.background;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(userApi.loadUser());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="App">
-      {/* {isAuthenticated && <Header />} */}
       <Routes location={background || location}>
         {/* ADMIN */}
         <Route

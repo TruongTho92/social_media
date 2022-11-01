@@ -1,10 +1,9 @@
-import { Col, Row } from "antd";
 import React from "react";
+import { FaMehRollingEyes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { PostAccount } from "~/common/types";
 import AccountPost from "../AccountPost/AccountPost";
 import styles from "./accountPostStyles.module.scss";
-import { FaMehRollingEyes } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 type Props = {
   isAccount: boolean;

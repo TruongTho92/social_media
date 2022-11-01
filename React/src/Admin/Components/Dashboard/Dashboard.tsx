@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(allUserApi.getAllUser());
     dispatch(allPostApi.getAllPost());
-  }, [allUser, allPost]);
+  }, []);
 
   return (
     <div className="dashboard__container container-fluid">
