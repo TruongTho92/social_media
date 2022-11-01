@@ -44,9 +44,15 @@ class Api::V1::AdminController < Api::V1::ApplicationController
 
   def post_admin
     if current_user.is_admin || current_user.is_supervisor
-      @posts = Post.all
+      @posts = []
+      Post.all.each do |post|
+        @posts << { id: post.id, caption: post.caption, image: post.image, user_id: post.user_id,
+                    created_at: post.created_at, update_at: post.updated_at, avatar: post.user.avatar,
+                    user_name: post.user.user_name
+                  }
+      end
       render json: {
-        data: {post: @posts}
+        data: { post: @posts }
       }, status: :ok
     else
       render json: {
