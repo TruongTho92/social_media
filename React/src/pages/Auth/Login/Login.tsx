@@ -1,4 +1,5 @@
 import { Col, Input, Row } from "antd";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -27,7 +28,7 @@ const LoginPage: React.FC = () => {
       },
     };
 
-    dispatch(userApi.loginUser(data));
+    await dispatch(userApi.loginUser(data));
   };
 
   return (

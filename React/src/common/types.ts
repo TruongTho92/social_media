@@ -11,7 +11,7 @@ export interface UserDataTypes {
 export interface UserDataResponse {
   data: {
     user: {
-      id: number;
+      id: number | null;
       email: string;
       password: string;
       password_confirmation: string;

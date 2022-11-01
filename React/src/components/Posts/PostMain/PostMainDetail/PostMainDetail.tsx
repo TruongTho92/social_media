@@ -3,7 +3,7 @@ import { TextAreaRef } from "antd/lib/input/TextArea";
 import React, { useEffect, useRef, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
@@ -19,24 +19,13 @@ import {
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { getUser } from "~/features/Auth/userSlice";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 
 import styles from "./postMainDetailStyles.module.scss";
 
-export type Props = {
-  avatar?: string;
-  userId?: number;
-  userName?: string;
-  nickName?: string;
-  caption?: string;
-};
-const PostMainDetail: React.FC<Props> = ({
-  avatar,
-  userId,
-  userName,
-  nickName,
-  caption,
-}) => {
+export type Props = {};
+const PostMainDetail: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -48,8 +37,7 @@ const PostMainDetail: React.FC<Props> = ({
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
   const likeData = useAppSelector(getLikeData);
-  const userProfile = useAppSelector(getProfileUser);
-
+  const profileUser = useAppSelector(getProfileUser);
   const postDetailData = useAppSelector(getPostDetail);
   const userLikedData = useAppSelector(getUsersLiked);
   const commentData = useAppSelector(getUsersCommented);
@@ -58,13 +46,15 @@ const PostMainDetail: React.FC<Props> = ({
   const postId = Number(id);
 
   useEffect(() => {
+    if (postDetailData.user_id) {
+      dispatch(profileUserApi.getProfileUser(postDetailData.user_id));
+    }
     dispatch(postDetailApi.getPost(postId));
-
     document.body.classList.add("postDetailOpen");
     return function cleanup() {
       document.body.classList.remove("postDetailOpen");
     };
-  }, []);
+  }, [postDetailData.user_id]);
 
   useEffect(() => {
     if (userLikedData.find((like: any) => like.id === getUserData.user.id)) {
@@ -72,7 +62,7 @@ const PostMainDetail: React.FC<Props> = ({
     } else {
       setLiked(false);
     }
-  }, [getUserData.user.id]);
+  }, [userLikedData]);
 
   // LIKE
   const handleLike = async () => {
@@ -121,24 +111,30 @@ const PostMainDetail: React.FC<Props> = ({
             <div className={styles.postDetailContent}>
               <div className={styles.contentTop}>
                 {/* HEADER */}
-                {/* <div className={styles.postDetailHeader}>
+                <div className={styles.postDetailHeader}>
                   <div className={styles.userName}>
                     <div className={styles.image}>
-                      <Link to={`/user-profile/${userId}`}>
+                      <Link to={`/user-profile/${profileUser.user.id}`}>
                         <img
                           src={
-                            avatar ? avatar : `/assets/images/user-vacant.jpg`
+                            profileUser.user.avatar
+                              ? profileUser.user.avatar
+                              : `/assets/images/user-vacant.jpg`
                           }
                           alt=""
                         />
                       </Link>
                     </div>
                     <div className={styles.info}>
-                      <p className={styles.name}>{userName}</p>
-                      <p className={styles.description}>{nickName}</p>
+                      <p className={styles.name}>
+                        {profileUser.user.user_name}
+                      </p>
+                      <p className={styles.description}>
+                        {profileUser.user.nick_name}
+                      </p>
                     </div>
                   </div>
-                </div> */}
+                </div>
 
                 <Typography className={styles.caption}>
                   {postDetailData.caption}

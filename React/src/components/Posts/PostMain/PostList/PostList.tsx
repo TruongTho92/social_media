@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getAllPostOfFollowing } from "~/features/postOfFollowing/postOfFollowingSlice";
@@ -8,11 +8,12 @@ import styles from "./postListStyles.module.scss";
 
 const PostList = () => {
   const dispatch = useAppDispatch();
-
   const allPostFollowing = useAppSelector(getAllPostOfFollowing);
+
   const sortAllPostFollowing = [...allPostFollowing].sort(
     (a, b) => b.id - a.id
   );
+
   useEffect(() => {
     dispatch(postOfFollowingApi.getPostFollowing());
   }, []);
