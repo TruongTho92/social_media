@@ -1,4 +1,4 @@
-import { Tooltip } from "antd";
+import { Switch, Tooltip } from "antd";
 import "./headerStyles.scss";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { settings } from "~/Admin/config/slickConfig";
 import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
 import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 import { userApi } from "~/features/Auth/userApi";
+import ToggleTheme from "../ToggleTheme";
 
 type Props = {
   setIsOpenSidebar?: (e: boolean) => void;
