@@ -50,6 +50,7 @@ const PostMainDetail: React.FC<Props> = () => {
       dispatch(profileUserApi.getProfileUser(postDetailData.user_id));
     }
     dispatch(postDetailApi.getPost(postId));
+
     document.body.classList.add("postDetailOpen");
     return function cleanup() {
       document.body.classList.remove("postDetailOpen");

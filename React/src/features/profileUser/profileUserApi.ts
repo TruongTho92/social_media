@@ -20,12 +20,11 @@ export const profileUserApi = {
           token: token,
         },
       });
-      setTimeout(() => {
-        dispatch({
-          type: profileUserSuccess.toString(),
-          payload: data.data,
-        });
-      }, 1000);
+
+      dispatch({
+        type: profileUserSuccess.toString(),
+        payload: data.data,
+      });
     } catch (error: any) {
       dispatch({
         type: profileUserFailure.toString(),

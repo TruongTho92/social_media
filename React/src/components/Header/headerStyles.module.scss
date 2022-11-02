@@ -87,6 +87,23 @@
   }
 }
 
+.settings {
+  margin: 24px 0;
+}
+.settingsMore {
+  .text {
+    display: block;
+    padding: 8px 16px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: $blackColor;
+
+    &:hover {
+      background-color: rgba($color: $mainBlue, $alpha: 0.1);
+    }
+  }
+}
 .subUserMenu {
   z-index: 10000;
   width: fit-content;

@@ -1,4 +1,4 @@
-import { Tooltip } from "antd";
+import { Tooltip, Typography } from "antd";
 import React, { useState } from "react";
 import { BsChatDots } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
@@ -81,12 +81,31 @@ const Header: React.FC = () => {
                   </div>
                   <label className={styles.subUserLabel}>Profile</label>
                 </Link>
-                <Link to="/settings" className={styles.subMenuItem}>
-                  <div style={{ lineHeight: 0 }}>
-                    <i className={`fal fa-cog ${styles.iconSub}`}></i>
+                <Tooltip
+                  trigger={"hover"}
+                  color="#fff"
+                  placement="left"
+                  title={
+                    <div className={styles.settingsMore}>
+                      <Link
+                        to="/profile/update-password"
+                        className={styles.text}
+                      >
+                        Change password
+                      </Link>
+                      <Link to="/profile/update" className={styles.text}>
+                        Update profile
+                      </Link>
+                    </div>
+                  }
+                >
+                  <div className={`${styles.subMenuItem} ${styles.settings}`}>
+                    <div style={{ lineHeight: 0 }}>
+                      <i className={`fal fa-cog ${styles.iconSub}`}></i>
+                    </div>
+                    <label className={styles.subUserLabel}>Settings</label>
                   </div>
-                  <label className={styles.subUserLabel}>Settings</label>
-                </Link>
+                </Tooltip>
                 <Link to="/saves" className={styles.subMenuItem}>
                   <div style={{ lineHeight: 0 }}>
                     <i className={`fal fa-bookmark ${styles.iconSub}`}></i>

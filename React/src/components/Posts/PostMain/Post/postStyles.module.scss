@@ -118,6 +118,8 @@
   }
 }
 .captionContainer {
+  width: 200px;
+
   display: flex;
   justify-content: start;
   align-items: center;
@@ -128,6 +130,7 @@
     margin-right: 8px;
   }
   .caption {
+    width: 200px;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 0 !important;
