@@ -137,21 +137,6 @@ const Post: React.FC<Props> = ({
           </Typography.Paragraph>
         </div>
       </div>
-
-      {/* <Routes>
-        <Route
-          path="post-newfeeds/:id"
-          element={
-            <PostMainDetail
-              avatar={avatar}
-              userId={userId}
-              userName={userName}
-              nickName={nickName}
-              caption={caption}
-            />
-          }
-        />
-      </Routes> */}
     </div>
   );
 };

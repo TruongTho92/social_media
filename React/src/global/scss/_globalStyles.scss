@@ -1,10 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @import "./variables";
+:root {
+  --whiteColor: #fff;
+  --blackColor: #000;
+  --bgColor: #fafafa;
+  --bgMain: #f0f2f5;
+  --menuColor: #697a8d;
+  --notifyColor: #71dd37;
 
+  --imageSize: 300px;
+  --borderRadius: 8px;
+  --boxShadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --boxShadowCard: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+  --paddingRL: 20%;
+  --mainBlue: #0095f6;
+  --greyLight: #dbdbdb;
+  --greyBold: #8e8e8e;
+  --greyTextColor: #566a7f;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.2s linear;
 }
 
 html {
