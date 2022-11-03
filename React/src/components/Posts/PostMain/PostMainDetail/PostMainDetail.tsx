@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import Comments from "~/components/Comments";
 import Loading from "~/components/Loading";
+import LoadingSpinner from "~/components/LoadingSpinner";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLikeData,

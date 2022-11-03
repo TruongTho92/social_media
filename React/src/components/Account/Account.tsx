@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, NavLink, Outlet, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import {
   getAllPost,
@@ -13,7 +12,8 @@ import {
   getUserFollowers,
   getUserFollowings,
 } from "~/features/profileUser/profileUserSlice";
-import Loading from "../Loading";
+import SavePage from "~/pages/SavePage";
+import LoadingSpinner from "../LoadingSpinner";
 import ModalFollowers from "../Modal/ModalFollowers";
 import ModalFollowing from "../Modal/ModalFollowing";
 import ModalSetting from "../Modal/ModalSetting";
@@ -39,81 +39,150 @@ const Account: React.FC = () => {
 
   return (
     <>
-      {loadingPosts ? (
-        <Loading />
-      ) : (
-        <div className={`${styles.account}`}>
-          <div className={styles.accountContainer}>
-            <div className={styles.accountInfo}>
-              <div className={styles.image}>
-                <img
-                  src={
-                    getUserData.user.avatar
-                      ? getUserData.user.avatar
-                      : "/assets/images/user-vacant.jpg"
-                  }
-                  alt=""
-                />
+      <div className={`${styles.account}`}>
+        <div className={styles.accountContainer}>
+          <div className={styles.accountInfo}>
+            <div className={styles.image}>
+              <img
+                src={
+                  getUserData.user.avatar
+                    ? getUserData.user.avatar
+                    : "/assets/images/user-vacant.jpg"
+                }
+                alt=""
+              />
+            </div>
+            <div className={styles.info}>
+              <div className={`${styles.infoItem} ${styles.infoItemMobile}`}>
+                <span className={styles.name}>
+                  {getUserData.user.user_name ? (
+                    getUserData.user.user_name
+                  ) : (
+                    <span className={styles.errorUpdate}>
+                      * Update your name
+                    </span>
+                  )}
+                </span>
+
+                <Link to="/profile/update" className={styles.linkEdit}>
+                  Edit profile
+                </Link>
+                <div style={{ lineHeight: 0 }}>
+                  <ModalSetting classNameIconSetting={styles.settingIcon} />
+                </div>
               </div>
-              <div className={styles.info}>
-                <div className={`${styles.infoItem} ${styles.infoItemMobile}`}>
-                  <span className={styles.name}>
-                    {getUserData.user.user_name ? (
-                      getUserData.user.user_name
+              <div className={`${styles.infoItem} ${styles.mobile}`}>
+                <div>
+                  <span className={styles.username}>
+                    {getUserData.user.nick_name ? (
+                      getUserData.user.nick_name
                     ) : (
                       <span className={styles.errorUpdate}>
-                        * Update your name
+                        * Update your nick name
                       </span>
                     )}
                   </span>
-
-                  <Link to="/profile/update" className={styles.linkEdit}>
-                    Edit profile
-                  </Link>
-                  <div style={{ lineHeight: 0 }}>
-                    <ModalSetting classNameIconSetting={styles.settingIcon} />
+                  <div className={styles.bio}>
+                    {getUserData.user.bio ? (
+                      getUserData.user.bio
+                    ) : (
+                      <span className={styles.errorUpdate}>
+                        * Update your Biography
+                      </span>
+                    )}
                   </div>
                 </div>
-                <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
-                  <span className={styles.posts}>
-                    <span>{allAccountPost?.length}</span> posts
-                  </span>
+              </div>
+              <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
+                <div className={`${styles.followContainer} ${styles.posts}`}>
+                  <span>{allAccountPost?.length}</span> posts
+                </div>
 
-                  {/* MODAL FOLLOW */}
+                {/* MODAL FOLLOW */}
+                <div className={styles.followContainer}>
                   <ModalFollowers followers={userFollowers} />
+                </div>
+                <div className={styles.followContainer}>
                   <ModalFollowing followings={userFollowings} />
                 </div>
-                <div className={styles.infoItem}>
-                  <div>
-                    <span className={styles.username}>
-                      {getUserData.user.nick_name ? (
-                        getUserData.user.nick_name
-                      ) : (
-                        <span className={styles.errorUpdate}>
-                          * Update your nick name
-                        </span>
-                      )}
-                    </span>
-                    <div className={styles.bio}>
-                      {getUserData.user.bio ? (
-                        getUserData.user.bio
-                      ) : (
-                        <span className={styles.errorUpdate}>
-                          * Update your Biography
-                        </span>
-                      )}
-                    </div>
+              </div>
+              <div className={`${styles.infoItem} ${styles.desktop}`}>
+                <div>
+                  <span className={styles.username}>
+                    {getUserData.user.nick_name ? (
+                      getUserData.user.nick_name
+                    ) : (
+                      <span className={styles.errorUpdate}>
+                        * Update your nick name
+                      </span>
+                    )}
+                  </span>
+                  <div className={styles.bio}>
+                    {getUserData.user.bio ? (
+                      getUserData.user.bio
+                    ) : (
+                      <span className={styles.errorUpdate}>
+                        * Update your Biography
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <span className={styles.line}></span>
-          <div className={styles.accountPost}>
-            <AccountPosts isAccount={true} postList={allAccountPost} />
+        </div>
+        <span className={styles.line}></span>
+
+        <div className={styles.postPages}>
+          <div className={styles.postPageItem}>
+            <NavLink
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.postPageLink} ${styles.active}`
+                  : `${styles.postPageLink}`
+              }
+              to="/profile"
+            >
+              <i className={`fas fa-th-large ${styles.postPageIcon}`}></i>
+
+              <span>Posts</span>
+            </NavLink>
+          </div>
+          <div className={styles.postPageItem}>
+            <NavLink
+              to="/profile/saves"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.postPageLink} ${styles.active}`
+                  : `${styles.postPageLink}`
+              }
+            >
+              <i className={`fal fa-bookmark ${styles.postPageIcon}`}></i>
+              <span>Saves</span>
+            </NavLink>
           </div>
         </div>
-      )}
+
+        {/* ROUTES */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              loadingPosts ? (
+                <div style={{ position: "relative" }}>
+                  <LoadingSpinner width={30} />
+                </div>
+              ) : (
+                <div className={styles.accountPost}>
+                  <AccountPosts isAccount={true} postList={allAccountPost} />
+                </div>
+              )
+            }
+          />
+          <Route path="saves" element={<SavePage />} />
+        </Routes>
+      </div>
     </>
   );
 };

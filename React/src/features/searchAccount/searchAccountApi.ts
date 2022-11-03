@@ -21,10 +21,12 @@ export const searchAccountApi = {
         },
       });
 
-      dispatch({
-        type: searchSuccess.toString(),
-        payload: data.data.user,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: searchSuccess.toString(),
+          payload: data.data.user,
+        });
+      }, 500);
     } catch (error: any) {
       dispatch({
         type: searchFailure.toString(),

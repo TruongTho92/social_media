@@ -4,7 +4,6 @@ import Header from "~/components/Header";
 const PostDetailPage = () => {
   return (
     <>
-      <Header />
       <div>
         <PostDetail />
       </div>

@@ -15,6 +15,9 @@
 // SCSS
 
 .table {
+  &__user-id {
+    color: var(--textWhiteChange);
+  }
   &__posts-image {
     width: 100px;
     height: 100px;
@@ -34,6 +37,8 @@
   &__posts-caption {
     font-style: 16px;
     font-weight: 400;
+    margin-bottom: 0 !important;
+    color: var(--textWhiteChange);
   }
   &__posts-caption-error {
     font-style: 14px;

@@ -45,7 +45,7 @@ const TablePosts = ({ data }: Props) => {
       key: "user_name",
       className: "cell__user-username",
       render: (username: number) => (
-        <Typography className="table__user-id">{username}</Typography>
+        <Typography className="table__user-name">{username}</Typography>
       ),
     },
     {
@@ -157,7 +157,9 @@ const TablePosts = ({ data }: Props) => {
             } else if (type === "next") {
               return <i className="far fa-chevron-right table__arrow-next"></i>;
             } else if (type === "jump-next" || type === "jump-prev") {
-              return "...";
+              return (
+                <Typography className="table__dots-hidden">...</Typography>
+              );
             } else {
               return page;
             }

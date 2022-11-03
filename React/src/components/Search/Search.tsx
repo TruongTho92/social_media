@@ -7,19 +7,24 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import useDebounce from "~/common/hooks/useDebounce";
 import { AllAccountResponse } from "~/common/types";
 import { searchAccountApi } from "~/features/searchAccount/searchAccountApi";
-import { getSearchResults } from "~/features/searchAccount/searchAccountSlice";
+import {
+  getLoadingSearch,
+  getSearchResults,
+} from "~/features/searchAccount/searchAccountSlice";
 import { userAllApi } from "~/features/userAll/userAllApi";
 import { getAllUser } from "~/features/userAll/userAllSlice";
+import LoadingSpinner from "../LoadingSpinner";
 import styles from "./searchStyles.module.scss";
 type Props = {};
 
 const Search = (props: Props) => {
-  const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const debouncedValue = useDebounce<string>(searchValue, 500);
 
+  const dispatch = useAppDispatch();
+  const debouncedValue = useDebounce<string>(searchValue, 500);
   const resultSearch = useAppSelector(getSearchResults);
   const allAccount = useAppSelector(getAllUser);
+  const loadingSearch = useAppSelector(getLoadingSearch);
 
   // CALL API SEARCH USER
   useEffect(() => {
@@ -29,13 +34,25 @@ const Search = (props: Props) => {
 
   useEffect(() => {
     dispatch(userAllApi.getAllUser());
-  }, [allAccount]);
+  }, []);
 
   return (
     <div className={styles.searchContainer}>
       <form action="">
         <Input
-          suffix={<BiSearch size={20} />}
+          suffix={
+            searchValue.length > 0 ? (
+              <>
+                {loadingSearch && (
+                  <div className={styles.iconSuffix}>
+                    <LoadingSpinner width={16} />
+                  </div>
+                )}
+              </>
+            ) : (
+              <BiSearch size={20} />
+            )
+          }
           className={styles.searchInput}
           placeholder="Search user..."
           onChange={(e) => setSearchValue(e.target.value)}
@@ -66,7 +83,9 @@ const Search = (props: Props) => {
               </div>
             ))
           ) : (
-            <div className={styles.searchError}>User dont exist</div>
+            <div className={styles.searchError}>
+              <span>User dont exist</span>
+            </div>
           )}
         </div>
       ) : (

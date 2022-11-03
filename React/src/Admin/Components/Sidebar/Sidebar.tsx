@@ -68,7 +68,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
         <div className="menu">
           <ul className="menu_list">
             <li className="menu__item">
-              <NavLink to="/admin" className="menu__item-link">
+              <NavLink to="/admin" className="menu__item-link" end>
                 <div className="link__content">
                   <div style={{ lineHeight: 0 }}>
                     <i className="fas fa-th-large menu__icon"></i>
@@ -127,7 +127,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
               </ul>
             </li>
             <li className="menu__item">
-              <NavLink to="more-account" className="menu__item-link">
+              <NavLink to="more-account" className="menu__item-link" end>
                 <div className="link__content">
                   <div style={{ lineHeight: 0 }}>
                     <i className="far fa-tire-rugged menu__icon"></i>

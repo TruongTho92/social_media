@@ -19,8 +19,13 @@ th.ant-table-cell {
 .table__user tr:nth-child(2n) td {
   background-color: rgba($color: $mainBlue, $alpha: 0.1);
 }
-.table__user thead {
-  background-color: var(--bgLight);
+.ant-table-tbody {
+  background-color: var(--bgLight) !important;
+}
+.ant-table-row {
+  &:hover {
+    background-color: #ccc;
+  }
 }
 .ant-table-container {
   box-shadow: $boxShadowCard;
@@ -37,16 +42,23 @@ li.ant-pagination-item-active {
   color: $whiteColor;
   font-weight: 500;
 }
-.ant-table-body {
+.table__dots-hidden {
+  font-weight: 500;
+  color: var(--textWhiteChange);
 }
 .ant-table-filter-dropdown {
   border-radius: 6px !important;
+}
+
+td.ant-table-cell-row-hover {
+  background-color: rgba($color: $mainBlue, $alpha: 0.4) !important;
 }
 
 // SCSS
 .cell {
   &__id {
     width: 12%;
+    color: var(--textWhiteChange);
   }
   &__avatar {
     width: 100px;
@@ -60,6 +72,8 @@ li.ant-pagination-item-active {
   }
   &__email {
     width: 20%;
+    color: var(--menuColor);
+    font-style: italic;
   }
   &__bio {
     width: 12%;
@@ -82,18 +96,19 @@ li.ant-pagination-item-active {
   }
   &__user-img {
     @include avatar(45, 45);
+    cursor: pointer;
   }
   &__user-name {
     font-size: 16px;
     font-weight: 500;
     width: fit-content;
     white-space: nowrap;
+    color: var(--textWhiteChange);
   }
-  &__user-nickname {
-    font-size: 14px;
-    font-weight: 400;
-    color: $menuColor;
+  &__user-email {
+    color: var(--textWhiteChange);
   }
+
   &__user-role-user {
     padding: 4px 14px;
     background-color: $mainBlue;

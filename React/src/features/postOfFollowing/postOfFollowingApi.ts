@@ -26,11 +26,12 @@ export const postOfFollowingApi = {
           token: token,
         },
       });
-
-      dispatch({
-        type: postFollowingSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: postFollowingSuccess.toString(),
+          payload: data.data,
+        });
+      }, 500);
     } catch (error: any) {
       dispatch({
         type: postFollowingFailure.toString(),

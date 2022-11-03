@@ -4,7 +4,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
+  gap: 12px;
   .postItem {
     // height: 272px;
     aspect-ratio: 1;
@@ -41,17 +41,17 @@
 
 @include desktop {
   .postList {
-    grid-template-columns: 1fr 1fr 1fr;
+    // grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @include tablet {
   .postList {
-    grid-template-columns: 1fr 1fr;
+    // grid-template-columns: 1fr 1fr;
   }
 }
 @include mobile {
   .postList {
-    grid-template-columns: 1fr;
+    // grid-template-columns: 1fr;
   }
   .nonePost {
     width: 100%;

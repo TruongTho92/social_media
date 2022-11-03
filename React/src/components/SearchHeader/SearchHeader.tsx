@@ -8,14 +8,18 @@ import useDebounce from "~/common/hooks/useDebounce";
 import { SearchUserResponse } from "~/common/types";
 import { getUser } from "~/features/Auth/userSlice";
 import { searchAccountApi } from "~/features/searchAccount/searchAccountApi";
-import { getSearchResults } from "~/features/searchAccount/searchAccountSlice";
+import {
+  getLoadingSearch,
+  getSearchResults,
+} from "~/features/searchAccount/searchAccountSlice";
+import LoadingSpinner from "../LoadingSpinner";
 import styles from "./searchHeaderStyles.module.scss";
 
 const SearchHeader: React.FC = () => {
   const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce<string>(searchValue, 500);
-
+  const loadingSearch = useAppSelector(getLoadingSearch);
   const getUserData = useAppSelector(getUser);
   const resultSearch = useAppSelector(getSearchResults);
 
@@ -39,8 +43,10 @@ const SearchHeader: React.FC = () => {
             </div>
           ) : (
             <div className={styles.userList}>
-              {resultSearch && resultSearch.length <= 0 ? (
-                <div className={styles.textError}>User dont exist</div>
+              {resultSearch?.length <= 0 ? (
+                <div className={styles.textError}>
+                  <span>No result found</span>
+                </div>
               ) : (
                 resultSearch.map((user) => (
                   <div className={styles.userItem} key={user.id}>
@@ -80,6 +86,17 @@ const SearchHeader: React.FC = () => {
           className={`${styles.searchInput} `}
           placeholder="Search"
           value={searchValue}
+          suffix={
+            searchValue.length > 0 ? (
+              <>
+                {loadingSearch && (
+                  <div className={styles.iconSuffix}>
+                    <LoadingSpinner width={16} />
+                  </div>
+                )}
+              </>
+            ) : null
+          }
           prefix={<IoSearchOutline className={styles.searchIcon} />}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearchValue(e.target.value)

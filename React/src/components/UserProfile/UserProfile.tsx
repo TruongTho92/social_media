@@ -19,6 +19,7 @@ import {
   getUserFollowings,
 } from "~/features/profileUser/profileUserSlice";
 import Loading from "../Loading";
+import LoadingSpinner from "../LoadingSpinner";
 import ModalFollowers from "../Modal/ModalFollowers";
 import ModalFollowing from "../Modal/ModalFollowing";
 import AccountPosts from "../Posts/PostAccount/AccountPosts";
@@ -74,8 +75,10 @@ const UserProfile: React.FC = (props: Props) => {
 
   return (
     <>
-      {loadingPosts && loadingProfile ? (
-        <Loading />
+      {loadingProfile ? (
+        <div style={{ position: "relative" }}>
+          <Loading />
+        </div>
       ) : (
         <div className={`${styles.userProfile}`}>
           <div className={styles.userProfileContainer}>
@@ -158,10 +161,18 @@ const UserProfile: React.FC = (props: Props) => {
               </div>
             </div>
           </div>
+
           <span className={styles.line}></span>
-          <div className={styles.userProfilePost}>
-            <AccountPosts isAccount={false} postList={allAccountPost} />
-          </div>
+
+          {loadingPosts ? (
+            <div style={{ position: "relative" }}>
+              <LoadingSpinner width={30} />
+            </div>
+          ) : (
+            <div className={styles.accountPost}>
+              <AccountPosts isAccount={false} postList={allAccountPost} />
+            </div>
+          )}
         </div>
       )}
     </>

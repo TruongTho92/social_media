@@ -42,6 +42,7 @@ const Post: React.FC<Props> = ({
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
   const likePostMain = useAppSelector(getLikePostMain);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -136,6 +137,15 @@ const Post: React.FC<Props> = ({
             {caption}
           </Typography.Paragraph>
         </div>
+        {comments?.length > 0 ? (
+          <Link
+            to={`/post-newfeeds/${postId}`}
+            className={styles.commentList}
+            state={{ background: location }}
+          >
+            View all {comments.length} comments
+          </Link>
+        ) : null}
       </div>
     </div>
   );
