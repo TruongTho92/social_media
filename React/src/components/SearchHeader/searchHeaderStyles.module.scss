@@ -3,9 +3,14 @@
   // position: relative;
 }
 .textError {
-  font-size: 16px;
-  font-weight: 500;
-  color: red;
+  @include d-flex(center, center);
+  height: 100%;
+  width: 100%;
+  span {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--menuColor);
+  }
   text-align: center;
 }
 .searchInput {
@@ -28,6 +33,12 @@
     height: 1.8rem;
     color: #8e8e8e;
   }
+}
+.iconSuffix {
+  position: relative;
+  width: 50px;
+  height: 100%;
+  @include d-flex(end, center);
 }
 .tooltipUser {
   width: 268px !important;

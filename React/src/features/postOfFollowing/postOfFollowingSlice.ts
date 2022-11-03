@@ -91,5 +91,7 @@ export const {
 export const getLikePostMain = (state: RootState) => state.postDetail.like;
 export const getAllPostOfFollowing = (state: RootState) =>
   state.postOfFollowing.data.posts;
+export const getLoadingPostFollowing = (state: RootState) =>
+  state.postOfFollowing.loading;
 
 export default postOfFollowingSlice.reducer;

@@ -210,7 +210,9 @@ const TableUsers = ({ data }: Props) => {
             } else if (type === "next") {
               return <i className="far fa-chevron-right table__arrow-next"></i>;
             } else if (type === "jump-next" || type === "jump-prev") {
-              return "...";
+              return (
+                <Typography className="table__dots-hidden">...</Typography>
+              );
             } else {
               return page;
             }

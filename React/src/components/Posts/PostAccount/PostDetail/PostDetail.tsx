@@ -26,6 +26,7 @@ import { getUser } from "~/features/Auth/userSlice";
 import { getAllPost } from "~/features/accountPost/Posts/postsSlice";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 import { IoBookmarkOutline } from "react-icons/io5";
+import { profileUserApi } from "~/features/profileUser/profileUserApi";
 
 export type Props = {};
 const PostDetail: React.FC<Props> = () => {
@@ -88,6 +89,7 @@ const PostDetail: React.FC<Props> = () => {
 
   const handleDeletePost = async () => {
     await dispatch(postsApi.delete(postId));
+
     navigate("/profile");
 
     window.location.reload();

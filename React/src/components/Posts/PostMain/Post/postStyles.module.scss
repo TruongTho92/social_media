@@ -96,6 +96,9 @@
     font-size: 24px;
     margin-right: 16px;
     cursor: pointer;
+    &:hover {
+      color: var(--menuColor);
+    }
   }
   .likeIcon {
     &.active {
@@ -115,6 +118,9 @@
   .saveIcon {
     font-size: 30px;
     cursor: pointer;
+    &:hover {
+      color: var(--menuColor);
+    }
   }
 }
 .captionContainer {
@@ -140,6 +146,15 @@
 .comment {
   margin-top: 4px;
   padding: 0 16px;
+}
+.commentList {
+  padding-left: 16px;
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgb(142, 142, 142);
+  &:hover {
+    color: rgb(142, 142, 142);
+  }
 }
 .textUserLiked {
   font-size: 16px;

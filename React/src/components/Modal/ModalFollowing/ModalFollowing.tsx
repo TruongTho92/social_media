@@ -2,12 +2,10 @@ import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { useAppSelector } from "~/app/hooks";
 import { UserFollowResponse } from "~/common/types";
 import Loading from "~/components/Loading";
 import { getUser } from "~/features/Auth/userSlice";
-import { followApi } from "~/features/follow/followApi";
-import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { getloadingProfile } from "~/features/profileUser/profileUserSlice";
 
 import styles from "./modalFollowing.module.scss";
@@ -19,8 +17,6 @@ type Props = {
 const ModalFollowing: React.FC<Props> = ({ followings }) => {
   const [isFollowerOpen, setIsFollowerOpen] = useState(false);
   const [isAccount, setIsAccount] = useState(false);
-  const [isFollow, setIsFollow] = useState(false);
-  const dispatch = useAppDispatch();
 
   const loadingProfile = useAppSelector(getloadingProfile);
   const getUserData = useAppSelector(getUser);

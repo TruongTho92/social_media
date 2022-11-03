@@ -63,7 +63,7 @@ const Header: React.FC = () => {
             </NavLink>
           </div>
           <div className={styles.icon}>
-            <NavLink to="/saves">
+            <NavLink to="/profile/saves">
               <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
             </NavLink>
           </div>
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
                     <label className={styles.subUserLabel}>Settings</label>
                   </div>
                 </Tooltip>
-                <Link to="/saves" className={styles.subMenuItem}>
+                <Link to="/profile/saves" className={styles.subMenuItem}>
                   <div style={{ lineHeight: 0 }}>
                     <i className={`fal fa-bookmark ${styles.iconSub}`}></i>
                   </div>
@@ -167,7 +167,7 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <div className={styles.icon}>
-          <NavLink to="/saves">
+          <NavLink to="/profile/saves">
             <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
           </NavLink>
         </div>

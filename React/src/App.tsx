@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
 import PostDetailPage from "./pages/PostDetailPage";
 import Profile from "./pages/Profile";
+import SavePage from "./pages/SavePage";
 import SearchPage from "./pages/SearchPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
@@ -54,7 +55,6 @@ const App: React.FC = () => {
         />
 
         <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
-        <Route path="saves" element={isAuthenticated ? <Chat /> : <Login />} />
 
         {/* POST */}
         <Route
@@ -64,9 +64,10 @@ const App: React.FC = () => {
 
         {/* PROFILE */}
         <Route
-          path="profile"
+          path="profile/*"
           element={isAuthenticated ? <Profile /> : <Login />}
         />
+
         <Route
           path="account-post/:id"
           element={isAuthenticated ? <PostDetailPage /> : <Login />}
