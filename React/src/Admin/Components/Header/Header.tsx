@@ -86,7 +86,7 @@ const Header: React.FC<Props> = ({ isOpenSidebar, setIsOpenSidebar }) => {
                   </li>
                   <Tooltip
                     color="#fff"
-                    trigger="click"
+                    trigger="hover"
                     placement="left"
                     title={
                       <ul className="setting__list">

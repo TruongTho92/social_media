@@ -1,8 +1,18 @@
 @import "../../../global/scss/rootStyles.scss";
+// ANTD CUSTOM
 
-// SCSS
-.cell {
+.ant-table-thead > tr > th {
+  background-color: var(--bgLight) !important;
+  color: var(--textWhiteChange);
 }
+
+.table__arrow-prev {
+  color: var(--textWhiteChange);
+}
+.table__arrow-next {
+  color: var(--textWhiteChange);
+}
+// SCSS
 
 .table {
   &__posts-image {
@@ -41,7 +51,7 @@
 .table {
   &__posts-morePost {
     position: relative;
-    background-color: $whiteColor;
+    background-color: var(--bgLight);
     padding: 8px;
     border-radius: 4px;
     box-shadow: $boxShadowCard;
@@ -56,7 +66,7 @@
     .name {
       font-size: 14px;
       font-weight: 500;
-      color: $blackColor;
+      color: var(--textWhiteChange);
       margin-left: 8px;
     }
   }
@@ -72,7 +82,8 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    color: $blackColor;
+    color: var(--textWhiteChange);
+
     font-size: 24px;
     animation: Rotate 1s linear infinite;
   }

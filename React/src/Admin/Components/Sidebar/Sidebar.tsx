@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { userApi } from "~/features/Auth/userApi";
 import { getUser } from "~/features/Auth/userSlice";
+import ToggleTheme from "../ToggleTheme";
 import "./sidebarStyles.scss";
 
 type Props = {
@@ -136,7 +137,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
               </NavLink>
             </li>
           </ul>
-          <div className="menu__item">
+          <div className="menu__item logout">
             <div className="menu__item-link">
               <div className="link__content">
                 <div style={{ lineHeight: 0 }}>
@@ -149,6 +150,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                   Logout
                 </span>
               </div>
+            </div>
+            <div className="theme__btn">
+              <ToggleTheme />
             </div>
           </div>
         </div>

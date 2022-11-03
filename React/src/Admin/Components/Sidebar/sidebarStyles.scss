@@ -11,7 +11,7 @@
   bottom: 0;
   left: 0px;
   z-index: 20001;
-  background-color: var(--whiteColor);
+  background-color: var(--bgLight);
   box-shadow: var(--boxShadow);
   width: 280px;
   height: 100%;
@@ -52,7 +52,7 @@
   height: 100vh;
   width: 100vw;
   z-index: 1;
-  background-color: rgba($color: var(--blackColor), $alpha: 0.3);
+  background-color: rgba($color: $blackColor, $alpha: 0.3);
 }
 .logo {
   width: 100%;
@@ -69,7 +69,8 @@
 
     .name {
       font-size: 18px;
-      font-weight: 400;
+      font-weight: 500;
+      color: var(--textWhiteChange);
     }
     .role {
       font-size: 14px;
@@ -98,6 +99,9 @@
     &:not(:first-child) {
       margin-top: 12px;
     }
+    &.logout {
+      @include d-flex(space-between, center);
+    }
   }
   &__item-link {
     width: 100%;
@@ -109,7 +113,7 @@
     color: var(--menuColor);
     font-weight: 500;
     &.active {
-      color: var(--whiteColor);
+      color: var(--textWhiteColor);
       background-color: var(--mainBlue);
     }
     .right__icon {
@@ -123,7 +127,7 @@
     }
     &:hover {
       color: var(--mainBlue);
-      background-color: rgba($color: var(--mainBlue), $alpha: 0.2);
+      background-color: rgba($color: $mainBlue, $alpha: 0.2);
 
       transition: all 0.2s linear;
       border-radius: 6px;
@@ -175,12 +179,13 @@
     padding: 8px 8px;
     border-radius: 6px;
     &:hover {
-      background-color: rgba($color: var(--mainBlue), $alpha: 0.2);
+      background-color: rgba($color: $mainBlue, $alpha: 0.2);
 
       color: var(--mainBlue);
     }
     &.active {
-      color: var(--whiteColor);
+      color: var(--textWhiteColor);
+
       background-color: var(--mainBlue);
     }
   }
