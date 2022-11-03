@@ -31,6 +31,10 @@ Rails.application.routes.draw do
       delete "delete_user_admin/:id", :to => 'admin#destroy'
       get "posts_admin", :to => 'admin#post_admin'
       delete "delete_post_admin/:id", :to => 'admin#delete_post_admin'
+
+      get "storage", :to => 'storages#index'
+      post "save_post/:id", :to => 'storages#create'
+      delete "delete_post_in_storage/:id", :to => 'storages#delete'
     end
   end
 end

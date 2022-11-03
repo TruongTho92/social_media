@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_055652) do
+ActiveRecord::Schema.define(version: 2022_11_03_154150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_055652) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "posts_storages", id: false, force: :cascade do |t|
+    t.bigint "storage_id"
+    t.bigint "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_posts_storages_on_post_id"
+    t.index ["storage_id"], name: "index_posts_storages_on_storage_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -51,6 +60,13 @@ ActiveRecord::Schema.define(version: 2022_10_31_055652) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "storages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_storages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
