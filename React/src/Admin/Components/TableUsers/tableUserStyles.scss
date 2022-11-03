@@ -20,7 +20,7 @@ th.ant-table-cell {
   background-color: rgba($color: $mainBlue, $alpha: 0.1);
 }
 .table__user thead {
-  background-color: #f1f1f1;
+  background-color: var(--bgLight);
 }
 .ant-table-container {
   box-shadow: $boxShadowCard;
@@ -130,6 +130,7 @@ li.ant-pagination-item-active {
     .delete__icon {
       font-size: 20px;
       transition: all 0.25s linear;
+      color: var(--textWhiteChange);
 
       &:hover {
         color: red;
@@ -151,7 +152,7 @@ li.ant-pagination-item-active {
 .table {
   &__users-moreUser {
     position: relative;
-    background-color: $whiteColor;
+    background-color: var(--bgLight);
     padding-bottom: 8px;
     box-shadow: $boxShadowCard;
     border-radius: 4px;
@@ -172,6 +173,7 @@ li.ant-pagination-item-active {
     .name {
       font-size: 14px;
       font-weight: 500;
+      color: var(--textWhiteChange);
     }
     .nickname {
       font-size: 12px;

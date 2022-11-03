@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--bgLight);
     padding: 16px;
     border-radius: 8px;
     margin-bottom: 24px;
@@ -21,7 +21,7 @@
     line-height: 0;
 
     i {
-      color: $whiteColor;
+      color: var(--textWhiteColor);
       font-size: 20px;
     }
   }
@@ -29,14 +29,14 @@
     .heading {
       font-size: 14px;
       font-weight: 500;
-      color: $menuColor;
+      color: var(--menuColor);
       margin-top: 8px;
       margin-bottom: 0;
     }
     .number {
       font-size: 30px;
       font-weight: 500;
-      color: $greyTextColor;
+      color: var(--greyTextColor);
       margin-bottom: 0;
     }
   }

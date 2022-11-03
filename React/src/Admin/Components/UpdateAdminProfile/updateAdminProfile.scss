@@ -1,6 +1,9 @@
 @import "../../../global/scss/rootStyles.scss";
+.ant-input[disabled] {
+  background-color: var(--bgLight);
+}
 .updateAdminProfile {
-  background-color: $whiteColor;
+  background-color: var(--bgLight);
   height: fit-content;
   padding: 16px 24px;
   box-shadow: $boxShadow;
@@ -54,6 +57,7 @@
 .updateAdminProfile__header-lable-reset {
   background-color: transparent;
   margin-left: 8px;
+  color: var(--textWhiteChange);
 }
 .updateAdminProfile__header-sublable {
   color: $menuColor;
@@ -81,6 +85,7 @@
     padding: 8px;
     width: 80%;
     color: $menuColor !important;
+    background-color: var(--bgLight);
     font-size: 16px;
     border-radius: 6px;
     &.textarea {
@@ -94,6 +99,8 @@
     input {
       padding: 10px 8px;
       color: $menuColor !important;
+      background-color: var(--bgLight);
+
       font-size: 16px;
       border-radius: 6px;
       border: 1px solid $greyTextColor !important;

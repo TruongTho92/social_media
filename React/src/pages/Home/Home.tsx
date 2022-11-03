@@ -1,4 +1,5 @@
 import { Col, Row } from "antd";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "~/components/Header";
 import PostList from "~/components/Posts/PostMain/PostList";
@@ -6,6 +7,13 @@ import UserList from "~/components/UserList";
 import styles from "./homeStyles.module.scss";
 
 const HomePage: React.FC = () => {
+  useEffect(() => {
+    if (localStorage.getItem("theme") === "dark") {
+      document
+        .getElementsByTagName("HTML")[0]
+        .setAttribute("data-theme", "light");
+    }
+  }, []);
   return (
     <>
       <Header />

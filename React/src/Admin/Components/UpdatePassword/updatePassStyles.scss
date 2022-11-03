@@ -3,7 +3,7 @@
   // padding: 80px 20% 40px;
 }
 .updatePassContainer {
-  background-color: $whiteColor;
+  background-color: var(--bgLight);
   padding: 0 36px 36px 24px;
   border-radius: 8px;
   box-shadow: $boxShadow;
@@ -16,6 +16,7 @@
   font-weight: 600;
   padding: 8px 0;
   border-bottom: 1px solid $greyLight;
+  color: var(--textWhiteChange);
 }
 
 .udpatePassContent {
@@ -35,6 +36,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
+    color: var(--textWhiteChange);
   }
 }
 
@@ -45,6 +47,7 @@
     display: block;
     font-size: 16px;
     font-weight: 500;
+    color: var(--textWhiteChange);
   }
   .formInput {
     width: 70%;

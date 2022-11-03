@@ -2,7 +2,7 @@
 .search {
   overflow: hidden;
   height: 380px;
-  background-color: $whiteColor;
+  background-color: var(--bgLight);
   padding: 12px 16px;
   border-radius: 6px;
   box-shadow: $boxShadowCard;
@@ -17,6 +17,7 @@
   &__heading {
     font-size: 24px;
     font-weight: 600;
+    color: var(--textWhiteChange);
   }
   &__input {
     margin-bottom: 24px;

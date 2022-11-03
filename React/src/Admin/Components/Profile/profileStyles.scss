@@ -14,13 +14,13 @@
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: $whiteColor;
+    background-color: var(--bgLight);
     padding: 24px;
     border-radius: 6px;
-    border: 2px solid $blackColor;
+    border: 2px solid var(--textWhiteChange);
     box-shadow: $boxShadowCard;
     .sun__icon {
-      color: $blackColor !important;
+      color: var(--sunColor) !important;
     }
   }
   &__admin-img {
@@ -47,7 +47,7 @@
   &__admin-content-username {
     font-size: 36px;
     font-weight: 600;
-    color: $blackColor;
+    color: var(--textWhiteChange);
   }
   &__admin-content-email {
     font-size: 24px;
