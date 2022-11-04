@@ -2,11 +2,17 @@ class Api::V1::StoragesController < Api::V1::ApplicationController
   def index
     if Storage.find_by(user_id: current_user.id).nil?
       Storage.create(user_id: current_user.id)
+      current_user.storage.posts.each do |post|
+      end
       render json: {
         data: { storage: current_user.storage.posts }
       }, status: :ok
     else
-      @storage = current_user.storage.posts
+      @storage = []
+      current_user.storage.posts.each do |post|
+        @storage << { id: post.id, caption: post.caption, image: post.image,
+                      user_id: post.user_id, current_user_id: current_user.id }
+      end
       render json: {
         data: { storage: @storage }
       }
