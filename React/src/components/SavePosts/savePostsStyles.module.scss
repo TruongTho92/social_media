@@ -1,9 +1,10 @@
+@import "../../global/scss/rootStyles.scss";
 .savePosts {
   // padding: 80px 20% 24px;
 }
 .savePostList {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 .savePostItem {
@@ -13,5 +14,17 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+}
+
+@include tablet {
+  .savePostList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include mobile {
+  .savePostList {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

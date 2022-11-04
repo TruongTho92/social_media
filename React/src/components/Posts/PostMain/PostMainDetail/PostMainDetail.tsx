@@ -23,6 +23,7 @@ import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingAp
 import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 import {
+  getAllPostSave,
   getAllPostSaveAsync,
   savePostAsync,
   unSavePostAsync,
@@ -77,11 +78,14 @@ const PostMainDetail: React.FC<Props> = () => {
   const handleLike = async () => {
     await dispatch(postDetailApi.like(postId));
     dispatch(postDetailApi.getPost(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
+
     setLiked(true);
   };
   const handleDisLike = async () => {
     await dispatch(postDetailApi.disLike(postId, likeData.id));
     dispatch(postDetailApi.getPost(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
     setLiked(false);
   };
 
@@ -96,6 +100,7 @@ const PostMainDetail: React.FC<Props> = () => {
     setComment("");
     await dispatch(postDetailApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
 
   //Handle Save Post
@@ -117,7 +122,6 @@ const PostMainDetail: React.FC<Props> = () => {
         <section
           className={` ${styles.postDetail}`}
           onClick={() => {
-            dispatch(postOfFollowingApi.getPostFollowing());
             navigate(-1);
           }}
         >

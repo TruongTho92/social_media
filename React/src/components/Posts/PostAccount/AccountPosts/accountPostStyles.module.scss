@@ -41,17 +41,17 @@
 
 @include desktop {
   .postList {
-    // grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @include tablet {
   .postList {
-    // grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 @include mobile {
   .postList {
-    // grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .nonePost {
     width: 100%;

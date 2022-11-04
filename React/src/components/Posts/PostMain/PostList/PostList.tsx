@@ -1,6 +1,5 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
@@ -8,10 +7,6 @@ import {
   getAllPostOfFollowing,
   getLoadingPostFollowing,
 } from "~/features/postOfFollowing/postOfFollowingSlice";
-import {
-  getAllPostSave,
-  getAllPostSaveAsync,
-} from "~/features/savePosts/savePostsSlice";
 import Post from "../Post/Post";
 import styles from "./postListStyles.module.scss";
 
@@ -22,11 +17,9 @@ const PostList = () => {
   const sortAllPostFollowing = [...allPostFollowing].sort(
     (a, b) => b.id - a.id
   );
-  const allPostSave = useAppSelector(getAllPostSave);
 
   useEffect(() => {
     dispatch(postOfFollowingApi.getPostFollowing());
-    dispatch(getAllPostSaveAsync());
   }, []);
 
   return (
@@ -48,7 +41,6 @@ const PostList = () => {
                   caption={post.caption}
                   likes={post.like}
                   comments={post.comment}
-                  allPostSave={allPostSave}
                 />
               </div>
             ))

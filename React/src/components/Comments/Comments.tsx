@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { UserCommentResponse } from "~/common/types";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import { getUser } from "~/features/Auth/userSlice";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 
 import styles from "./commentsStyles.module.scss";
 
@@ -23,6 +24,7 @@ const Comments: React.FC<Props> = ({ commentList, postId, isAccount }) => {
   const handleDeleteComment = async (idComment: number | null) => {
     await dispatch(postDetailApi.deleteComment(postId, idComment));
     dispatch(postDetailApi.getPost(postId));
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
 
   return (

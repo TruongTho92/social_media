@@ -96,11 +96,7 @@ export interface userLikedTypes {
 }
 
 // COMMENT
-export interface CommentDataResponse {
-  id: number | null;
-  post_id: number | null;
-  user_id: number | null;
-}
+export interface CommentDataResponse extends LikeDataResponse {}
 
 export interface UserCommentResponse {
   id: number | null;
@@ -175,14 +171,8 @@ export interface SearchUserResponse {
 }
 
 // ADMIN
-export interface UserResponse {
-  nick_name: string;
-  user_name: string;
-  avatar: string;
-  bio: string;
-  email: string;
+export interface UserResponse extends SearchUserResponse {
   gender: string;
-  id: number;
   is_admin: string;
   is_supervisor: false;
   authentication_token: string;
@@ -203,5 +193,5 @@ export interface PostResponse {
 }
 
 export interface SaveReponse extends PostResponse {
-  current_userId: Number;
+  current_user_id: Number;
 }
