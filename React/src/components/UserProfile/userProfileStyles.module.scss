@@ -39,6 +39,12 @@
   .infoItem {
     @include d-flex(start, center);
     margin-bottom: 20px;
+    &.mobile {
+      display: none;
+    }
+    &.desktop {
+      display: block;
+    }
     .name {
       font-size: 36px;
       font-weight: 500;
@@ -136,7 +142,13 @@
     @include d-flex(center, center);
     flex-direction: column;
     .image {
-      padding: 40px 40px 24px 40px;
+      padding: 40px 40px 10px 40px;
+
+      img {
+        width: 120px;
+        height: 120px;
+        border-radius: 100rem;
+      }
     }
     .info {
       width: 100%;
@@ -145,9 +157,24 @@
     .infoItem {
       @include d-flex(space-evenly, center);
       margin-bottom: 20px;
+
+      &.mobile {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+        .username {
+          font-size: 14px;
+        }
+        .bio {
+          font-size: 12px;
+        }
+      }
+      &.desktop {
+        display: none;
+      }
       &.infoItemMobile {
         flex-direction: column;
-        margin-bottom: 24px;
+        margin-bottom: 10px;
       }
       &.infoItemFollow {
         border-top: 1px solid $greyLight;

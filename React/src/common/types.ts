@@ -201,3 +201,7 @@ export interface PostResponse {
   created_at: string;
   updated_at: string;
 }
+
+export interface SaveReponse extends PostResponse {
+  current_userId: Number;
+}

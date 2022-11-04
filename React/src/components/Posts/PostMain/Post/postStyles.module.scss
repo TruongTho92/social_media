@@ -74,13 +74,15 @@
     object-fit: cover;
   }
 }
+.postContent {
+  padding: 0 16px;
+}
 
 .emotion {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 12px;
-  padding: 0 12px;
   .left {
     display: flex;
     justify-content: start;
@@ -116,7 +118,10 @@
   }
 
   .saveIcon {
-    font-size: 30px;
+    font-size: 24px;
+    &.active {
+      color: var(--blackColor);
+    }
     cursor: pointer;
     &:hover {
       color: var(--menuColor);
@@ -130,7 +135,6 @@
   justify-content: start;
   align-items: center;
   font-size: 14px;
-  padding-left: 12px;
   .userNameCaption {
     font-weight: 600;
     margin-right: 8px;
@@ -148,7 +152,6 @@
   padding: 0 16px;
 }
 .commentList {
-  padding-left: 16px;
   margin-top: 8px;
   font-size: 14px;
   color: rgb(142, 142, 142);
@@ -159,7 +162,6 @@
 .textUserLiked {
   font-size: 16px;
   font-weight: normal;
-  padding-left: 12px;
   margin-top: 8px;
   font-weight: 600;
   span {

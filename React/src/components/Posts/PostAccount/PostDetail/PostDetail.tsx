@@ -27,11 +27,17 @@ import { getAllPost } from "~/features/accountPost/Posts/postsSlice";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { profileUserApi } from "~/features/profileUser/profileUserApi";
+import {
+  getAllPostSaveAsync,
+  savePostAsync,
+  unSavePostAsync,
+} from "~/features/savePosts/savePostsSlice";
 
 export type Props = {};
 const PostDetail: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [saved, setSaved] = useState(false);
 
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -118,6 +124,18 @@ const PostDetail: React.FC<Props> = () => {
     setComment("");
     await dispatch(postDetailApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
+  };
+
+  //Handle Save Post
+  const handleSavePost = async (idPost: number) => {
+    setSaved(true);
+    await dispatch(savePostAsync(idPost));
+    dispatch(getAllPostSaveAsync());
+  };
+  const handleUnSavePost = async (idPost: number) => {
+    setSaved(false);
+    await dispatch(unSavePostAsync(idPost));
+    dispatch(getAllPostSaveAsync());
   };
 
   return (
@@ -298,13 +316,21 @@ const PostDetail: React.FC<Props> = () => {
                     ></i>
                   </div>
 
-                  <div className={styles.save} style={{ lineHeight: 0 }}>
-                    <IoBookmarkOutline
-                      color={"#00000"}
-                      // title={}
-                      className={styles.iconSave}
-                    />
-                  </div>
+                  {saved ? (
+                    <div
+                      style={{ lineHeight: 0 }}
+                      onClick={() => handleUnSavePost(postId)}
+                    >
+                      <i className={`fas fa-bookmark ${styles.iconSave}`}></i>
+                    </div>
+                  ) : (
+                    <div
+                      style={{ lineHeight: 0 }}
+                      onClick={() => handleSavePost(postId)}
+                    >
+                      <i className={`fal fa-bookmark ${styles.iconSave}`}></i>
+                    </div>
+                  )}
                 </div>
                 <Typography className={styles.likeNumber}>
                   <span>{userLikedData.length}</span> Likes
