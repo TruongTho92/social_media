@@ -24,7 +24,6 @@ type Props = {
   imagePost: string;
   likes: LikeDataResponse[];
   comments: LikeDataResponse[];
-  allPostSave: SaveReponse[];
 };
 
 const Post: React.FC<Props> = ({
@@ -37,11 +36,10 @@ const Post: React.FC<Props> = ({
   caption,
   likes,
   comments,
-  allPostSave,
 }) => {
   const [liked, setLiked] = useState(false);
   const [ellipsis, setEllipsis] = useState(true);
-  const [saved, setSaved] = useState(true);
+  const [saved, setSaved] = useState(false);
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
   const likePostMain = useAppSelector(getLikePostMain);
@@ -55,17 +53,6 @@ const Post: React.FC<Props> = ({
       setLiked(false);
     }
   }, [getUserData.user.id, likes]);
-
-  useEffect(() => {
-    if (
-      allPostSave.find((post) => post.current_userId === getUserData.user.id)
-    ) {
-      setSaved(true);
-    } else {
-      setSaved(false);
-      console.log("false");
-    }
-  }, [getUserData.user.id, allPostSave]);
 
   // LIKE
   const handleLike = async () => {

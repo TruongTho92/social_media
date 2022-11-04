@@ -90,4 +90,6 @@ const savePostsSlice = createSlice({
 
 // SELECTOR
 export const getAllPostSave = (state: RootState) => state.savePosts.data;
+export const getLoadingSave = (state: RootState) => state.savePosts.loading;
+
 export default savePostsSlice.reducer;

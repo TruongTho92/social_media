@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { userApi } from "~/features/Auth/userApi";
 import { getUser } from "~/features/Auth/userSlice";
 import { followApi } from "~/features/follow/followApi";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
@@ -27,6 +28,16 @@ const User: React.FC = () => {
     dispatch(userAllApi.getAllUser());
   };
 
+  const handleLogout = async () => {
+    const payload = {
+      user: {
+        email: getUserData.user.email,
+        authentication_token: getUserData.user.authentication_token,
+      },
+    };
+    dispatch(userApi.logoutUser(payload));
+  };
+
   return (
     <>
       {/* ACCOUNT */}
@@ -50,7 +61,9 @@ const User: React.FC = () => {
               <p className={styles.description}>{getUserData.user.nick_name}</p>
             </div>
           </div>
-          <div className={styles.btnLogout}>Logout</div>
+          <div className={styles.btnLogout} onClick={handleLogout}>
+            Logout
+          </div>
         </div>
       </div>
 
