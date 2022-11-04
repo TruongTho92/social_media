@@ -36,6 +36,7 @@ export const postDetailApi = {
           token: token,
         },
       });
+
       if (data) {
         setTimeout(() => {
           dispatch({

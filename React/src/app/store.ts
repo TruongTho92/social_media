@@ -13,6 +13,7 @@ import deleteAdminSlice from "~/features/Admin/DeleteAccount/deleteAdminSlice";
 import UserReducer from "~/features/Auth/userSlice";
 import followSlice from "~/features/follow/followSlice";
 import profileUserSlice from "~/features/profileUser/profileUserSlice";
+import savePostsSlice from "~/features/savePosts/savePostsSlice";
 import searchAccountSlice from "~/features/searchAccount/searchAccountSlice";
 import userAllSlice from "~/features/userAll/userAllSlice";
 import postOfFollowingSlice from "../features/postOfFollowing/postOfFollowingSlice";
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   // ACCOUNT POST
   posts: postsSlice,
   postDetail: postDetailSlice,
+  savePosts: savePostsSlice,
 
   // USER PROFILE
   profileUser: profileUserSlice,

@@ -22,6 +22,11 @@ import { getUser } from "~/features/Auth/userSlice";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
+import {
+  getAllPostSaveAsync,
+  savePostAsync,
+  unSavePostAsync,
+} from "~/features/savePosts/savePostsSlice";
 
 import styles from "./postMainDetailStyles.module.scss";
 
@@ -31,6 +36,8 @@ const PostMainDetail: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+
   const [isOpenComment, setisOpenComment] = useState(false);
   const [comment, setComment] = useState("");
   const inputRef = useRef<TextAreaRef>(null);
@@ -64,18 +71,18 @@ const PostMainDetail: React.FC<Props> = () => {
     } else {
       setLiked(false);
     }
-  }, [userLikedData]);
+  }, [userLikedData, likeData]);
 
   // LIKE
   const handleLike = async () => {
-    setLiked(true);
     await dispatch(postDetailApi.like(postId));
     dispatch(postDetailApi.getPost(postId));
+    setLiked(true);
   };
   const handleDisLike = async () => {
-    setLiked(false);
     await dispatch(postDetailApi.disLike(postId, likeData.id));
     dispatch(postDetailApi.getPost(postId));
+    setLiked(false);
   };
 
   // COMMENT
@@ -91,6 +98,17 @@ const PostMainDetail: React.FC<Props> = () => {
     dispatch(postDetailApi.getPost(postId));
   };
 
+  //Handle Save Post
+  const handleSavePost = async (idPost: number) => {
+    setSaved(true);
+    await dispatch(savePostAsync(idPost));
+    dispatch(getAllPostSaveAsync());
+  };
+  const handleUnSavePost = async (idPost: number) => {
+    setSaved(false);
+    await dispatch(unSavePostAsync(idPost));
+    dispatch(getAllPostSaveAsync());
+  };
   return (
     <>
       {loadingPost ? (
@@ -174,13 +192,21 @@ const PostMainDetail: React.FC<Props> = () => {
                     ></i>
                   </div>
 
-                  <div className={styles.save} style={{ lineHeight: 0 }}>
-                    <IoBookmarkOutline
-                      color={"#00000"}
-                      // title={}
-                      className={styles.iconSave}
-                    />
-                  </div>
+                  {saved ? (
+                    <div
+                      style={{ lineHeight: 0 }}
+                      onClick={() => handleUnSavePost(postId)}
+                    >
+                      <i className={`fas fa-bookmark ${styles.iconSave}`}></i>
+                    </div>
+                  ) : (
+                    <div
+                      style={{ lineHeight: 0 }}
+                      onClick={() => handleSavePost(postId)}
+                    >
+                      <i className={`fal fa-bookmark ${styles.iconSave}`}></i>
+                    </div>
+                  )}
                 </div>
                 <Typography className={styles.likeNumber}>
                   <span>{userLikedData.length}</span> Likes

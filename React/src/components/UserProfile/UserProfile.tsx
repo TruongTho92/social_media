@@ -143,6 +143,15 @@ const UserProfile: React.FC = (props: Props) => {
                     </div>
                   </Tooltip>
                 </div>
+
+                <div className={`${styles.infoItem} ${styles.mobile}`}>
+                  <div>
+                    <span className={styles.username}>
+                      {profileUser.user.nick_name}
+                    </span>
+                    <div className={styles.bio}>{profileUser.user.bio}</div>
+                  </div>
+                </div>
                 <div className={`${styles.infoItem} ${styles.infoItemFollow}`}>
                   <span className={styles.posts}>
                     <span>{allAccountPost?.length}</span> posts
@@ -150,7 +159,7 @@ const UserProfile: React.FC = (props: Props) => {
                   <ModalFollowers followers={userFollowers} />
                   <ModalFollowing followings={userFollowings} />
                 </div>
-                <div className={styles.infoItem}>
+                <div className={`${styles.infoItem} ${styles.desktop}`}>
                   <div>
                     <span className={styles.username}>
                       {profileUser.user.nick_name}
