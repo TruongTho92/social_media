@@ -26,6 +26,7 @@ export const postOfFollowingApi = {
           token: token,
         },
       });
+
       setTimeout(() => {
         dispatch({
           type: postFollowingSuccess.toString(),

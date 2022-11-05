@@ -16,11 +16,14 @@ const SavePosts: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const allPostSave = useAppSelector(getAllPostSave);
   const loadingSave = useAppSelector(getLoadingSave);
-  const allPostSaveSort = [...allPostSave].sort((a, b) => a.id - b.id);
+  const allPostSaveSort = [...allPostSave].sort(
+    (a, b) => Number(b.updated_at) - Number(a.updated_at)
+  );
 
   useEffect(() => {
     dispatch(getAllPostSaveAsync());
   }, []);
+
   return (
     <>
       {loadingSave ? (

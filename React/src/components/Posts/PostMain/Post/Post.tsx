@@ -8,6 +8,7 @@ import { getUser } from "~/features/Auth/userSlice";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
 import {
+  getAllPostSave,
   getAllPostSaveAsync,
   savePostAsync,
   unSavePostAsync,
@@ -24,6 +25,7 @@ type Props = {
   imagePost: string;
   likes: LikeDataResponse[];
   comments: LikeDataResponse[];
+  allPostSaved: SaveReponse[];
 };
 
 const Post: React.FC<Props> = ({
@@ -36,6 +38,7 @@ const Post: React.FC<Props> = ({
   caption,
   likes,
   comments,
+  allPostSaved,
 }) => {
   const [liked, setLiked] = useState(false);
   const [ellipsis, setEllipsis] = useState(true);
@@ -53,6 +56,12 @@ const Post: React.FC<Props> = ({
       setLiked(false);
     }
   }, [getUserData.user.id, likes]);
+
+  useEffect(() => {
+    if (allPostSaved.find((post) => post.id === postId)) {
+      setSaved(true);
+    }
+  }, [postId]);
 
   // LIKE
   const handleLike = async () => {

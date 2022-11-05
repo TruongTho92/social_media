@@ -88,35 +88,6 @@
   }
 }
 
-.postPages {
-  @include d-flex(center, center);
-  .postPageItem {
-    &:not(:first-child) {
-      margin-left: 24px;
-    }
-  }
-  .postPageLink {
-    @include d-flex(center, center);
-    color: var(--blackColor);
-    padding: 16px 0;
-    transition: all 0.2s linear;
-
-    &.active {
-      transition: all 0.2s linear;
-      border-top: 1px solid var(--blackColor);
-    }
-    .postPageIcon {
-      margin-right: 8px;
-    }
-    span {
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      line-height: 0;
-    }
-  }
-}
-
 @include desktop {
   .account {
     padding: 60px 10% 20px 10%;

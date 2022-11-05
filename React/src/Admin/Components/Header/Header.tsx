@@ -1,15 +1,14 @@
-import { Switch, Tooltip } from "antd";
-import "./headerStyles.scss";
-import React, { useEffect, useState } from "react";
+import { Tooltip } from "antd";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { getUser } from "~/features/Auth/userSlice";
 import { settings } from "~/Admin/config/slickConfig";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { allUserApi } from "~/features/Admin/AllUser/allUserApi";
 import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 import { userApi } from "~/features/Auth/userApi";
-import ToggleTheme from "../ToggleTheme";
+import { getUser } from "~/features/Auth/userSlice";
+import "./headerStyles.scss";
 
 type Props = {
   setIsOpenSidebar?: (e: boolean) => void;

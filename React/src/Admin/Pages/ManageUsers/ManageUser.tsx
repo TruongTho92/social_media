@@ -7,7 +7,7 @@ type Props = {};
 
 const ManageUsers = (props: Props) => {
   const allUser = useAppSelector(getAllUser);
-  const allUserClone = [...allUser].sort((a, b) => a.id - b.id);
+  const allUserClone = [...allUser].sort((a, b) => b.id - a.id);
 
   return (
     <div className="section">

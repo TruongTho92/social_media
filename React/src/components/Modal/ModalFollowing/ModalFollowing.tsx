@@ -16,16 +16,9 @@ type Props = {
 
 const ModalFollowing: React.FC<Props> = ({ followings }) => {
   const [isFollowerOpen, setIsFollowerOpen] = useState(false);
-  const [isAccount, setIsAccount] = useState(false);
 
   const loadingProfile = useAppSelector(getloadingProfile);
   const getUserData = useAppSelector(getUser);
-
-  useEffect(() => {
-    if (followings.find((user) => user.id === getUserData.user.id)) {
-      setIsAccount(true);
-    }
-  }, []);
 
   const showModal = () => {
     setIsFollowerOpen(true);
@@ -57,7 +50,13 @@ const ModalFollowing: React.FC<Props> = ({ followings }) => {
                   <div className={styles.userItem} key={user.id}>
                     <div className={styles.userInfo}>
                       <Link
-                        to={isAccount ? `/profile` : `/user-profile/${user.id}`}
+                        to={
+                          followings.find(
+                            (user) => user.id === getUserData.user.id
+                          )
+                            ? `/profile`
+                            : `/user-profile/${user.id}`
+                        }
                       >
                         <img
                           src={

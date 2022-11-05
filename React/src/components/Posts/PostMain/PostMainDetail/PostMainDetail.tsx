@@ -50,6 +50,7 @@ const PostMainDetail: React.FC<Props> = () => {
   const postDetailData = useAppSelector(getPostDetail);
   const userLikedData = useAppSelector(getUsersLiked);
   const commentData = useAppSelector(getUsersCommented);
+  const allPostSaved = useAppSelector(getAllPostSave);
 
   const { id } = useParams();
   const postId = Number(id);
@@ -74,12 +75,17 @@ const PostMainDetail: React.FC<Props> = () => {
     }
   }, [userLikedData, likeData]);
 
+  useEffect(() => {
+    if (allPostSaved.find((post) => post.id === postId)) {
+      setSaved(true);
+    }
+  }, [postId]);
+
   // LIKE
   const handleLike = async () => {
     await dispatch(postDetailApi.like(postId));
     dispatch(postDetailApi.getPost(postId));
     dispatch(postOfFollowingApi.getPostFollowing());
-
     setLiked(true);
   };
   const handleDisLike = async () => {
@@ -108,11 +114,13 @@ const PostMainDetail: React.FC<Props> = () => {
     setSaved(true);
     await dispatch(savePostAsync(idPost));
     dispatch(getAllPostSaveAsync());
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
   const handleUnSavePost = async (idPost: number) => {
     setSaved(false);
     await dispatch(unSavePostAsync(idPost));
     dispatch(getAllPostSaveAsync());
+    dispatch(postOfFollowingApi.getPostFollowing());
   };
   return (
     <>
