@@ -38,6 +38,13 @@
       font-weight: 500;
       color: var(--greyTextColor);
       margin-bottom: 0;
+      transition: 0.25s linear;
+
+      &:hover {
+        color: var(--textWhiteChange);
+        cursor: pointer;
+        transition: 0.25s linear;
+      }
     }
   }
 }

@@ -1,0 +1,68 @@
+@import "../../global/scss/rootStyles.scss";
+.story {
+  position: relative;
+  padding: 16px;
+  padding-right: 0;
+  background-color: var(--whiteColor);
+  margin-bottom: 16px;
+  box-shadow: var(--boxShadow);
+  border-radius: 6px;
+}
+.userList {
+  margin-bottom: 0;
+  line-height: 0;
+}
+.userItem {
+}
+.userItemImg {
+  width: 56px;
+  height: 56px;
+  border-radius: 100rem;
+  background: #d6249f;
+  padding: 1px;
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100rem;
+
+    object-fit: cover;
+  }
+}
+
+.arrow {
+  position: absolute;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: var(--whiteColor) !important;
+  text-align: center;
+  border-radius: 100rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--boxShadow) !important;
+  &.next {
+    right: -10px !important;
+  }
+  &.prev {
+    left: -30px !important;
+    z-index: 100;
+  }
+  &::before {
+    display: none;
+  }
+  .arrowNextIcon {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--blackColor);
+  }
+}

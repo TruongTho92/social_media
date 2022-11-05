@@ -28,6 +28,7 @@ import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import {
+  getAllPostSave,
   getAllPostSaveAsync,
   savePostAsync,
   unSavePostAsync,
@@ -58,6 +59,7 @@ const PostDetail: React.FC<Props> = () => {
   const postDetailData = useAppSelector(getPostDetail);
   const userLikedData = useAppSelector(getUsersLiked);
   const commentData = useAppSelector(getUsersCommented);
+  const allPostSaved = useAppSelector(getAllPostSave);
 
   const { id } = useParams();
   const postId = Number(id);
@@ -82,6 +84,12 @@ const PostDetail: React.FC<Props> = () => {
     }
   }, [allPostData, getUserData.user.id, userLikedData]);
 
+  useEffect(() => {
+    if (allPostSaved.find((post) => post.id === postId)) {
+      setSaved(true);
+    }
+  }, [postId]);
+
   // UPDATE POST
   const handleUpdatePost = () => {
     const data = {
@@ -95,9 +103,7 @@ const PostDetail: React.FC<Props> = () => {
 
   const handleDeletePost = async () => {
     await dispatch(postsApi.delete(postId));
-
     navigate("/profile");
-
     window.location.reload();
   };
 

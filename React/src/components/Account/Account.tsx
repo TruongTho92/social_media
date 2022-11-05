@@ -17,6 +17,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import ModalFollowers from "../Modal/ModalFollowers";
 import ModalFollowing from "../Modal/ModalFollowing";
 import ModalSetting from "../Modal/ModalSetting";
+import PagePosts from "../PagePosts";
 import AccountPosts from "../Posts/PostAccount/AccountPosts";
 import styles from "./accountStyles.module.scss";
 
@@ -133,37 +134,8 @@ const Account: React.FC = () => {
         </div>
         <span className={styles.line}></span>
 
-        <div className={styles.postPages}>
-          <div className={styles.postPageItem}>
-            <NavLink
-              end
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.postPageLink} ${styles.active}`
-                  : `${styles.postPageLink}`
-              }
-              to="/profile"
-            >
-              <i className={`fas fa-th-large ${styles.postPageIcon}`}></i>
-
-              <span>Posts</span>
-            </NavLink>
-          </div>
-          <div className={styles.postPageItem}>
-            <NavLink
-              to="/profile/saves"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.postPageLink} ${styles.active}`
-                  : `${styles.postPageLink}`
-              }
-            >
-              <i className={`fal fa-bookmark ${styles.postPageIcon}`}></i>
-              <span>Saves</span>
-            </NavLink>
-          </div>
-        </div>
-
+        {/*LINK POST PAGE */}
+        <PagePosts />
         {/* ROUTES */}
         <Routes>
           <Route
