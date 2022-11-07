@@ -9,7 +9,7 @@ class Api::V1::StoragesController < Api::V1::ApplicationController
       }, status: :ok
     else
       @storage = []
-      current_user.storage.posts.each do |post|
+      current_user.storage.posts.order(created_at: :desc).each do |post|
         @storage << { id: post.id, caption: post.caption, image: post.image,
                       user_id: post.user_id, current_user_id: current_user.id }
       end
@@ -34,7 +34,7 @@ class Api::V1::StoragesController < Api::V1::ApplicationController
         current_user.storage.posts << post
         render json: {
           message: "Create Successfully!",
-          data: { storage: current_user.storage.posts }
+          data: { storage: current_user.storage.posts.order(created_at: :desc) }
         }, status: :ok
       else
         render json: {
