@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   disLikeFailure,
   disLikeRequest,
@@ -10,20 +11,51 @@ import {
   postFollowingFailure,
   postFollowingRequest,
   postFollowingSuccess,
+  postLimitFailure,
+  postLimitRequest,
+  postLimitSuccess,
 } from "./postOfFollowingSlice";
 
 export const postOfFollowingApi = {
+  getPostLimit: (volume: any) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: postLimitRequest.toString(),
+      });
+
+      const { data } = await apiClient.post(
+        `/api/v1/posts_with_quantity`,
+        volume,
+        {
+          headers: {
+            token: variables.token,
+          },
+        }
+      );
+      console.log(data.data);
+
+      setTimeout(() => {
+        dispatch({
+          type: postLimitSuccess.toString(),
+          payload: data.data,
+        });
+      }, 500);
+    } catch (error: any) {
+      dispatch({
+        type: postLimitFailure.toString(),
+        payload: error.response.data,
+      });
+    }
+  },
   getPostFollowing: () => async (dispatch: any) => {
     try {
       dispatch({
         type: postFollowingRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.get(`/api/v1/posts_of_following`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -46,11 +78,10 @@ export const postOfFollowingApi = {
       dispatch({
         type: likeRequest.toString(),
       });
-      const token = JSON.parse(Cookies.get("access_token") || "");
 
       const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -72,13 +103,12 @@ export const postOfFollowingApi = {
         dispatch({
           type: disLikeRequest.toString(),
         });
-        const token = JSON.parse(Cookies.get("access_token") || "");
 
         const { data } = await apiClient.delete(
           `/api/v1/posts/${id}/likes/${idLike}`,
           {
             headers: {
-              token: token,
+              token: variables.token,
             },
           }
         );

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
@@ -56,14 +57,18 @@ const Story: React.FC<Props> = () => {
         <Slider {...settings}>
           {userFollowings.map((item) => (
             <li className={styles.userItem} key={item.id}>
-              <div className={styles.userItemImg}>
-                <img
-                  src={
-                    item.avatar ? item.avatar : `/assets/images/user-vacant.jpg`
-                  }
-                  alt=""
-                />
-              </div>
+              <Link to={`/user-profile/${item.id}`}>
+                <div className={styles.userItemImg}>
+                  <img
+                    src={
+                      item.avatar
+                        ? item.avatar
+                        : `/assets/images/user-vacant.jpg`
+                    }
+                    alt=""
+                  />
+                </div>
+              </Link>
             </li>
           ))}
         </Slider>

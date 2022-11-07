@@ -21,16 +21,21 @@ const PostList = () => {
   const dispatch = useAppDispatch();
   const allPostFollowing = useAppSelector(getAllPostOfFollowing);
   const loadingPostFollowing = useAppSelector(getLoadingPostFollowing);
-  const sortAllPostFollowing = [...allPostFollowing].sort(
-    (a, b) => b.id - a.id
-  );
 
   const allPostSaved = useAppSelector(getAllPostSave);
 
   useEffect(() => {
     dispatch(getAllPostSaveAsync());
     dispatch(postOfFollowingApi.getPostFollowing());
+    // const payload = {
+    //   quantity: 5,
+    // };
+    // dispatch(postOfFollowingApi.getPostLimit(payload));
   }, []);
+
+  const handleLoadMore = () => {
+    // dispatch(postOfFollowingApi.getPostLimit(payload));
+  };
 
   return (
     <>
@@ -41,7 +46,7 @@ const PostList = () => {
           <Story />
           <div className={styles.posts}>
             {allPostFollowing?.length > 0 ? (
-              sortAllPostFollowing.map((post) => (
+              allPostFollowing.map((post, index) => (
                 <div key={post.id}>
                   <Post
                     avatar={post.avatar}
@@ -64,6 +69,9 @@ const PostList = () => {
               </Typography>
             )}
           </div>
+          <button type="submit" onClick={handleLoadMore}>
+            Loadmore
+          </button>
         </>
       )}
     </>

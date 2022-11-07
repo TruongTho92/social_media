@@ -26,6 +26,7 @@
   .headerMenu {
     @include d-flex(center, center);
     height: 100%;
+
     .icon {
       display: flex;
       justify-content: center;
@@ -63,6 +64,10 @@
       font-size: 16px;
       border: 2px solid $blackColor;
       border-radius: 6px;
+      &.active {
+        background-color: var(--blackColor);
+        color: var(--whiteColor);
+      }
       &:hover {
         border: 2px solid $mainBlue;
       }
@@ -157,10 +162,6 @@
   background-color: aqua;
 }
 
-.active {
-  color: white !important;
-}
-
 // RESPONSIVE
 @include desktop {
   .headerContainer {
@@ -224,6 +225,10 @@
       font-size: 16px !important;
       border: 2px solid $blackColor;
       border-radius: 6px;
+      &.active {
+        background-color: var(--blackColor);
+        color: var(--whiteColor);
+      }
     }
     .saveIcon {
       font-size: 26px;

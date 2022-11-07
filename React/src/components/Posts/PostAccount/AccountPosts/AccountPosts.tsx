@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaMehRollingEyes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { PostAccount } from "~/common/types";
@@ -11,11 +11,18 @@ type Props = {
 };
 
 const AccountPosts: React.FC<Props> = ({ postList, isAccount = false }) => {
-  const reversed = [...postList].sort((a, b) => b.id - a.id);
+  const [allPost, setAllPost] = useState<PostAccount[]>([]);
+  const reversed = [...allPost].sort((a, b) => b.id - a.id);
+
+  useEffect(() => {
+    if (postList) {
+      setAllPost(postList);
+    }
+  }, [allPost, postList]);
 
   return (
     <section className={styles.postList}>
-      {postList && postList.length > 0 ? (
+      {allPost?.length > 0 ? (
         reversed.map((post) => (
           <div className={styles.postItem} key={post.id}>
             <AccountPost id={post.id} image={post.image} />

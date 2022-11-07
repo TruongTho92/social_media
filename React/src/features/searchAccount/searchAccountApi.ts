@@ -1,5 +1,5 @@
-import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   searchFailure,
   searchRequest,
@@ -13,11 +13,9 @@ export const searchAccountApi = {
         type: searchRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
-      const { data } = await apiClient.post(`/api/v1/search?search=${name}`, {
+      const { data } = await apiClient.post(`/api/v1/search?name=${name}`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 

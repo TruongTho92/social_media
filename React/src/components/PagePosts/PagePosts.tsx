@@ -16,9 +16,19 @@ const PagePosts = (props: Props) => {
           }
           to="/profile"
         >
-          <i className={`fas fa-th-large ${styles.postPageIcon}`}></i>
-
-          <span>Posts</span>
+          {({ isActive }) =>
+            isActive ? (
+              <>
+                <i className={`fas fa-th-large ${styles.postPageIcon}`}></i>
+                <span>Posts</span>
+              </>
+            ) : (
+              <>
+                <i className={`far fa-th-large ${styles.postPageIcon}`}></i>
+                <span>Posts</span>
+              </>
+            )
+          }
         </NavLink>
       </div>
       <div className={styles.postPageItem}>
@@ -30,8 +40,19 @@ const PagePosts = (props: Props) => {
               : `${styles.postPageLink}`
           }
         >
-          <i className={`fal fa-bookmark ${styles.postPageIcon}`}></i>
-          <span>Saves</span>
+          {({ isActive }) =>
+            isActive ? (
+              <>
+                <i className={`fas fa-bookmark ${styles.postPageIcon}`}></i>
+                <span>Saves</span>
+              </>
+            ) : (
+              <>
+                <i className={`fal fa-bookmark ${styles.postPageIcon}`}></i>
+                <span>Saves</span>
+              </>
+            )
+          }
         </NavLink>
       </div>
     </div>

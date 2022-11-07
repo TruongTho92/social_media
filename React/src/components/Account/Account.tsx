@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
@@ -25,7 +25,6 @@ const Account: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const getUserData = useAppSelector(getUser);
-
   const userFollowers = useAppSelector(getUserFollowers);
   const userFollowings = useAppSelector(getUserFollowings);
   const loadingPosts = useAppSelector(getLoadingPosts);

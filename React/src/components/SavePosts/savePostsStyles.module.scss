@@ -16,6 +16,14 @@
     object-fit: cover;
   }
 }
+.textError {
+  margin-top: 24px;
+  width: 100%;
+  text-align: center;
+  color: var(--menuColor);
+  font-style: italic;
+  font-size: 18px;
+}
 
 @include tablet {
   .savePostList {
@@ -26,5 +34,8 @@
 @include mobile {
   .savePostList {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .textError {
+    font-size: 14px;
   }
 }

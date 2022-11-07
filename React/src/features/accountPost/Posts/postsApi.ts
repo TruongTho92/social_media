@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
 import { PostPayloadCreate } from "~/common/types";
+import { variables } from "~/common/variables";
 import {
   CreatePostFailure,
   CreatePostRequest,
@@ -21,11 +22,9 @@ export const postsApi = {
         type: GetPostsRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.get(`api/v1/posts_of_user/${id}`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -50,11 +49,9 @@ export const postsApi = {
         type: CreatePostRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.post(`api/v1/posts`, payload, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -77,15 +74,12 @@ export const postsApi = {
         type: DeletePostRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.delete(`api/v1/posts/${id}`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
-      console.log(data);
       setTimeout(() => {
         dispatch({
           type: DeletePostSuccess.toString(),

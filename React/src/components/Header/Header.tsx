@@ -1,4 +1,4 @@
-import { Tooltip, Typography } from "antd";
+import { Tooltip } from "antd";
 import React, { useState } from "react";
 import { BsChatDots } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
@@ -44,29 +44,55 @@ const Header: React.FC = () => {
           </Link>
         </>
 
-        <div className={styles.headerMenu}>
-          <div className={styles.icon}>
-            <NavLink to="/">
-              <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
+        <ul className={styles.headerMenu}>
+          <li className={styles.icon}>
+            <NavLink end to="/">
+              {({ isActive }) =>
+                isActive ? (
+                  <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
+                ) : (
+                  <i className={`far fa-th-large ${styles.menuIcon}`}></i>
+                )
+              }
             </NavLink>
-          </div>
-          <div className={styles.icon}>
+          </li>
+          <li className={styles.icon}>
             <NavLink to="/chat">
-              <i className={`far fa-comment ${styles.menuIcon}`}></i>
+              {({ isActive }) =>
+                isActive ? (
+                  <i className={`fas fa-comment ${styles.menuIcon}`}></i>
+                ) : (
+                  <i className={`far fa-comment ${styles.menuIcon}`}></i>
+                )
+              }
             </NavLink>
-          </div>
-          <div className={styles.icon}>
+          </li>
+          <li className={styles.icon}>
             <NavLink to="/create-post">
-              <i
-                className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
-              ></i>
+              {({ isActive }) =>
+                isActive ? (
+                  <i
+                    className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon} ${styles.active}`}
+                  ></i>
+                ) : (
+                  <i
+                    className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon} `}
+                  ></i>
+                )
+              }
             </NavLink>
-          </div>
-          <div className={styles.icon}>
+          </li>
+          <li className={styles.icon}>
             <NavLink to="/profile/saves">
-              <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
+              {({ isActive }) =>
+                isActive ? (
+                  <i className={`fas fa-bookmark ${styles.menuIcon}`}></i>
+                ) : (
+                  <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
+                )
+              }
             </NavLink>
-          </div>
+          </li>
 
           {/* TOOLTIP USER */}
           <Tooltip
@@ -144,31 +170,57 @@ const Header: React.FC = () => {
               />
             </div>
           </Tooltip>
-        </div>
+        </ul>
       </div>
 
       {/* MOBILE MENU */}
       <div className={styles.menuMobile}>
         <div className={styles.icon}>
-          <NavLink to="/">
-            <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
+          <NavLink end to="/">
+            {({ isActive }) =>
+              isActive ? (
+                <i className={`fas fa-th-large ${styles.menuIcon}`}></i>
+              ) : (
+                <i className={`far fa-th-large ${styles.menuIcon}`}></i>
+              )
+            }
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/search">
-            <i className={`far fa-search ${styles.menuIcon}`}></i>
+            {({ isActive }) =>
+              isActive ? (
+                <i className={`fas fa-search ${styles.menuIcon}`}></i>
+              ) : (
+                <i className={`far fa-search ${styles.menuIcon}`}></i>
+              )
+            }
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/create-post">
-            <i
-              className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
-            ></i>
+            {({ isActive }) =>
+              isActive ? (
+                <i
+                  className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon} ${styles.active}`}
+                ></i>
+              ) : (
+                <i
+                  className={`fal fa-plus ${styles.menuIcon} ${styles.addIcon}`}
+                ></i>
+              )
+            }
           </NavLink>
         </div>
         <div className={styles.icon}>
           <NavLink to="/profile/saves">
-            <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
+            {({ isActive }) =>
+              isActive ? (
+                <i className={`fas fa-bookmark ${styles.menuIcon}`}></i>
+              ) : (
+                <i className={`fal fa-bookmark ${styles.menuIcon}`}></i>
+              )
+            }
           </NavLink>
         </div>
 
