@@ -4,4 +4,6 @@ class Relationship < ApplicationRecord
 
   validates :follower_id, presence: true
   validates :followed_id, presence: true
+
+  default_scope { order(created_at: :desc) }
 end

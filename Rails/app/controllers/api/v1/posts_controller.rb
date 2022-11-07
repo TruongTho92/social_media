@@ -89,6 +89,13 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     }
   end
 
+  def posts_with_quantity
+    @posts = Post.first(params[:quantity])
+    render json: {
+      data: {post: @posts}
+    }, status: :ok
+  end
+
   private
   def post_params
     params.require(:post).permit(:image, :caption)
