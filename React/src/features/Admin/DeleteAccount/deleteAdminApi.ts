@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   deleteAccountFailure,
   deleteAccountRequest,
@@ -16,13 +17,11 @@ export const deleteAdminApi = {
         type: deleteAccountRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.delete(
         `/api/v1/delete_user_admin/${idUser}`,
         {
           headers: {
-            token: token,
+            token: variables.token,
           },
         }
       );

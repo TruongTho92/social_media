@@ -103,8 +103,8 @@ const PostDetail: React.FC<Props> = () => {
 
   const handleDeletePost = async () => {
     await dispatch(postsApi.delete(postId));
+    dispatch(postsApi.getAll(getUserData.user.id));
     navigate("/profile");
-    window.location.reload();
   };
 
   // LIKE

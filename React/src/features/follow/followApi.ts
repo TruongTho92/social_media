@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   followFailure,
   followRequest,
@@ -16,11 +17,9 @@ export const followApi = {
         type: followRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.post(`/api/v1/relationships`, userId, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
       dispatch({
@@ -40,13 +39,11 @@ export const followApi = {
         type: unFollowRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.delete(
         `/api/v1/relationships/${userId}`,
         {
           headers: {
-            token: token,
+            token: variables.token,
           },
         }
       );

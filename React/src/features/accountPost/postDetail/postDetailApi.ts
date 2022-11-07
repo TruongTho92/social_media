@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   CommentFailure,
   CommentRequest,
@@ -29,11 +30,9 @@ export const postDetailApi = {
         type: GetPostRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.get(`api/v1/posts/${id}`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -60,11 +59,9 @@ export const postDetailApi = {
         type: UpdatePostRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.put(`api/v1/posts/${id}`, payload, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -88,11 +85,10 @@ export const postDetailApi = {
       dispatch({
         type: likeRequest.toString(),
       });
-      const token = JSON.parse(Cookies.get("access_token") || "");
 
       const { data } = await apiClient.post(`/api/v1/posts/${id}/likes`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 
@@ -144,14 +140,12 @@ export const postDetailApi = {
         type: CommentRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.post(
         `/api/v1/posts/${idPost}/comments`,
         payload,
         {
           headers: {
-            token: token,
+            token: variables.token,
           },
         }
       );
@@ -175,14 +169,12 @@ export const postDetailApi = {
           type: DeleteCommentRequest.toString(),
         });
 
-        const token = JSON.parse(Cookies.get("access_token") || "");
-
         const { data } = await apiClient.delete(
           `/api/v1/posts/${idPost}/comments/${idComment}`,
 
           {
             headers: {
-              token: token,
+              token: variables.token,
             },
           }
         );

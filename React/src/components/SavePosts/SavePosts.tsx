@@ -1,3 +1,4 @@
+import { Typography } from "antd";
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
@@ -16,9 +17,6 @@ const SavePosts: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const allPostSave = useAppSelector(getAllPostSave);
   const loadingSave = useAppSelector(getLoadingSave);
-  const allPostSaveSort = [...allPostSave].sort(
-    (a, b) => Number(b.updated_at) - Number(a.updated_at)
-  );
 
   useEffect(() => {
     dispatch(getAllPostSaveAsync());
@@ -39,20 +37,24 @@ const SavePosts: React.FC<Props> = () => {
         </div>
       ) : (
         <div className={styles.savePosts}>
-          <ul className={styles.savePostList}>
-            {allPostSave?.length > 0
-              ? allPostSaveSort.map((post) => (
-                  <div className={styles.savePostItem} key={post.id}>
-                    <Link
-                      to={`/post-newfeeds/${post.id}`}
-                      state={{ background: location }}
-                    >
-                      <img src={`${post.image}`} alt="" />
-                    </Link>
-                  </div>
-                ))
-              : null}
-          </ul>
+          {allPostSave?.length > 0 ? (
+            <ul className={styles.savePostList}>
+              {allPostSave.map((post) => (
+                <div className={styles.savePostItem} key={post.id}>
+                  <Link
+                    to={`/post-newfeeds/${post.id}`}
+                    state={{ background: location }}
+                  >
+                    <img src={`${post.image}`} alt="" />
+                  </Link>
+                </div>
+              ))}
+            </ul>
+          ) : (
+            <Typography className={styles.textError}>
+              Dont have post save
+            </Typography>
+          )}
         </div>
       )}
     </>

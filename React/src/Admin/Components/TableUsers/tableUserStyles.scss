@@ -17,7 +17,7 @@ th.ant-table-cell {
 }
 
 .table__user tr:nth-child(2n) td {
-  background-color: rgba($color: $mainBlue, $alpha: 0.1);
+  background-color: rgba($color: $whiteColor, $alpha: 0.1);
 }
 .ant-table-tbody {
   background-color: var(--bgLight) !important;
@@ -51,7 +51,7 @@ li.ant-pagination-item-active {
 }
 
 td.ant-table-cell-row-hover {
-  background-color: rgba($color: $mainBlue, $alpha: 0.4) !important;
+  background-color: rgba($color: $mainBlue, $alpha: 0.2) !important;
 }
 
 // SCSS
@@ -120,6 +120,7 @@ td.ant-table-cell-row-hover {
   &__user-phone {
     font-size: 16px;
     font-weight: 600;
+    color: var(--textWhiteChange);
     &.error {
       font-size: 14px;
       font-weight: 400;
@@ -131,6 +132,8 @@ td.ant-table-cell-row-hover {
   &__user-bio {
     font-size: 14px;
     font-weight: 400;
+    color: var(--textWhiteChange);
+
     width: 200px;
     margin-bottom: 0 !important;
   }

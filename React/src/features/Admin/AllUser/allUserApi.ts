@@ -1,5 +1,5 @@
-import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
+import { variables } from "~/common/variables";
 import {
   getAllUserFailure,
   getAllUserRequest,
@@ -13,11 +13,9 @@ export const allUserApi = {
         type: getAllUserRequest.toString(),
       });
 
-      const token = JSON.parse(Cookies.get("access_token") || "");
-
       const { data } = await apiClient.get(`/api/v1/users_admin`, {
         headers: {
-          token: token,
+          token: variables.token,
         },
       });
 

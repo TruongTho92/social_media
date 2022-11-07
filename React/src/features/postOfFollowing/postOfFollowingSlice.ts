@@ -18,19 +18,7 @@ export interface StateTypes {
 const initialState: StateTypes = {
   loading: false,
   data: {
-    posts: [
-      {
-        id: 0,
-        user_id: 0,
-        avatar: "",
-        user_name: "",
-        nick_name: "",
-        image: "",
-        caption: "",
-        like: [],
-        comment: [],
-      },
-    ],
+    posts: [],
   },
   like: { id: null, post_id: null, user_id: null },
   comment: { id: null, post_id: null, user_id: null },
@@ -40,6 +28,17 @@ const postOfFollowingSlice = createSlice({
   name: "postOfFollowing",
   initialState,
   reducers: {
+    postLimitRequest: (state) => {
+      state.loading = true;
+    },
+    postLimitSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data.posts = action.payload.post;
+    },
+    postLimitFailure: (state) => {
+      state.loading = true;
+    },
+
     postFollowingRequest: (state) => {
       state.loading = true;
     },
@@ -85,6 +84,9 @@ export const {
   disLikeRequest,
   disLikeSuccess,
   disLikeFailure,
+  postLimitRequest,
+  postLimitSuccess,
+  postLimitFailure,
 } = postOfFollowingSlice.actions;
 
 // SELECTOR
