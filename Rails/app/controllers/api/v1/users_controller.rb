@@ -35,7 +35,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   end
 
   def search
-    @users = User.where("user_name LIKE ?", "%#{params[:search]}%")
+    @users = User.where("user_name LIKE ?", "%#{params[:name]}%")
     render json: {
       data: {user: @users}
     }, status: :ok
