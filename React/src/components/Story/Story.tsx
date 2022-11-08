@@ -18,10 +18,21 @@ const Story: React.FC<Props> = () => {
     dots: false,
     slidesToShow: userFollowings.length > 6 ? 6 : userFollowings.length,
     slidesToScroll: 1,
-    className: "slider",
     infinite: false,
-    nextArrow: <NextArrow styles={styles} />,
-    prevArrow: <PrevArrow styles={styles} />,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
     responsive: [
       {
         breakpoint: 769,

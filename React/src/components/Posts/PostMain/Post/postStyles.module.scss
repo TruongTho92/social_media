@@ -104,6 +104,7 @@
   }
   .likeIcon {
     &.active {
+      animation: MotionEmotion 0.45s ease-in;
       color: red;
     }
   }

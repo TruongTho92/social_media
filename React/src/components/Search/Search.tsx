@@ -5,7 +5,6 @@ import { BiSearch } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import useDebounce from "~/common/hooks/useDebounce";
-import { AllAccountResponse } from "~/common/types";
 import { searchAccountApi } from "~/features/searchAccount/searchAccountApi";
 import {
   getLoadingSearch,
@@ -29,8 +28,8 @@ const Search = (props: Props) => {
   // CALL API SEARCH USER
   useEffect(() => {
     if (searchValue.length <= 0) return;
-    dispatch(searchAccountApi.search(searchValue.trim()));
-  }, [debouncedValue.trim()]);
+    dispatch(searchAccountApi.search(searchValue));
+  }, [debouncedValue]);
 
   useEffect(() => {
     dispatch(userAllApi.getAllUser());
@@ -55,7 +54,7 @@ const Search = (props: Props) => {
           }
           className={styles.searchInput}
           placeholder="Search user..."
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => setSearchValue(e.target.value.trim())}
         />
       </form>
       {searchValue.length > 0 ? (

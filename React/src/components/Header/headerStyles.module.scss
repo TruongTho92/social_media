@@ -26,6 +26,7 @@
   .headerMenu {
     @include d-flex(center, center);
     height: 100%;
+    margin-bottom: 0;
 
     .icon {
       display: flex;
@@ -37,11 +38,6 @@
       margin-left: 26px;
       height: 100%;
 
-      &:hover a {
-        color: blue;
-        transform: translateY(-10px);
-        transition: all 0.2s ease-out;
-      }
       a {
         width: 2.2rem;
         height: 2.2rem;
@@ -78,7 +74,6 @@
       width: 3rem;
       height: 3rem;
       border: 1px solid #000;
-      // overflow: hidden;
       border-radius: 100rem;
       margin-left: 2.6rem;
       cursor: pointer;
