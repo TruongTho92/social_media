@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
       get "posts_of_user/:id", :to => 'posts#posts_of_user'
       get "posts_of_following", :to => 'posts#posts_of_following'
-      post "posts_with_quantity", :to => 'posts#posts_with_quantity'
+      get "posts_with_quantity/:page", :to => 'posts#posts_with_quantity'
 
       get "users_admin", :to => 'admin#index'
       delete "delete_user_admin/:id", :to => 'admin#destroy'
