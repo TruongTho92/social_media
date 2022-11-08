@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import apiClient from "~/apiClient/apiClient";
-import { variables } from "~/common/variables";
 import {
   profileUserFailure,
   profileUserRequest,
@@ -13,10 +12,10 @@ export const profileUserApi = {
       dispatch({
         type: profileUserRequest.toString(),
       });
-
+      const token = JSON.parse(Cookies.get("access_token") || "");
       const { data } = await apiClient.get(`/api/v1/users/${id}`, {
         headers: {
-          token: variables.token,
+          token: token,
         },
       });
 
