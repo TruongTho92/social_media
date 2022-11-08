@@ -19,7 +19,6 @@ import {
 } from "./userSlice";
 
 import Cookies from "js-cookie";
-import { variables } from "~/common/variables";
 
 export const userApi = {
   registerUser: (payload: UserDataTypes) => async (dispatch: any) => {
@@ -70,10 +69,10 @@ export const userApi = {
       dispatch({
         type: LoadUserRequest.toString(),
       });
-
+      const token = JSON.parse(Cookies.get("access_token") || "");
       const { data } = await apiClient.get(`/api/v1/logged_in`, {
         headers: {
-          token: variables.token,
+          token: token,
         },
       });
       dispatch({
