@@ -16,15 +16,14 @@ import {
 } from "./postOfFollowingSlice";
 
 export const postOfFollowingApi = {
-  getPostLimit: (volume: any) => async (dispatch: any) => {
+  getPostLimit: (page: any) => async (dispatch: any) => {
     try {
       dispatch({
         type: postLimitRequest.toString(),
       });
       const token = JSON.parse(Cookies.get("access_token") || "");
-      const { data } = await apiClient.post(
-        `/api/v1/posts_with_quantity`,
-        volume,
+      const { data } = await apiClient.get(
+        `/api/v1/posts_with_quantity/${page}`,
         {
           headers: {
             token: token,

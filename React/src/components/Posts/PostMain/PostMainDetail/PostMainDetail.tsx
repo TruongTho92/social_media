@@ -131,6 +131,7 @@ const PostMainDetail: React.FC<Props> = () => {
           className={` ${styles.postDetail}`}
           onClick={() => {
             navigate(-1);
+            dispatch(profileUserApi.getProfileUser(getUserData.user.id));
           }}
         >
           <div

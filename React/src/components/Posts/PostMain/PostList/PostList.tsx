@@ -1,6 +1,5 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
-
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import Story from "~/components/Story";
@@ -23,58 +22,43 @@ const PostList = () => {
   const loadingPostFollowing = useAppSelector(getLoadingPostFollowing);
 
   const allPostSaved = useAppSelector(getAllPostSave);
-
   useEffect(() => {
     dispatch(getAllPostSaveAsync());
     dispatch(postOfFollowingApi.getPostFollowing());
-    // const payload = {
-    //   quantity: 5,
-    // };
-    // dispatch(postOfFollowingApi.getPostLimit(payload));
   }, []);
 
-  const handleLoadMore = () => {
-    // dispatch(postOfFollowingApi.getPostLimit(payload));
-  };
-
   return (
-    <>
-      {loadingPostFollowing ? (
-        <LoadingSpinner width={30} />
-      ) : (
-        <>
-          <Story />
-          <div className={styles.posts}>
-            {allPostFollowing?.length > 0 ? (
-              allPostFollowing.map((post, index) => (
-                <div key={post.id}>
-                  <Post
-                    avatar={post.avatar}
-                    userName={post.user_name}
-                    nickName={post.nick_name}
-                    imagePost={post.image}
-                    userId={post.user_id}
-                    postId={post.id}
-                    caption={post.caption}
-                    likes={post.like}
-                    comments={post.comment}
-                    allPostSaved={allPostSaved}
-                  />
-                </div>
-              ))
-            ) : (
-              <Typography className={styles.textErrorFL}>
-                Oh No!! You dont have user following or <br /> User dont have
-                post
-              </Typography>
-            )}
-          </div>
-          <button type="submit" onClick={handleLoadMore}>
-            Loadmore
-          </button>
-        </>
+    <div>
+      {!loadingPostFollowing ? <Story /> : null}
+
+      <div className={styles.posts}>
+        {allPostFollowing?.length > 0 ? (
+          allPostFollowing.map((post) => (
+            <div key={post.id}>
+              <Post
+                avatar={post.avatar}
+                userName={post.user_name}
+                nickName={post.nick_name}
+                imagePost={post.image}
+                userId={post.user_id}
+                postId={post.id}
+                caption={post.caption}
+                likes={post.like}
+                comments={post.comment}
+                allPostSaved={allPostSaved}
+              />
+            </div>
+          ))
+        ) : (
+          <LoadingSpinner width={30} />
+        )}
+      </div>
+      {allPostFollowing?.length <= 0 && (
+        <Typography className={styles.textErrorFL}>
+          Oh No!! You dont have user following or <br /> User dont have post
+        </Typography>
       )}
-    </>
+    </div>
   );
 };
 

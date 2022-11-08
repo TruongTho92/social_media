@@ -3,15 +3,48 @@
 .postItem {
   height: 272px;
 }
-.modal {
-}
 .postImg {
+  position: relative;
   height: 100%;
   width: 100%;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+  &:hover .postImgHover {
+    opacity: 1;
+    transition: all 0.25s linear;
+  }
+}
+.postImgHover {
+  @include d-flex(center, center);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($color: $blackColor, $alpha: 0.4);
+  transition: all 0.25s linear;
+  opacity: 0;
+
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  .postItemHoverItem {
+    color: var(--whiteColor);
+    @include d-flex(center, center);
+    // width: 100%;
+    &:last-child {
+      margin-left: 40px;
+    }
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+    i {
+      font-size: 18px;
+    }
   }
 }
 

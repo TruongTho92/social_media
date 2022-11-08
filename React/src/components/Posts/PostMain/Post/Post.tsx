@@ -65,14 +65,14 @@ const Post: React.FC<Props> = ({
 
   // LIKE
   const handleLike = async () => {
-    setLiked(true);
     await dispatch(postOfFollowingApi.like(postId));
     dispatch(postOfFollowingApi.getPostFollowing());
+    setLiked(true);
   };
   const handleDisLike = async () => {
-    setLiked(false);
     await dispatch(postOfFollowingApi.disLike(postId, likePostMain.id));
     dispatch(postOfFollowingApi.getPostFollowing());
+    setLiked(false);
   };
 
   const handleSavePost = async (idPost: number) => {

@@ -19,6 +19,7 @@ import styles from "./searchHeaderStyles.module.scss";
 const SearchHeader: React.FC = () => {
   const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState("");
+
   const debouncedValue = useDebounce<string>(searchValue, 500);
   const loadingSearch = useAppSelector(getLoadingSearch);
   const getUserData = useAppSelector(getUser);
@@ -27,8 +28,8 @@ const SearchHeader: React.FC = () => {
   // CALL API SEARCH USER
   useEffect(() => {
     if (searchValue.length <= 0) return;
-    dispatch(searchAccountApi.search(searchValue.trim()));
-  }, [debouncedValue.trim()]);
+    dispatch(searchAccountApi.search(searchValue));
+  }, [debouncedValue]);
 
   return (
     <div className={styles.searchHeader}>
@@ -38,9 +39,9 @@ const SearchHeader: React.FC = () => {
         placement="bottom"
         color={"#fff"}
         title={
-          searchValue.length <= 0 ? (
+          loadingSearch ? (
             <div className={styles.loading}>
-              <AiOutlineLoading className={styles.loadingIcon} />
+              <LoadingSpinner width={16} />
             </div>
           ) : (
             <div className={styles.userList}>
@@ -100,7 +101,7 @@ const SearchHeader: React.FC = () => {
           }
           prefix={<IoSearchOutline className={styles.searchIcon} />}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchValue(e.target.value)
+            setSearchValue(e.target.value.trim())
           }
         />
       </Tooltip>
