@@ -90,7 +90,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def posts_with_quantity
-    @posts = Post.first(params[:quantity])
+    @posts = Post.all.page(params[:page]).per(6)
     render json: {
       data: {post: @posts}
     }, status: :ok
