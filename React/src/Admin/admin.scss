@@ -1,0 +1,61 @@
+@import "../global/scss/rootStyles.scss";
+.error {
+  &__permission {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blackColor);
+  }
+  &__permission-text {
+    color: var(--whiteColor);
+    font-size: 24px;
+    font-style: italic;
+
+    span {
+      font-size: 40px;
+      color: red;
+      margin-right: 8px;
+      display: block;
+      .error__icon {
+        animation: ChangeColor 0.45s linear infinite;
+      }
+    }
+  }
+}
+.error__icon-left,
+.error__icon-right,
+.error__icon-left-bottom,
+.error__icon-right-bottom {
+  position: absolute;
+
+  font-size: 120px;
+  animation: ChangeColor 0.45s linear infinite;
+}
+.error__icon-left {
+  top: 40px;
+  left: 40px;
+}
+.error__icon-right {
+  top: 40px;
+  right: 40px;
+}
+.error__icon-left-bottom {
+  bottom: 40px;
+  left: 40px;
+}
+.error__icon-right-bottom {
+  bottom: 40px;
+  right: 40px;
+}
+
+@keyframes ChangeColor {
+  from {
+    color: red;
+  }
+  to {
+    color: yellow;
+  }
+}

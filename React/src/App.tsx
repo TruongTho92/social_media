@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import PostMainDetail from "./components/Posts/PostMain/PostMainDetail";
 // import UserPostDetail from "./components/Posts/PostUser/UserPostDetail";
 import { userApi } from "./features/Auth/userApi";
-import { getAuthenticated } from "./features/Auth/userSlice";
+import { getAuthenticated, getUser } from "./features/Auth/userSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Chat from "./pages/Chat";

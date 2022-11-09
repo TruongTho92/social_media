@@ -60,7 +60,9 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
           </div>
           <div className="logo__username">
             <span className="name">{getAdminData.user.user_name}</span>
-            <span className="role">Admin</span>
+            <span className="role">
+              {getAdminData.user.is_admin ? "Admin" : "Supervisor"}
+            </span>
           </div>
         </div>
 
@@ -126,16 +128,18 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                 </li>
               </ul>
             </li>
-            <li className="menu__item">
-              <NavLink to="more-account" className="menu__item-link" end>
-                <div className="link__content">
-                  <div style={{ lineHeight: 0 }}>
-                    <i className="far fa-tire-rugged menu__icon"></i>
+            {getAdminData.user.is_admin && (
+              <li className="menu__item">
+                <NavLink to="more-account" className="menu__item-link" end>
+                  <div className="link__content">
+                    <div style={{ lineHeight: 0 }}>
+                      <i className="far fa-tire-rugged menu__icon"></i>
+                    </div>
+                    <span> More account</span>
                   </div>
-                  <span> More account</span>
-                </div>
-              </NavLink>
-            </li>
+                </NavLink>
+              </li>
+            )}
           </ul>
           <div className="menu__item logout">
             <div className="menu__item-link">
