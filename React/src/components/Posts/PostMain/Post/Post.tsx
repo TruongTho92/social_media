@@ -1,6 +1,7 @@
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { LikeDataResponse, SaveReponse } from "~/common/types";
@@ -8,7 +9,6 @@ import { getUser } from "~/features/Auth/userSlice";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
 import {
-  getAllPostSave,
   getAllPostSaveAsync,
   savePostAsync,
   unSavePostAsync,
@@ -87,7 +87,7 @@ const Post: React.FC<Props> = ({
   };
 
   return (
-    <div>
+    <LazyLoad className={styles.height} threshold={0.4}>
       <div className={styles.post}>
         <div className={styles.user}>
           <div className={styles.userName}>
@@ -96,6 +96,7 @@ const Post: React.FC<Props> = ({
                 <img
                   src={avatar ? avatar : "/assets/images/user-img.jpg"}
                   alt=""
+                  loading="lazy"
                 />
               </div>
             </Link>
@@ -182,7 +183,7 @@ const Post: React.FC<Props> = ({
           ) : null}
         </div>
       </div>
-    </div>
+    </LazyLoad>
   );
 };
 
