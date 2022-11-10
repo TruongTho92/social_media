@@ -57,12 +57,10 @@ export const postOfFollowingApi = {
         },
       });
 
-      setTimeout(() => {
-        dispatch({
-          type: postFollowingSuccess.toString(),
-          payload: data.data,
-        });
-      }, 500);
+      dispatch({
+        type: postFollowingSuccess.toString(),
+        payload: data.data,
+      });
     } catch (error: any) {
       dispatch({
         type: postFollowingFailure.toString(),

@@ -64,9 +64,6 @@
         background-color: var(--blackColor);
         color: var(--whiteColor);
       }
-      &:hover {
-        border: 2px solid $mainBlue;
-      }
     }
     .menuUser {
       @include d-flex(center, center);

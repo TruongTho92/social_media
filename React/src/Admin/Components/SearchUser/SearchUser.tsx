@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import AccountList from "~/Admin/Components/AccountList";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import useDebounce from "~/common/hooks/useDebounce";
-import { SearchUserResponse } from "~/common/types";
+import LoadingSpinner from "~/components/LoadingSpinner";
 import { getAllUser } from "~/features/Admin/AllUser/allUserSlice";
 import { searchAccountApi } from "~/features/searchAccount/searchAccountApi";
-import { getSearchResults } from "~/features/searchAccount/searchAccountSlice";
+import {
+  getLoadingSearch,
+  getSearchResults,
+} from "~/features/searchAccount/searchAccountSlice";
 
 import "./searchUserStyles.scss";
 
@@ -17,6 +20,7 @@ const SearchUser: React.FC = () => {
   const dispatch = useAppDispatch();
   const allUser = useAppSelector(getAllUser);
   const resultSearch = useAppSelector(getSearchResults);
+  const loadingSearch = useAppSelector(getLoadingSearch);
 
   useEffect(() => {
     if (searchValue.length <= 0) return;
@@ -30,7 +34,13 @@ const SearchUser: React.FC = () => {
         className="search__input"
         placeholder="Enter name user..."
         onChange={(e) => setSearchValue(e.target.value)}
-        suffix={<i className="bi bi-search search__icon"></i>}
+        suffix={
+          loadingSearch ? (
+            <LoadingSpinner width={24} />
+          ) : (
+            <i className="bi bi-search search__icon"></i>
+          )
+        }
       />
       {searchValue.length > 0 && resultSearch.length > 0 ? (
         <AccountList data={resultSearch} />
