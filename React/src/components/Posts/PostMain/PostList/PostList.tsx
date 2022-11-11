@@ -85,29 +85,35 @@ const PostList = () => {
               </div>
             ))
           ) : (
-            <div className={styles.post}>
-              <div className={styles.user}>
-                <div className={styles.image}></div>
+            <>
+              {!loadingPostFollowing ? null : (
+                <div className={styles.post}>
+                  <div className={styles.user}>
+                    <div className={styles.image}></div>
 
-                <div className={styles.info}>
-                  <p className={styles.name}></p>
-                  <p className={styles.description}> </p>
+                    <div className={styles.info}>
+                      <p className={styles.name}></p>
+                      <p className={styles.description}> </p>
+                    </div>
+                  </div>
+                  <div className={styles.postImage}></div>
+                  <div className={styles.postContent}>
+                    <div className={styles.emotion}>
+                      <div className={styles.left}></div>
+                    </div>
+                    <Typography className={styles.textUserLiked}></Typography>
+                    <div className={styles.captionContainer}>
+                      <Typography
+                        className={styles.userNameCaption}
+                      ></Typography>
+                      <Typography.Paragraph
+                        className={styles.caption}
+                      ></Typography.Paragraph>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.postImage}></div>
-              <div className={styles.postContent}>
-                <div className={styles.emotion}>
-                  <div className={styles.left}></div>
-                </div>
-                <Typography className={styles.textUserLiked}></Typography>
-                <div className={styles.captionContainer}>
-                  <Typography className={styles.userNameCaption}></Typography>
-                  <Typography.Paragraph
-                    className={styles.caption}
-                  ></Typography.Paragraph>
-                </div>
-              </div>
-            </div>
+              )}
+            </>
           )}
         </InfiniteScroll>
       </div>

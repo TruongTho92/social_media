@@ -1,12 +1,17 @@
 import { Form, Input, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdDriveFolderUpload, MdOutlineDone } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostPayloadCreate } from "~/common/types";
+import {
+  NextArrow,
+  PrevArrow,
+} from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 import Header from "~/components/Header";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { getLoadingPosts } from "~/features/accountPost/Posts/postsSlice";
@@ -21,27 +26,63 @@ const PostCreate: React.FC = () => {
 
   const [image, setImage] = useState("");
   const [caption, setCaption] = useState("");
-
   const [isHasImage, setIsHasImage] = useState(false);
 
-  const handleImageChange = (e: any) => {
-    const file = e.target.files[0];
-    const Reader = new FileReader();
+  const [mutipleImage, setMutipleImage] = useState<any[]>([]);
+  const [imageURLS, setImageURLs] = useState([]);
 
-    Reader.readAsDataURL(file);
-
-    Reader.onload = () => {
-      if (Reader.readyState === 2) {
-        setIsHasImage(true);
-        setImage(Reader.result as string);
-      }
-    };
+  // CONFIG Slider
+  const settings = {
+    dots: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: "slider",
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
   };
+
+  // SET MUTIPLE_IMAGE URL
+  useEffect(() => {
+    if (mutipleImage.length < 1) return;
+    const newImageUrls: any = [];
+    mutipleImage.forEach((image: any) =>
+      newImageUrls.push(URL.createObjectURL(image))
+    );
+
+    setImageURLs(newImageUrls);
+  }, [mutipleImage]);
+
+  // const handleImageChange = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const Reader = new FileReader();
+
+  //   Reader.readAsDataURL(file);
+
+  //   Reader.onload = () => {
+  //     if (Reader.readyState === 2) {
+  //       setIsHasImage(true);
+  //       setImage(Reader.result as string);
+  //     }
+  //   };
+  // };
 
   const hanleCreatePost = async () => {
     const payload: PostPayloadCreate = {
       post: {
-        image,
+        image: imageURLS,
         caption,
       },
     };
@@ -49,6 +90,11 @@ const PostCreate: React.FC = () => {
     setIsHasImage(false);
     setCaption("");
     setImage("");
+  };
+
+  const handleChangeMutipleImg = (e: any) => {
+    setMutipleImage([...e.target.files]);
+    setIsHasImage(true);
   };
 
   return (
@@ -69,7 +115,7 @@ const PostCreate: React.FC = () => {
           {/* FORM */}
           <Form className={styles.form} onFinish={hanleCreatePost}>
             <Form.Item className={styles.formItem}>
-              <label htmlFor="input-image" className={styles.labelInputImage}>
+              {/* <label htmlFor="input-image" className={styles.labelInputImage}>
                 <MdDriveFolderUpload className={styles.uploadIcon} />
                 <span>{isHasImage ? "Change Image" : "Upload Your image"}</span>
               </label>
@@ -77,15 +123,40 @@ const PostCreate: React.FC = () => {
                 type="file"
                 id="input-image"
                 className={styles.inputForm}
-                onChange={handleImageChange}
+                onChange={handleChangeMutipleImg}
                 hidden
+              /> */}
+
+              <label htmlFor="input-image" className={styles.labelInputImage}>
+                <MdDriveFolderUpload className={styles.uploadIcon} />
+                <span>
+                  {isHasImage ? "Change Image" : "Upload Your images"}
+                </span>
+              </label>
+              <Input
+                type="file"
+                id="input-image"
+                className={styles.inputForm}
+                onChange={handleChangeMutipleImg}
+                hidden
+                multiple
               />
 
-              {isHasImage ? (
+              {/* {isHasImage ? (
                 <div className={styles.imagePost}>
                   <img src={image} alt="img-post" />
                 </div>
-              ) : null}
+              ) : null} */}
+
+              {/* MUTIPLE IMAGE */}
+
+              <div key={image} className={styles.imagePost}>
+                <Slider {...settings}>
+                  {imageURLS.map((image) => (
+                    <img src={image} alt="" />
+                  ))}
+                </Slider>
+              </div>
             </Form.Item>
             <Form.Item className={`${styles.formItem} ${styles.widthFull}`}>
               {/* AVATAR */}
