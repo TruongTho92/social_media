@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 
-import "./global/scss/rootStyles.scss";
 import "normalize.css";
 // Bootstrap
 import "bootstrap/dist/js/bootstrap.bundle.min";

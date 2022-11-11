@@ -55,7 +55,7 @@ export interface PayloadLogout {
 // POST
 export interface PostPayloadCreate {
   post: {
-    image: string;
+    image: string | string[];
     caption: string;
   };
 }

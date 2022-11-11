@@ -29,7 +29,7 @@ const Story: React.FC<Props> = () => {
     prevArrow: (
       <PrevArrow
         styleArrow={styles.arrow}
-        styleNext={styles.prev}
+        stylePrev={styles.prev}
         styleIcon={styles.arrowNextIcon}
       />
     ),
