@@ -23,6 +23,7 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
       <div className={styles.postImg}>
         <Link to={`/account-post/${id}`} state={{ background: location }}>
           <img src={`${image}`} alt="" />
+
           <div className={styles.postImgHover}>
             <div className={styles.postItemHoverItem}>
               <i className="fas fa-heart"></i>

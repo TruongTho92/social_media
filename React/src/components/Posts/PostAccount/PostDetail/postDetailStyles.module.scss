@@ -28,25 +28,28 @@
   border-radius: 8px;
   animation: FadeOut 0.25s linear;
 }
-
-.postDetailImg {
+.slider.postImgSlider {
   aspect-ratio: 1;
-  &.mobile {
-    display: none;
-  }
-
+}
+.slider.postImgSliderMobile {
+  display: none;
+}
+.postDetailImg,
+.postDetailImgMobile {
+  aspect-ratio: 1;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    cursor: pointer;
   }
 }
+
 .postDetailContent {
   @include d-flex(space-between, flex-start);
   width: 100%;
   height: 100%;
+
   overflow-y: scroll;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -54,7 +57,6 @@
   }
   padding: 12px 12px 6px 12px;
   flex-direction: column;
-  // aspect-ratio: 1;
 }
 
 .contentTop,
@@ -115,7 +117,6 @@
 
   .inputEdit {
     margin-bottom: 8px;
-    // padding: 8px 12px;
     height: fit-content;
     border: 1px solid $greyLight;
     &:focus {
@@ -254,6 +255,38 @@
   }
 }
 
+// CUSTOM ARROW SLIDER
+.arrow {
+  position: absolute;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  text-align: center;
+  border-radius: 100rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--boxShadow) !important;
+  z-index: 100;
+
+  &.next {
+    right: 10px !important;
+  }
+  &.prev {
+    left: 8px !important;
+  }
+  &::before {
+    display: none;
+  }
+  .arrowNextIcon {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--whiteColor);
+  }
+}
+
 @include desktop {
   .postDetail {
     padding: 4%;
@@ -303,31 +336,41 @@
     width: 100%;
     height: 500px;
   }
-  .postDetailImg {
-    width: 100%;
+  .slider.postImgSlider {
     display: none;
-    &.mobile {
-      display: block;
-    }
-    img {
-      border-top-left-radius: 0;
-    }
   }
+  .slider.postImgSliderMobile {
+    display: grid;
+  }
+
+  .postDetailHeader,
+  .contentBottom,
+  .caption {
+    padding: 0 8px;
+  }
+
   .postDetailContent {
     justify-content: start;
     display: block;
     margin-left: 0 !important;
+    padding: 0;
+    padding-top: 12px;
     width: 100%;
     height: 100%;
     margin-bottom: 0;
     aspect-ratio: 0;
   }
   .caption {
-    margin-bottom: 0px !important;
+    margin-bottom: 8px !important;
     width: 100%;
+    margin-top: 8px;
   }
   .emotion {
-    padding: 12px 8px;
+    padding: 4px 8px;
+    .icon,
+    .iconSave {
+      font-size: 20px !important;
+    }
   }
   .comment {
     display: none;
@@ -343,6 +386,13 @@
   }
   .form {
     padding-right: 8px;
+    .inputComment,
+    .btnComment {
+      font-size: 14px;
+    }
+  }
+  .seeComment {
+    font-size: 14px;
   }
 
   .settingPost {
