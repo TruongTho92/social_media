@@ -1,16 +1,19 @@
 import { Button, Col, Input, Row, Typography } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { BiMessageRounded } from "react-icons/bi";
-import { BsBookmarkPlus, BsThreeDots } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./postDetailStyles.module.scss";
 
 import Tooltip from "antd/es/tooltip";
 import { TextAreaRef } from "antd/lib/input/TextArea";
 import { MdOutlineDone } from "react-icons/md";
+import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import {
+  NextArrow,
+  PrevArrow,
+} from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 import Comments from "~/components/Comments";
 import Loading from "~/components/Loading";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
@@ -22,11 +25,9 @@ import {
   getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
-import { getUser } from "~/features/Auth/userSlice";
 import { getAllPost } from "~/features/accountPost/Posts/postsSlice";
+import { getUser } from "~/features/Auth/userSlice";
 import { getProfileUser } from "~/features/profileUser/profileUserSlice";
-import { IoBookmarkOutline } from "react-icons/io5";
-import { profileUserApi } from "~/features/profileUser/profileUserApi";
 import {
   getAllPostSave,
   getAllPostSaveAsync,
@@ -64,6 +65,7 @@ const PostDetail: React.FC<Props> = () => {
   const { id } = useParams();
   const postId = Number(id);
 
+  // GET POST DETAIL
   useEffect(() => {
     dispatch(postDetailApi.getPost(postId));
 
@@ -73,6 +75,7 @@ const PostDetail: React.FC<Props> = () => {
     };
   }, []);
 
+  // CHECK ACCOUNT AND LIKED
   useEffect(() => {
     if (allPostData.find((post: any) => post.user_id === getUserData.user.id)) {
       setIsAccount(true);
@@ -84,11 +87,56 @@ const PostDetail: React.FC<Props> = () => {
     }
   }, [allPostData, getUserData.user.id, userLikedData]);
 
+  // CHECK SAVED POST
   useEffect(() => {
     if (allPostSaved.find((post) => post.id === postId)) {
       setSaved(true);
     }
   }, [postId]);
+
+  // CONFIG Slider
+  const settings = {
+    dots: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: `${styles.slider} ${styles.postImgSlider}`,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+  };
+  const settingsMobile = {
+    dots: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: `${styles.slider} ${styles.postImgSliderMobile}`,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+  };
 
   // UPDATE POST
   const handleUpdatePost = () => {
@@ -101,13 +149,14 @@ const PostDetail: React.FC<Props> = () => {
     setIsOpenEdit(false);
   };
 
+  // DELETE POST
   const handleDeletePost = async () => {
     await dispatch(postsApi.delete(postId));
     dispatch(postsApi.getAll(getUserData.user.id));
     navigate("/profile");
   };
 
-  // LIKE
+  // LIKE POST
   const handleLike = async () => {
     setLiked(true);
     await dispatch(postDetailApi.like(postId));
@@ -159,9 +208,20 @@ const PostDetail: React.FC<Props> = () => {
             className={styles.postDetailContainer}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.postDetailImg}>
-              <img src={postDetailData.image} alt="" />
-            </div>
+            {/* IMAGES DESKTOP*/}
+            <Slider {...settings}>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+            </Slider>
+
+            {/* CONTENT */}
             <div className={styles.postDetailContent}>
               {/* HEADER */}
               <div className={styles.contentTop}>
@@ -296,9 +356,20 @@ const PostDetail: React.FC<Props> = () => {
                 </div>
               </div>
 
-              <div className={`${styles.postDetailImg} ${styles.mobile}`}>
-                <img src={postDetailData.image} alt="" />
-              </div>
+              {/* POST IMAGE MOBILE */}
+              <Slider {...settingsMobile}>
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+              </Slider>
 
               <div className={styles.contentBottom}>
                 {/* Like */}

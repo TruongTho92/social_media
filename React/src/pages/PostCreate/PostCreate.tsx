@@ -1,4 +1,4 @@
-import { Form, Input, Typography } from "antd";
+import { Col, Form, Input, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdDriveFolderUpload, MdOutlineDone } from "react-icons/md";
@@ -37,7 +37,7 @@ const PostCreate: React.FC = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: false,
-    className: "slider",
+    className: `${styles.slider} ${styles.imageCreateSlider}`,
     nextArrow: (
       <NextArrow
         styleArrow={styles.arrow}
@@ -100,7 +100,7 @@ const PostCreate: React.FC = () => {
   return (
     <>
       <Header />
-      <div className={`container-fluid ${styles.createPost}`}>
+      <div className={`${styles.createPost}`}>
         <div className={styles.createPostContainer}>
           <div className={styles.createPostHeader}>
             <Link to="/" style={{ lineHeight: 0 }}>
@@ -114,7 +114,7 @@ const PostCreate: React.FC = () => {
 
           {/* FORM */}
           <Form className={styles.form} onFinish={hanleCreatePost}>
-            <Form.Item className={styles.formItem}>
+            <Form.Item className={`${styles.formItem} ${styles.widthContent}`}>
               {/* <label htmlFor="input-image" className={styles.labelInputImage}>
                 <MdDriveFolderUpload className={styles.uploadIcon} />
                 <span>{isHasImage ? "Change Image" : "Upload Your image"}</span>
@@ -150,13 +150,13 @@ const PostCreate: React.FC = () => {
 
               {/* MUTIPLE IMAGE */}
 
-              <div key={image} className={styles.imagePost}>
-                <Slider {...settings}>
-                  {imageURLS.map((image) => (
-                    <img src={image} alt="" />
-                  ))}
-                </Slider>
-              </div>
+              <Slider {...settings}>
+                {imageURLS.map((image) => (
+                  <div className={styles.imagePost}>
+                    <img key={image} src={image} alt="" />
+                  </div>
+                ))}
+              </Slider>
             </Form.Item>
             <Form.Item className={`${styles.formItem} ${styles.widthFull}`}>
               {/* AVATAR */}
