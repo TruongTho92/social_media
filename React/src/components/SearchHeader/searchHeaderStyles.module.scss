@@ -1,7 +1,7 @@
-@import "../../global/scss/rootStyles.scss";
-.searchHeader {
-  // position: relative;
-}
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
+
 .textError {
   @include d-flex(center, center);
   height: 100%;

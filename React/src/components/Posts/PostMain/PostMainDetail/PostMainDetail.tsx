@@ -4,9 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import {
+  NextArrow,
+  PrevArrow,
+} from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 import Comments from "~/components/Comments";
 import Loading from "~/components/Loading";
 import LoadingSpinner from "~/components/LoadingSpinner";
@@ -54,6 +59,54 @@ const PostMainDetail: React.FC<Props> = () => {
 
   const { id } = useParams();
   const postId = Number(id);
+
+  // CONFIG SLICK
+  const settings = {
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: `${styles.slider} ${styles.postImgSlider}`,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    dotsClass: `slick-dots ${styles.slickDots} ${styles.slickThumb}`,
+    customPaging: (i: any) => <div className={styles.dotCustom}></div>,
+  };
+  const settingsMobile = {
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: `${styles.slider} ${styles.postImgSliderMobile}`,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    dotsClass: `slick-dots ${styles.slickDots} ${styles.slickThumb}`,
+    customPaging: (i: any) => <div className={styles.dotCustom}></div>,
+  };
 
   useEffect(() => {
     if (postDetailData.user_id) {
@@ -138,9 +191,17 @@ const PostMainDetail: React.FC<Props> = () => {
             className={styles.postDetailContainer}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.postDetailImg}>
-              <img src={postDetailData.image} alt="" />
-            </div>
+            <Slider {...settings}>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+              <div className={styles.postDetailImg}>
+                <img src={postDetailData.image} alt="" />
+              </div>
+            </Slider>
             <div className={styles.postDetailContent}>
               <div className={styles.contentTop}>
                 {/* HEADER */}
@@ -179,9 +240,20 @@ const PostMainDetail: React.FC<Props> = () => {
                 </div>
               </div>
 
-              <div className={`${styles.postDetailImg} ${styles.mobile}`}>
-                <img src={postDetailData.image} alt="" />
-              </div>
+              {/* POST IMAGE MOBILE */}
+              <Slider {...settingsMobile}>
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+
+                <div className={`${styles.postDetailImgMobile}`}>
+                  <img src={postDetailData.image} alt="" />
+                </div>
+              </Slider>
 
               <div className={styles.contentBottom}>
                 {/* Like */}
@@ -241,6 +313,7 @@ const PostMainDetail: React.FC<Props> = () => {
                 <form action="" className={styles.form}>
                   <Input.TextArea
                     value={comment}
+                    required={true}
                     ref={inputRef}
                     id={"input-comment"}
                     placeholder="Add a comment..."

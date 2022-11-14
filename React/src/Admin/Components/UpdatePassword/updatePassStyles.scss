@@ -1,7 +1,7 @@
-@import "../../../global/scss/rootStyles.scss";
-.updatePassword {
-  // padding: 80px 20% 40px;
-}
+@import "../../../global/scss/mixins.scss";
+@import "../../../global/scss/responsive.scss";
+@import "../../../global/scss/variables.scss";
+
 .updatePassContainer {
   background-color: var(--bgLight);
   padding: 0 36px 36px 24px;

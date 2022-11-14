@@ -1,4 +1,6 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 
 .menuMobile,
 .iconOpenMenu,
@@ -206,8 +208,10 @@
     width: 100%;
     height: fit-content;
     background-color: $whiteColor;
+    border-radius: 4px;
     padding: 12px 6%;
-    z-index: 100;
+    z-index: 20000;
+    box-shadow: 0 0 50px rgba($color: #000, $alpha: 0.2);
     .addIcon {
       width: 2.4rem;
       height: 2.4rem;

@@ -1,15 +1,13 @@
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 .loadingSpinner {
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // z-index: 2000;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .loader {
-  width: 20px; /* control the size */
+  width: 20px;
   aspect-ratio: 1;
   display: grid;
   mask: conic-gradient(from 22deg, #0003, #000);

@@ -1,7 +1,9 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 
 .commentList {
-  height: 400px;
+  height: 300px;
   width: 100%;
   overflow-y: scroll;
   padding: 12px 0;
@@ -76,7 +78,7 @@
 
 @include desktop {
   .commentList {
-    height: 340px;
+    height: 260px;
     &.hidden {
       height: 0;
     }
@@ -84,7 +86,8 @@
 }
 @include tablet {
   .commentList {
-    height: 240px;
+    height: 140px;
+    font-size: 14px;
     &.hidden {
       height: 0;
     }

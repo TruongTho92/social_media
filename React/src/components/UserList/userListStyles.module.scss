@@ -1,4 +1,6 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 .userList {
   padding: 12px 48px 12px 24px;
   border-radius: 12px;

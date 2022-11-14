@@ -96,7 +96,7 @@ const PostDetail: React.FC<Props> = () => {
 
   // CONFIG Slider
   const settings = {
-    dots: false,
+    dots: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: false,
@@ -115,9 +115,11 @@ const PostDetail: React.FC<Props> = () => {
         styleIcon={styles.arrowNextIcon}
       />
     ),
+    dotsClass: `slick-dots ${styles.slickDots} ${styles.slickThumb}`,
+    customPaging: (i: any) => <div className={styles.dotCustom}></div>,
   };
   const settingsMobile = {
-    dots: false,
+    dots: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: false,
@@ -136,6 +138,8 @@ const PostDetail: React.FC<Props> = () => {
         styleIcon={styles.arrowNextIcon}
       />
     ),
+    dotsClass: `slick-dots ${styles.slickDots} ${styles.slickThumb}`,
+    customPaging: (i: any) => <div className={styles.dotCustom}></div>,
   };
 
   // UPDATE POST

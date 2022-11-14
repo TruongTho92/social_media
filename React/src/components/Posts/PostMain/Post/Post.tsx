@@ -14,6 +14,11 @@ import {
   unSavePostAsync,
 } from "~/features/savePosts/savePostsSlice";
 import styles from "./postStyles.module.scss";
+import Slider from "react-slick";
+import {
+  NextArrow,
+  PrevArrow,
+} from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 
 type Props = {
   avatar: string;
@@ -48,6 +53,30 @@ const Post: React.FC<Props> = ({
   const likePostMain = useAppSelector(getLikePostMain);
 
   const location = useLocation();
+
+  const settings = {
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: `${styles.slider} ${styles.postImgSlider}`,
+    nextArrow: (
+      <NextArrow
+        styleArrow={styles.arrow}
+        styleNext={styles.next}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow={styles.arrow}
+        stylePrev={styles.prev}
+        styleIcon={styles.arrowNextIcon}
+      />
+    ),
+    dotsClass: `slick-dots ${styles.slickDots} ${styles.slickThumb}`,
+    customPaging: (i: any) => <div className={styles.dotCustom}></div>,
+  };
 
   useEffect(() => {
     if (likes?.find((post) => post.user_id === getUserData.user.id)) {
@@ -107,15 +136,26 @@ const Post: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className={styles.postImage}>
-          <Link
-            to={`/post-newfeeds/${postId}`}
-            className={styles.commentLink}
-            state={{ background: location }}
-          >
+        <Slider {...settings}>
+          <div className={styles.postImage}>
+            {/* <Link
+              to={`/post-newfeeds/${postId}`}
+              className={styles.commentLink}
+              state={{ background: location }}
+            > */}
             <img src={imagePost} alt="" />
-          </Link>
-        </div>
+            {/* </Link> */}
+          </div>
+          <div className={styles.postImage}>
+            {/* <Link
+              to={`/post-newfeeds/${postId}`}
+              className={styles.commentLink}
+              state={{ background: location }}
+            > */}
+            <img src={imagePost} alt="" />
+            {/* </Link> */}
+          </div>
+        </Slider>
 
         <div className={styles.postContent}>
           <div className={styles.emotion}>

@@ -4,7 +4,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostOfFollowingResponse } from "~/common/types";
-import LoadingSpinner from "~/components/LoadingSpinner";
 import Story from "~/components/Story";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import {
@@ -30,8 +29,8 @@ const PostList = () => {
   const allPostSaved = useAppSelector(getAllPostSave);
 
   useEffect(() => {
-    dispatch(getAllPostSaveAsync());
     dispatch(postOfFollowingApi.getPostFollowing());
+    dispatch(getAllPostSaveAsync());
   }, []);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const PostList = () => {
     const newLimit = visible + LIMIT;
     const dataToAdd = allPostFollowing.slice(visible, newLimit);
 
-    if (allPostFollowing.length >= postData.length) {
+    if (allPostFollowing.length > postData.length) {
       setTimeout(() => {
         setPostData([...postData].concat(dataToAdd));
       }, 1000);
@@ -51,6 +50,8 @@ const PostList = () => {
       setHasMore(false);
     }
   };
+
+  console.log(hasMore);
 
   return (
     <div>
@@ -65,7 +66,8 @@ const PostList = () => {
           dataLength={postData.length}
           next={fetchData}
           hasMore={hasMore}
-          loader={null}
+          loader={<p>loading...</p>}
+          scrollThreshold={0.8}
         >
           {postData.length > 0 ? (
             postData.map((post) => (

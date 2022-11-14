@@ -7,13 +7,10 @@
   --menuColor: #697a8d;
   --notifyColor: #71dd37;
   --bgBody: #f0f2f5;
-
   --imageSize: 300px;
   --borderRadius: 8px;
   --boxShadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-
   --boxShadowCard: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-
   --paddingRL: 20%;
   --mainBlue: #0095f6;
   --greyLight: #dbdbdb;
@@ -66,10 +63,10 @@ body {
   padding-bottom: 24px;
   padding-right: 24px;
   padding-top: 24px;
-  @include tablet {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     padding: 12px 24px;
   }
-  @include mobile {
+  @media screen and (max-width: 767px) {
     padding: 12px 24px;
   }
 }
@@ -102,50 +99,8 @@ body {
   padding: 0;
   border-radius: 6px;
 }
-@mixin Skeleton {
-  background: #eee;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-  background-size: 200% 100%;
-}
 
-@mixin d-flex($justify, $align) {
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
-
-@mixin box($width, $height) {
-  width: $width * 1px;
-  height: $height * 1px;
-}
-
-@mixin avatar($width, $height) {
-  width: $width * 1px;
-  height: $height * 1px;
-  img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-}
-
-// hidden Scrollbar
-@mixin hidden-scrollbar {
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
-  }
-}
-
-// COVER BACKGROUND
-@mixin cover-background {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
 // ANIMATIONS
-
 @keyframes Shine {
   to {
     background-position-x: -200%;
