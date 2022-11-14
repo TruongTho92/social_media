@@ -1,4 +1,6 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 .updatePassword {
   padding: 80px 20% 40px;
 }

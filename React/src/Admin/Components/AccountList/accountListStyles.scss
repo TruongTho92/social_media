@@ -1,4 +1,6 @@
-@import "../../../global/scss/rootStyles.scss";
+@import "../../../global/scss/mixins.scss";
+@import "../../../global/scss/responsive.scss";
+@import "../../../global/scss/variables.scss";
 .search__user-list {
   height: 300px;
   overflow-y: scroll;

@@ -1,4 +1,6 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 .userProfile {
   padding: 60px 20% 20px;
   background-color: #fff;

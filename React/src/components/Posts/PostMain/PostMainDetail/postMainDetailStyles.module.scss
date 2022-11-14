@@ -1,4 +1,7 @@
-@import "../../../../global/scss/rootStyles.scss";
+@import "../../../../global/scss/mixins.scss";
+@import "../../../../global/scss/responsive.scss";
+@import "../../../../global/scss/variables.scss";
+
 .warn {
   color: red;
 }
@@ -27,20 +30,24 @@
   background-color: #fff;
   border-radius: 8px;
   animation: FadeOut 0.25s linear;
+  overflow: hidden;
 }
 
-.postDetailImg {
+.slider.postImgSlider {
+  display: grid;
   aspect-ratio: 1;
-  &.mobile {
-    display: none;
-  }
-
+}
+.slider.postImgSliderMobile {
+  display: none;
+}
+.postDetailImg,
+.postDetailImgMobile {
+  aspect-ratio: 1;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    cursor: pointer;
   }
 }
 
@@ -55,7 +62,6 @@
   }
   padding: 12px 12px 6px 12px;
   flex-direction: column;
-  // aspect-ratio: 1;
 }
 
 .contentTop,
@@ -93,7 +99,7 @@
         font-size: 14px;
         font-weight: normal;
         font-style: italic;
-        color: $greyBold;
+        color: var(--greyBold);
         line-height: normal;
       }
     }
@@ -119,7 +125,7 @@
     margin-bottom: 8px;
     // padding: 8px 12px;
     height: fit-content;
-    border: 1px solid $greyLight;
+    border: 1px solid var(--greyLight);
     &:focus {
       box-shadow: none;
     }
@@ -136,12 +142,12 @@
   .btnEditCancel {
     background-color: transparent;
     border: none;
-    color: $blackColor;
+    color: var(--blackColor);
   }
   .btnEditSave {
-    background-color: $mainBlue;
+    background-color: var(--mainBlue);
     border: none;
-    color: $whiteColor;
+    color: var(--whiteColor);
   }
 }
 
@@ -155,7 +161,7 @@
 }
 .settingPostContent {
   background-color: #fff;
-  box-shadow: $boxShadow;
+  box-shadow: var(--boxShadow);
   padding: 8px 0;
   width: 100px;
   border-radius: 4px;
@@ -224,7 +230,7 @@
   margin-left: 12px;
   font-size: 16px;
   font-weight: 500;
-  color: $mainBlue;
+  color: var(--mainBlue);
   cursor: pointer;
   display: none;
 }
@@ -248,11 +254,70 @@
     float: right;
     font-size: 16px;
     font-weight: 500;
-    color: $mainBlue;
+    color: var(--mainBlue);
     margin-left: 12px;
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+}
+
+// CUSTOM ARROW SLIDER
+.arrow {
+  position: absolute;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  text-align: center;
+  border-radius: 100rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--boxShadow) !important;
+  z-index: 100;
+
+  &.next {
+    right: 10px !important;
+  }
+  &.prev {
+    left: 8px !important;
+  }
+  &::before {
+    display: none;
+  }
+  .arrowNextIcon {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--greyBold);
+  }
+}
+
+.slickDots.slickThumb {
+  position: absolute;
+  bottom: 20px;
+
+  .dotCustom {
+    width: 6px;
+    height: 6px;
+    border-radius: 100rem;
+    background-color: #767d7d;
+  }
+  li.slick-active .dotCustom {
+    background-color: #000;
+  }
+
+  li {
+    height: 0 !important;
+    width: 0 !important;
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+  }
+  :global(li.slick-active) .dotCustom {
+    opacity: 1;
+    background-color: #fff;
   }
 }
 
@@ -305,15 +370,12 @@
     width: 100%;
     height: 500px;
   }
-  .postDetailImg {
-    width: 100%;
+
+  .slider.postImgSlider {
     display: none;
-    &.mobile {
-      display: block;
-    }
-    img {
-      border-top-left-radius: 0;
-    }
+  }
+  .slider.postImgSliderMobile {
+    display: grid;
   }
   .postDetailContent {
     justify-content: start;
@@ -323,13 +385,25 @@
     height: 100%;
     margin-bottom: 0;
     aspect-ratio: 0;
+    padding: 12px 0;
+  }
+  .contentTop {
+    padding: 0 12px;
   }
   .caption {
     margin-bottom: 0px !important;
     width: 100%;
   }
   .emotion {
-    padding: 12px 8px;
+    padding: 6px 12px;
+    .iconEmotion {
+      .icon {
+        font-size: 20px;
+      }
+    }
+    .iconSave {
+      font-size: 22px;
+    }
   }
   .comment {
     display: none;
@@ -342,9 +416,14 @@
   }
   .seeComment {
     display: block;
+    font-size: 14px;
   }
   .form {
     padding-right: 8px;
+    .inputComment,
+    .btnComment {
+      font-size: 14px;
+    }
   }
 
   .settingPost {

@@ -1,4 +1,6 @@
-@import "../../../../global/scss/rootStyles.scss";
+@import "../../../../global/scss/mixins.scss";
+@import "../../../../global/scss/responsive.scss";
+@import "../../../../global/scss/variables.scss";
 
 .postItem {
   height: 272px;
@@ -80,7 +82,6 @@
   }
 }
 
-@import "../../../../global/scss/rootStyles.scss";
 .warn {
   color: red;
 }

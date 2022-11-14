@@ -1,4 +1,6 @@
-@import "../../global/scss/rootStyles.scss";
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
 .account {
   padding: 60px 20% 20px 20%;
   background-color: #fff;
@@ -6,7 +8,7 @@
 }
 .line {
   display: block;
-  background-color: $greyLight;
+  background-color: var(--greyLight);
   width: 100%;
   height: 1px;
 }
@@ -52,9 +54,9 @@
     }
     .linkEdit {
       padding: 4px 8px;
-      background-color: $whiteColor;
-      color: $blackColor;
-      border: 2px solid $greyLight;
+      background-color: var(--whiteColor);
+      color: var(--blackColor);
+      border: 2px solid var(--greyLight);
       border-radius: 6px;
       margin: 0 24px;
       white-space: nowrap;
@@ -145,8 +147,8 @@
         margin-bottom: 10px;
       }
       &.infoItemFollow {
-        border-top: 1px solid $greyLight;
-        border-bottom: 1px solid $greyLight;
+        border-top: 1px solid var(--greyLight);
+        border-bottom: 1px solid var(--greyLight);
         width: 100%;
         padding: 12px 0px;
       }
@@ -156,9 +158,9 @@
       }
       .linkEdit {
         padding: 4px 8px;
-        background-color: $whiteColor;
-        color: $blackColor;
-        border: 2px solid $greyLight;
+        background-color: var(--whiteColor);
+        color: var(--blackColor);
+        border: 2px solid var(--greyLight);
         border-radius: 6px;
         font-size: 14px;
         margin: 0 24px;

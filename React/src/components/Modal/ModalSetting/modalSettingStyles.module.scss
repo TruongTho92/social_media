@@ -1,4 +1,6 @@
-@import "../../../global/scss/rootStyles.scss";
+@import "../../../global/scss/mixins.scss";
+@import "../../../global/scss/responsive.scss";
+@import "../../../global/scss/variables.scss";
 .modalSetting {
   padding: 16px 0;
   width: 300px;

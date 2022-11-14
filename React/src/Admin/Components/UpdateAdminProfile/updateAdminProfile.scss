@@ -1,4 +1,6 @@
-@import "../../../global/scss/rootStyles.scss";
+@import "../../../global/scss/mixins.scss";
+@import "../../../global/scss/responsive.scss";
+@import "../../../global/scss/variables.scss";
 .ant-input[disabled] {
   background-color: var(--bgLight);
 }
