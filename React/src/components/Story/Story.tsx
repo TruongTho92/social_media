@@ -51,7 +51,7 @@ const Story: React.FC<Props> = () => {
           dots: false,
           infinite: false,
           arrows: false,
-          slidesToShow: userFollowings.length > 4 ? 4 : userFollowings.length,
+          slidesToShow: userFollowings.length > 5 ? 5 : userFollowings.length,
           slidesToScroll: 1,
         },
       },

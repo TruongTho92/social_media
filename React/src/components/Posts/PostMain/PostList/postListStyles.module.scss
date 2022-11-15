@@ -63,3 +63,11 @@
   @include Skeleton;
   animation: 1.5s Shine linear infinite;
 }
+
+.loadingScroll {
+  width: 100%;
+  i {
+    font-size: 14px;
+    animation: Rotate 1s linear infinite;
+  }
+}

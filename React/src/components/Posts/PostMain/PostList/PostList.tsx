@@ -51,8 +51,6 @@ const PostList = () => {
     }
   };
 
-  console.log(hasMore);
-
   return (
     <div>
       {!loadingPostFollowing ? <Story /> : null}

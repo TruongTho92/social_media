@@ -138,22 +138,10 @@ const Post: React.FC<Props> = ({
 
         <Slider {...settings}>
           <div className={styles.postImage}>
-            {/* <Link
-              to={`/post-newfeeds/${postId}`}
-              className={styles.commentLink}
-              state={{ background: location }}
-            > */}
             <img src={imagePost} alt="" />
-            {/* </Link> */}
           </div>
           <div className={styles.postImage}>
-            {/* <Link
-              to={`/post-newfeeds/${postId}`}
-              className={styles.commentLink}
-              state={{ background: location }}
-            > */}
             <img src={imagePost} alt="" />
-            {/* </Link> */}
           </div>
         </Slider>
 
