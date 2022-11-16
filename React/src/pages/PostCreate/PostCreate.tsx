@@ -29,7 +29,7 @@ const PostCreate: React.FC = () => {
   const [isHasImage, setIsHasImage] = useState(false);
 
   const [mutipleImage, setMutipleImage] = useState<any[]>([]);
-  const [imageURLS, setImageURLs] = useState([]);
+  const [imageURLS, setImageURLs] = useState<any[]>([]);
 
   // CONFIG Slider
   const settings = {
@@ -58,26 +58,15 @@ const PostCreate: React.FC = () => {
   useEffect(() => {
     if (mutipleImage.length < 1) return;
     const newImageUrls: any = [];
-    mutipleImage.forEach((image: any) =>
-      newImageUrls.push(URL.createObjectURL(image))
-    );
-
-    setImageURLs(newImageUrls);
+    mutipleImage.forEach((image: any) => {
+      const Reader = new FileReader();
+      Reader.readAsDataURL(image);
+      Reader.onload = () => {
+        newImageUrls.push(Reader.result);
+        setImageURLs(newImageUrls);
+      };
+    });
   }, [mutipleImage]);
-
-  // const handleImageChange = (e: any) => {
-  //   const file = e.target.files[0];
-  //   const Reader = new FileReader();
-
-  //   Reader.readAsDataURL(file);
-
-  //   Reader.onload = () => {
-  //     if (Reader.readyState === 2) {
-  //       setIsHasImage(true);
-  //       setImage(Reader.result as string);
-  //     }
-  //   };
-  // };
 
   const hanleCreatePost = async () => {
     const payload: PostPayloadCreate = {
@@ -86,14 +75,17 @@ const PostCreate: React.FC = () => {
         caption,
       },
     };
+
     await dispatch(postsApi.create(payload));
     setIsHasImage(false);
+    setMutipleImage([]);
     setCaption("");
-    setImage("");
   };
 
   const handleChangeMutipleImg = (e: any) => {
-    setMutipleImage([...e.target.files]);
+    const file = e.target.files;
+
+    setMutipleImage([...file]);
     setIsHasImage(true);
   };
 
@@ -115,18 +107,6 @@ const PostCreate: React.FC = () => {
           {/* FORM */}
           <Form className={styles.form} onFinish={hanleCreatePost}>
             <Form.Item className={`${styles.formItem} ${styles.widthContent}`}>
-              {/* <label htmlFor="input-image" className={styles.labelInputImage}>
-                <MdDriveFolderUpload className={styles.uploadIcon} />
-                <span>{isHasImage ? "Change Image" : "Upload Your image"}</span>
-              </label>
-              <Input
-                type="file"
-                id="input-image"
-                className={styles.inputForm}
-                onChange={handleChangeMutipleImg}
-                hidden
-              /> */}
-
               <label htmlFor="input-image" className={styles.labelInputImage}>
                 <MdDriveFolderUpload className={styles.uploadIcon} />
                 <span>
@@ -142,17 +122,10 @@ const PostCreate: React.FC = () => {
                 multiple
               />
 
-              {/* {isHasImage ? (
-                <div className={styles.imagePost}>
-                  <img src={image} alt="img-post" />
-                </div>
-              ) : null} */}
-
               {/* MUTIPLE IMAGE */}
-
               <Slider {...settings}>
                 {imageURLS.map((image) => (
-                  <div className={styles.imagePost}>
+                  <div className={styles.imagePost} key={image}>
                     <img key={image} src={image} alt="" />
                   </div>
                 ))}

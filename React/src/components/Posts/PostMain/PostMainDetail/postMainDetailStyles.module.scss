@@ -293,6 +293,13 @@
     color: var(--greyBold);
   }
 }
+.dateCreated {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--secondaryText);
+  margin-top: 6px;
+  margin-left: 12px;
+}
 
 .slickDots.slickThumb {
   position: absolute;

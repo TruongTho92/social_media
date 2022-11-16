@@ -10,7 +10,7 @@ import styles from "./accountPostStyles.module.scss";
 
 type Props = {
   id?: number | null;
-  image?: string;
+  image?: string[];
 };
 
 const AccountPost: React.FC<Props> = ({ id, image }) => {
@@ -22,7 +22,16 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
     <>
       <div className={styles.postImg}>
         <Link to={`/account-post/${id}`} state={{ background: location }}>
-          <img src={`${image}`} alt="" />
+          {image && image?.length > 1 ? (
+            <div className={styles.imageMutiple}>
+              <div className={styles.iconDuplicate}>
+                <i className="fas fa-clone"></i>
+              </div>
+              <img src={`${image[0]}`} alt="" />
+            </div>
+          ) : (
+            <img src={image && `${image[0]}`} alt="" />
+          )}
 
           <div className={styles.postImgHover}>
             <div className={styles.postItemHoverItem}>

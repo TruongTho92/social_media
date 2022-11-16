@@ -62,9 +62,10 @@ export interface PostPayloadCreate {
 
 export interface PostAccount {
   id: number;
-  image: string;
+  image: string[];
   caption: string;
   user_id: number | null;
+  created_at: string;
 }
 
 export interface PostDataResponse {
@@ -138,10 +139,11 @@ export interface PostOfFollowingResponse {
   avatar: string;
   user_name: string;
   nick_name: string;
-  image: string;
+  image: string[];
   caption: string;
   like: LikeDataResponse[];
   comment: LikeDataResponse[];
+  created_at: string;
 }
 
 // ALL ACCOUNT

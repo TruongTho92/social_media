@@ -10,41 +10,9 @@ import {
   postFollowingFailure,
   postFollowingRequest,
   postFollowingSuccess,
-  postLimitFailure,
-  postLimitRequest,
-  postLimitSuccess,
 } from "./postOfFollowingSlice";
 
 export const postOfFollowingApi = {
-  getPostLimit: (page: any) => async (dispatch: any) => {
-    try {
-      dispatch({
-        type: postLimitRequest.toString(),
-      });
-      const token = JSON.parse(Cookies.get("access_token") || "");
-      const { data } = await apiClient.get(
-        `/api/v1/posts_with_quantity/${page}`,
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
-      console.log(data.data);
-
-      setTimeout(() => {
-        dispatch({
-          type: postLimitSuccess.toString(),
-          payload: data.data,
-        });
-      }, 500);
-    } catch (error: any) {
-      dispatch({
-        type: postLimitFailure.toString(),
-        payload: error.response.data,
-      });
-    }
-  },
   getPostFollowing: () => async (dispatch: any) => {
     try {
       dispatch({

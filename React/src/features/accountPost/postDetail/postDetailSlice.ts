@@ -14,7 +14,7 @@ export interface StateTypes {
 const initialState: StateTypes = {
   loading: true,
   data: {
-    post: { id: 0, image: "", caption: "", user_id: null },
+    post: { id: 0, image: [], caption: "", user_id: null, created_at: "" },
     is_success: false,
     message: "",
     like: [],
@@ -37,7 +37,6 @@ const postDetailSlice = createSlice({
       state.data.post = action.payload.post;
       state.data.like = action.payload.like;
       state.data.comment = action.payload.comment;
-      // state.like = action.payload.;
     },
     GetPostFailure: (state, action: PayloadAction<PostDetailResponse>) => {
       state.loading = true;

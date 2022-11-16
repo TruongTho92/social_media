@@ -11,8 +11,7 @@ import LoadingSpinner from "../LoadingSpinner";
 
 import styles from "./savePostsStyles.module.scss";
 
-type Props = {};
-const SavePosts: React.FC<Props> = () => {
+const SavePosts: React.FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const allPostSave = useAppSelector(getAllPostSave);
@@ -45,7 +44,16 @@ const SavePosts: React.FC<Props> = () => {
                     to={`/post-newfeeds/${post.id}`}
                     state={{ background: location }}
                   >
-                    <img src={`${post.image}`} alt="" />
+                    {post.image.length > 1 ? (
+                      <div className={styles.imageMutiple}>
+                        <div className={styles.iconDuplicate}>
+                          <i className="fas fa-clone"></i>
+                        </div>
+                        <img src={`${post.image[0]}`} alt="" />
+                      </div>
+                    ) : (
+                      <img src={`${post.image[0]}`} alt="" />
+                    )}
                   </Link>
                 </div>
               ))}

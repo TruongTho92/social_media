@@ -1,5 +1,6 @@
 import { Input, Typography } from "antd";
 import { TextAreaRef } from "antd/lib/input/TextArea";
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
@@ -191,17 +192,22 @@ const PostMainDetail: React.FC<Props> = () => {
             className={styles.postDetailContainer}
             onClick={(e) => e.stopPropagation()}
           >
-            <Slider {...settings}>
-              <div className={styles.postDetailImg}>
-                <img src={postDetailData.image} alt="" />
-              </div>
-              <div className={styles.postDetailImg}>
-                <img src={postDetailData.image} alt="" />
-              </div>
-              <div className={styles.postDetailImg}>
-                <img src={postDetailData.image} alt="" />
-              </div>
-            </Slider>
+            {postDetailData.image.length > 1 ? (
+              <Slider {...settings}>
+                {postDetailData.image.map((image: string) => (
+                  <div className={styles.postDetailImg} key={image}>
+                    <img src={image} alt="" />
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              postDetailData.image.map((image: string) => (
+                <div className={styles.postDetailImg} key={image}>
+                  <img src={image} alt="" />
+                </div>
+              ))
+            )}
+
             <div className={styles.postDetailContent}>
               <div className={styles.contentTop}>
                 {/* HEADER */}
@@ -241,19 +247,21 @@ const PostMainDetail: React.FC<Props> = () => {
               </div>
 
               {/* POST IMAGE MOBILE */}
-              <Slider {...settingsMobile}>
-                <div className={`${styles.postDetailImgMobile}`}>
-                  <img src={postDetailData.image} alt="" />
-                </div>
-
-                <div className={`${styles.postDetailImgMobile}`}>
-                  <img src={postDetailData.image} alt="" />
-                </div>
-
-                <div className={`${styles.postDetailImgMobile}`}>
-                  <img src={postDetailData.image} alt="" />
-                </div>
-              </Slider>
+              {postDetailData.image.length > 1 ? (
+                <Slider {...settingsMobile}>
+                  {postDetailData.image.map((image: string) => (
+                    <div className={styles.postDetailImgMobile} key={image}>
+                      <img src={image} alt="" />
+                    </div>
+                  ))}
+                </Slider>
+              ) : (
+                postDetailData.image.map((image: string) => (
+                  <div className={styles.postDetailImgMobile} key={image}>
+                    <img src={image} alt="" />
+                  </div>
+                ))
+              )}
 
               <div className={styles.contentBottom}>
                 {/* Like */}
@@ -295,6 +303,10 @@ const PostMainDetail: React.FC<Props> = () => {
                 </div>
                 <Typography className={styles.likeNumber}>
                   <span>{userLikedData.length}</span> Likes
+                </Typography>
+
+                <Typography className={styles.dateCreated}>
+                  {moment(postDetailData.created_at).fromNow()}
                 </Typography>
                 {/* COMMENT MOBILE */}
 

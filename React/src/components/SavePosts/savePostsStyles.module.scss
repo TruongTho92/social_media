@@ -1,9 +1,7 @@
 @import "../../global/scss/mixins.scss";
 @import "../../global/scss/responsive.scss";
 @import "../../global/scss/variables.scss";
-.savePosts {
-  // padding: 80px 20% 24px;
-}
+
 .savePostList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -25,6 +23,20 @@
   color: var(--menuColor);
   font-style: italic;
   font-size: 18px;
+}
+
+.imageMutiple {
+  aspect-ratio: 1;
+  position: relative;
+}
+.iconDuplicate {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  i {
+    font-size: 16px;
+    color: var(--whiteColor);
+  }
 }
 
 @include tablet {

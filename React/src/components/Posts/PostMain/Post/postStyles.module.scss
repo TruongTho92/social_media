@@ -173,7 +173,13 @@
   span {
   }
 }
-
+.dateCreated {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-top: 6px;
+  color: var(--secondaryText);
+}
 // CUSTOM ARROW SLIDER
 .arrow {
   position: absolute;

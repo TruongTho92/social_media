@@ -19,6 +19,7 @@ import {
   NextArrow,
   PrevArrow,
 } from "~/components/ArrowSlickCustom/ArrowSlickCustom";
+import moment from "moment";
 
 type Props = {
   avatar: string;
@@ -27,7 +28,8 @@ type Props = {
   userName: string;
   nickName: string;
   caption: string;
-  imagePost: string;
+  imagePost: string[];
+  dateCreated: string;
   likes: LikeDataResponse[];
   comments: LikeDataResponse[];
   allPostSaved: SaveReponse[];
@@ -41,6 +43,7 @@ const Post: React.FC<Props> = ({
   nickName,
   imagePost,
   caption,
+  dateCreated,
   likes,
   comments,
   allPostSaved,
@@ -136,14 +139,22 @@ const Post: React.FC<Props> = ({
           </div>
         </div>
 
-        <Slider {...settings}>
-          <div className={styles.postImage}>
-            <img src={imagePost} alt="" />
-          </div>
-          <div className={styles.postImage}>
-            <img src={imagePost} alt="" />
-          </div>
-        </Slider>
+        {/* IMAGES */}
+        {imagePost.length > 1 ? (
+          <Slider {...settings}>
+            {imagePost.map((image: string) => (
+              <div className={styles.postImage} key={image}>
+                <img src={image} alt="" />
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          imagePost.map((image: string) => (
+            <div className={styles.postImage} key={image}>
+              <img src={image} alt="" />
+            </div>
+          ))
+        )}
 
         <div className={styles.postContent}>
           <div className={styles.emotion}>
@@ -209,6 +220,9 @@ const Post: React.FC<Props> = ({
               View all {comments.length} comments
             </Link>
           ) : null}
+          <Typography className={styles.dateCreated}>
+            {moment(dateCreated).fromNow()}
+          </Typography>
         </div>
       </div>
     </LazyLoad>

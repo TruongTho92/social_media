@@ -53,7 +53,6 @@ export const postsApi = {
           token: token,
         },
       });
-      console.log(data);
 
       dispatch({
         type: CreatePostSuccess.toString(),
