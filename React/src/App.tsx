@@ -19,6 +19,8 @@ import SearchPage from "./pages/SearchPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import UserProfilePage from "./pages/UserProfilePage";
+import CardSwiper from "~/components/CardSwiper";
+import Intro from "./components/Intro";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
@@ -33,6 +35,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <Intro />
       <Routes location={background || location}>
         {/* ADMIN */}
         <Route

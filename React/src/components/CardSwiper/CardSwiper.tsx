@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import styles from "./cardSwiperStyles.module.scss";
 
 type Props = {};

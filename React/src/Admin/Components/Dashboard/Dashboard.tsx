@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { Typewriter } from "react-simple-typewriter";
+
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { allPostApi } from "~/features/Admin/AllPost/AllPostApi";
 import { getAllPost } from "~/features/Admin/AllPost/AllPostSlice";
@@ -61,8 +63,17 @@ const Dashboard = () => {
           <div className="col-md-12 col-lg-6  col-xl-4 static__img-container">
             <div className="static__img">
               <h1 className="static__img-content">
-                Welcome to admin dashboard!! <br />{" "}
-                <span>Start manage your app now</span>
+                <Typewriter
+                  words={[
+                    " Welcome to admin dashboard!! Start manage your app now",
+                  ]}
+                  loop={2}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1000}
+                />
               </h1>
               <i className="fal fa-sun"></i>
             </div>
