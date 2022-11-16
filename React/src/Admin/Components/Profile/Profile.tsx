@@ -1,4 +1,5 @@
 import { Typography } from "antd";
+import { Typewriter } from "react-simple-typewriter";
 import { useAppSelector } from "~/app/hooks";
 import { getUser } from "~/features/Auth/userSlice";
 import Footer from "../Footer";
@@ -25,7 +26,16 @@ const Profile = (props: Props) => {
               <div className="col-xl-12">
                 <div className="profile__admin-left-bottom">
                   <span className="text">
-                    Hi! Welcome to comeback <br /> {getAdminData.user.user_name}
+                    Hi! Welcome to comeback <br />
+                    <Typewriter
+                      words={[`${getAdminData.user.user_name}`]}
+                      loop={0}
+                      cursor
+                      cursorStyle="_"
+                      typeSpeed={80}
+                      deleteSpeed={80}
+                      delaySpeed={1000}
+                    />
                   </span>
                   <i className="fal fa-sun sun__icon"></i>
                 </div>
@@ -51,7 +61,15 @@ const Profile = (props: Props) => {
                   {getAdminData.user.user_name}
                 </Typography>
                 <Typography className="profile__admin-content-email">
-                  {getAdminData.user.email}
+                  <Typewriter
+                    words={[`${getAdminData.user.email}`]}
+                    loop={0}
+                    cursor
+                    cursorStyle="|"
+                    typeSpeed={80}
+                    deleteSpeed={80}
+                    delaySpeed={1000}
+                  />
                 </Typography>
               </div>
               <i className="fas fa-sun sun__icon "></i>
