@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
 import { UserDataTypes } from "~/common/types";
+import CardSwiper from "~/components/CardSwiper";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword/InputConfirmPassword";
 import InputPassword from "~/components/Input/Password";
 import { userApi } from "~/features/Auth/userApi";
@@ -73,7 +74,8 @@ const Register: React.FC = () => {
           xl={12}
           className={styles.loginLeft}
         >
-          <img src="/assets/images/login-background.png" alt="" />
+          {/* <img src="/assets/images/login-background.png" alt="" /> */}
+          <CardSwiper />
         </Col>
         <Col
           xs={24}
