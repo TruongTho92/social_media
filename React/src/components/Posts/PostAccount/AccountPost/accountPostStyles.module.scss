@@ -280,8 +280,6 @@
   }
 }
 
-.comment {
-}
 .commentMobile {
   padding: 0 12px 12px 12px;
 
@@ -322,6 +320,20 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+}
+
+.imageMutiple {
+  aspect-ratio: 1;
+  position: relative;
+}
+.iconDuplicate {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  i {
+    font-size: 16px;
+    color: var(--whiteColor);
   }
 }
 

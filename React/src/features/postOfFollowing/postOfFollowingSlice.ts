@@ -28,17 +28,6 @@ const postOfFollowingSlice = createSlice({
   name: "postOfFollowing",
   initialState,
   reducers: {
-    postLimitRequest: (state) => {
-      state.loading = true;
-    },
-    postLimitSuccess: (state, action: PayloadAction<any>) => {
-      state.loading = false;
-      state.data.posts = action.payload.post;
-    },
-    postLimitFailure: (state) => {
-      state.loading = true;
-    },
-
     postFollowingRequest: (state) => {
       state.loading = true;
     },
@@ -84,9 +73,6 @@ export const {
   disLikeRequest,
   disLikeSuccess,
   disLikeFailure,
-  postLimitRequest,
-  postLimitSuccess,
-  postLimitFailure,
 } = postOfFollowingSlice.actions;
 
 // SELECTOR
