@@ -79,7 +79,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     @posts = []
     current_user.following.each do |user|
       user.posts.each do |post|
-        @posts << {id: post.id, image: post.image, caption: post.caption, 
+        @posts << {id: post.id, image: post.image, caption: post.caption, created_at: post.created_at,
                   user_id: post.user_id, avatar: post.user.avatar, user_name: post.user.user_name, 
                   nick_name: post.user.nick_name, comment: post.comments, like: post.likes}
       end
@@ -98,6 +98,6 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:image, :caption)
+    params.require(:post).permit(:caption, image: [])
   end
 end
