@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useAppDispatch } from "~/app/hooks";
+import CardSwiper from "~/components/CardSwiper";
 import { UserDataTypes } from "~/common/types";
 import { userApi } from "~/features/Auth/userApi";
 
@@ -46,7 +47,8 @@ const LoginPage: React.FC = () => {
           xl={12}
           className={styles.loginLeft}
         >
-          <img src="/assets/images/login-background.png" alt="" />
+          {/* <img src="/assets/images/login-background.png" alt="" /> */}
+          <CardSwiper />
         </Col>
         <Col
           xs={24}

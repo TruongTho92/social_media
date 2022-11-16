@@ -12,6 +12,7 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 
   img {
     width: 94%;
@@ -165,7 +166,7 @@
   }
   .registerForm,
   .signUp {
-    width: 300px;
+    width: 320px;
   }
   .registerLeft {
     img {
@@ -176,11 +177,13 @@
   .signUp {
     margin-top: 8px;
   }
-}
-
-.iconLoading {
-  font-size: 30px;
-  animation: Rotate 1s linear infinite;
+  .subTitle {
+    font-size: 14px !important;
+  }
+  .iconLoading {
+    font-size: 30px;
+    animation: Rotate 1s linear infinite;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -196,6 +199,9 @@
   }
   .messageWaitConfirm {
     width: 100%;
+  }
+  .subTitle {
+    font-size: 14px !important;
   }
 }
 
