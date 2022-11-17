@@ -42,7 +42,6 @@ const Story: React.FC<Props> = () => {
 
           slidesToShow: userFollowings.length > 5 ? 5 : userFollowings.length,
           slidesToScroll: 1,
-          initialSlide: 2,
         },
       },
       {
