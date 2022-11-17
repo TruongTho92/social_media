@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 import Admin from "./Admin";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
+import Intro from "./components/Intro";
 import PostMainDetail from "./components/Posts/PostMain/PostMainDetail";
 import { userApi } from "./features/Auth/userApi";
 import { getAuthenticated } from "./features/Auth/userSlice";
@@ -19,8 +20,6 @@ import SearchPage from "./pages/SearchPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import UserProfilePage from "./pages/UserProfilePage";
-import CardSwiper from "~/components/CardSwiper";
-import Intro from "./components/Intro";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(getAuthenticated);
@@ -35,7 +34,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Intro />
+      {!isAuthenticated && <Intro />}
       <Routes location={background || location}>
         {/* ADMIN */}
         <Route

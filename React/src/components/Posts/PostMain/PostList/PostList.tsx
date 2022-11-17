@@ -10,6 +10,7 @@ import {
   getAllPostOfFollowing,
   getLoadingPostFollowing,
 } from "~/features/postOfFollowing/postOfFollowingSlice";
+import { getloadingProfile } from "~/features/profileUser/profileUserSlice";
 import {
   getAllPostSave,
   getAllPostSaveAsync,
@@ -21,6 +22,7 @@ import styles from "./postListStyles.module.scss";
 const LIMIT = 4;
 const PostList = () => {
   const [postData, setPostData] = useState<PostOfFollowingResponse[]>([]);
+
   const [visible, setVisible] = useState(LIMIT);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useAppDispatch();
@@ -33,9 +35,9 @@ const PostList = () => {
     dispatch(getAllPostSaveAsync());
   }, []);
 
-  useEffect(() => {
-    setPostData(allPostFollowing.slice(0, LIMIT));
-  }, [allPostFollowing]);
+  // useEffect(() => {
+  //   setPostData(allPostFollowing.slice(0, LIMIT));
+  // }, [allPostFollowing]);
 
   const fetchData = () => {
     const newLimit = visible + LIMIT;
@@ -53,7 +55,14 @@ const PostList = () => {
 
   return (
     <div>
-      {!loadingPostFollowing ? <Story /> : null}
+      {!loadingPostFollowing && <Story />}
+      {/* <Story /> */}
+
+      {allPostFollowing.length <= 0 && (
+        <Typography className={styles.textErrorFL}>
+          Oh No!! You dont have user following or <br /> User dont have post
+        </Typography>
+      )}
       <div className={styles.posts}>
         {/* <InfiniteScroll
           dataLength={allPostFollowing.length}
@@ -62,9 +71,8 @@ const PostList = () => {
           loader={postData.length > 0 && <p>loading...</p>}
           scrollThreshold={0.8}
         > */}
-        {!loadingPostFollowing ? (
-          allPostFollowing.length > 0 ? (
-            allPostFollowing.map((post) => (
+        {allPostFollowing.length > 0
+          ? allPostFollowing.map((post) => (
               <div key={post.id}>
                 <Post
                   avatar={post.avatar}
@@ -81,38 +89,35 @@ const PostList = () => {
                 />
               </div>
             ))
-          ) : (
-            <Typography className={styles.textErrorFL}>
-              Oh No!! You dont have user following or <br /> User dont have post
-            </Typography>
-          )
-        ) : (
-          <>
-            <div className={styles.post}>
-              <div className={styles.user}>
-                <div className={styles.image}></div>
+          : loadingPostFollowing && (
+              <>
+                <div className={styles.post}>
+                  <div className={styles.user}>
+                    <div className={styles.image}></div>
 
-                <div className={styles.info}>
-                  <p className={styles.name}></p>
-                  <p className={styles.description}> </p>
+                    <div className={styles.info}>
+                      <p className={styles.name}></p>
+                      <p className={styles.description}> </p>
+                    </div>
+                  </div>
+                  <div className={styles.postImage}></div>
+                  <div className={styles.postContent}>
+                    <div className={styles.emotion}>
+                      <div className={styles.left}></div>
+                    </div>
+                    <Typography className={styles.textUserLiked}></Typography>
+                    <div className={styles.captionContainer}>
+                      <Typography
+                        className={styles.userNameCaption}
+                      ></Typography>
+                      <Typography.Paragraph
+                        className={styles.caption}
+                      ></Typography.Paragraph>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.postImage}></div>
-              <div className={styles.postContent}>
-                <div className={styles.emotion}>
-                  <div className={styles.left}></div>
-                </div>
-                <Typography className={styles.textUserLiked}></Typography>
-                <div className={styles.captionContainer}>
-                  <Typography className={styles.userNameCaption}></Typography>
-                  <Typography.Paragraph
-                    className={styles.caption}
-                  ></Typography.Paragraph>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
+              </>
+            )}
         {/* </InfiniteScroll> */}
       </div>
     </div>

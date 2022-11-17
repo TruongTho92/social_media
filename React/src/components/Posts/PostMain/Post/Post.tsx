@@ -13,13 +13,14 @@ import {
   savePostAsync,
   unSavePostAsync,
 } from "~/features/savePosts/savePostsSlice";
-import styles from "./postStyles.module.scss";
 import Slider from "react-slick";
 import {
   NextArrow,
   PrevArrow,
 } from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 import moment from "moment";
+
+import styles from "./postStyles.module.scss";
 
 type Props = {
   avatar: string;
