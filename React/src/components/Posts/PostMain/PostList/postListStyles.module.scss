@@ -1,12 +1,18 @@
 @import "../../../../global/scss/mixins.scss";
 @import "../../../../global/scss/responsive.scss";
 @import "../../../../global/scss/variables.scss";
+
 .textErrorFL {
   font-size: 14px;
   font-weight: 500;
   color: red;
   text-align: center;
   margin-bottom: 16px;
+}
+.posts {
+  @include mobile {
+    padding-bottom: 40px;
+  }
 }
 .post {
   padding: 16px 0 12px 0;

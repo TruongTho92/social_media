@@ -4,6 +4,12 @@
 
 .height {
   height: fit-content;
+  // @include desktop {
+  //   height: 800px;
+  // }
+  // @include tablet {
+  //   height: 600px;
+  // }
 }
 .post {
   padding: 16px 0 12px 0;
@@ -135,11 +141,11 @@
   }
 }
 .captionContainer {
-  width: 200px;
+  width: 400px;
 
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: flex-start;
   font-size: 14px;
   .userNameCaption {
     font-weight: 600;

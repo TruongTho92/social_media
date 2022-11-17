@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostOfFollowingResponse } from "~/common/types";
+import LoadingSpinner from "~/components/LoadingSpinner";
 import Story from "~/components/Story";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import {
@@ -35,91 +36,98 @@ const PostList = () => {
     dispatch(getAllPostSaveAsync());
   }, []);
 
-  // useEffect(() => {
-  //   setPostData(allPostFollowing.slice(0, LIMIT));
-  // }, [allPostFollowing]);
+  useEffect(() => {
+    setPostData(allPostFollowing.slice(0, LIMIT));
+  }, [allPostFollowing]);
 
   const fetchData = () => {
     const newLimit = visible + LIMIT;
-    const dataToAdd = allPostFollowing.slice(visible, newLimit);
+    console.log({ postData, allPostFollowing });
 
+    const dataToAdd = allPostFollowing.slice(visible, newLimit);
     if (allPostFollowing.length > postData.length) {
       setTimeout(() => {
-        setPostData([...postData].concat(dataToAdd));
+        setPostData((prev) => [...prev].concat(dataToAdd));
       }, 400);
       setVisible(newLimit);
     } else {
       setHasMore(false);
     }
   };
+  console.log(hasMore);
 
   return (
     <div>
-      {!loadingPostFollowing && <Story />}
+      {loadingPostFollowing ? (
+        <div style={{ marginBottom: 24 }}>
+          <LoadingSpinner width={30} />
+        </div>
+      ) : (
+        <Story />
+      )}
       {/* <Story /> */}
 
-      {allPostFollowing.length <= 0 && (
-        <Typography className={styles.textErrorFL}>
-          Oh No!! You dont have user following or <br /> User dont have post
-        </Typography>
-      )}
-      <div className={styles.posts}>
-        {/* <InfiniteScroll
-          dataLength={allPostFollowing.length}
-          next={fetchData}
-          hasMore={hasMore}
-          loader={postData.length > 0 && <p>loading...</p>}
-          scrollThreshold={0.8}
-        > */}
-        {allPostFollowing.length > 0
-          ? allPostFollowing.map((post) => (
-              <div key={post.id}>
-                <Post
-                  avatar={post.avatar}
-                  userName={post.user_name}
-                  nickName={post.nick_name}
-                  imagePost={post.image}
-                  userId={post.user_id}
-                  postId={post.id}
-                  caption={post.caption}
-                  likes={post.like}
-                  comments={post.comment}
-                  allPostSaved={allPostSaved}
-                  dateCreated={post.created_at}
-                />
-              </div>
-            ))
-          : loadingPostFollowing && (
-              <>
-                <div className={styles.post}>
-                  <div className={styles.user}>
-                    <div className={styles.image}></div>
+      {loadingPostFollowing ? (
+        <div className={styles.post}>
+          <div className={styles.user}>
+            <div className={styles.image}></div>
 
-                    <div className={styles.info}>
-                      <p className={styles.name}></p>
-                      <p className={styles.description}> </p>
-                    </div>
-                  </div>
-                  <div className={styles.postImage}></div>
-                  <div className={styles.postContent}>
-                    <div className={styles.emotion}>
-                      <div className={styles.left}></div>
-                    </div>
-                    <Typography className={styles.textUserLiked}></Typography>
-                    <div className={styles.captionContainer}>
-                      <Typography
-                        className={styles.userNameCaption}
-                      ></Typography>
-                      <Typography.Paragraph
-                        className={styles.caption}
-                      ></Typography.Paragraph>
-                    </div>
-                  </div>
+            <div className={styles.info}>
+              <p className={styles.name}></p>
+              <p className={styles.description}> </p>
+            </div>
+          </div>
+          <div className={styles.postImage}></div>
+          <div className={styles.postContent}>
+            <div className={styles.emotion}>
+              <div className={styles.left}></div>
+            </div>
+            <Typography className={styles.textUserLiked}></Typography>
+            <div className={styles.captionContainer}>
+              <Typography className={styles.userNameCaption}></Typography>
+              <Typography.Paragraph
+                className={styles.caption}
+              ></Typography.Paragraph>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.posts}>
+          <InfiniteScroll
+            scrollableTarget="body"
+            dataLength={postData.length}
+            next={fetchData}
+            hasMore={hasMore}
+            loader={postData.length > 0 && <p>loading...</p>}
+            style={{ overflow: "hidden" }}
+          >
+            {postData.length > 0 ? (
+              postData.map((post) => (
+                <div key={post.id}>
+                  <Post
+                    avatar={post.avatar}
+                    userName={post.user_name}
+                    nickName={post.nick_name}
+                    imagePost={post.image}
+                    userId={post.user_id}
+                    postId={post.id}
+                    caption={post.caption}
+                    likes={post.like}
+                    comments={post.comment}
+                    allPostSaved={allPostSaved}
+                    dateCreated={post.created_at}
+                  />
                 </div>
-              </>
+              ))
+            ) : (
+              <Typography className={styles.textErrorFL}>
+                Oh No!! You dont have user following or <br /> User dont have
+                post
+              </Typography>
             )}
-        {/* </InfiniteScroll> */}
-      </div>
+          </InfiniteScroll>
+        </div>
+      )}
     </div>
   );
 };
