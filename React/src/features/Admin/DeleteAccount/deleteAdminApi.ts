@@ -27,7 +27,7 @@ export const deleteAdminApi = {
 
       dispatch({
         type: deleteAccountSuccess.toString(),
-        payload: data.data,
+        payload: data,
       });
     } catch (error: any) {
       dispatch({
@@ -55,7 +55,7 @@ export const deleteAdminApi = {
 
       dispatch({
         type: deletePostSuccess.toString(),
-        payload: data.data,
+        payload: data,
       });
     } catch (error: any) {
       dispatch({
