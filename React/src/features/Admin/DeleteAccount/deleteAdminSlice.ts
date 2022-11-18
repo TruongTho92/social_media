@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { RootState } from "~/app/store";
 import { UserResponse } from "~/common/types";
 
@@ -21,8 +22,15 @@ const deleteAdminSlice = createSlice({
     },
     deleteAccountSuccess: (state, action: PayloadAction<any>) => {
       state.loading = true;
-      state.data = action.payload;
-      console.log(state.data);
+      state.data = action.payload.data;
+      toast(`${action.payload.message}`, {
+        position: "top-right",
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     deleteAccountFailure: (state) => {
       state.loading = true;
@@ -32,8 +40,15 @@ const deleteAdminSlice = createSlice({
     },
     deletePostSuccess: (state, action: PayloadAction<any>) => {
       state.loading = true;
-      state.data = action.payload;
-      console.log(state.data);
+      state.data = action.payload.data;
+      toast(`${action.payload.message}`, {
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     deletePostFailure: (state) => {
       state.loading = true;

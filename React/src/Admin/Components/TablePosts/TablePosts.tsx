@@ -1,8 +1,15 @@
 import { Tag, Tooltip, Typography } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
+import moment from "moment";
 import React, { useState } from "react";
+import Slider from "react-slick";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "~/app/hooks";
 import { PostResponse } from "~/common/types";
+import {
+  NextArrow,
+  PrevArrow,
+} from "~/components/ArrowSlickCustom/ArrowSlickCustom";
 import { postsApi } from "~/features/accountPost/Posts/postsApi";
 import { allPostApi } from "~/features/Admin/AllPost/AllPostApi";
 import { deleteAdminApi } from "~/features/Admin/DeleteAccount/deleteAdminApi";
@@ -15,6 +22,29 @@ const TablePosts = ({ data }: Props) => {
   const dispatch = useAppDispatch();
 
   const [ellipsis, setEllipsis] = useState(true);
+
+  const settings = {
+    dots: false,
+
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    className: "slider postImgSlider",
+    nextArrow: (
+      <NextArrow
+        styleArrow="arrow"
+        styleNext="next"
+        styleIcon="arrowNextIcon"
+      />
+    ),
+    prevArrow: (
+      <PrevArrow
+        styleArrow="arrow"
+        stylePrev="prev"
+        styleIcon="arrowNextIcon"
+      />
+    ),
+  };
 
   const columns: ColumnsType<PostResponse> = [
     {
@@ -53,7 +83,7 @@ const TablePosts = ({ data }: Props) => {
       dataIndex: "image",
       key: "image",
       className: "cell__image",
-      render: (image: number, record) => (
+      render: (image: any[], record) => (
         <Tooltip
           trigger={"hover"}
           placement="right"
@@ -80,9 +110,15 @@ const TablePosts = ({ data }: Props) => {
             </div>
           }
         >
-          <div className="table__posts-image">
-            <img src={`${image}`} alt="" />
-          </div>
+          {image && (
+            <Slider {...settings}>
+              {image.map((image) => (
+                <div className="table__posts-image" key={image}>
+                  <img src={`${image}`} alt="" />
+                </div>
+              ))}
+            </Slider>
+          )}
         </Tooltip>
       ),
     },
@@ -96,7 +132,7 @@ const TablePosts = ({ data }: Props) => {
         caption ? (
           <Typography.Paragraph
             ellipsis={
-              ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
+              ellipsis ? { rows: 2, expandable: true, symbol: "more" } : false
             }
             className="table__posts-caption"
           >
@@ -114,10 +150,9 @@ const TablePosts = ({ data }: Props) => {
       key: "created_at",
       className: "cell__created_at",
       render: (date: number) => {
-        var dateConvert = new Date(date);
         return (
           <Typography className="table__posts-date">
-            {dateConvert.toUTCString()}
+            {moment(date).fromNow()}
           </Typography>
         );
       },
@@ -174,6 +209,20 @@ const TablePosts = ({ data }: Props) => {
           cancelSort: "",
         }}
         rowKey={(record) => record.id}
+      />
+
+      <ToastContainer
+        // icon={}
+        position="top-center"
+        autoClose={1000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </div>
   );

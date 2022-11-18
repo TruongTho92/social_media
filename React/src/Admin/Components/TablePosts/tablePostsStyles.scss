@@ -15,7 +15,6 @@
   color: var(--textWhiteChange);
 }
 // SCSS
-
 .table {
   &__user-id {
     color: var(--textWhiteChange);
@@ -38,9 +37,19 @@
   }
   &__posts-caption {
     font-style: 16px;
+    width: 240px;
     font-weight: 400;
     margin-bottom: 0 !important;
     color: var(--textWhiteChange);
+    @include desktop {
+      width: 100px;
+    }
+    @include tablet {
+      width: 100px;
+    }
+    @include mobile {
+      width: 100px;
+    }
   }
   &__posts-caption-error {
     font-style: 14px;
@@ -93,6 +102,57 @@
 
     font-size: 24px;
     animation: Rotate 1s linear infinite;
+  }
+}
+
+.cell__image {
+  width: 200px;
+  height: fit-content;
+}
+.slider.postImgSlider {
+  display: grid;
+  aspect-ratio: 1;
+}
+.table__posts-image {
+  width: 200px !important;
+  height: 200px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+
+// ARROW SLIDER
+.arrow {
+  position: absolute;
+  width: 18px !important;
+  height: 18px !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+  text-align: center;
+  border-radius: 4px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--boxShadow) !important;
+  z-index: 100;
+
+  &.next {
+    right: 6px !important;
+  }
+  &.prev {
+    left: 6px !important;
+  }
+  &::before {
+    display: none;
+  }
+  .arrowNextIcon {
+    height: 100%;
+    width: 100%;
+    font-size: 10px;
+    line-height: 18px;
+    color: var(--greyBold);
   }
 }
 

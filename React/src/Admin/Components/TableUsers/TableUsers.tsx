@@ -1,6 +1,7 @@
 import { Input, Table, Tag, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "~/app/hooks";
 
 import { UserResponse } from "~/common/types";
@@ -221,6 +222,19 @@ const TableUsers = ({ data }: Props) => {
         }}
         className="table__user"
         rowKey={(record) => record.id}
+      />
+      <ToastContainer
+        // icon={}
+        position="top-center"
+        autoClose={1000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </div>
   );
