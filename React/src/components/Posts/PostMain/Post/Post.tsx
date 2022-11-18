@@ -9,6 +9,7 @@ import { getUser } from "~/features/Auth/userSlice";
 import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
 import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
 import {
+  getAllPostSave,
   getAllPostSaveAsync,
   savePostAsync,
   unSavePostAsync,
@@ -83,18 +84,20 @@ const Post: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    if (allPostSaved.find((post) => post.id === postId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [allPostSaved, postId]);
+
+  useEffect(() => {
     if (likes?.find((post) => post.user_id === getUserData.user.id)) {
       setLiked(true);
     } else {
       setLiked(false);
     }
   }, [getUserData.user.id, likes]);
-
-  useEffect(() => {
-    if (allPostSaved.find((post) => post.id === postId)) {
-      setSaved(true);
-    }
-  }, [postId]);
 
   // LIKE
   const handleLike = async () => {

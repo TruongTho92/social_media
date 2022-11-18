@@ -19,6 +19,7 @@ import Loading from "~/components/Loading";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLikeData,
+  getLoadingLike,
   getLoadingPosts,
   getPostDetail,
   getUsersCommented,
@@ -35,13 +36,13 @@ import {
   unSavePostAsync,
 } from "~/features/savePosts/savePostsSlice";
 import moment from "moment";
+import LoadingSpinner from "~/components/LoadingSpinner";
 
 export type Props = {};
 const PostDetail: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
-
   const [isOpenSettingPost, setIsOpenSettingPost] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -55,6 +56,7 @@ const PostDetail: React.FC<Props> = () => {
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
   const likeData = useAppSelector(getLikeData);
+  const loadingLike = useAppSelector(getLoadingLike);
 
   const userProfile = useAppSelector(getProfileUser);
   const allPostData = useAppSelector(getAllPost);
@@ -69,12 +71,22 @@ const PostDetail: React.FC<Props> = () => {
   // GET POST DETAIL
   useEffect(() => {
     dispatch(postDetailApi.getPost(postId));
+    dispatch(getAllPostSaveAsync());
 
     document.body.classList.add("postDetailOpen");
     return function cleanup() {
       document.body.classList.remove("postDetailOpen");
     };
   }, []);
+
+  // CHECK SAVED POST
+  useEffect(() => {
+    if (allPostSaved.find((post) => post.id === postId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [allPostSaved, postId]);
 
   // CHECK ACCOUNT AND LIKED
   useEffect(() => {
@@ -87,13 +99,6 @@ const PostDetail: React.FC<Props> = () => {
       setLiked(false);
     }
   }, [allPostData, getUserData.user.id, userLikedData]);
-
-  // CHECK SAVED POST
-  useEffect(() => {
-    if (allPostSaved.find((post) => post.id === postId)) {
-      setSaved(true);
-    }
-  }, [postId]);
 
   // CONFIG Slider
   const settings = {
@@ -181,26 +186,32 @@ const PostDetail: React.FC<Props> = () => {
         content: comment,
       },
     };
-    setComment("");
+    if (!comment) return;
+
     await dispatch(postDetailApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
+    setComment("");
+    inputRef.current?.focus();
   };
 
   //Handle Save Post
   const handleSavePost = async (idPost: number) => {
-    setSaved(true);
     await dispatch(savePostAsync(idPost));
+    setSaved(true);
+    dispatch(postDetailApi.getPost(postId));
+
     dispatch(getAllPostSaveAsync());
   };
   const handleUnSavePost = async (idPost: number) => {
-    setSaved(false);
     await dispatch(unSavePostAsync(idPost));
+    setSaved(false);
+    dispatch(postDetailApi.getPost(postId));
     dispatch(getAllPostSaveAsync());
   };
 
   return (
     <>
-      {loadingPost ? (
+      {postDetailData.id !== postId ? (
         <Loading />
       ) : (
         <section
@@ -376,7 +387,7 @@ const PostDetail: React.FC<Props> = () => {
                 </Slider>
               ) : (
                 postDetailData.image.map((image) => (
-                  <div className={styles.postDetailImg} key={image}>
+                  <div className={styles.postDetailImgMobile} key={image}>
                     <img src={image} alt="" />
                   </div>
                 ))
@@ -420,9 +431,16 @@ const PostDetail: React.FC<Props> = () => {
                     </div>
                   )}
                 </div>
-                <Typography className={styles.likeNumber}>
-                  <span>{userLikedData.length}</span> Likes
-                </Typography>
+
+                {loadingLike ? (
+                  <div className="d-flex justify-content-start ml-3 my-2">
+                    <LoadingSpinner width={20} />
+                  </div>
+                ) : (
+                  <Typography className={styles.likeNumber}>
+                    <span>{userLikedData.length}</span> Likes
+                  </Typography>
+                )}
 
                 <Typography className={styles.dateCreated}>
                   {moment(postDetailData.created_at).fromNow()}

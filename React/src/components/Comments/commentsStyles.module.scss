@@ -3,11 +3,12 @@
 @import "../../global/scss/variables.scss";
 
 .commentList {
-  height: 300px;
+  height: 340px;
   width: 100%;
   overflow-y: scroll;
   padding: 12px 0;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
@@ -78,7 +79,7 @@
 
 @include desktop {
   .commentList {
-    height: 260px;
+    height: 340px;
     &.hidden {
       height: 0;
     }
@@ -86,7 +87,7 @@
 }
 @include tablet {
   .commentList {
-    height: 140px;
+    height: 260px;
     font-size: 14px;
     &.hidden {
       height: 0;
@@ -97,6 +98,7 @@
 @include mobile {
   .commentList {
     height: 160px;
+    padding: 12px 12px;
     &.hidden {
       height: 0;
     }
