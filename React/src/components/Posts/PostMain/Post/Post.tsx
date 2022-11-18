@@ -120,113 +120,111 @@ const Post: React.FC<Props> = ({
   };
 
   return (
-    <LazyLoad className={styles.height} threshold={0.4}>
-      <div className={styles.post}>
-        <div className={styles.user}>
-          <div className={styles.userName}>
-            <Link to={`/user-profile/${userId}`}>
-              <div className={styles.image}>
-                <img
-                  src={avatar ? avatar : "/assets/images/user-img.jpg"}
-                  alt=""
-                  loading="lazy"
-                />
-              </div>
-            </Link>
-            <div className={styles.info}>
-              <p className={styles.name}>{userName}</p>
-              <p className={styles.description}>{nickName} </p>
+    // <LazyLoad className={styles.height} threshold={0.4}>
+    <div className={styles.post}>
+      <div className={styles.user}>
+        <div className={styles.userName}>
+          <Link to={`/user-profile/${userId}`}>
+            <div className={styles.image}>
+              <img
+                src={avatar ? avatar : "/assets/images/user-img.jpg"}
+                alt=""
+                loading="lazy"
+              />
             </div>
+          </Link>
+          <div className={styles.info}>
+            <p className={styles.name}>{userName}</p>
+            <p className={styles.description}>{nickName} </p>
           </div>
         </div>
+      </div>
 
-        {/* IMAGES */}
-        {imagePost.length > 1 ? (
-          <Slider {...settings}>
-            {imagePost.map((image: string) => (
-              <div className={styles.postImage} key={image}>
-                <img src={image} alt="" />
-              </div>
-            ))}
-          </Slider>
-        ) : (
-          imagePost.map((image: string) => (
+      {/* IMAGES */}
+      {imagePost.length > 1 ? (
+        <Slider {...settings}>
+          {imagePost.map((image: string) => (
             <div className={styles.postImage} key={image}>
               <img src={image} alt="" />
             </div>
-          ))
-        )}
+          ))}
+        </Slider>
+      ) : (
+        imagePost.map((image: string) => (
+          <div className={styles.postImage} key={image}>
+            <img src={image} alt="" />
+          </div>
+        ))
+      )}
 
-        <div className={styles.postContent}>
-          <div className={styles.emotion}>
-            <div className={styles.left}>
-              {liked ? (
-                <i
-                  onClick={handleDisLike}
-                  className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
-                ></i>
-              ) : (
-                <i
-                  onClick={handleLike}
-                  className={`far fa-heart ${styles.likeIcon}`}
-                ></i>
-              )}
-
-              <Link
-                to={`/post-newfeeds/${postId}`}
-                className={styles.commentLink}
-                state={{ background: location }}
-              >
-                <i className={`far fa-comment ${styles.commentIcon}`}></i>
-              </Link>
-            </div>
-            {saved ? (
-              <div
-                style={{ lineHeight: 0 }}
-                onClick={() => handleUnSavePost(postId)}
-              >
-                <i className={`fas fa-bookmark ${styles.saveIcon}`}></i>
-              </div>
+      <div className={styles.postContent}>
+        <div className={styles.emotion}>
+          <div className={styles.left}>
+            {liked ? (
+              <i
+                onClick={handleDisLike}
+                className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
+              ></i>
             ) : (
-              <div
-                style={{ lineHeight: 0 }}
-                onClick={() => handleSavePost(postId)}
-              >
-                <i className={`fal fa-bookmark ${styles.saveIcon}`}></i>
-              </div>
+              <i
+                onClick={handleLike}
+                className={`far fa-heart ${styles.likeIcon}`}
+              ></i>
             )}
-          </div>
-          <Typography className={styles.textUserLiked}>
-            <span>{likes?.length}</span> likes
-          </Typography>
-          <div className={styles.captionContainer}>
-            <Typography className={styles.userNameCaption}>
-              {userName}
-            </Typography>
-            <Typography.Paragraph
-              ellipsis={
-                ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
-              }
-              className={styles.caption}
-            >
-              {caption}
-            </Typography.Paragraph>
-          </div>
-          {comments?.length > 0 ? (
+
             <Link
               to={`/post-newfeeds/${postId}`}
-              className={styles.commentList}
+              className={styles.commentLink}
               state={{ background: location }}
             >
-              View all {comments.length} comments
+              <i className={`far fa-comment ${styles.commentIcon}`}></i>
             </Link>
-          ) : null}
-          <Typography className={styles.dateCreated}>
-            {moment(dateCreated).fromNow()}
-          </Typography>
+          </div>
+          {saved ? (
+            <div
+              style={{ lineHeight: 0 }}
+              onClick={() => handleUnSavePost(postId)}
+            >
+              <i className={`fas fa-bookmark ${styles.saveIcon}`}></i>
+            </div>
+          ) : (
+            <div
+              style={{ lineHeight: 0 }}
+              onClick={() => handleSavePost(postId)}
+            >
+              <i className={`fal fa-bookmark ${styles.saveIcon}`}></i>
+            </div>
+          )}
         </div>
+        <Typography className={styles.textUserLiked}>
+          <span>{likes?.length}</span> likes
+        </Typography>
+        <div className={styles.captionContainer}>
+          <Typography className={styles.userNameCaption}>{userName}</Typography>
+          <Typography.Paragraph
+            ellipsis={
+              ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
+            }
+            className={styles.caption}
+          >
+            {caption}
+          </Typography.Paragraph>
+        </div>
+        {comments?.length > 0 ? (
+          <Link
+            to={`/post-newfeeds/${postId}`}
+            className={styles.commentList}
+            state={{ background: location }}
+          >
+            View all {comments.length} comments
+          </Link>
+        ) : null}
+        <Typography className={styles.dateCreated}>
+          {moment(dateCreated).fromNow()}
+        </Typography>
       </div>
-    </LazyLoad>
+    </div>
+    // </LazyLoad>
   );
 };
 
