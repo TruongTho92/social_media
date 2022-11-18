@@ -64,6 +64,7 @@ const savePostsSlice = createSlice({
       })
       .addCase(savePostAsync.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false;
+        state.data = action.payload;
       })
       .addCase(savePostAsync.rejected, (state) => {
         state.loading = true;

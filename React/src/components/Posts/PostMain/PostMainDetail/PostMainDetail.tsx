@@ -2,7 +2,6 @@ import { Input, Typography } from "antd";
 import { TextAreaRef } from "antd/lib/input/TextArea";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
-import { IoBookmarkOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Slider from "react-slick";
@@ -19,6 +18,7 @@ import LoadingSpinner from "~/components/LoadingSpinner";
 import { postDetailApi } from "~/features/accountPost/postDetail/postDetailApi";
 import {
   getLikeData,
+  getLoadingLike,
   getLoadingPosts,
   getPostDetail,
   getUsersCommented,
@@ -31,6 +31,7 @@ import { getProfileUser } from "~/features/profileUser/profileUserSlice";
 import {
   getAllPostSave,
   getAllPostSaveAsync,
+  getLoadingSave,
   savePostAsync,
   unSavePostAsync,
 } from "~/features/savePosts/savePostsSlice";
@@ -51,6 +52,7 @@ const PostMainDetail: React.FC<Props> = () => {
 
   const getUserData = useAppSelector(getUser);
   const loadingPost = useAppSelector(getLoadingPosts);
+  const loadingLike = useAppSelector(getLoadingLike);
   const likeData = useAppSelector(getLikeData);
   const profileUser = useAppSelector(getProfileUser);
   const postDetailData = useAppSelector(getPostDetail);
@@ -133,19 +135,17 @@ const PostMainDetail: React.FC<Props> = () => {
     if (allPostSaved.find((post) => post.id === postId)) {
       setSaved(true);
     }
-  }, [postId]);
+  }, [allPostSaved, postId]);
 
   // LIKE
   const handleLike = async () => {
     await dispatch(postDetailApi.like(postId));
     dispatch(postDetailApi.getPost(postId));
-    dispatch(postOfFollowingApi.getPostFollowing());
     setLiked(true);
   };
   const handleDisLike = async () => {
     await dispatch(postDetailApi.disLike(postId, likeData.id));
     dispatch(postDetailApi.getPost(postId));
-    dispatch(postOfFollowingApi.getPostFollowing());
     setLiked(false);
   };
 
@@ -157,28 +157,29 @@ const PostMainDetail: React.FC<Props> = () => {
         content: comment,
       },
     };
-    setComment("");
+    if (!comment) return;
     await dispatch(postDetailApi.comment(payload, postId));
     dispatch(postDetailApi.getPost(postId));
-    dispatch(postOfFollowingApi.getPostFollowing());
+    setComment("");
+    inputRef.current?.focus();
   };
 
   //Handle Save Post
   const handleSavePost = async (idPost: number) => {
-    setSaved(true);
     await dispatch(savePostAsync(idPost));
+    setSaved(true);
+    dispatch(postDetailApi.getPost(postId));
     dispatch(getAllPostSaveAsync());
-    dispatch(postOfFollowingApi.getPostFollowing());
   };
   const handleUnSavePost = async (idPost: number) => {
-    setSaved(false);
     await dispatch(unSavePostAsync(idPost));
+    setSaved(false);
+    dispatch(postDetailApi.getPost(postId));
     dispatch(getAllPostSaveAsync());
-    dispatch(postOfFollowingApi.getPostFollowing());
   };
   return (
     <>
-      {loadingPost ? (
+      {postDetailData.id !== postId ? (
         <Loading />
       ) : (
         <section
@@ -186,6 +187,7 @@ const PostMainDetail: React.FC<Props> = () => {
           onClick={() => {
             navigate(-1);
             dispatch(profileUserApi.getProfileUser(getUserData.user.id));
+            dispatch(postOfFollowingApi.getPostFollowing());
           }}
         >
           <div
@@ -301,15 +303,22 @@ const PostMainDetail: React.FC<Props> = () => {
                     </div>
                   )}
                 </div>
-                <Typography className={styles.likeNumber}>
-                  <span>{userLikedData.length}</span> Likes
-                </Typography>
+
+                {loadingLike ? (
+                  <div className="d-flex justify-content-start ml-3 my-2">
+                    <LoadingSpinner width={20} />
+                  </div>
+                ) : (
+                  <Typography className={styles.likeNumber}>
+                    <span>{userLikedData.length}</span> Likes
+                  </Typography>
+                )}
 
                 <Typography className={styles.dateCreated}>
                   {moment(postDetailData.created_at).fromNow()}
                 </Typography>
-                {/* COMMENT MOBILE */}
 
+                {/* COMMENT MOBILE */}
                 {isOpenComment && (
                   <Comments postId={postId} commentList={commentData} />
                 )}
@@ -345,6 +354,7 @@ const PostMainDetail: React.FC<Props> = () => {
           </div>
         </section>
       )}
+
       <ToastContainer
         icon={<MdOutlineDone size={30} />}
         position="top-center"

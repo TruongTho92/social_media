@@ -35,7 +35,9 @@
 
   aspect-ratio: 1;
 }
-.slider.postImgSliderMobile {
+
+.slider.postImgSliderMobile,
+.postDetailImgMobile {
   display: none;
 }
 .postDetailImg,
@@ -256,6 +258,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    outline: none;
   }
 }
 
@@ -372,10 +375,13 @@
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
-    height: 500px;
+    height: 457px;
   }
   .slider.postImgSlider {
     display: none;
+  }
+  .postDetailImgMobile {
+    display: block;
   }
   .slider.postImgSliderMobile {
     display: grid;
@@ -427,6 +433,7 @@
     .inputComment,
     .btnComment {
       font-size: 14px;
+      border: none;
     }
   }
   .seeComment {

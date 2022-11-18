@@ -91,11 +91,12 @@ export const postDetailApi = {
           token: token,
         },
       });
-
-      dispatch({
-        type: likeSuccess.toString(),
-        payload: data.data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: likeSuccess.toString(),
+          payload: data.data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: likeFailure.toString(),
@@ -120,11 +121,12 @@ export const postDetailApi = {
             },
           }
         );
-
-        dispatch({
-          type: disLikeSuccess.toString(),
-          payload: data,
-        });
+        setTimeout(() => {
+          dispatch({
+            type: disLikeSuccess.toString(),
+            payload: data,
+          });
+        }, 1000);
       } catch (error: any) {
         dispatch({
           type: disLikeFailure.toString(),
@@ -151,10 +153,12 @@ export const postDetailApi = {
           },
         }
       );
-      dispatch({
-        type: CommentSuccess.toString(),
-        payload: data.data.comment,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: CommentSuccess.toString(),
+          payload: data.data.comment,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: CommentFailure.toString(),
@@ -165,7 +169,6 @@ export const postDetailApi = {
 
   deleteComment:
     (idPost: any, idComment: number | null) => async (dispatch: any) => {
-      console.log({ idPost, idComment });
       try {
         dispatch({
           type: DeleteCommentRequest.toString(),
@@ -182,10 +185,12 @@ export const postDetailApi = {
             },
           }
         );
-        dispatch({
-          type: DeleteCommentSuccess.toString(),
-          payload: data,
-        });
+        setTimeout(() => {
+          dispatch({
+            type: DeleteCommentSuccess.toString(),
+            payload: data,
+          });
+        }, 1000);
       } catch (error: any) {
         dispatch({
           type: DeleteCommentFailure.toString(),

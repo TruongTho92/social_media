@@ -9,6 +9,8 @@ export interface StateTypes {
   data: PostDetailResponse;
   like: LikeDataResponse;
   comment: CommentDataResponse;
+  loadingLike: boolean | null;
+  loadingComment: boolean | null;
 }
 
 const initialState: StateTypes = {
@@ -22,6 +24,8 @@ const initialState: StateTypes = {
   },
   like: { id: null, post_id: null, user_id: null },
   comment: { id: null, post_id: null, user_id: null },
+  loadingLike: null,
+  loadingComment: null,
 };
 
 const postDetailSlice = createSlice({
@@ -67,50 +71,50 @@ const postDetailSlice = createSlice({
     },
 
     likeRequest: (state) => {
-      state.loading = true;
+      state.loadingLike = true;
     },
     likeSuccess: (state, action: PayloadAction<LikeDataResponse>) => {
-      state.loading = false;
+      state.loadingLike = false;
       state.like = action.payload;
     },
     likeFailure: (state) => {
-      state.loading = true;
+      state.loadingLike = true;
     },
 
     disLikeRequest: (state) => {
-      state.loading = true;
+      state.loadingLike = true;
     },
     disLikeSuccess: (state, action: PayloadAction<any>) => {
-      state.loading = false;
+      state.loadingLike = false;
       state.like = action.payload.data;
     },
     disLikeFailure: (state) => {
-      state.loading = true;
+      state.loadingLike = true;
     },
 
     // COMMENT
     CommentRequest: (state) => {
-      state.loading = true;
+      state.loadingComment = true;
     },
     CommentSuccess: (state, action: PayloadAction<CommentDataResponse>) => {
-      state.loading = false;
+      state.loadingComment = false;
       state.comment = action.payload;
     },
     CommentFailure: (state) => {
-      state.loading = true;
+      state.loadingComment = true;
     },
     DeleteCommentRequest: (state) => {
-      state.loading = true;
+      state.loadingComment = true;
     },
     DeleteCommentSuccess: (
       state,
       action: PayloadAction<CommentDataResponse>
     ) => {
-      state.loading = false;
+      state.loadingComment = false;
       state.comment = action.payload;
     },
     DeleteCommentFailure: (state) => {
-      state.loading = true;
+      state.loadingComment = true;
     },
   },
 });
@@ -139,6 +143,11 @@ export const {
 
 // SELECTOR
 export const getLoadingPosts = (state: RootState) => state.postDetail.loading;
+export const getLoadingLike = (state: RootState) =>
+  state.postDetail.loadingLike;
+export const getLoadingComment = (state: RootState) =>
+  state.postDetail.loadingComment;
+
 export const getPostDetail = (state: RootState) => state.postDetail.data.post;
 export const getUsersLiked = (state: RootState) => state.postDetail.data.like;
 export const getUsersCommented = (state: RootState) =>
