@@ -45,7 +45,7 @@ const PostList = () => {
     if (allPostFollowing.length > postData.length) {
       setTimeout(() => {
         setPostData((prev) => [...prev].concat(dataToAdd));
-      }, 400);
+      }, 500);
       setVisible(newLimit);
     } else {
       setHasMore(false);

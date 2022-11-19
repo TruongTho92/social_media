@@ -1,25 +1,27 @@
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import LazyLoad from "react-lazy-load";
+import { Link, useLocation } from "react-router-dom";
 
+import moment from "moment";
+import Slider from "react-slick";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { LikeDataResponse, SaveReponse } from "~/common/types";
-import { getUser } from "~/features/Auth/userSlice";
-import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
-import { getLikePostMain } from "~/features/postOfFollowing/postOfFollowingSlice";
-import {
-  getAllPostSave,
-  getAllPostSaveAsync,
-  savePostAsync,
-  unSavePostAsync,
-} from "~/features/savePosts/savePostsSlice";
-import Slider from "react-slick";
 import {
   NextArrow,
   PrevArrow,
 } from "~/components/ArrowSlickCustom/ArrowSlickCustom";
-import moment from "moment";
+import { getUser } from "~/features/Auth/userSlice";
+import { postOfFollowingApi } from "~/features/postOfFollowing/postOfFollowingApi";
+import {
+  getLikePostMain,
+  getLoadingPostFollowing,
+} from "~/features/postOfFollowing/postOfFollowingSlice";
+import {
+  getAllPostSaveAsync,
+  savePostAsync,
+  unSavePostAsync,
+} from "~/features/savePosts/savePostsSlice";
 
 import styles from "./postStyles.module.scss";
 
@@ -56,6 +58,7 @@ const Post: React.FC<Props> = ({
   const dispatch = useAppDispatch();
   const getUserData = useAppSelector(getUser);
   const likePostMain = useAppSelector(getLikePostMain);
+  const loadingPostFollowing = useAppSelector(getLoadingPostFollowing);
 
   const location = useLocation();
 
@@ -101,14 +104,14 @@ const Post: React.FC<Props> = ({
 
   // LIKE
   const handleLike = async () => {
+    setLiked(true);
     await dispatch(postOfFollowingApi.like(postId));
     dispatch(postOfFollowingApi.getPostFollowing());
-    setLiked(true);
   };
   const handleDisLike = async () => {
+    setLiked(false);
     await dispatch(postOfFollowingApi.disLike(postId, likePostMain.id));
     dispatch(postOfFollowingApi.getPostFollowing());
-    setLiked(false);
   };
 
   const handleSavePost = async (idPost: number) => {
@@ -123,111 +126,115 @@ const Post: React.FC<Props> = ({
   };
 
   return (
-    // <LazyLoad className={styles.height} threshold={0.4}>
-    <div className={styles.post}>
-      <div className={styles.user}>
-        <div className={styles.userName}>
-          <Link to={`/user-profile/${userId}`}>
-            <div className={styles.image}>
-              <img
-                src={avatar ? avatar : "/assets/images/user-img.jpg"}
-                alt=""
-                loading="lazy"
-              />
+    <LazyLoad className={styles.height} threshold={0.4}>
+      <div className={styles.post}>
+        <div className={styles.user}>
+          <div className={styles.userName}>
+            <Link to={`/user-profile/${userId}`}>
+              <div className={styles.image}>
+                <img
+                  src={avatar ? avatar : "/assets/images/user-img.jpg"}
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+            </Link>
+            <div className={styles.info}>
+              <p className={styles.name}>{userName}</p>
+              <p className={styles.description}>{nickName} </p>
             </div>
-          </Link>
-          <div className={styles.info}>
-            <p className={styles.name}>{userName}</p>
-            <p className={styles.description}>{nickName} </p>
           </div>
         </div>
-      </div>
 
-      {/* IMAGES */}
-      {imagePost.length > 1 ? (
-        <Slider {...settings}>
-          {imagePost.map((image: string) => (
+        {/* IMAGES */}
+        {imagePost.length > 1 ? (
+          <Slider {...settings}>
+            {imagePost.map((image: string) => (
+              <div className={styles.postImage} key={image}>
+                <img src={image} alt="" />
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          imagePost.map((image: string) => (
             <div className={styles.postImage} key={image}>
               <img src={image} alt="" />
             </div>
-          ))}
-        </Slider>
-      ) : (
-        imagePost.map((image: string) => (
-          <div className={styles.postImage} key={image}>
-            <img src={image} alt="" />
-          </div>
-        ))
-      )}
+          ))
+        )}
 
-      <div className={styles.postContent}>
-        <div className={styles.emotion}>
-          <div className={styles.left}>
-            {liked ? (
-              <i
-                onClick={handleDisLike}
-                className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
-              ></i>
+        <div className={styles.postContent}>
+          <div className={styles.emotion}>
+            <div className={styles.left}>
+              {liked ? (
+                <i
+                  onClick={handleDisLike}
+                  className={`fas fa-heart ${styles.likeIcon} ${styles.active}`}
+                ></i>
+              ) : (
+                <i
+                  onClick={handleLike}
+                  className={`far fa-heart ${styles.likeIcon}`}
+                ></i>
+              )}
+
+              <Link
+                to={`/post-newfeeds/${postId}`}
+                className={styles.commentLink}
+                state={{ background: location }}
+              >
+                <i className={`far fa-comment ${styles.commentIcon}`}></i>
+              </Link>
+            </div>
+            {saved ? (
+              <div
+                style={{ lineHeight: 0 }}
+                onClick={() => handleUnSavePost(postId)}
+              >
+                <i className={`fas fa-bookmark ${styles.saveIcon}`}></i>
+              </div>
             ) : (
-              <i
-                onClick={handleLike}
-                className={`far fa-heart ${styles.likeIcon}`}
-              ></i>
+              <div
+                style={{ lineHeight: 0 }}
+                onClick={() => handleSavePost(postId)}
+              >
+                <i className={`fal fa-bookmark ${styles.saveIcon}`}></i>
+              </div>
             )}
+          </div>
 
+          <Typography className={styles.textUserLiked}>
+            <span>{likes?.length}</span> likes
+          </Typography>
+
+          <div className={styles.captionContainer}>
+            <Typography className={styles.userNameCaption}>
+              {userName}
+            </Typography>
+            <Typography.Paragraph
+              ellipsis={
+                ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
+              }
+              className={styles.caption}
+            >
+              {caption}
+            </Typography.Paragraph>
+          </div>
+          {comments?.length > 0 ? (
             <Link
               to={`/post-newfeeds/${postId}`}
-              className={styles.commentLink}
+              className={styles.commentList}
               state={{ background: location }}
             >
-              <i className={`far fa-comment ${styles.commentIcon}`}></i>
+              View all {comments.length} comments
             </Link>
-          </div>
-          {saved ? (
-            <div
-              style={{ lineHeight: 0 }}
-              onClick={() => handleUnSavePost(postId)}
-            >
-              <i className={`fas fa-bookmark ${styles.saveIcon}`}></i>
-            </div>
-          ) : (
-            <div
-              style={{ lineHeight: 0 }}
-              onClick={() => handleSavePost(postId)}
-            >
-              <i className={`fal fa-bookmark ${styles.saveIcon}`}></i>
-            </div>
-          )}
+          ) : null}
+          <Typography className={styles.dateCreated}>
+            {moment(dateCreated).fromNow()}
+          </Typography>
         </div>
-        <Typography className={styles.textUserLiked}>
-          <span>{likes?.length}</span> likes
-        </Typography>
-        <div className={styles.captionContainer}>
-          <Typography className={styles.userNameCaption}>{userName}</Typography>
-          <Typography.Paragraph
-            ellipsis={
-              ellipsis ? { rows: 1, expandable: true, symbol: "more" } : false
-            }
-            className={styles.caption}
-          >
-            {caption}
-          </Typography.Paragraph>
-        </div>
-        {comments?.length > 0 ? (
-          <Link
-            to={`/post-newfeeds/${postId}`}
-            className={styles.commentList}
-            state={{ background: location }}
-          >
-            View all {comments.length} comments
-          </Link>
-        ) : null}
-        <Typography className={styles.dateCreated}>
-          {moment(dateCreated).fromNow()}
-        </Typography>
       </div>
-    </div>
-    // </LazyLoad>
+    </LazyLoad>
   );
 };
 

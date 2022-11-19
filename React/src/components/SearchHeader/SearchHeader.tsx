@@ -49,15 +49,16 @@ const SearchHeader: React.FC = () => {
                 </div>
               ) : (
                 resultSearch.map((user) => (
-                  <div className={styles.userItem} key={user.id}>
-                    <div className={styles.userInfo}>
-                      <Link
-                        to={
-                          user.id === getUserData.user.id
-                            ? "/profile"
-                            : `/user-profile/${user.id}`
-                        }
-                      >
+                  <Link
+                    to={
+                      user.id === getUserData.user.id
+                        ? "/profile"
+                        : `/user-profile/${user.id}`
+                    }
+                    className={styles.userItem}
+                  >
+                    <div className={styles.userItem} key={user.id}>
+                      <div className={styles.userInfo}>
                         <img
                           src={
                             user.avatar
@@ -67,15 +68,15 @@ const SearchHeader: React.FC = () => {
                           alt=""
                           className={styles.userImg}
                         />
-                      </Link>
-                      <div className={styles.info}>
-                        <span className={styles.name}>{user.user_name}</span>
-                        <span className={styles.description}>
-                          {user.nick_name}
-                        </span>
+                        <div className={styles.info}>
+                          <span className={styles.name}>{user.user_name}</span>
+                          <span className={styles.description}>
+                            {user.nick_name}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))
               )}
             </div>
