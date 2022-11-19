@@ -14,9 +14,15 @@
 .followerContainer {
   width: 400px !important;
   padding: 16px;
+  &.scroll {
+    height: 500px;
+    overflow-y: scroll;
+    @include hidden-scrollbar;
+  }
 }
 
-.userItem {
+.userItem,
+.userItemLink {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,7 +56,7 @@
       width: fit-content;
       margin: 0;
       line-height: 1;
-      // margin-bottom: 4px;
+      color: var(--blackColor);
       white-space: nowrap;
       word-wrap: break-word;
       overflow: hidden;

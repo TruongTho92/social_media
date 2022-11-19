@@ -10,7 +10,7 @@
 }
 .headerContainer {
   position: fixed;
-  z-index: 1001;
+  z-index: 1000;
   color: var(--bgLight);
   background-color: $whiteColor;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);

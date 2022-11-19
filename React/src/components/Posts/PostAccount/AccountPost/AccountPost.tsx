@@ -1,11 +1,11 @@
 import React from "react";
+import LazyLoad from "react-lazy-load";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "~/app/hooks";
 import {
   getUsersCommented,
   getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
-
 import styles from "./accountPostStyles.module.scss";
 
 type Props = {
@@ -27,10 +27,14 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
               <div className={styles.iconDuplicate}>
                 <i className="fas fa-clone"></i>
               </div>
-              <img src={`${image[0]}`} alt="" />
+              <LazyLoad threshold={0.6} width={"100%"} height={"100%"}>
+                <img src={`${image[image.length - 1]}`} alt="" />
+              </LazyLoad>
             </div>
           ) : (
-            <img src={image && `${image[0]}`} alt="" />
+            <LazyLoad threshold={0.6} width={"100%"} height={"100%"}>
+              <img src={image && `${image[image.length - 1]}`} alt="" />
+            </LazyLoad>
           )}
 
           <div className={styles.postImgHover}>

@@ -44,20 +44,27 @@ const ModalFollowing: React.FC<Props> = ({ followings }) => {
             footer={false}
             onCancel={handleCancel}
           >
-            <div className={styles.followerContainer}>
+            <div
+              className={
+                followings.length > 6
+                  ? `${styles.followerContainer} ${styles.scroll}`
+                  : `${styles.followerContainer}`
+              }
+            >
               {followings?.length > 0 ? (
                 followings.map((user, index) => (
                   <div className={styles.userItem} key={user.id}>
-                    <div className={styles.userInfo}>
-                      <Link
-                        to={
-                          followings.find(
-                            (user) => user.id === getUserData.user.id
-                          )
-                            ? `/profile`
-                            : `/user-profile/${user.id}`
-                        }
-                      >
+                    <Link
+                      to={
+                        followings.find(
+                          (user) => user.id === getUserData.user.id
+                        )
+                          ? `/profile`
+                          : `/user-profile/${user.id}`
+                      }
+                      className={styles.userItemLink}
+                    >
+                      <div className={styles.userInfo}>
                         <img
                           src={
                             user.avatar
@@ -67,17 +74,17 @@ const ModalFollowing: React.FC<Props> = ({ followings }) => {
                           alt=""
                           className={styles.userImg}
                         />
-                      </Link>
-                      <div className={styles.info}>
-                        <span className={styles.name}>{user.user_name}</span>
-                        <span className={styles.description}>
-                          {user.nick_name}
-                        </span>
-                        <span className={styles.ticked}>
-                          <FiCheck className={styles.tickedIcon} />
-                        </span>
+                        <div className={styles.info}>
+                          <span className={styles.name}>{user.user_name}</span>
+                          <span className={styles.description}>
+                            {user.nick_name}
+                          </span>
+                          <span className={styles.ticked}>
+                            <FiCheck className={styles.tickedIcon} />
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))
               ) : (

@@ -1,6 +1,5 @@
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import { PostOfFollowingResponse } from "~/common/types";
@@ -11,7 +10,6 @@ import {
   getAllPostOfFollowing,
   getLoadingPostFollowing,
 } from "~/features/postOfFollowing/postOfFollowingSlice";
-import { getloadingProfile } from "~/features/profileUser/profileUserSlice";
 import {
   getAllPostSave,
   getAllPostSaveAsync,
@@ -69,64 +67,62 @@ const PostList = () => {
       )}
 
       <div className={styles.posts}>
-        <InfiniteScroll
+        {/* <InfiniteScroll
           scrollableTarget="body"
           dataLength={postData.length}
           next={fetchData}
           hasMore={hasMore}
           loader={postData.length > 0 && <p>loading...</p>}
           style={{ overflow: "hidden" }}
-        >
-          {allPostFollowing.length > 0 ? (
-            allPostFollowing.map((post) => (
-              <div key={post.id}>
-                <Post
-                  avatar={post.avatar}
-                  userName={post.user_name}
-                  nickName={post.nick_name}
-                  imagePost={post.image}
-                  userId={post.user_id}
-                  postId={post.id}
-                  caption={post.caption}
-                  likes={post.like}
-                  comments={post.comment}
-                  dateCreated={post.created_at}
-                  allPostSaved={allPostSaved}
-                />
-              </div>
-            ))
-          ) : (
-            <>
-              {loadingPostFollowing && (
-                <div className={styles.post}>
-                  <div className={styles.user}>
-                    <div className={styles.image}></div>
+        > */}
+        {allPostFollowing.length > 0 ? (
+          allPostFollowing.map((post) => (
+            <div key={post.id}>
+              <Post
+                avatar={post.avatar}
+                userName={post.user_name}
+                nickName={post.nick_name}
+                imagePost={post.image}
+                userId={post.user_id}
+                postId={post.id}
+                caption={post.caption}
+                likes={post.like}
+                comments={post.comment}
+                dateCreated={post.created_at}
+                allPostSaved={allPostSaved}
+              />
+            </div>
+          ))
+        ) : (
+          <>
+            {loadingPostFollowing && (
+              <div className={styles.post}>
+                <div className={styles.user}>
+                  <div className={styles.image}></div>
 
-                    <div className={styles.info}>
-                      <p className={styles.name}></p>
-                      <p className={styles.description}> </p>
-                    </div>
-                  </div>
-                  <div className={styles.postImage}></div>
-                  <div className={styles.postContent}>
-                    <div className={styles.emotion}>
-                      <div className={styles.left}></div>
-                    </div>
-                    <Typography className={styles.textUserLiked}></Typography>
-                    <div className={styles.captionContainer}>
-                      <Typography
-                        className={styles.userNameCaption}
-                      ></Typography>
-                      <Typography.Paragraph
-                        className={styles.caption}
-                      ></Typography.Paragraph>
-                    </div>
+                  <div className={styles.info}>
+                    <p className={styles.name}></p>
+                    <p className={styles.description}> </p>
                   </div>
                 </div>
-              )}
-            </>
-          )}
-        </InfiniteScroll>
+                <div className={styles.postImage}></div>
+                <div className={styles.postContent}>
+                  <div className={styles.emotion}>
+                    <div className={styles.left}></div>
+                  </div>
+                  <Typography className={styles.textUserLiked}></Typography>
+                  <div className={styles.captionContainer}>
+                    <Typography className={styles.userNameCaption}></Typography>
+                    <Typography.Paragraph
+                      className={styles.caption}
+                    ></Typography.Paragraph>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        {/* </InfiniteScroll> */}
       </div>
     </div>
   );
