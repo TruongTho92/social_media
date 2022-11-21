@@ -181,9 +181,10 @@
       }
       &.infoItemFollow {
         border-top: 1px solid $greyLight;
-        border-bottom: 1px solid $greyLight;
+        // border-bottom: 1px solid $greyLight;
         width: 100%;
         padding: 12px 0px;
+        margin-bottom: 0;
       }
       .name {
         font-size: 24px;

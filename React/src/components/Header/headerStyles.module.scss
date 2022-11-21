@@ -176,10 +176,13 @@
   .headerMenu {
     display: none !important;
   }
+  .logoImg {
+    width: 110px !important;
+  }
   .chatIconMobile {
     display: block;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     color: #000;
     &.hidden {
       display: none;
