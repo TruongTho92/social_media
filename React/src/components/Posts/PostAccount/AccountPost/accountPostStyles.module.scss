@@ -420,4 +420,20 @@
       }
     }
   }
+  .postImgHover {
+    .postItemHoverItem {
+      // width: 100%;
+      &:last-child {
+        margin-left: 20px;
+      }
+      span {
+        font-size: 12px;
+        font-weight: 500;
+        margin-left: 6px;
+      }
+      i {
+        font-size: 12px;
+      }
+    }
+  }
 }

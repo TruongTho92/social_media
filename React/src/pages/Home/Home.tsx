@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Header />
-      <div className={`container-fluid pt-80 ${styles.homePage} `}>
+      <div className={`container-fluid  ${styles.homePage} `}>
         <Row gutter={[24, 24]}>
           <Col xs={24} sm={24} md={14} lg={14} xl={14}>
             <PostList />

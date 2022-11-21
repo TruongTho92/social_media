@@ -10,7 +10,7 @@
 }
 .headerContainer {
   position: fixed;
-  z-index: 1001;
+  z-index: 1000;
   color: var(--bgLight);
   background-color: $whiteColor;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
@@ -176,10 +176,13 @@
   .headerMenu {
     display: none !important;
   }
+  .logoImg {
+    width: 110px !important;
+  }
   .chatIconMobile {
     display: block;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     color: #000;
     &.hidden {
       display: none;

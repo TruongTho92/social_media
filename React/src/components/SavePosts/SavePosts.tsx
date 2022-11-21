@@ -1,5 +1,6 @@
 import { Typography } from "antd";
 import React, { useEffect } from "react";
+import LazyLoad from "react-lazy-load";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import {
@@ -49,10 +50,24 @@ const SavePosts: React.FC = () => {
                         <div className={styles.iconDuplicate}>
                           <i className="fas fa-clone"></i>
                         </div>
-                        <img src={`${post.image[0]}`} alt="" />
+                        <LazyLoad
+                          width={"100%"}
+                          height={"100%"}
+                          threshold={0.6}
+                        >
+                          <img
+                            src={`${post.image[post.image.length - 1]}`}
+                            alt=""
+                          />
+                        </LazyLoad>
                       </div>
                     ) : (
-                      <img src={`${post.image[0]}`} alt="" />
+                      <LazyLoad width={"100%"} height={"100%"} threshold={0.6}>
+                        <img
+                          src={`${post.image[post.image.length - 1]}`}
+                          alt=""
+                        />
+                      </LazyLoad>
                     )}
                   </Link>
                 </div>

@@ -29,3 +29,17 @@
     }
   }
 }
+
+@include mobile {
+  .postPages {
+    .postPageLink {
+      padding-top: 8px;
+      &.active {
+        border-top: 0px solid var(--blackColor);
+      }
+      span {
+        font-size: 12px !important;
+      }
+    }
+  }
+}

@@ -35,18 +35,25 @@ const ModalFollowers: React.FC<Props> = ({ followers }) => {
         footer={false}
         onCancel={handleCancel}
       >
-        <div className={styles.followerContainer}>
+        <div
+          className={
+            followers.length > 6
+              ? `${styles.followerContainer} ${styles.scroll}`
+              : `${styles.followerContainer}`
+          }
+        >
           {followers?.length > 0 ? (
             followers.map((user, index) => (
               <div className={styles.userItem} key={index}>
-                <div className={styles.userInfo}>
-                  <Link
-                    to={
-                      followers.find((user) => user.id === getUserData.user.id)
-                        ? `/profile`
-                        : `/user-profile/${user.id}`
-                    }
-                  >
+                <Link
+                  to={
+                    followers.find((user) => user.id === getUserData.user.id)
+                      ? `/profile`
+                      : `/user-profile/${user.id}`
+                  }
+                  className={styles.userItemLink}
+                >
+                  <div className={styles.userInfo}>
                     <img
                       src={
                         user.avatar
@@ -56,15 +63,17 @@ const ModalFollowers: React.FC<Props> = ({ followers }) => {
                       alt=""
                       className={styles.userImg}
                     />
-                  </Link>
-                  <div className={styles.info}>
-                    <span className={styles.name}>{user.user_name}</span>
-                    <span className={styles.description}>{user.nick_name}</span>
-                    <span className={styles.ticked}>
-                      <FiCheck className={styles.tickedIcon} />
-                    </span>
+                    <div className={styles.info}>
+                      <span className={styles.name}>{user.user_name}</span>
+                      <span className={styles.description}>
+                        {user.nick_name}
+                      </span>
+                      <span className={styles.ticked}>
+                        <FiCheck className={styles.tickedIcon} />
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))
           ) : (

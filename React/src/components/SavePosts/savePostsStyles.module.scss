@@ -41,13 +41,15 @@
 
 @include tablet {
   .savePostList {
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
   }
 }
 
 @include mobile {
   .savePostList {
-    grid-template-columns: repeat(1, 1fr);
+    // grid-template-columns: repeat(1, 1fr);
+    gap: 2px;
   }
   .textError {
     font-size: 14px;

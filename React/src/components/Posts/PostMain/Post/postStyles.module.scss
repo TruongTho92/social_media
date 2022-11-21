@@ -8,10 +8,6 @@
 .post {
   padding: 16px 0 12px 0;
   background-color: #fff;
-  margin-bottom: 40px;
-
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .user {
@@ -136,7 +132,7 @@
   }
 }
 .captionContainer {
-  width: 400px;
+  width: fit-content;
 
   display: flex;
   justify-content: start;
@@ -147,7 +143,9 @@
     margin-right: 8px;
   }
   .caption {
-    width: 200px;
+    white-space: pre-wrap;
+    width: 360px;
+
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 0 !important;
@@ -186,7 +184,7 @@
   position: absolute;
   width: 24px !important;
   height: 24px !important;
-  background-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
   text-align: center;
   border-radius: 100rem;
   display: flex !important;
@@ -237,5 +235,21 @@
   :global(li.slick-active) .dotCustom {
     opacity: 1;
     background-color: #fff;
+  }
+}
+
+@include tablet {
+  .captionContainer {
+    .caption {
+      width: 300px;
+    }
+  }
+}
+
+@include mobile {
+  .captionContainer {
+    .caption {
+      width: 180px;
+    }
   }
 }

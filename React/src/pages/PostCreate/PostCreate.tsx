@@ -78,7 +78,7 @@ const PostCreate: React.FC = () => {
 
     await dispatch(postsApi.create(payload));
     setIsHasImage(false);
-    setMutipleImage([]);
+    setImageURLs([]);
     setCaption("");
   };
 
