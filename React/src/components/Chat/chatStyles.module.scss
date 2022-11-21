@@ -1,0 +1,133 @@
+@import "../../global/scss/mixins.scss";
+@import "../../global/scss/responsive.scss";
+@import "../../global/scss/variables.scss";
+
+.chat {
+  @include PaddingTopMain;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.chatContainer {
+  background-color: var(--whiteColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+}
+.chatUserList {
+  border-right: 1px solid var(--borderColor);
+}
+.user {
+  position: relative;
+  @include d-flex(center, center);
+  padding: 16px;
+  border-bottom: 1px solid var(--borderColor);
+  .name {
+    @include d-flex(center, center);
+    font-weight: 500;
+    color: var(--blackColor);
+    cursor: pointer;
+  }
+  .iconDown {
+    width: 26px;
+    height: 26px;
+    margin-left: 6px;
+  }
+  .iconCreateChat {
+    position: absolute;
+    right: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+}
+.userList {
+  @include hidden-scrollbar;
+  padding-top: 12px;
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 0;
+
+  .userItem {
+    @include d-flex(start, center);
+    padding: 0 20px;
+    &:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+  .avatar {
+    @include avatar(60, 60);
+    margin-right: 12px;
+  }
+  .info {
+    .name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--blackColor);
+    }
+    .onlineTime {
+      font-size: 14px;
+      color: var(--greyTextColor);
+    }
+  }
+}
+
+.messagePlaceholder {
+  height: 100%;
+  @include d-flex(center, center);
+  flex-direction: column;
+  .heading {
+    font-size: 22px;
+    font-weight: 400;
+    margin-top: 8px;
+    color: var(--blackColor);
+    text-align: center;
+  }
+  .description {
+    font-size: 14px;
+    color: var(--greyTextColor);
+    text-align: center;
+  }
+  .buttonSend {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--whiteColor);
+    border: none;
+    background-color: var(--mainBlue);
+    padding: 8px 12px;
+    margin-top: 20px;
+    border-radius: 4px;
+  }
+}
+
+.iconSend {
+  @include d-flex(center, center);
+  width: 100px;
+  height: 100px;
+  border-radius: 100rem;
+  border: 2px solid var(--blackColor);
+  i {
+    font-size: 50px;
+  }
+}
+
+@include desktop {
+  .chat {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+@include tablet {
+  .chat {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+}
+@include mobile {
+  .chat {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+  .userList {
+    height: calc(100vh - 210px);
+  }
+}

@@ -10,7 +10,7 @@ import { userApi } from "./features/Auth/userApi";
 import { getAuthenticated } from "./features/Auth/userSlice";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import Chat from "./pages/Chat";
+import ChatPage from "./pages/ChatPage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PostCreate from "./pages/PostCreate";
@@ -34,44 +34,42 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {!isAuthenticated && <Intro />}
+      <Intro />
       <Routes location={background || location}>
-        {/* ADMIN */}
+        {/*===== ADMIN =====*/}
         <Route
           path="/admin/*"
           element={isAuthenticated ? <Admin /> : <Login />}
         />
-        {/* AUTH */}
+        {/*===== AUTH =====*/}
         <Route path="/*" element={isAuthenticated ? <Home /> : <Login />} />
         <Route
           path="post-newfeeds/:id"
           element={isAuthenticated ? <PostMainDetail /> : <Login />}
         />
-
         <Route
           path="/register"
           element={isAuthenticated ? <NotFound /> : <Register />}
         />
-
-        <Route path="chat" element={isAuthenticated ? <Chat /> : <Login />} />
-
-        {/* POST */}
+        {/*===== CHAT =====*/}
+        <Route
+          path="chat"
+          element={isAuthenticated ? <ChatPage /> : <Login />}
+        />
+        {/*===== POST =====*/}
         <Route
           path="create-post"
           element={isAuthenticated ? <PostCreate /> : <Login />}
         />
-
-        {/* PROFILE */}
+        {/*===== PROFILE =====*/}
         <Route
           path="profile/*"
           element={isAuthenticated ? <Profile /> : <Login />}
         />
-
         <Route
           path="account-post/:id"
           element={isAuthenticated ? <PostDetailPage /> : <Login />}
         />
-
         <Route
           path="profile/update"
           element={isAuthenticated ? <UpdateProfilePage /> : <Login />}
@@ -80,19 +78,17 @@ const App: React.FC = () => {
           path="profile/update-password"
           element={isAuthenticated ? <UpdatePasswordPage /> : <Login />}
         />
-
-        {/* USER PROFILE */}
+        {/*===== USER PROFILE =====*/}
         <Route
           path="user-profile/:id"
           element={isAuthenticated ? <UserProfilePage /> : <Login />}
         />
-        {/* SEARCH */}
+        {/*===== SEARCH =====*/}
         <Route
           path="search"
           element={isAuthenticated ? <SearchPage /> : <Login />}
         />
-
-        {/* 404 PAGE */}
+        {/*===== 404 PAGE =====*/}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
