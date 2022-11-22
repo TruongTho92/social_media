@@ -8,12 +8,27 @@
   background-color: var(--whiteColor);
   margin-bottom: 16px;
   box-shadow: var(--boxShadow);
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .userList {
   margin-bottom: 0;
-  line-height: 0;
+}
+.nameUser {
+  margin-top: 8px;
+  width: 80px;
+  line-height: 1;
+  text-align: center;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.userItem {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .userItemImg {
@@ -38,8 +53,8 @@
     object-fit: cover;
   }
   @include mobile {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 100rem;
   }
 }
@@ -72,5 +87,20 @@
     font-size: 12px;
     line-height: 24px;
     color: var(--greyBold);
+  }
+}
+
+@include mobile {
+  .story {
+    margin-bottom: 0;
+    box-shadow: none;
+    padding: 20px 12px;
+    border-radius: 0;
+    border-bottom: 1px solid var(--borderColor);
+  }
+  .userItem {
+    user-select: none;
+    pointer-events: none;
+    cursor: pointer;
   }
 }

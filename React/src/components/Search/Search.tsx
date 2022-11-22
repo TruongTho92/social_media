@@ -37,7 +37,7 @@ const Search = (props: Props) => {
 
   return (
     <div className={styles.searchContainer}>
-      <form action="">
+      <form className={styles.formSearch}>
         <Input
           suffix={
             searchValue.length > 0 ? (

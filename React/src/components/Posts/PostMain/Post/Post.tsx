@@ -126,7 +126,7 @@ const Post: React.FC<Props> = ({
   };
 
   return (
-    <LazyLoad width={"100%"} height={"100%"} threshold={0.6}>
+    <LazyLoad width={"100%"} height={"100%"} threshold={1}>
       <div className={styles.post}>
         <div className={styles.user}>
           <div className={styles.userName}>
@@ -148,7 +148,7 @@ const Post: React.FC<Props> = ({
 
         {/* IMAGES */}
         {imagePost.length > 1 ? (
-          <LazyLoad width={"100%"} height={"100%"} threshold={0.6}>
+          <LazyLoad width={"100%"} height={"100%"} threshold={1}>
             <Slider {...settings}>
               {imagePost.map((image: string) => (
                 <div className={styles.postImage} key={image}>
@@ -160,7 +160,7 @@ const Post: React.FC<Props> = ({
         ) : (
           imagePost.map((image: string) => (
             <div className={styles.postImage} key={image}>
-              <LazyLoad width={"100%"} height={"100%"} threshold={0.6}>
+              <LazyLoad width={"100%"} height={"100%"} threshold={1}>
                 <img src={image} alt="" />
               </LazyLoad>
             </div>

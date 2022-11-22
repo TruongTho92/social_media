@@ -53,6 +53,10 @@
     padding: 12px 2rem;
   }
 
+  .dashboard__body {
+    margin-top: 0;
+  }
+
   .user__list {
     margin-left: 24px;
   }
@@ -68,6 +72,10 @@
   }
 }
 @include mobile {
+  .dashboard__body {
+    margin-top: 0;
+  }
+
   .dashboard__container {
     padding: 12px 2rem;
   }
