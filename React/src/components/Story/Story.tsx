@@ -1,3 +1,4 @@
+import { Typography } from "antd";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
@@ -50,8 +51,8 @@ const Story: React.FC<Props> = () => {
           dots: false,
           infinite: false,
           arrows: false,
-          slidesToShow: userFollowings.length > 5 ? 5 : userFollowings.length,
-          slidesToScroll: 1,
+          slidesToShow: userFollowings.length > 4 ? 4 : userFollowings.length,
+          slidesToScroll: 2,
         },
       },
     ],
@@ -79,6 +80,9 @@ const Story: React.FC<Props> = () => {
                   />
                 </div>
               </Link>
+              <Typography className={styles.nameUser}>
+                {item.user_name}
+              </Typography>
             </li>
           ))}
         </Slider>

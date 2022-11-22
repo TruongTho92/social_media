@@ -177,6 +177,7 @@
 @include mobile {
   .profile__admin {
     padding: 12px 24px;
+    height: fit-content;
   }
   .profile__admin-info {
     // margin-top: 24px;

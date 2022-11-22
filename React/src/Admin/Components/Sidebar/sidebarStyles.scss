@@ -155,12 +155,11 @@
   &__list {
     list-style: none;
     height: 0;
-    opacity: 0;
+
     overflow: hidden;
     padding-left: 36px;
     transition: all 0.25s linear;
     &.open {
-      opacity: 1;
       height: 120px;
       transition: all 0.25s linear;
     }
@@ -220,7 +219,6 @@
 
     &.open {
       width: 100vw;
-
       transition: all 0.25s linear;
       left: 0;
     }

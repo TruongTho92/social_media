@@ -212,7 +212,7 @@ const UpdateProfile: React.FC = () => {
                 </Col>
                 <Col>
                   <button type="submit" className={styles.btnSubmit}>
-                    Submit
+                    Save
                   </button>
                 </Col>
               </Row>

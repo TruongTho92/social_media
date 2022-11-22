@@ -70,7 +70,12 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
         <div className="menu">
           <ul className="menu_list">
             <li className="menu__item">
-              <NavLink to="/admin" className="menu__item-link" end>
+              <NavLink
+                to="/admin"
+                className="menu__item-link"
+                end
+                onClick={handleCloseSidebar}
+              >
                 <div className="link__content">
                   <div style={{ lineHeight: 0 }}>
                     <i className="fas fa-th-large menu__icon"></i>
@@ -108,6 +113,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                   <NavLink
                     to="/admin/manage-posts"
                     className="manage__item-link"
+                    onClick={handleCloseSidebar}
                   >
                     <div className="link__content">
                       <i className="far fa-clone manage__icon"></i>
@@ -119,6 +125,7 @@ const Sidebar = ({ setIsOpenSidebar, isOpenSidebar }: Props) => {
                   <NavLink
                     to="/admin/manage-users"
                     className="manage__item-link"
+                    onClick={handleCloseSidebar}
                   >
                     <div style={{ lineHeight: 0 }}>
                       <i className="far fa-users manage__icon"></i>

@@ -197,7 +197,7 @@ const TableUsers = ({ data }: Props) => {
   ];
 
   return (
-    <div>
+    <div className="table__user">
       <Table
         columns={columns}
         scroll={{ x: "max-content", y: 460 }}
