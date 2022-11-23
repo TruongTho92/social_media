@@ -24,6 +24,7 @@ import {
 } from "~/features/savePosts/savePostsSlice";
 
 import styles from "./postStyles.module.scss";
+import { getUsersLiked } from "~/features/accountPost/postDetail/postDetailSlice";
 
 type Props = {
   avatar: string;
@@ -59,6 +60,7 @@ const Post: React.FC<Props> = ({
   const getUserData = useAppSelector(getUser);
   const likePostMain = useAppSelector(getLikePostMain);
   const loadingPostFollowing = useAppSelector(getLoadingPostFollowing);
+  const userLikedData = useAppSelector(getUsersLiked);
 
   const location = useLocation();
 

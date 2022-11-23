@@ -111,6 +111,7 @@ const PostMainDetail: React.FC<Props> = () => {
     customPaging: (i: any) => <div className={styles.dotCustom}></div>,
   };
 
+  // GET DETAIL POST DATA
   useEffect(() => {
     if (postDetailData.user_id) {
       dispatch(profileUserApi.getProfileUser(postDetailData.user_id));
@@ -237,10 +238,6 @@ const PostMainDetail: React.FC<Props> = () => {
                     </div>
                   </div>
                 </div>
-
-                <Typography className={styles.caption}>
-                  {postDetailData.caption}
-                </Typography>
 
                 {/* COMMENT */}
                 <div className={styles.comment}>

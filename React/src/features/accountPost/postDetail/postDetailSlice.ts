@@ -11,6 +11,7 @@ export interface StateTypes {
   comment: CommentDataResponse;
   loadingLike: boolean | null;
   loadingComment: boolean | null;
+  loadingUpdateCaption: boolean | null;
 }
 
 const initialState: StateTypes = {
@@ -26,6 +27,7 @@ const initialState: StateTypes = {
   comment: { id: null, post_id: null, user_id: null },
   loadingLike: null,
   loadingComment: null,
+  loadingUpdateCaption: null,
 };
 
 const postDetailSlice = createSlice({
@@ -49,10 +51,10 @@ const postDetailSlice = createSlice({
 
     // [PUT] /update_post => UPDATE POST
     UpdatePostRequest: (state) => {
-      state.loading = true;
+      state.loadingUpdateCaption = true;
     },
     UpdatePostSuccess: (state, action: PayloadAction<PostDetailResponse>) => {
-      state.loading = false;
+      state.loadingUpdateCaption = false;
       state.data.post = action.payload.post;
       toast(action.payload.message, {
         position: "top-center",
@@ -66,7 +68,7 @@ const postDetailSlice = createSlice({
       });
     },
     UpdatePostFailure: (state, action: PayloadAction<PostDetailResponse>) => {
-      state.loading = true;
+      state.loadingUpdateCaption = true;
       state.data.post = action.payload.post;
     },
 
@@ -143,6 +145,9 @@ export const {
 
 // SELECTOR
 export const getLoadingPosts = (state: RootState) => state.postDetail.loading;
+export const getLoadingUpdateCaption = (state: RootState) =>
+  state.postDetail.loadingUpdateCaption;
+
 export const getLoadingLike = (state: RootState) =>
   state.postDetail.loadingLike;
 export const getLoadingComment = (state: RootState) =>

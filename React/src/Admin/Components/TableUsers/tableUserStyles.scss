@@ -3,6 +3,9 @@
 @import "../../../global/scss/variables.scss";
 
 // CUSTOM ANTD
+.ant-table-body {
+  @include customScrollbar(10);
+}
 .ant-typography-expand {
   font-size: 14px !important;
   font-weight: 400 !important;
