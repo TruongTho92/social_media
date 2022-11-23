@@ -38,6 +38,27 @@
   }
 }
 
+// CUSTOM SCROLLBAR
+@mixin customScrollbar($widthScrollbar) {
+  &::-webkit-scrollbar-track {
+    border: 1px solid var(--blackColor);
+    background-color: var(--whiteColor);
+    z-index: -1;
+  }
+
+  &::-webkit-scrollbar {
+    width: $widthScrollbar * 1px;
+    background-color: var(--bgMain);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--mainBlue);
+    cursor: pointer;
+  }
+}
+
 // COVER BACKGROUND
 @mixin cover-background {
   background-repeat: no-repeat;

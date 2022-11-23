@@ -7,15 +7,19 @@
   width: 100%;
   overflow-y: scroll;
   padding: 12px 0;
-  scrollbar-width: none;
+  // @include customScrollbar(4);
+  @include hidden-scrollbar;
 
-  &::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
-  }
   &.hidden {
     height: 0;
     padding: 0;
   }
+}
+.caption {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  white-space: pre-wrap;
 }
 .infoComment {
   @include d-flex(start, flex-start);
@@ -25,9 +29,11 @@
   justify-content: space-between;
   align-items: center;
   width: fit-content;
-  margin-bottom: 16px;
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
   width: 100%;
-
+  // padding-right: 8px;
   .userImage {
     width: 30px;
     height: 30px;
@@ -79,7 +85,7 @@
 
 @include desktop {
   .commentList {
-    height: 340px;
+    height: 320px;
     &.hidden {
       height: 0;
     }
@@ -87,7 +93,7 @@
 }
 @include tablet {
   .commentList {
-    height: 260px;
+    height: 188px;
     font-size: 14px;
     &.hidden {
       height: 0;
@@ -96,9 +102,13 @@
 }
 
 @include mobile {
+  .caption {
+    font-size: 12px;
+    font-weight: 400;
+  }
   .commentList {
     height: 160px;
-    padding: 12px 12px;
+    // padding: 12px 12px;
     &.hidden {
       height: 0;
     }

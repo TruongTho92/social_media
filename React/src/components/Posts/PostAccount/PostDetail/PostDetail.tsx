@@ -21,6 +21,7 @@ import {
   getLikeData,
   getLoadingLike,
   getLoadingPosts,
+  getLoadingUpdateCaption,
   getPostDetail,
   getUsersCommented,
   getUsersLiked,
@@ -353,18 +354,7 @@ const PostDetail: React.FC<Props> = () => {
                       </Col>
                     </Row>
                   </div>
-                ) : (
-                  <Typography.Paragraph
-                    ellipsis={
-                      ellipsis
-                        ? { rows: 2, expandable: true, symbol: "more" }
-                        : false
-                    }
-                    className={styles.caption}
-                  >
-                    {postDetailData.caption}
-                  </Typography.Paragraph>
-                )}
+                ) : null}
 
                 {/* COMMENT */}
                 <div className={styles.comment}>
@@ -372,6 +362,7 @@ const PostDetail: React.FC<Props> = () => {
                     postId={postId}
                     isAccount={isAccount}
                     commentList={commentData}
+                    isOpenEdit={isOpenEdit}
                   />
                 </div>
               </div>

@@ -33,22 +33,22 @@ const PostList = () => {
     dispatch(postOfFollowingApi.getPostFollowing());
   }, []);
 
-  useEffect(() => {
-    setPostData(allPostFollowing.slice(0, LIMIT));
-  }, [allPostFollowing]);
+  // useEffect(() => {
+  //   setPostData(allPostFollowing.slice(0, LIMIT));
+  // }, [allPostFollowing]);
 
-  const fetchData = () => {
-    const newLimit = visible + LIMIT;
-    const dataToAdd = allPostFollowing.slice(visible, newLimit);
-    if (allPostFollowing.length > postData.length) {
-      setTimeout(() => {
-        setPostData((prev) => [...prev].concat(dataToAdd));
-      }, 500);
-      setVisible(newLimit);
-    } else {
-      setHasMore(false);
-    }
-  };
+  // const fetchData = () => {
+  //   const newLimit = visible + LIMIT;
+  //   const dataToAdd = allPostFollowing.slice(visible, newLimit);
+  //   if (allPostFollowing.length > postData.length) {
+  //     setTimeout(() => {
+  //       setPostData((prev) => [...prev].concat(dataToAdd));
+  //     }, 500);
+  //     setVisible(newLimit);
+  //   } else {
+  //     setHasMore(false);
+  //   }
+  // };
 
   return (
     <div>
@@ -60,7 +60,7 @@ const PostList = () => {
         <Story />
       )}
 
-      {postData.length <= 0 && (
+      {allPostFollowing.length <= 0 && (
         <Typography className={styles.textErrorFL}>
           Oh No!! You dont have user following or <br /> User dont have post
         </Typography>

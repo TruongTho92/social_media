@@ -40,7 +40,7 @@
   }
 }
 .userList {
-  @include hidden-scrollbar;
+  @include customScrollbar(4);
   padding-top: 12px;
   height: calc(100vh - 200px);
   overflow-y: scroll;

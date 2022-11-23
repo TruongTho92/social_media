@@ -28,7 +28,7 @@
   display: grid;
   grid-template-columns: 55% 45%;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 4px;
   animation: FadeOut 0.25s linear;
   overflow: hidden;
 }
@@ -74,6 +74,7 @@
 
 .postDetailHeader {
   width: 100%;
+  padding-bottom: 12px;
   @include d-flex(space-between, center);
   .userName {
     @include d-flex(start, center);

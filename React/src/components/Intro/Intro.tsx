@@ -1,14 +1,13 @@
 import { Typography } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./introStyles.module.scss";
 type Props = {};
 
 const Intro = (props: Props) => {
+  const [isHiddenIntro, setIsHiddenInstro] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
-      document
-        .querySelector(`.${styles.intro}`)
-        ?.classList.add(`${styles.hidden}`);
+      setIsHiddenInstro(!isHiddenIntro);
     }, 2000);
 
     return () => {
@@ -27,7 +26,11 @@ const Intro = (props: Props) => {
     };
   }, []);
   return (
-    <div className={styles.intro}>
+    <div
+      className={
+        isHiddenIntro ? `${styles.intro} ${styles.hidden} ` : styles.intro
+      }
+    >
       <div className={styles.cardGroup}>
         <div className={`${styles.littleCard} ${styles.card}`}></div>
         <div className={`${styles.bigCard} ${styles.card}`}></div>
@@ -38,7 +41,7 @@ const Intro = (props: Props) => {
         <div className={`${styles.littleCard} ${styles.card}`}></div>
         <div className={`${styles.bigCard} ${styles.card}`}></div>
       </div>
-      <Typography className={styles.cardTitle}>Social Media App</Typography>
+      {/* <Typography className={styles.cardTitle}>Social Media App</Typography> */}
     </div>
   );
 };
