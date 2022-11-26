@@ -6,6 +6,7 @@ import { PostAccount, PostDataResponse } from "~/common/types";
 export interface StateTypes {
   loading: boolean | null;
   data: PostDataResponse;
+  loadingCreated: boolean | null;
 }
 
 const initialState: StateTypes = {
@@ -15,6 +16,7 @@ const initialState: StateTypes = {
     is_success: false,
     message: "",
   },
+  loadingCreated: null,
 };
 
 const postsSlice = createSlice({
@@ -36,23 +38,23 @@ const postsSlice = createSlice({
 
     // [POST]: /create_post => CREATE POST
     CreatePostRequest: (state) => {
-      state.loading = true;
+      state.loadingCreated = true;
     },
     CreatePostSuccess: (state, action: PayloadAction<PostDataResponse>) => {
-      state.loading = false;
-      toast(action.payload.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      state.loadingCreated = false;
+      // toast(action.payload.message, {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "dark",
+      // });
     },
     CreatePostFailure: (state, action: PayloadAction<PostDataResponse>) => {
-      state.loading = true;
+      state.loadingCreated = true;
     },
 
     // [DELETE]: /delete_post => DELETE POST
@@ -85,6 +87,9 @@ export const {
 
 // SELECTOR
 export const getLoadingPosts = (state: RootState) => state.posts.loading;
+export const getLoadingCreate = (state: RootState) =>
+  state.posts.loadingCreated;
+
 export const getAllPost = (state: RootState) => state.posts.data.posts;
 
 // REDUCER

@@ -8,7 +8,7 @@ const Intro = (props: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsHiddenInstro(!isHiddenIntro);
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);

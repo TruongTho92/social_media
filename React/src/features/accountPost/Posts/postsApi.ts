@@ -53,11 +53,12 @@ export const postsApi = {
           token: token,
         },
       });
-
-      dispatch({
-        type: CreatePostSuccess.toString(),
-        payload: data,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: CreatePostSuccess.toString(),
+          payload: data,
+        });
+      }, 1000);
     } catch (error: any) {
       dispatch({
         type: CreatePostFailure.toString(),
