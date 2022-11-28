@@ -2,6 +2,7 @@ import { Input, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import useDebounce from "~/common/hooks/useDebounce";
@@ -56,6 +57,7 @@ const SearchHeader: React.FC = () => {
                         : `/user-profile/${user.id}`
                     }
                     className={styles.userItem}
+                    key={user.id}
                   >
                     <div className={styles.userItem} key={user.id}>
                       <div className={styles.userInfo}>
@@ -104,6 +106,18 @@ const SearchHeader: React.FC = () => {
           }
         />
       </Tooltip>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

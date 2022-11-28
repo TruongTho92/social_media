@@ -63,31 +63,35 @@ const Story: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div className={styles.story}>
-      <ul className={styles.userList}>
-        <Slider {...settings}>
-          {userFollowings.map((item) => (
-            <li className={styles.userItem} key={item.id}>
-              <Link to={`/user-profile/${item.id}`}>
-                <div className={styles.userItemImg}>
-                  <img
-                    src={
-                      item.avatar
-                        ? item.avatar
-                        : `/assets/images/user-vacant.jpg`
-                    }
-                    alt=""
-                  />
-                </div>
-              </Link>
-              <Typography className={styles.nameUser}>
-                {item.user_name}
-              </Typography>
-            </li>
-          ))}
-        </Slider>
-      </ul>
-    </div>
+    <>
+      {userFollowings?.length > 0 && (
+        <div className={styles.story}>
+          <ul className={styles.userList}>
+            <Slider {...settings}>
+              {userFollowings.map((item) => (
+                <li className={styles.userItem} key={item.id}>
+                  <Link to={`/user-profile/${item.id}`}>
+                    <div className={styles.userItemImg}>
+                      <img
+                        src={
+                          item.avatar
+                            ? item.avatar
+                            : `/assets/images/user-vacant.jpg`
+                        }
+                        alt=""
+                      />
+                    </div>
+                  </Link>
+                  <Typography className={styles.nameUser}>
+                    {item.user_name}
+                  </Typography>
+                </li>
+              ))}
+            </Slider>
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 
