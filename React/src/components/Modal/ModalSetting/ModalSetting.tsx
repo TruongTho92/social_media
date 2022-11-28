@@ -63,14 +63,7 @@ const ModalSetting = ({ classNameIconSetting }: Props) => {
             />
             <span> Change password</span>
           </Link>
-          <div className={styles.deleteAccount}>
-            <AiOutlineDelete
-              size={20}
-              style={{ marginRight: 12 }}
-              className={styles.iconLink}
-            />
-            <span> Delete Account</span>
-          </div>
+
           {getUserData.user.is_admin || getUserData.user.is_supervisor ? (
             <Link to="/admin" className={styles.deleteAccount}>
               <div style={{ lineHeight: 0 }}>

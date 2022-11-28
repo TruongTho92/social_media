@@ -3,6 +3,7 @@ import LazyLoad from "react-lazy-load";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "~/app/hooks";
 import {
+  getPostDetail,
   getUsersCommented,
   getUsersLiked,
 } from "~/features/accountPost/postDetail/postDetailSlice";
@@ -37,7 +38,7 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
             </LazyLoad>
           )}
 
-          <div className={styles.postImgHover}>
+          {/* <div className={styles.postImgHover}>
             <div className={styles.postItemHoverItem}>
               <i className="fas fa-heart"></i>
               <span>{usersLiked.length}</span>
@@ -46,7 +47,7 @@ const AccountPost: React.FC<Props> = ({ id, image }) => {
               <i className="fas fa-comment"></i>
               <span>{usersCommentd.length}</span>
             </div>
-          </div>
+          </div> */}
         </Link>
         <Outlet />
       </div>

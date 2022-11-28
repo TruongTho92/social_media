@@ -1,5 +1,6 @@
 import { Button, Form, Typography } from "antd";
 import React, { SyntheticEvent, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import InputConfirmPassword from "~/components/Input/ConfirmPassword";
 import InputPassword from "~/components/Input/Password";
@@ -117,6 +118,18 @@ const UpdatePassword: React.FC<Props> = (props: Props) => {
           </Form>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        theme="dark"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
