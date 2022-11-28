@@ -180,10 +180,10 @@
   .subTitle {
     font-size: 14px !important;
   }
-  .iconLoading {
-    font-size: 30px;
-    animation: Rotate 1s linear infinite;
-  }
+}
+.iconLoading {
+  font-size: 30px;
+  animation: Rotate 1s linear infinite;
 }
 
 @media screen and (max-width: 767px) {

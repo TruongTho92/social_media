@@ -143,6 +143,11 @@
   }
 }
 
+.iconLoading {
+  font-size: 30px;
+  animation: Rotate 1s linear infinite;
+}
+
 // RESPONSIVE
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
   .register {
