@@ -43,6 +43,8 @@ const postDetailSlice = createSlice({
       state.data.post = action.payload.post;
       state.data.like = action.payload.like;
       state.data.comment = action.payload.comment;
+      state.loadingUpdateCaption = false;
+      state.loadingComment = false;
     },
     GetPostFailure: (state, action: PayloadAction<PostDetailResponse>) => {
       state.loading = true;

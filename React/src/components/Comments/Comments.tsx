@@ -48,7 +48,7 @@ const Comments: React.FC<Props> = ({
       className={
         commentList && commentList?.length > 0
           ? `${styles.commentList}`
-          : `${styles.commentList} ${styles.hidden}`
+          : `${styles.commentList}`
       }
     >
       {!isOpenEdit && (
