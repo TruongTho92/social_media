@@ -42,16 +42,16 @@ const postsSlice = createSlice({
     },
     CreatePostSuccess: (state, action: PayloadAction<PostDataResponse>) => {
       state.loadingCreated = false;
-      // toast(action.payload.message, {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "dark",
-      // });
+      toast(action.payload.message, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     },
     CreatePostFailure: (state, action: PayloadAction<PostDataResponse>) => {
       state.loadingCreated = true;

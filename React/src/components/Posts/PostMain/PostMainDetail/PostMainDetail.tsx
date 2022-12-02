@@ -186,7 +186,7 @@ const PostMainDetail: React.FC<Props> = () => {
         <section
           className={` ${styles.postDetail}`}
           onClick={() => {
-            navigate(-1);
+            navigate("/");
             dispatch(profileUserApi.getProfileUser(getUserData.user.id));
             dispatch(postOfFollowingApi.getPostFollowing());
           }}
