@@ -20,7 +20,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    if current_user.authentication_token == user_params[:authentication_token]
+    if current_user
       sign_out current_user
       render json: {
         message: "Signed out"
