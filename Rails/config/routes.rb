@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "home#index"
   devise_for :users
   namespace :api, default: {fomat: :json} do
     namespace :v1 do
